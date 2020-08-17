@@ -1,0 +1,23 @@
+#debug {background:#e5edee; clear:both; margin-top:-20px}
+#debug h2 {margin:0; position:relative; border:solid #45d7dd; border-width:1px 0; background:#cde4e5; padding:4px 25px; font-size:120%; font-weight:bold; overflow:hidden; zoom:1}
+#debug h2 small {font-size:80%; margin-left:10px; font-weight:normal; color:#0c7a7f}
+#debugHdr {float:left}
+#debugSetting {float:right}
+#debug h3 {margin:-1px 0 0; font-size:110%}
+#debug h3 a {display:block; border:solid #a6dee0; color:#0c7a7f; border-width:1px 0; background:#dee9e9; padding:4px 25px; font-weight:normal}
+#debug h3 a:hover {text-decoration:none}
+#debug h3 a:active {background:#a6dee0}
+#debugPostGetFiles, #debugSessionCookie {padding:10px 25px}
+#debug ul {margin:0; padding:0}
+#debug li {list-style-type:none; border-bottom:1px solid #a6dee0; padding:10px 25px}
+
+@media only screen and (max-width:740px) {
+#debugSetting {clear:left; float:none; padding-top:5px}
+#debug h2 small, #debugSetting input {margin-left:0}
+#debugHdr small {margin-left:10px!important}
+}
+
+@media only screen and (max-width:570px) {
+#debug {margin-top:-12px}
+#debug h2, #debug h3 a, #debug li, #debugPostGetFiles, #debugSessionCookie {padding-left:10px}
+}

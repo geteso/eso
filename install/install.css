@@ -1,0 +1,59 @@
+/* Installer CSS */
+body {background:#fff; font-size:75%; min-width:260px}
+body, input, select, textarea, table {font-family:arial, helvetica, sans-serif; margin:0}
+input, select, textarea {font-size:100%}
+#container {margin:50px auto; width:55em; background:#f5f5ff; padding:20px; font-size:120%; line-height:1.4}
+h1 {margin:0 0 20px; font-size:150%; font-weight:normal; color:#32517e}
+h1 img {vertical-align:middle; margin-right:15px}
+a {text-decoration:none; color:#00f}
+a:hover {text-decoration:underline; color:#000}
+hr {color:#bbf; border:solid #bbf; border-width:1px 0 0; height:1px; margin:15px 0}
+#footer {text-align:right; font-size:90%}
+#footer .button {margin-left:5px; font-size:140%}
+pre {overflow:auto; padding-bottom:5px}
+li {margin-bottom:1em}
+hr.aboveToggle {margin-top:5px}
+
+/* Inputs, buttons, and other form elements */
+form, .form {margin:0; padding:0}
+input.text, textarea {border:1px solid #aaa; background:#fff; padding:2px}
+input.text:focus, textarea.text:focus {border-color:#555}
+input::placeholder {color:#aaa}
+.placeholder {color:#aaa}
+input.checkbox, input.radio {padding:0; margin:0 2px 0 5px; vertical-align:-2px}
+label.checkbox, label.radio {cursor:pointer}
+.form label {width:16em; float:left; text-align:right; margin:2px 1em 0 0}
+.form div label {float:none; width:auto; text-align:left; margin:0}
+.form label.long {width:100%; text-align:left}
+.form label.radio {text-align:left; cursor:pointer}
+.form input.text, .form select {width:17em; margin:0; float:left; font-size:130%}
+.form div {float:left}
+.form div input.text, .form div select {float:none}
+.form li {margin-bottom:4px; overflow:hidden; list-style:none; display:block; zoom:1}
+.form .msg {font-size:75%; padding:3px 5px; margin:0 0 0 5px; float:left; width:19em}
+.form small {color:#888; font-size:75%}
+.form small a {color:#55f}
+
+/* Messages */
+.msg {padding:5px 10px; background:#ddd; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4); margin:0 0 1em 0; line-height:1.4}
+.info {background:#fad163; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
+.success {background:#cf0; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
+.warning {background:#c00; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4); color:#fff}
+.warning a, .warning a:hover {color:#fff; text-decoration:underline}
+
+/* Other styles */
+#advanced input.text {font-size:100%; width:22em}
+
+/* Mobile support */
+@media only screen and (max-width:850px) {
+  #container {width:unset; margin:unset}
+}
+
+@media only screen and (max-width:650px) {
+  .form input.text, .form select, .form div {clear:left}
+  .form label {text-align:left; padding-bottom:5px; width:auto}
+}
+
+@media only screen and (max-width:400px) {
+  .form input.text, .form select {width:-webkit-fill-available !important}
+}
