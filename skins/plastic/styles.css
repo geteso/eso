@@ -35,7 +35,7 @@ a, .link, .p .hdr a.link {color:#00f}
 .clear {clear:both; font-size:1px; height:1px; margin:0; padding:0; width:1px}
 small, dt {color:#888; font-size:90%}
 small a, dt a {color:#55f}
-#loading {background:#dcff52; border:solid #d4e58f; border-width:0 1px 1px 1px; font-size:120%; padding:5px 15px; position:fixed; right:10px; top:0; z-index:10000; -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px}
+#loading {background:#dcff52; border:solid #d4e58f; border-width:0 1px 1px 1px; font-size:120%; padding:5px 15px; position:fixed; right:10px; top:0; z-index:10000; box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px; -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px}
 .strike {text-decoration:line-through}
 img.avatar, div.avatar img {width:100px; height:100px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
 .enabled, #skins a:hover {background:#ffa}
@@ -82,7 +82,7 @@ h3 {font-size:120%; font-weight:bold}
 #hdrbarpack {top:0; z-index:100; position:relative}
 
 /* Body */
-#body {background:linear-gradient(#e5e7e9, #fff); background-repeat:no-repeat; background-size:100% 90px; padding:15px 25px; padding-bottom:0}
+#body {background:linear-gradient(#e5e7e9, #fff); background-repeat:no-repeat; background-size:100% 90px; padding:10px 25px; padding-bottom:0}
 
 /* Tags & gambits */
 #tagArea {margin-bottom:10px; border:1px dashed #bbb}
@@ -154,7 +154,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 .c strong a {color:#000; margin:0}
 .c a {margin-left:10px; margin-bottom:-5px}
 .c .author a, .c .lastPost a {color:#000; margin:0}
-.c td.avatar {padding:4px 10px 4px 6px; width:32px; text-align:center}
+.c td.avatar {padding:4px 10px 4px 4px; width:32px; text-align:center}
 .c td.avatar img {width:30px; height:30px; object-fit:cover; vertical-align:middle; border:1px solid #ddd}
 .c td.star {width:3.5em}
 .c .posts {padding:5px 10px; text-align:center}
@@ -168,6 +168,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 #newResults a {margin:0; font-weight:bold}
 #more .msg {margin:0; margin-top:-2px; padding:3px 0; text-align:center; font-size:90%}
 #more .msg a {font-weight:bold}
+#searchResults {border-left:1px solid #ddd; border-right:1px solid #ddd}
 #searchResults tbody > tr:nth-of-type(even) {background-color:#f4f4f4}
 
 /* Conversation header */
@@ -300,16 +301,16 @@ form#settingsAvatar {padding-bottom:8px}
 #palette table#tblsecond a.selected {height:37px}
 
 /* Admin */
-#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; margin:-15px -25px; background:#fff;}
-#admin .menu {float:left; width:175px; margin:0; margin-left:-175px; padding:10px 0; border-right:1px solid #ccc;}
+#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; margin:-15px -25px; background:#fff}
+#admin .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0; border-right:1px solid #ccc}
 #admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
-#admin .menu li a {display:block; margin-left:15px; padding:10px 15px; font-size:120%;}
-#admin .menu li.active a {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; margin-right:-1px; color:#000; font-weight:bold;}
-#admin .inner {padding:15px 25px; padding-bottom:2px; margin-bottom:15px; border-left:1px solid #ccc;}
+#admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
+#admin .menu li.active a {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; margin-right:-1px; color:#000; font-weight:bold}
+#admin .inner {padding:15px 25px; padding-bottom:2px; margin-bottom:15px; border-left:1px solid #ccc}
 #admin .stats label {font-weight:normal; text-align:left; width:30%}
 #admin .stats div {float:none; font-size:115%; margin-left:35%}
 #admin .stats li {border-bottom:1px solid #ddd; padding-left:10px}
-#admin .settingsForm input.text, #admin .settingsForm select {font-size:140%;}
+#admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
 #admin .logoForm label, #admin .settingsForm label {width:20em;}
 #admin input.checkbox {margin:3px 5px 5px 0}
 #admin .clear {display:none}
@@ -359,7 +360,7 @@ form#settingsAvatar {padding-bottom:8px}
 /* Footer */
 #ftr {font-size:90%; margin:5px 25px 20px; overflow:hidden}
 #ftr ul {margin:0; padding:0}
-#ftr #copyright {padding-top:10px; border-top:1px solid #ccc}
+#ftr #copyright {margin-top:0; padding-top:10px; border-top:1px dashed #ccc}
 #ftr #cpyr2 {padding-top:5px}
 
 /* Inputs, buttons, and other form elements */
@@ -552,6 +553,12 @@ ul.fl, ul.fr {white-space:nowrap}
 #body {padding-top:8px}
 #startaconv {display:inherit; padding-top:8px; padding-bottom:10px}
 #markasread {margin-bottom:0}
+#admin {margin-top:0; border-left:0; border-image:none; background:unset}
+#admin .menu {float:none; margin-top:7px; margin-left:25px; margin-right:25px; width:fit-content; border:1px solid #ccc}
+#admin .menu li {display:inline; margin-right:-4px}
+#admin .menu li a {display:unset; margin-left:0; border-left:1px solid #ccc}
+#admin .menu li:first-child a {border:unset}
+#admin .menu li:last-child, #admin .menu li.active a {margin-right:unset}
 }
 
 @media only screen and (max-width:570px) {

@@ -95,6 +95,9 @@ case "info": ?>
 <li><label>Forum title</label> <input id='forumTitle' name='forumTitle' tabindex='1' type='text' class='text' placeholder="e.g. Simon's Krav Maga Forum" value='<?php echo @$_POST["forumTitle"]; ?>'/>
 <?php if (isset($install->errors["forumTitle"])): ?><div class='warning msg'><?php echo $install->errors["forumTitle"]; ?></div><?php endif; ?></li>
 
+<li><label>Forum description</label> <input id='forumDescription' name='forumDescription' tabindex='1' type='text' class='text' placeholder="e.g. Learn about and discuss Krav Maga." value='<?php echo @$_POST["forumDescription"]; ?>'/>
+<?php if (isset($install->errors["forumDescription"])): ?><div class='warning msg'><?php echo $install->errors["forumDescription"]; ?></div><?php endif; ?></li>
+
 <li><label>Default language</label> <div><select id='language' name='language' tabindex='2'>
 <?php foreach ($install->languages as $language) echo "<option value='$language'" . ((!empty($_POST["language"]) ? $_POST["language"] : "English (casual)") == $language ? " selected='selected'" : "") . ">$language</option>"; ?>
 </select><br/>

@@ -53,6 +53,7 @@ function init()
 				// Put all the POST data into the session and proceed to the install step.
 				$_SESSION["install"] = array(
 					"forumTitle" => $_POST["forumTitle"],
+					"forumDescription" => $_POST["forumDescription"],
 					"language" => $_POST["language"],
 					"mysqlHost" => $_POST["mysqlHost"],
 					"mysqlUser" => $_POST["mysqlUser"],
@@ -154,6 +155,7 @@ function doInstall()
 		"mysqlDB" => desanitize($_SESSION["install"]["mysqlDB"]),
 		"tablePrefix" => desanitize($_SESSION["install"]["tablePrefix"]),
 		"forumTitle" => $_SESSION["install"]["forumTitle"],
+		"forumDescription" => $_SESSION["install"]["forumDescription"],
 		"language" => $_SESSION["install"]["language"],
 		"baseURL" => $_SESSION["install"]["baseURL"],
 		"salt" => generateRandomString(rand(32, 64)),
@@ -240,6 +242,9 @@ function validateInfo()
 
 	// Forum title must contain at least one character.
 	if (!strlen($_POST["forumTitle"])) $errors["forumTitle"] = "Your forum title must consist of at least one character";
+
+	// Forum description also must contain at least one character.
+	if (!strlen($_POST["forumDescription"])) $errors["forumDescription"] = "Your forum description must consist of at least one character";
 	
 	// Username must not be reserved, and must not contain special characters.
 	if (in_array(strtolower($_POST["adminUser"]), array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "suspended", "everyone", "myself"))) $errors["adminUser"] = "The name you have entered is reserved and cannot be used";

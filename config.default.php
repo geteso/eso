@@ -5,7 +5,7 @@
 
 if (!defined("IN_ESO")) exit;
 
-define("ESO_VERSION", "1.0");
+define("ESO_VERSION", "beta-1.0");
 
 $defaultConfig = array(
 // This following block is filled out by the installer in config/config.php.
@@ -15,6 +15,7 @@ $defaultConfig = array(
 "mysqlDB" => "",
 "tablePrefix" => "",
 "forumTitle" => "",
+"forumDescription" => "",
 "language" => "English (casual)",
 "baseURL" => "",
 "rootAdmin" => 1,

@@ -56,7 +56,7 @@ function dashboardInit(&$adminController)
 	);
 	
 	$this->serverInfo = array(
- 		"esoProjects version" => ESO_VERSION,
+ 		"eso version" => ESO_VERSION,
  		"PHP version" => phpversion(),
  		"MySQL version" => $this->eso->db->result("SELECT VERSION()", 0)
 	);
@@ -103,6 +103,10 @@ function saveSettings()
     // Forum title must contain at least one character.
 	if (empty($_POST["forumTitle"]) or !strlen($_POST["forumTitle"])) {$this->eso->message("avatarError"); return false;}
 	$newConfig["forumTitle"] = $_POST["forumTitle"];
+
+    // Forum description must contain at least one character.
+	if (empty($_POST["forumDescription"]) or !strlen($_POST["forumDescription"])) {$this->eso->message("avatarError"); return false;}
+	$newConfig["forumDescription"] = $_POST["forumDescription"];
 	
 	if (in_array(@$_POST["forumLanguage"], $this->languages)) $newConfig["language"] = $_POST["forumLanguage"];
 	
