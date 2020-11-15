@@ -1,5 +1,5 @@
 <?php
-// captcha/captchaImg.php
+// Captcha/captchaImg.php
 // Generates a captcha image.
 
 // Set headers to prevent caching.

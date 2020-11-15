@@ -41,7 +41,7 @@ $install->init();
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-<title>esoProjects Installer</title>
+<title>esoInstaller</title>
 <script type='text/javascript' src='../js/eso.js'></script>
 <link type='text/css' rel='stylesheet' href='install.css'/>
 </head>
@@ -59,7 +59,7 @@ switch ($install->step) {
 // Fatal checks.
 case "fatalChecks": ?>
 <h1><img src='logo.svg' data-fallback='logo.png' alt='esoForum logo'/>Uh oh, something's not right!</h1>
-<p>The following errors were found with your esoProjects setup. They must be resolved before you can continue the installation.</p>
+<p>The following errors were found with your forum's setup. They must be resolved before you can continue the installation.</p>
 <hr/>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
@@ -73,7 +73,7 @@ case "fatalChecks": ?>
 // Warning checks.
 case "warningChecks": ?>
 <h1><img src='logo.svg' data-fallback='logo.png' alt='esoForum logo'/>Warning!</h1>
-<p>The following errors were found with your esoProjects setup. You can continue the esoProjects install without resolving them, but some functionality may be limited.</p>
+<p>The following errors were found with your forum's setup. You can continue the installation without resolving them, but some functionality may be limited.</p>
 <hr/>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
@@ -95,7 +95,7 @@ case "info": ?>
 <li><label>Forum title</label> <input id='forumTitle' name='forumTitle' tabindex='1' type='text' class='text' placeholder="e.g. Simon's Krav Maga Forum" value='<?php echo @$_POST["forumTitle"]; ?>'/>
 <?php if (isset($install->errors["forumTitle"])): ?><div class='warning msg'><?php echo $install->errors["forumTitle"]; ?></div><?php endif; ?></li>
 
-<li><label>Forum description</label> <input id='forumDescription' name='forumDescription' tabindex='1' type='text' class='text' placeholder="e.g. Learn about and discuss Krav Maga." value='<?php echo @$_POST["forumDescription"]; ?>'/>
+<li><label>Forum description</label> <input id='forumDescription' name='forumDescription' tabindex='1' type='text' class='text' placeholder="e.g. Learn about Krav Maga." value='<?php echo @$_POST["forumDescription"]; ?>'/>
 <?php if (isset($install->errors["forumDescription"])): ?><div class='warning msg'><?php echo $install->errors["forumDescription"]; ?></div><?php endif; ?></li>
 
 <li><label>Default language</label> <div><select id='language' name='language' tabindex='2'>
@@ -105,7 +105,7 @@ case "info": ?>
 </ul>
 
 <hr/>
-<p>esoProjects needs access to a MySQL database to store all your forum's data in, such as conversations and posts. If you're unsure of any of these details, you may need to ask your hosting provider.</p>
+<p>The software needs a database to store all your forum's data in, such as conversations and posts. If you're unsure of any of these details, you may need to ask your hosting provider.</p>
 
 <?php if (isset($install->errors["mysql"])): ?><div class='warning msg'><?php echo $install->errors["mysql"]; ?></div><?php endif; ?>
 
@@ -120,7 +120,7 @@ case "info": ?>
 </ul>
 
 <hr/>
-<p>esoProjects will use the following information to set up your administrator account on your forum.</p>
+<p>The software will use the following information to set up your administrator account on your forum.</p>
 
 <ul class='form'>
 <li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='7' type='text' class='text' placeholder='Simon' value='<?php echo @$_POST["adminUser"]; ?>'/>
@@ -176,7 +176,7 @@ function toggleAdvanced() {
 // Show an installation error.
 case "install": ?>
 <h1><img src='logo.svg' alt=''/>Uh oh! It's a fatal error...</h1>
-<p class='warning msg'>The esoProjects installer encountered an error.</p>
+<p class='warning msg'>The forum installer encountered an error.</p>
 <p>The installer has encountered a nasty error which is making it impossible to install a forum on your server. But don't feel down, <strong>here are a few things you can try</strong>:</p>
 <ul>
 <li><strong>Try again.</strong> Everyone makes mistakes: maybe the computer made one this time.</li>

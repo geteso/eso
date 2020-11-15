@@ -2,7 +2,7 @@
 // index.php
 // Fires events required for page contents to be deciphered and shown.
 
-define("ESO", 1);
+define("IN_ESO", 1);
 
 // Basic page initialization.
 require "lib/init.php";

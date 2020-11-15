@@ -1,8 +1,8 @@
 <?php
-// plastic/skin.php
+// Plastic/skin.php
 // Plastic skin file.
 
-if (!defined("ESO")) exit;
+if (!defined("IN_ESO")) exit;
 
 class Plastic extends Skin {
 

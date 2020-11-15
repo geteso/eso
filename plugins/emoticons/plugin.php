@@ -1,5 +1,5 @@
 <?php
-// emoticons/plugin.php
+// Emoticons/plugin.php
 // Converts emoticon text entities into graphic emoticons.
 
 if (!defined("IN_ESO")) exit;

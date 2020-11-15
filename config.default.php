@@ -30,6 +30,7 @@ $defaultConfig = array(
 "verboseFatalErrors" => false, // Dumps SQL information in fatal errors.  Don't keep this enabled for production.
 "basePath" => "", // The base path to use when including or writing to any files.
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
+"showForumDescription" => true, // Whether or not to display the forum description on the homepage.
 
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
 "useModRewrite" => true, // ex. example.com/conversation/1 (requires mod_rewrite and a .htaccess file!)

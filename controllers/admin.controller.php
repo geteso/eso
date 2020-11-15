@@ -56,7 +56,7 @@ function dashboardInit(&$adminController)
 	);
 	
 	$this->serverInfo = array(
- 		"eso version" => ESO_VERSION,
+ 		"Forum version" => ESO_VERSION,
  		"PHP version" => phpversion(),
  		"MySQL version" => $this->eso->db->result("SELECT VERSION()", 0)
 	);

@@ -1,5 +1,5 @@
 <?php
-// captcha/plugin.php
+// Captcha/plugin.php
 // Provides image verification to prevent bots from joining.
 
 if (!defined("IN_ESO")) exit;

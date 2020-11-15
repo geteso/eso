@@ -29,10 +29,10 @@ function columnConversation(&$search,$conversation)
 {
     global $language;
     
-    // $conversation["labels"] contains comma-separated values corresponding to each label in the $esoTalk->labels array: 0 = label does not apply, 1 = label does apply.  Read this variable and output applied labels.
+    // $conversation["labels"] contains comma-separated values corresponding to each label in the $eso->labels array: 0 = label does not apply, 1 = label does apply.  Read this variable and output applied labels.
     $labels=explode(",",$conversation["labels"]);$i=0;$labelsHtml="";$html="";
-    foreach($search->eso->labels as $k=>$v){
-        if(@$labels[$i])$labelsHtml.="<span class='label $k'>{$language["labels"][$k]}</span> ";
+    foreach($search->eso->labels as $k => $v) {
+        if(@$labels[$i])$labelsHtml .= "<span class='label $k'>{$language["labels"][$k]}</span> ";
         $i++;
     }
     if($labelsHtml)$html.="<span class='labels'>$labelsHtml</span>";
@@ -78,29 +78,29 @@ function columnLastReply(&$search,$conversation)
 }
 
 // If there are results, loop through the conversations and output a table row for each one.
-if(count($this->results)):
-foreach($this->results as $conversation):?>
+if (count($this->results)):
+foreach ($this->results as $conversation): ?>
 
-<tr id='c<?php echo $conversation["id"];?>'<?php if($conversation["starred"]):?> class='starred'<?php endif;?>>
+<tr id='c<?php echo $conversation["id"]; ?>'<?php if ($conversation["starred"]): ?> class='starred'<?php endif; ?>>
 <?php
 
 // Loop through the columns defined in the search controller and echo the output of a callback function for the cell contents.
-foreach($this->resultsTable as $column):?><td<?php if(!empty($column["class"])):?> class='<?php echo $column["class"];?>'<?php endif;?>><?php echo call_user_func_array($column["content"],array(&$this,$conversation));?></td>
-<?php endforeach;?>
+foreach ($this->resultsTable as $column): ?><td<?php if (!empty($column["class"])): ?> class='<?php echo $column["class"]; ?>'<?php endif; ?>><?php echo call_user_func_array($column["content"], array(&$this,$conversation)); ?></td>
+<?php endforeach; ?>
 </tr>
 <?php endforeach;
-endif;?>
+endif; ?>
 
 </tbody>
 </table>
 
 <?php
 // If there are no conversations, show a message.
-if(!$this->numberOfConversations):echo $this->eso->htmlMessage("noSearchResults");
+if (!$this->numberOfConversations): echo $this->eso->htmlMessage("noSearchResults");
 
 // On the other hand, if there were too many results, show a "show more" message.
-elseif($this->limit==$config["results"]+1 and $this->numberOfConversations>$config["results"]):?>
+elseif ($this->limit==$config["results"] + 1 and $this->numberOfConversations > $config["results"]): ?>
 <div id='more'>
-<?php echo $this->eso->htmlMessage("viewMore",array(makeLink("search",urlencode(@$_SESSION["search"].(@$_SESSION["search"]?" + ":"")."more results"))));?>
+<?php echo $this->eso->htmlMessage("viewMore", array(makeLink("search", urlencode(@$_SESSION["search"] . (@$_SESSION["search"] ? " + " : "")."more results")))); ?>
 </div>
-<?php endif;?>
+<?php endif; ?>

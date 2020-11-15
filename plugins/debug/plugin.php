@@ -1,5 +1,5 @@
 <?php
-// debug/plugin.php
+// Debug/plugin.php
 // Shows programming debug information for administrators.
 
 if (!defined("IN_ESO")) exit;

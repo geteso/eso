@@ -174,6 +174,7 @@ $language = array(
 "show conversations participated in" => "let's see!",
 "show conversations started" => "check them out!",
 "Show debug information to non-administrators" => "Show debug information to non-administrators",
+"Show forum description" => "Show forum description",
 "Skin" => "Skin",
 "Skins" => "Skins",
 "Starred" => "Starred",

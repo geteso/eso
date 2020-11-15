@@ -11,10 +11,6 @@ small#hdrslogan {left:58px}
 @media only screen and (max-width:300px) {
 small#hdrslogan {display:none}
 } */
-
-/* Transitions */
-#body, #ftr {animation:fadein .7s}
-@keyframes fadein{from{opacity:0}to{opacity:1}}
   
 /* Main tags */
 body {font-family:arial,helvetica,sans-serif; font-size:75%; margin:0; -webkit-text-size-adjust: none; padding-top:0px !important; min-width:260px}

@@ -28,6 +28,9 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <li><label class='checkbox'><?php echo $language["Use friendly URLs"]; ?></label>
 <div><input type='checkbox' class='checkbox' name='useFriendlyURLs' value='1'<?php echo !empty($config["useFriendlyURLs"]) ? " checked='checked'" : ""; ?>/></div></li>
 
+<li><label class='checkbox'><?php echo $language["Show forum description"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='showForumDescription' value='1'<?php echo !empty($config["showForumDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
+
 <li><label></label> <span class='button'><input type='submit' name='saveSettings' value='Save changes'/></span></li>
 
 </ul>

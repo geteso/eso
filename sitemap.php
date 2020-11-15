@@ -2,7 +2,7 @@
 // sitemap.php
 // Generates necessary sitemap files and outputs an xml file.
 
-define("ESO", 1);
+define("IN_ESO", 1);
 
 // Include our config files.
 require "config.default.php";
