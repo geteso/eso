@@ -78,7 +78,16 @@ function init()
 
 	// Only do the following for non-ajax requests.
 	if (!defined("AJAX_REQUEST")) {
-	
+
+		// Check for updates, but only for the root admin.
+		// if ($this->user["memberId"] == $config["rootAdmin"]) {
+		//	// How long ago was the last update check? If it was any more than 1 day ago, check again now.
+		//	if (file_exists("config/lastUpdateCheck.php")) include "config/lastUpdateCheck.php";
+		//	if (!isset($lastUpdateCheck) or time() - $lastUpdateCheck >= 86400) {
+		//		if ($latestVersion = $this->checkForUpdates()) $this->message("updatesAvailable", false, $latestVersion);
+		//	}
+		// }
+
 		// If the user IS NOT logged in, add the login form and 'Join this forum' link to the bar.
 		if (!$this->user) {
 			$this->addToBar("left", "<form action='" . curLink() . "' method='post' id='login'><div>
@@ -252,21 +261,21 @@ function getStatistics()
 }
 
 // Get an array of language packs from the languages/ directory.
- function getLanguages()
- {
- 	$languages = array();
- 	if ($handle = opendir("languages")) {
- 	    while (false !== ($v = readdir($handle))) {
- 			if (!in_array($v, array(".", "..")) and substr($v, -4) == ".php" and $v[0] != ".") {
- 				$v = substr($v, 0, strrpos($v, "."));
- 				$languages[] = $v;
- 			}
- 		}
- 	}
- 	sort($languages);
- 	return $languages;
- }
-	
+function getLanguages()
+{
+	$languages = array();
+	if ($handle = opendir("languages")) {
+	    while (false !== ($v = readdir($handle))) {
+			if (!in_array($v, array(".", "..")) and substr($v, -4) == ".php" and $v[0] != ".") {
+				$v = substr($v, 0, strrpos($v, "."));
+				$languages[] = $v;
+			}
+		}
+	}
+	sort($languages);
+	return $languages;
+}
+
 // Check for updates to the software.
 function checkForUpdates()
 {

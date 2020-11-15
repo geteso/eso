@@ -46,10 +46,10 @@ function columnConversation(&$search,$conversation)
     if($search->eso->user["name"] and $conversation["unread"])$html.="<small><a href='".makeLink($conversation["id"],$conversation["slug"],"?start=unread")."'>{$language["Jump to unread"]}</a></small>";
     else $html.="<small><a href='".makeLink($conversation["id"],$conversation["slug"],"?start=last")."'>{$language["Jump to last"]}</a></small>";
     
-    // Tags.
-    $html.="<br/><small class='tags'>{$conversation["tags"]}</small>";
+    // We can't forget tags.
+    $html .= "<br/><small class='tags'>{$conversation["tags"]}</small>";
     
-    $search->fireEvent("getConversationColumn",array(&$html,$conversation));
+    $search->callHook("getConversationColumn", array(&$html, $conversation));
     
     return $html;
 }

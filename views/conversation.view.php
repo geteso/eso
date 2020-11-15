@@ -6,10 +6,10 @@ if(!defined("IN_ESO"))exit;?>
 <?php
 // If we're trying to start a new conversation but we can't, display an error message.
 if(!$this->conversation["id"] and ($error=$this->canStartConversation())!==true):echo $this->eso->htmlMessage($error);
-else
+else:
 
 // If we're starting a new conversation, we'll need a big form around the whole page.
-if(!$this->conversation["id"]):?><form id='sconvo' action='<?php echo curLink();?>' method='post' enctype='multipart/form-data'><?php endif;?>
+if(!$this->conversation["id"]):?><form id='sconvo' action='<?php echo curLink();?>' method='post' enctype='multipart/form-data'><?php endif; ?>
 
 <div id='cHdr'>
 
