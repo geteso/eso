@@ -50,7 +50,7 @@ function dashboardInit(&$adminController)
 		"Members" => $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}members", 0),
  		"Conversations" => $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}conversations", 0),
  		"Posts" => $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}posts", 0),
- 		"New members in the past week" => "TODO: add join date column to members table",//$this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}members WHERE UNIX_TIMESTAMP()-60*60*24*7<joinTime", 0)
+ 		// "New members in the past week" => $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}members WHERE UNIX_TIMESTAMP()-60*60*24*7<joinTime", 0),
  		"New conversations in the past week" => $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}conversations WHERE UNIX_TIMESTAMP()-60*60*24*7<startTime", 0),
  		"New posts in the past week" => $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}posts WHERE UNIX_TIMESTAMP()-60*60*24*7<time", 0)	
 	);
@@ -101,16 +101,18 @@ function saveSettings()
 	$newConfig = array();
 	
     // Forum title must contain at least one character.
-	if (empty($_POST["forumTitle"]) or !strlen($_POST["forumTitle"])) {$this->eso->message("avatarError"); return false;}
+	if (empty($_POST["forumTitle"]) or !strlen($_POST["forumTitle"])) {$this->eso->message("forumTitleError"); return false;}
 	$newConfig["forumTitle"] = $_POST["forumTitle"];
 
     // Forum description must contain at least one character.
-	if (empty($_POST["forumDescription"]) or !strlen($_POST["forumDescription"])) {$this->eso->message("avatarError"); return false;}
+	if (empty($_POST["forumDescription"]) or !strlen($_POST["forumDescription"])) {$this->eso->message("forumDescriptionError"); return false;}
 	$newConfig["forumDescription"] = $_POST["forumDescription"];
 	
 	if (in_array(@$_POST["forumLanguage"], $this->languages)) $newConfig["language"] = $_POST["forumLanguage"];
 	
 	$newConfig["useFriendlyURLs"] = (bool)!empty($_POST["useFriendlyURLs"]);
+
+	$newConfig["showForumDescription"] = (bool)!empty($_POST["showForumDescription"]);
 	
 	if (count($newConfig)) $this->writeSettingsConfig($newConfig);
 

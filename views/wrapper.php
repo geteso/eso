@@ -25,11 +25,19 @@ if(!defined("IN_ESO"))exit;
 <div id='hdrbarpack'>
 
 <div id='hdr'>
-<h1><a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo(); ?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
-<span id='forumTitle'><?php echo $config["forumTitle"];?></span>
-<?php if ($this->action == "search"): ?>
+
+<?php if (($config["showForumDescription"] == "true") && ($this->action == "search")): ?>
+<h1 id="hasForumDescription">
+<?php else: ?>
+<h1>
+<?php endif; ?>
+
+<a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo(); ?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
+<span id='forumTitle'><?php echo $config["forumTitle"];?>
+<?php if (($config["showForumDescription"] == "true") && ($this->action == "search")): ?>
 <small id='forumDescription'><?php echo $config["forumDescription"];?></small>
 <?php endif; ?>
+</span>
 </a></h1>
 <?php if($this->action=="search"):?>
 <p id='stats'>
@@ -59,7 +67,7 @@ foreach ($this->footer as $v) echo "<li>$v</li>";
 ?></ul><?php endif; ?>
 <p id='copyright'>
 <!-- The following text constitutes a copyright notification. -->
-Powered by <a href='https://geteso.org'>ᴇꜱᴏ</a> <?php if ($this->user["admin"]) echo ESO_VERSION; ?>
+Powered by <a href='https://geteso.org'>eso</a> <?php if ($this->user["admin"]) echo ESO_VERSION; ?>
 <!-- End copyright notification. -->
 </p>
 </div>

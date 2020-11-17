@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
 <div><select name='forumLanguage'><?php
 foreach ($this->languages as $v)
 echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" : "") . ">$v</option>";	
-?></select><br/><small>Upload languages packs to the <code>languages/</code> folder to see them here.</small></div></li>
+?></select><br/><small><?php echo $language["languagePackInfo"]; ?></small></div></li>
 
 <li><label class='checkbox'><?php echo $language["Use friendly URLs"]; ?></label>
 <div><input type='checkbox' class='checkbox' name='useFriendlyURLs' value='1'<?php echo !empty($config["useFriendlyURLs"]) ? " checked='checked'" : ""; ?>/></div></li>
@@ -41,7 +41,7 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <fieldset>
 <legend><?php echo $language["Forum logo"]; ?></legend>
 
-<div class='msg info'><?php echo $language["On most skins, your forum logo appears near the title in the header of your forum. Your logo will be automatically resized to be 32 pixels high."]; ?></div>
+<div class='msg info'><?php echo $language["logoInfo"]; ?></div>
 
 <form action='<?php echo makeLink("admin", "settings"); ?>' id='settingsLogo' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
@@ -69,6 +69,6 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <input type='submit' name='changeLogo' value='Change logo'/></span></li>
 
 </ul>
-	
+
 </form>
 </fieldset>

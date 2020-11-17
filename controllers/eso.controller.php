@@ -534,9 +534,9 @@ function getAvatar($memberId, $avatarFormat, $type = false)
 	if (!$avatarFormat) {
 		global $config;
 		switch ($type) {
-			case "l": return "skins/{$config["skin"]}/avatarLeft.png";
-			case "r": return "skins/{$config["skin"]}/avatarRight.png";
-			case "thumb": return "skins/{$config["skin"]}/avatarThumb.png";
+			case "l": return "skins/{$config["skin"]}/avatarDefault.svg";
+			case "r": return "skins/{$config["skin"]}/avatarDefault.svg";
+			case "thumb": return "skins/{$config["skin"]}/avatarThumb.svg";
 		}
 	}
 }

@@ -16,7 +16,7 @@ function init()
 	if (!$this->eso->user) redirect("join");
 	
 	// Set the title.
-	global $config, $language;
+	global $language;
 	$this->title = $language["My settings"];	
 	
 	// Change the user's color.
@@ -38,17 +38,11 @@ function init()
 	
 	// Loop through the languages directory to create a string of options to go in the language <select> tag.
 	$langOptions = "";
-	$this->languages = array();
-	if ($handle = opendir("languages")) {
-	    while (false !== ($v = readdir($handle))) {
-			if (!in_array($v, array(".", "..")) and substr($v, -4) == ".php" and $v[0] != ".") {
-				$v = substr($v, 0, strrpos($v, "."));
-				$langOptions .= "<option value='$v'" . ($this->eso->user["language"] == $v ? " selected='selected'" : "") . ">$v</option>";
-				$this->languages[] = $v;
-			}
-		}
+	$this->languages = $this->eso->getLanguages();
+ 	foreach ($this->languages as $v) {
+ 		$value = ($v == $config["language"]) ? "" : $v;
+ 		$langOptions .= "<option value='$value'" . ($this->eso->user["language"] == $value ? " selected='selected'" : "") . ">$v</option>";
 	}
-	sort($this->languages);
 	
 	// Create a string of options to go in the avatar alignment <select> tag.
 	$avatarAlignmentOptions = "";
@@ -478,8 +472,7 @@ function validateAvatarAlignment(&$alignment)
 // Validate the language field: make sure the selected language actually exists.
 function validateLanguage(&$language)
 {
-	global $config;
-	if (!in_array($language, $this->languages)) $language = $config["language"];
+	if (!in_array($language, $this->languages)) $language = "";
 }
 
 }
