@@ -1,0 +1,13 @@
+#areYouHuman .form div {line-height:0}
+#areYouHuman .form li {margin-bottom:0}
+#areYouHuman input {width:96%}
+#areYouHuman label {width:auto !important}
+
+/* Captcha message */
+#captcha-message {display:none}
+
+/* Mobile support */
+@media only screen and (max-width:710px) {
+#areYouHuman .form label {text-align:left}
+#areYouHuman .form div {clear:left; padding-top:5px}
+}
