@@ -21,9 +21,9 @@ abbr {cursor:help}
 
 /* Links */
 a {text-decoration:none}
-a:hover {color:#000; text-decoration:underline}
-a:active {color:#666}
-a, .link, .p .hdr a.link {color:#00f}
+a:hover {text-decoration:underline}
+/* a:active {text-shadow:#888 0 1px; color:#000} */
+a, .link, .p .hdr a.link {color:#003483}
 
 /* Misc */
 .fl {float:left}
@@ -43,12 +43,12 @@ h3 {font-size:120%; font-weight:bold}
 #appearance #preview {margin-bottom:0}
 
 /* Header */
-#hdr {background:linear-gradient(#fff, #fff, #e4e5ea); overflow:hidden; padding:0 25px; position:relative}
+#hdr {background:linear-gradient(#dbdbdb, #c1c1c1); overflow:hidden; padding:0 25px; position:relative; text-shadow:#fff 0 1px}
 #hdr h1 {float:left; font-size:190%; font-weight:normal; margin:0; padding:17px 0}
 #hdr h1 a {color:#000}
 #hdr h1 a:hover {text-decoration:none}
 #hdr h1 a:hover span {text-decoration:underline}
-#hdr h1 img {height:36px; margin-right:15px}
+#hdr h1 img {height:36px; margin-right:15px; filter:drop-shadow(#fff 0 1px)}
 #hdr h1 img, #forumTitle {vertical-align:middle}
 #stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
 .small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:100px; white-space:nowrap}
@@ -56,13 +56,13 @@ h3 {font-size:120%; font-weight:bold}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
 
 /* Header with forum description */
-#forumDescription {font-size:12px}
+#forumDescription {font-size:12px; color:#555}
 #hdr h1#hasForumDescription img {float:left}
 #hdr h1#hasForumDescription #forumTitle {float:right; position:absolute; font-size:20px}
 #hdr h1#hasForumDescription #forumDescription {display:block; white-space:nowrap}
 
 /* User bar */
-#bar {background: linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02); line-height:18px; overflow:hidden; padding:6px 25px; height:18px}
+#bar {background: linear-gradient(#e4e4e4, #a7a7a7); border-bottom:1px solid gray; border-top:1px solid gray; box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02); line-height:18px; overflow:hidden; padding:6px 25px; height:18px; text-shadow:#ddd 0 1px}
 #bar ul {list-style-type:none; margin:0; padding:0}
 #bar li {float:left; margin:0}
 #bar .fl li {margin-right:20px}
@@ -71,12 +71,15 @@ h3 {font-size:120%; font-weight:bold}
 #bar strong a {color:#000}
 #bar form {font-size:90%; margin-top:-1px; margin-bottom:-2px}
 #bar .text {width:8em}
+#bar input.text, #hdr #reset {border-color:#555; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -webkit-box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -moz-box-shadow:0 1px 1px #c6c6c6}
 #bar input.text {height:14px; border-radius:0; -webkit-appearance:none}
-#bar span.button {height:18px; border-radius:0}
+#bar span.button {height:18px; border-radius:0; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5)}
+#bar span.button:hover {box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .15)}
+#bar span.button:active {box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .5)}
 #bar img {vertical-align:-4px}
 #rss span {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
 #nav-dpav {margin-right:-17px}
-#nav-dpav select {height:20px; margin-left:3px; border-radius:0; border-color:#bbb; box-shadow:inset 0 5px 10px rgba(0,0,0,.07)}
+#nav-dpav select {height:20px; margin-left:3px; border-radius:0; border-color:#555; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -webkit-box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -moz-box-shadow:0 1px 1px #c6c6c6}
 #mbl-prof {background:url(icons/profile.svg) 100% -1px no-repeat; height:20px; width:20px; vertical-align:-4px; float:left; margin-bottom:-2px; display:none}
 #mbl-prof span {display:none}
 #mbl-join {background:url(icons/join.svg) 100% -1px no-repeat; height:20px; width:20px; vertical-align:-4px; float:left; margin-left:-10px; margin-right:-10px; margin-bottom:-2px; display:none}
@@ -86,10 +89,10 @@ h3 {font-size:120%; font-weight:bold}
 #hdrbarpack {top:0; z-index:100; position:relative}
 
 /* Body */
-#body {background:linear-gradient(#e5e7e9, #fff); background-repeat:no-repeat; background-size:100% 90px; padding:10px 25px; padding-bottom:0}
+#body {background:linear-gradient(#cdcdcd, #fff); background-repeat:no-repeat; background-size:100% 90px; padding:10px 25px; padding-bottom:0}
 
 /* Tags & gambits */
-#tagArea {margin-bottom:10px; border:1px dashed #bbb}
+#tagArea {margin-bottom:10px; border:1px dashed #bbb; border-image:linear-gradient(to top, #ccc, #aaa); border-image-slice:1}
 #tags, #gambits {line-height:1.2; margin:10px 10px 10px; text-align:justify}
 #tags a, #gambits a {margin-right:0.7em}
 #tags a {color:#777}
@@ -102,8 +105,9 @@ a.s5 {font-size:90%}
 
 /* Search form */
 #search {font-size:150%; min-width:100px; overflow:hidden; padding-right:7.1em; margin-bottom:10px}
+#body #search {background:#d6dce5; padding:10px 19.2em 10px 10px; margin:0}
 #search .fr {margin-right:-18.5em; width:18.5em}
-#searchText {border-right:0; float:left; height:21px; min-width:100px; width:100%; margin-right:-100%; padding-right:2em}
+#searchText {border-right:0; float:left; height:21px; min-width:100px; width:100%; margin-right:-100%; padding-right:2em; background:#fff url(icons/search.gif) no-repeat 5px 6px; padding-left:23px; border-color:#555}
 #search.withStartConversation {padding-right:18.5em}
 #submit {float:left; font-size:100%; position:relative; border-top-left-radius:0; border-bottom-left-radius:0}
 #submit input {font-size:100%; margin-left:-5px; padding-left:8px; width:5.5em}
@@ -114,14 +118,14 @@ a.s5 {font-size:90%}
 #reset:hover, #searchText:focus ~ #reset:hover {text-decoration:none; color:#000}
 
 /* Messages */
-#messages .msg {margin:0}
+#messages .msg {margin:0; border-bottom:1px solid #888}
 .msg .close {float:right; border:1px solid #fff; color:#fff; text-decoration:none; padding:0 5px; margin:-2px -4px 0 0}
 .msg .close:hover {background:#fff; color:#000; text-decoration:none}
 .msg .close:active {background:#aaa}
 .msg {background:#ddd; line-height:1.4; margin:0 0 1em 0; padding:5px 10px}
-.info {background:#fad163; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
+.info {background:#ffe680}
 .success {background:#cf0}
-.warning {background:#c00; color:#fff; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
+.warning {background:#c00; color:#fff}
 .warning a, .warning a:hover {color:#fff; text-decoration:underline}
 .msg code {background:none}
 
@@ -129,15 +133,15 @@ a.s5 {font-size:90%}
 .star1, .star0 {cursor:default; display:block; font-size:600%; font-weight:normal; height:0.4em; line-height:0.8; overflow:hidden; width:0.4em}
 a.star1, a.star0 {cursor:pointer}
 .star0 {color:#ccc}
-a.star0:hover {color:#fe7}
-.star1, a.star1:hover {color:#fc0}
-a.star0:active, a.star1:active {color:#e4b600}
-.starred td {background:#ffa}
+a.star0:hover {color:#92bcff}
+.star1, a.star1:hover {color:#0055d4}
+a.star0:active, a.star1:active {color:#68a2ff}
+tr.starred td {background:#d7e3f4; border-color:#5f8dd3; border-top:1px solid #5f8dd3}
 .star1 span, .star0 span {display:none}
 .starInline {cursor:inherit; display:none; display:inline-block; font-size:350%; margin-bottom:-4px}
 
 /* Conversation labels */
-.label {font-size:90%; padding:0 5px; white-space:nowrap}
+.label {font-size:90%; padding:0 5px; white-space:nowrap; border-radius:2px; -webkit-border-radius:2px; -moz-border-radius:2px}
 .locked {background:#999; color:#fff}
 .private {background:#7b00ad; color:#fff}
 #gambits a.privateText {color:#7b00ad}
@@ -149,14 +153,14 @@ a.star0:active, a.star1:active {color:#e4b600}
 #gambits a.draftText {color:#0b2}
 
 /* Conversations table */
-.c {margin:10px 0 1px; width:100%}
-.c th {background-color:#ddd; font-weight:normal; font-size:90%; padding:6px 0; text-align:left}
-.c td {border-bottom:1px solid #ddd; line-height:1.1; padding:5px 0}
+.c {margin:0 0 1px; width:100%; border-collapse:collapse}
+.c th {background-color:#dbe0e4; font-weight:normal; font-size:90%; padding:6px 0; text-align:left; background-color:#d6dce5; border-bottom:1px solid #bbb; text-transform:uppercase; font-weight:bold; color:#5f6d7f; text-shadow:#e6eaef 0 1px}
+.c td {border-bottom:1px solid #ccc; line-height:1.1; padding:5px 0}
 .c .labels {margin-right:3px}
 .c strong {font-size:120%; font-weight:bold}
 .c .read {font-weight:normal}
 .c strong a {color:#000; margin:0}
-.c a {margin-left:8.5px; margin-bottom:-5px}
+.c a {margin-left:8.8px; margin-bottom:-5px}
 .c .author a, .c .lastPost a {color:#000; margin:0}
 .c td.avatar {padding:4px 10px 4px 4px; width:32px; text-align:center}
 .c td.avatar img {width:30px; height:30px; object-fit:cover; vertical-align:middle; border:1px solid #ddd}
@@ -172,14 +176,16 @@ a.star0:active, a.star1:active {color:#e4b600}
 #newResults a {margin:0; font-weight:bold}
 #more .msg {margin:0; margin-top:-2px; padding:3px 0; text-align:center; font-size:90%}
 #more .msg a {font-weight:bold}
-#searchResults {border-left:1px solid #ddd; border-right:1px solid #ddd}
+#body #search {border-top:1px solid #bbb}
+#body #search {border-left:1px solid #bbb; border-right:1px solid #bbb}
+#searchResults {border-left:1px solid #ccc; border-right:1px solid #ccc}
 #searchResults tbody > tr:nth-of-type(even) {background-color:#f4f4f4}
 
 /* Conversation header */
-#cHdr {margin:0 0 10px; overflow:hidden; padding:10px; border:1px solid #bbb}
+#cHdr {margin:0 0 10px; overflow:hidden; background:#d6dce5; padding:10px; border:1px solid #bbb; border-image:linear-gradient(to top, #bbb, #aaa); border-image-slice:1}
 /* Info and title (left part) */
 #cInfo {float:left; overflow:hidden; width:60%}
-#cInfo .star1, #cInfo .star0 {float:left; margin:2px 13px 0 2px; padding-top:7px; text-shadow:#fe7 0 0 2px}
+#cInfo .star1, #cInfo .star0 {float:left; margin:2px 13px 0 2px; padding-top:7px; text-shadow:#666 0 0 4px}
 #cInfo h2 {font-size:100%; margin:0; overflow:hidden}
 #cInfo #cTitle {font-size:180%; font-weight:normal; margin:0.15em 0 0 0; word-wrap:break-word}
 #cTitle {display:block; padding-top:3px}
@@ -207,9 +213,9 @@ a.star0:active, a.star1:active {color:#e4b600}
 .pg li.right {margin-left:-1px; margin-right:-10em; width:10em}
 .pg li.middle {border-width:1px 0; cursor:pointer; margin:0 -1px; width:100%}
 .pg .viewing {bottom:-1px; cursor:E-resize; cursor:col-resize; margin-top:-2px; position:relative; white-space:nowrap}
-.pg .viewing div {background:#d7eef4; border:1px solid #879ec4; overflow:hidden; padding:0 2px;}
-.pg .viewing:hover div {background:#e9f3f2}
-.pg .viewing:active div {background:#abcbe3}
+.pg .viewing div {background:#c2dbff; border:1px solid #62a0dc; overflow:hidden; padding:0 2px;}
+.pg .viewing:hover div {border-color:#0e5395}
+.pg .viewing:active div {background:#62a0dc}
 .pg .unread {background:#ffc; color:#f71; display:block; margin-top:-1.8em; overflow:hidden; white-space:nowrap}
 .pg li.left a, .pg li.right a {cursor:pointer; display:block; float:left; overflow:hidden; text-align:center; width:6em; white-space:nowrap}
 .pg li.left a.first, .pg li.right a.last {width:4em}
@@ -272,9 +278,9 @@ hr {display:none}
 pre, code, .fixed {font-family:monospace; font-size:120%; overflow-x:auto; white-space:pre-wrap; white-space:-moz-pre-wrap !important; white-space:-pre-wrap; white-space:-o-pre-wrap; word-wrap:break-word}
 pre {border:1px dashed #bbb; margin:0 10px 1em; padding:7px}
 code {background:#e6e6e6}
-blockquote {border:solid rgba(0,0,0,0.2); border-width:2px; margin:0 0 1em; padding:8px 10px 0 10px; color:#555}
-blockquote cite {border-bottom:1px dotted rgba(0,0,0,0.2); display:block; font-style:normal; font-weight:bold; padding-bottom:2px}
-blockquote p {margin-bottom:.75em}
+blockquote {width:fit-content; padding:5px 7px 5px 7px; margin:0 0 10px 0; border:1px solid #bbb; background:#d6dce5}
+blockquote cite {display:block; font-style:normal; margin-bottom:5px; text-transform:uppercase; font-weight:bold; color:#5f6d7f; text-shadow:#e6eaef 0 1px; font-size:90%}
+blockquote p:first-child, blockquote p:last-child {margin-bottom:0}
 .p .body h3 {border-bottom:1px solid #bbb; margin:0 0 5px}
 .p hr {display:block; color:#bbb; border:solid #bbb; border-width:1px 0 0; height:1px}
 
@@ -304,7 +310,7 @@ form#settingsAvatar {padding-bottom:8px}
 #palette table#tblsecond a.selected {height:37px}
 
 /* Admin */
-#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; margin:-15px -25px; background:#fff}
+#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #e0dede, #fff); border-image-slice:1; margin:-15px -25px; background:#fff}
 #admin .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0; border-right:1px solid #ccc}
 #admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
 #admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
@@ -368,8 +374,8 @@ form#settingsAvatar {padding-bottom:8px}
 
 /* Inputs, buttons, and other form elements */
 form {margin:0}
-input.text, textarea {background:#fff; border:1px solid #bbb; padding:2px}
-input.text:focus, textarea:focus {border-color:#777}
+input.text, textarea {background:#fff; border:1px solid #aaa; padding:2px}
+input.text:focus, textarea:focus {border-color:#555}
 #cInfo .editable:focus {background:#fff}
 input::placeholder {color:#aaa}
 .placeholder {color:#aaa}
@@ -395,15 +401,15 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .form .msg {float:left; font-size:95%; margin:0 0 0 10px; padding:2px 10px}
 
 /* Buttons */
-.button, .button input {cursor:pointer; display:-moz-inline-box; display:inline-block; height:20.3px; padding:0; text-align:center; text-shadow:#046b9e 0 1px}
-.button {background:linear-gradient(#8fb8d0, #498db7, #0573a4, #0bb3d2); margin:0; border:1px solid #00689c; border-radius:5px; height:18px}
-.button input {background:none; border:0; color:#fff; margin-left:5px; margin-right:5px; height:18px}
+.button, .button input {cursor:pointer; display:-moz-inline-box; display:inline-block; height:20.3px; padding:0; text-align:center; text-shadow:#ececec 0 1px}
+.button {background:linear-gradient(#f7f7f7,#aeaeae); margin:0; border:1px solid #4e4e4e; border-radius:5px; height:18px}
+.button input {background:none; border:0; color:#000; margin-left:5px; margin-right:5px; height:18px}
 .big {height:25px}
 .big input {font-size:140%; height:26px}
-.button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)}
+.button:hover {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .12)}
 .button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)}
-.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {background:linear-gradient(#dadada, #eeeeee, #dbdbdb, #eeeeee); border:1px solid #a6a6a6; box-shadow:none; cursor:default}
-.bigDisabled, .bigDisabled:active, .bigDisabled:hover {background:linear-gradient(#dadada, #eeeeee, #dbdbdb, #eeeeee); border:1px solid #a6a6a6; box-shadow:none; cursor:default}
+.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {border:1px solid #aaa; box-shadow:none; cursor:default}
+.bigDisabled, .bigDisabled:active, .bigDisabled:hover {border:1px solid #aaa; box-shadow:none; cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input {color:#999; text-shadow:#fff 0 1px; cursor:default}
 .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {color:#999; text-shadow:#fff 0 1px; cursor:default}
 
@@ -543,6 +549,7 @@ ul.fl, ul.fr {white-space:nowrap}
 
 @media only screen and (max-width:620px) {
 #search, #bar .fr {display:none}
+#searchResults {border-top:1px solid #ccc; border-bottom:0; border-image:linear-gradient(to top, #ccc, #aaa); border-image-slice:1}
 #startaconv {display:inherit; padding-top:8px; padding-bottom:10px}
 #markasread {margin-bottom:0}
 #admin {margin-top:0; border-left:0; border-image:none; background:unset}

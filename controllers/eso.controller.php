@@ -93,7 +93,6 @@ function init()
 			$this->addToBar("left", "<form action='" . curLink() . "' method='post' id='login'><div>
  <input id='loginName' name='login[name]' type='text' class='text' autocomplete='username' placeholder='" . (!empty($_POST["login"]["name"]) ? $_POST["login"]["name"] : $language["Username"]) . "'/>
  <input id='loginPassword' name='login[password]' type='password' class='text' autocomplete='current-password' placeholder='{$language["Password"]}'/>
- <input id='rememberMe' name='login[rememberMe]' type='checkbox' class='checkbox'/> <label id='rememberChk' for='rememberMe'>{$language["Remember me"]}</label>
  " . $this->skin->button(array("value" => $language["Log in"])) . "
  </div></form>", 100);
 			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='mbl-join' title='Join this forum'><span>Join this forum</span></a>", 200);
@@ -195,7 +194,13 @@ function login($name = false, $password = false, $hash = false)
 			regenerateToken();
 			
 			// If the "remember me" box was checked, set a cookie, and set the cookieIP field in the database.
-			if (@$_POST["login"]["rememberMe"]) {
+			// if (@$_POST["login"]["rememberMe"]) {
+			//	$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP=$ip WHERE memberId={$_SESSION["user"]["memberId"]}");
+			//	setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
+			// }
+
+			// Assume that the signing-in user wants to be remembered, set a cookie, and set the cookieIP field in the database.
+			if (@$_POST["login"]) {
 				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP=$ip WHERE memberId={$_SESSION["user"]["memberId"]}");
 				setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
 			}

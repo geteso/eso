@@ -1,12 +1,12 @@
 <?php
-// Plastic/skin.php
-// Plastic skin file.
+// Aluminum/skin.php
+// Aluminum skin file.
 
 if (!defined("IN_ESO")) exit;
 
-class Plastic extends Skin {
+class Aluminum extends Skin {
 
-var $name = "Plastic";
+var $name = "Aluminum";
 var $version = "1.0";
 var $author = "eso";
 var $numberOfColors = 27;

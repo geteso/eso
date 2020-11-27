@@ -116,7 +116,7 @@ case "info": ?>
 
 <li><label>MySQL password</label> <input id='mysqlPass' name='mysqlPass' tabindex='5' type='password' class='text' value='<?php echo @$_POST["mysqlPass"]; ?>'/></li>
 
-<li><label>MySQL database</label> <input id='mysqlDB' name='mysqlDB' tabindex='6' type='text' class='text' placeholder='esoprojects' value='<?php echo @$_POST["mysqlDB"]; ?>'/></li>
+<li><label>MySQL database</label> <input id='mysqlDB' name='mysqlDB' tabindex='6' type='text' class='text' placeholder='esodb' value='<?php echo @$_POST["mysqlDB"]; ?>'/></li>
 </ul>
 
 <hr/>

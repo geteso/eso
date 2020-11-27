@@ -135,7 +135,7 @@ function init()
 		$this->eso->addVarToJS("checkForNewResultsInterval", $config["checkForNewResultsInterval"]);
 		
 		// Add a link to the RSS feed in the bar.
-		$this->eso->addToBar("right", "<a href='" . makeLink("feed") . "' id='rss'><span>{$language["RSS"]}</span></a>", 500);
+		$this->eso->addToBar("right", "<a href='" . makeLink("feed") . "' id='rss'><span class='button'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
 		
 		// Update the user's last action.
 		$this->eso->updateLastAction("");

@@ -219,7 +219,7 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 // If the post after this one is by a different member to this one, end the post 'group'.
 if(!isset($this->conversation["posts"][$k+1]["memberId"]) or $this->conversation["posts"][$k+1]["memberId"]!=$post["memberId"] or !empty($this->conversation["posts"][$k+1]["deleteMember"])):?>
 </div>
-<?php if($side):?><div class='avatar'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='".($post["avatar"]?$post["avatar"]:("skins/{$config["skin"]}/avatar".($side=="l"?"Left":"Right").".png"))."' alt=''/>"),$memberLink);?></div><?php endif;?>
+<?php if($side):?><div class='avatar'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='".($post["avatar"]?$post["avatar"]:("skins/{$config["skin"]}/avatarDefault.svg"))."' alt=''/>"),$memberLink);?></div><?php endif;?>
 <div class='clear'></div>
 </div>
 

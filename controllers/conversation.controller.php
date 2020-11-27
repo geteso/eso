@@ -212,12 +212,12 @@ function init()
 			foreach ($align as $k => $v)
 				$avatarAlignmentOptions .= "<option value='$k'" . (@$_SESSION["avatarAlignment"] == $k ? " selected='selected'" : "") . ">$v</option>";
 			// Add it to the bar.
-			$this->eso->addToBar("right", "<form action='" . curLink() . "' method='post' id='nav-dpav'><div><input type='hidden' name='token' value='{$_SESSION["token"]}'/>{$language["Display avatars"]} <select onchange='Conversation.changeAvatarAlignment(this.value)' name='avatarAlignment'>$avatarAlignmentOptions</select> <noscript><div style='display:inline'>" . $this->eso->skin->button(array("value" => $language["Save changes"])) . "</div></noscript></div></form>", 100);
+			$this->eso->addToBar("right", "<form action='" . curLink() . "' method='post' id='nav-dpav'><div><input type='hidden' name='token' value='{$_SESSION["token"]}'/>{$language["Display avatars"]}<select onchange='Conversation.changeAvatarAlignment(this.value)' name='avatarAlignment'>$avatarAlignmentOptions</select> <noscript><div style='display:inline'>" . $this->eso->skin->button(array("value" => $language["Save changes"])) . "</div></noscript></div></form>", 100);
 		}
 
 		// Add links to the bar.
 		// Add the RSS feed button.
-		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss'><span>{$language["RSS"]}</span></a>", 500);
+		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss'><span class='button'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
 		
 		// Add the sticky/unsticky link if the user has permission.
 		if ($this->canSticky() === true) $this->eso->addToBar("right", "<a href='" . makeLink($this->conversation["id"], $this->conversation["slug"], "?toggleSticky", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleSticky();return false' id='stickyLink'>" . $language[in_array("sticky", $this->conversation["labels"]) ? "Unsticky" : "Sticky"] . "</a>", 400);
