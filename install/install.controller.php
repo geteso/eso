@@ -106,7 +106,7 @@ function init()
 			}
 			// Lock the installer.
 			if (($handle = fopen("lock", "w")) === false)
-				$this->errors[1] = "esoProjects can't seem to lock the installer. Please manually delete the install folder, otherwise your forum's security will be vulnerable.";
+				$this->errors[1] = "Your forum can't seem to lock the installer. Please manually delete the install folder, otherwise your forum's security will be vulnerable.";
 			else fclose($handle);
 	}
 
@@ -261,7 +261,7 @@ function validateInfo()
 	if ($_POST["adminPass"] != $_POST["adminConfirm"]) $errors["adminConfirm"] = "Your passwords do not match";
 	
 	// Try and connect to the database.
-	if (!$this->connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"])) $errors["mysql"] = "esoProjects could not connect to the MySQL server. The error returned was:<br/> " . $this->error();
+	if (!$this->connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"])) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . $this->error();
 	
 	// Check to see if there are any conflicting tables already in the database.
 	// If there are, show an error with a hidden input. If the form is submitted again with this hidden input,
@@ -274,7 +274,7 @@ function validateInfo()
 		$conflictingTables = array_intersect($ourTables, $theirTables);
 		if (count($conflictingTables)) {
 			$_POST["showAdvanced"] = true;
-			$errors["tablePrefix"] = "The installer has detected that there is another installation of esoProjects in the same MySQL database with the same table prefix. The conflicting tables are: <code>" . implode(", ", $conflictingTables) . "</code>.<br/><br/>To overwrite this installation of esoProjects, click 'Next step' again. <strong>All data will be lost.</strong><br/><br/>If you wish to create another esoProjects installation alongside the existing one, <strong>change the table prefix</strong>.<input type='hidden' name='confirmTablePrefix' value='{$_POST["tablePrefix"]}'/>";
+			$errors["tablePrefix"] = "The installer has detected that there is another installation of the software in the same MySQL database with the same table prefix. The conflicting tables are: <code>" . implode(", ", $conflictingTables) . "</code>.<br/><br/>To overwrite this installation, click 'Next step' again. <strong>All data will be lost.</strong><br/><br/>If you wish to create another installation alongside the existing one, <strong>change the table prefix</strong>.<input type='hidden' name='confirmTablePrefix' value='{$_POST["tablePrefix"]}'/>";
 		}
 	}
 	
@@ -294,10 +294,10 @@ function fatalChecks()
 	$errors = array();
 	
 	// Make sure the installer is not locked.
-	if (@$_GET["step"] != "finish" and file_exists("lock")) $errors[] = "<strong>esoProjects is already installed.</strong><br/><small>To reinstall esoProjects, you must remove <strong>install/lock</strong>.</small>";
+	if (@$_GET["step"] != "finish" and file_exists("lock")) $errors[] = "<strong>Your forum is already installed.</strong><br/><small>To reinstall your forum, you must remove <strong>install/lock</strong>.</small>";
 	
 	// Check the PHP version.
-	if (!version_compare(PHP_VERSION, "4.3.0", ">=")) $errors[] = "Your server must have <strong>PHP 4.3.0 or greater</strong> installed to run esoProjects.<br/><small>Please upgrade your PHP installation (preferably to version 5) or request that your host or administrator upgrade the server.</small>";
+	if (!version_compare(PHP_VERSION, "4.3.0", ">=")) $errors[] = "Your server must have <strong>PHP 4.3.0 or greater</strong> installed to run your forum.<br/><small>Please upgrade your PHP installation (preferably to version 5) or request that your host or administrator upgrade the server.</small>";
 	
 	// Check for the MySQL extension.
 	if (!extension_loaded("mysql")) $errors[] = "You must have <strong>MySQL 4 or greater</strong> installed and the <a href='http://php.net/manual/en/mysql.installation.php' target='_blank'>MySQL extension enabled in PHP</a>.<br/><small>Please install/upgrade both of these requirements or request that your host or administrator install them.</small>";
@@ -328,13 +328,13 @@ function warningChecks()
 	$errors = array();
 	
 	// We don't like register_globals!
-	if (ini_get("register_globals")) $errors[] = "PHP's <strong>register_globals</strong> setting is enabled.<br/><small>While esoProjects can run with this setting on, it is recommended that it be turned off to increase security and to prevent esoProjects from having problems.</small>";
+	if (ini_get("register_globals")) $errors[] = "PHP's <strong>register_globals</strong> setting is enabled.<br/><small>While your forum can run with this setting on, it is recommended that it be turned off to increase security and to prevent your forum from having problems.</small>";
 	
 	// Can we open remote URLs as files?
 	if (!ini_get("allow_url_fopen")) $errors[] = "The PHP setting <strong>allow_url_fopen</strong> is not on.<br/><small>Without this, avatars cannot be uploaded directly from remote websites.</small>";
 	
 	// Check for safe_mode.
-	if (ini_get("safe_mode")) $errors[] = "<strong>Safe mode</strong> is enabled.<br/><small>This could potentially cause problems with esoProjects, but you can still proceed if you cannot turn it off.</small>";
+	if (ini_get("safe_mode")) $errors[] = "<strong>Safe mode</strong> is enabled.<br/><small>This could potentially cause problems with your forum, but you can still proceed if you cannot turn it off.</small>";
 	
 	if (count($errors)) return $errors;
 }

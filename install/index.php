@@ -64,7 +64,7 @@ case "fatalChecks": ?>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
 </ul>
-<p>If you run into any other problems or just want some help with the installation, feel free to join the <a href='https://geteso.org/support'>support forum</a> where a bunch of friendly people will be happy to help you out.</p>
+<p>If you run into any other problems or just want some help with the installation, feel free to join <a href='https://geteso.org'>geteso.org</a> where a bunch of friendly people will be happy to help you out.</p>
 <hr/>
 <p id='footer'><input class='button' value='Try again' type='submit'/></p>
 <?php break;
@@ -78,7 +78,7 @@ case "warningChecks": ?>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
 </ul>
-<p>If you run into any other problems or just want some help with the installation, feel free to join the <a href='https://geteso.org/support'>support forum</a> where a bunch of friendly people will be happy to help you out.</p>
+<p>If you run into any other problems or just want some help with the installation, feel free to join <a href='https://geteso.org'>geteso.org</a> where a bunch of friendly people will be happy to help you out.</p>
 <hr/>
 <p id='footer'><input class='button' value='Next step &#155;' type='submit' name='next'/></p>
 <?php break;
@@ -88,7 +88,7 @@ case "warningChecks": ?>
 case "info": ?>
 <h1><img src='logo.svg' alt=''/>Specify setup information</h1>
 <p>Welcome to the installer.  We need a few details from you so we can get your forum set up and ready to go.</p>
-<p>If you have any trouble, get help on the <a href='https://geteso.org/support'>support forum</a>.</p>
+<p>If you have any trouble, get help on <a href='https://geteso.org'>geteso.org</a>.</p>
 <hr/>
 
 <ul class='form'>
@@ -181,7 +181,7 @@ case "install": ?>
 <ul>
 <li><strong>Try again.</strong> Everyone makes mistakes: maybe the computer made one this time.</li>
 <li><strong>Go back and check your settings.</strong> In particular, make sure your database information is correct.</li>
-<li><strong>Get help.</strong> Go on the <a href='https://geteso.org/support'>support forum</a> to see if anyone else is having the same problem as you are. If not, open a new issue, including the error details below.</li>
+<li><strong>Get help.</strong> Go on <a href='https://geteso.org'>geteso.org</a> to see if anyone else is having the same problem as you are. If not, open a new issue, including the error details below.</li>
 </ul>
 
 <a href='#' onclick='toggleError();return false'>Show error information</a>

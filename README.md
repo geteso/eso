@@ -14,7 +14,7 @@
 2. **[PHP 5.3-5.6](https://www.php.net/releases/5_6_0.php)** as version seven is not yet supported.
 4. **PHP-MySQL and PHP-GD** extensions.
 
-**For a production forum, you should serve all traffic over HTTPS/TLS.**  This can easily be done by installing [LetsEncrypt](https://letsencrypt.org/).  esoProjects requires no additional configuration for HTTPS/TLS other than changing the URL in your `config.php` from `http://example.com` -> `https://example.com`.
+**For a production forum, you should serve all traffic over HTTPS/TLS.**  This can easily be done by installing [LetsEncrypt](https://letsencrypt.org/).  eso requires no additional configuration for HTTPS/TLS other than changing the URL in your `config.php` from `http://example.com` -> `https://example.com`.
 
 ---
 

@@ -88,28 +88,27 @@ function init()
 		//	}
 		// }
 
-		// If the user IS NOT logged in, add the login form and 'Join this forum' link to the bar.
+		// If the user IS NOT logged in, add the login form and 'Join us' link to the bar.
 		if (!$this->user) {
 			$this->addToBar("left", "<form action='" . curLink() . "' method='post' id='login'><div>
  <input id='loginName' name='login[name]' type='text' class='text' autocomplete='username' placeholder='" . (!empty($_POST["login"]["name"]) ? $_POST["login"]["name"] : $language["Username"]) . "'/>
  <input id='loginPassword' name='login[password]' type='password' class='text' autocomplete='current-password' placeholder='{$language["Password"]}'/>
  " . $this->skin->button(array("value" => $language["Log in"])) . "
  </div></form>", 100);
-			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='mbl-join' title='Join this forum'><span>Join this forum</span></a>", 200);
- 			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='nav-join'>{$language["Join this forum"]}</a>", 300);
- 			$this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='nav-fgpw'>{$language["Forgot your password"]}</a>", 400);
+ 			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='nav-join'><span class='button'><input type='submit' value='{$language["Join us"]}'></span></a>", 200);
+ 			$this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='nav-fgpw'><span class='button'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
 		}
 		
 		// If the user IS logged in, we want to display their name and appropriate links.
 		else {
-                        $this->addToBar("left", "<strong id='nav-prof'><a href='" . makeLink("profile") . "'>{$this->user["name"]}</a>:</strong>", 100);
-                        $this->addToBar("left", "<a href='" . makeLink("profile") . "' id='mbl-prof' title='My profile'><span>My profile</span></a>", 200);
-                        $this->addToBar("left", "<a href='" . makeLink("") . "' id='nav-home'>{$language["Home"]}</a>", 300);
-                        $this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='nav-conv'>{$language["Start a conversation"]}</a>", 400);
-                        $this->addToBar("left", "<a href='" . makeLink("settings") . "' id='nav-sett'>{$language["My settings"]}</a>", 500);
-                        $this->addToBar("left", "<a href='" . makeLink("logout") . "' id='nav-exit'>{$language["Log out"]}</a>", 1100);
+						$this->addToBar("left", "<strong id='nav-prof'><a href='" . makeLink("profile") . "'>{$this->user["name"]}</a>:</strong>", 100);
+						$this->addToBar("left", "<a href='" . makeLink("") . "' id='nav-home'><span class='button'><input type='submit' value='{$language["Home"]}'></span></a>", 200);
+						$this->addToBar("left", "<a href='" . makeLink("profile") . "' id='mbl-prof'><span class='button'><input type='submit' value='{$language["My profile"]}'></span></a>", 300);
+						$this->addToBar("left", "<a href='" . makeLink("settings") . "' id='nav-sett'><span class='button'><input type='submit' value='{$language["My settings"]}'></span></a>", 400);
+                        $this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='nav-conv'><span class='button'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
+                        $this->addToBar("left", "<a href='" . makeLink("logout") . "' id='nav-exit'><span class='button'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
                         if ($this->user["admin"])
- 				$this->addToBar("left", "<a href='" . makeLink("admin") . "'>{$language["Administration"]}</a>", 700);
+ 				$this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
 		
 		// Set up some default JavaScript files and language definitions.
