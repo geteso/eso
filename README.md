@@ -1,21 +1,41 @@
-## esoForum for Projects
-***Projects* (esoForum for Projects) is a web forum software** created for the sandbox discussion site [esoForum](https://esotalk.net) with which anyone can easily **create a functional and speedy forum.**  It's a roughly 230¹ KB GZIP download.
-<br>
-<br>
-![](https://image.ibb.co/g8KXuq/whole.png)
+<div align="center">
 
-*Projects* is based off the now-defunct [esoTalk](#) forum software, created by Simon and [Toby Zerner](http://tobyzerner.com) — so remember that this isn't affiliated with the original project. Current development is provided by [esoForum](https://esotalk.net) administrators.
+<img src="https://grntbg.github.io/esodev/img/logo.svg" alt="eso" width="150"/><br>
 
-### Creating your own forum
-**It's very easy to create your own forum** and doesn't require much (if any) command-line experience.  **For an extremely novice tutorial, see [this tutorial](https://github.com/esoForum/esoProjects/wiki/The-novice's-guide-to-creating-an-esoProject)** but otherwise dependencies are specified below.
+**Forum software that's lightweight and extensible.**
 
-1. **[Apache](https://apache.org)** or [lighttpd](https://www.lighttpd.net).
-2. A recent (latest, recommended) version of **[MySQL](https://www.mysql.com)** and an empty database.
-2. **[PHP 5.3-5.6](https://www.php.net/releases/5_6_0.php)** as version seven is not yet supported.
-4. **PHP-MySQL and PHP-GD** extensions.
+<p align="justify"><b>eso is a web forum software</b> originally created for <a href="https://esotalk.net">geteso, the unmoderated¹ discussion board</a> which brings a whole new approach to how users interact.&nbsp&nbspUsing our software, webmasters can <b>create a functional and speedy forum</b> in a short manner of time.&nbsp&nbspIt's a small package and loads <i>freaky fast</i> on modern browsers using compression and an unsophisticated design.
 
-**For a production forum, you should serve all traffic over HTTPS/TLS.**  This can easily be done by installing [LetsEncrypt](https://letsencrypt.org/).  eso requires no additional configuration for HTTPS/TLS other than changing the URL in your `config.php` from `http://example.com` -> `https://example.com`.
+[![Repo Size](https://img.shields.io/github/repo-size/geteso/eso)]()
+[![Issues](https://img.shields.io/github/issues/geteso/eso)]()
+[![License](https://img.shields.io/github/license/geteso/eso)]()
+[![Version](https://img.shields.io/github/v/release/geteso/eso?include_prereleases)]()
+[![PHP Version Support](https://img.shields.io/badge/php-%5E5.6.4-blue)]()
+
+</div>
 
 ---
 
-¹SIZE — File size measured in the unsplitted GZIP (.gz) lossless format.
+### About the project
+Our software is based on an earlier incarnation of an unmaintained project named [*esoTalk*](https://github.com/esotalk/esoTalk) headed by <a href="http://tobyzerner.com/">Toby Zerner</a>.  We started a small, private forum by the name of "esotalk.ga" in order to test our fork of the software on the date of 2/22/18.  More than three years later, our forum software now services the forum itself, which has grown significantly.
+
+That doesn't mean it isn't great for individual forums, though.  Since then, we've added an administrator panel, and have updated the forum software to keep in touch with modern web technologies of the present.  We're still making changes as the web continues to shape itself, and as our users suggest improvements.  We are not affiliated with the original *esoTalk* project.
+
+### Creating your own forum
+**It's very easy to create your own forum** and doesn't require much (if any) command-line experience.  **For an extremely novice tutorial, see [this tutorial](https://github.com/geteso/eso/wiki/The-beginner's-guide-to-creating-your-forum)**.  Otherwise, dependencies are listed below.
+
+1. **[Apache](https://apache.org)** or [lighttpd](https://www.lighttpd.net) (not yet tested).
+2. A recent (preferably latest) version of **[MySQL](https://www.mysql.com)** and an empty database.
+2. **[PHP 5.3-5.6](https://www.php.net/releases/5_6_0.php)** as version seven is not yet supported.
+4. **PHP-MySQL and PHP-GD** extensions.
+
+**For a production forum, you should serve all traffic over HTTPS/TLS.**  This can easily be done by installing [LetsEncrypt](https://letsencrypt.org/).  Our software requires no additional configuration for HTTPS/TLS other than changing the URL in your `config.php` from `http://example.com` -> `https://example.com`.
+
+### Getting support
+The people who are responsible for heading development on this project also regularly check the discusion board that it is made for, which means that you'd be better off asking your questions [on our forum](https://geteso.org).  If you're uncomfortable with that, you can always [open an issue](https://github.com/geteso/eso/issues), however we cannot guarantee a response within any short manner of time.
+
+As always, the best way to contribute is by joining our forum and discussing the project with us there.
+
+---
+
+¹The geteso forum is not entirely unmoderated.  See [our about page](https://geteso.org/751/about-the-forum/) for details.

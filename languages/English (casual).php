@@ -212,6 +212,7 @@ $language = array(
 "Use default logo" => "Use default logo",
 "Username" => "Username",
 "version" => "version %s",
+"Video" => "Video",
 "Viewing" => "Viewing:",
 "viewingPosts" => "<b>%s-%s</b> of %s posts",
 

@@ -22,14 +22,12 @@ if(!defined("IN_ESO"))exit;
 <meta property='og:site_name' content='<?php echo $config["forumTitle"]; ?>'>
 <meta property='og:title' content='<?php echo ($this->controller->title ? $this->controller->title . "" : "") ?>'>
 <meta property='og:type' content='website'>
-<meta property='og:image' content=''>
-<meta property='og:url' content=''>
+<meta property='og:url' content='<?php echo $config["baseURL"];?>'>
 <!-- og:description added to head @ conversation.controller, search.controller -->
 
 <!-- Twitter -->
 <meta name='twitter:title' content='<?php echo ($this->controller->title ? $this->controller->title . "" : "") ?>'>
 <meta name='twitter:card' content='summary'>
-<meta name='twitter:image' content=''>
 <!-- twitter:description added to head @ conversation.controller, search.controller -->
 
 <!-- PWA manifest -->

@@ -22,8 +22,6 @@ function init()
 	// Preload the default forum logo to evade flickering upon hover.
 	$this->eso->addToHead("
 	<link rel='preload' href='skins/{$config["skin"]}/logo.svg' as='image'/>
-	<link rel='preload' href='skins/{$config["skin"]}/icons/profile.svg' as='image'/>
-	<link rel='preload' href='skins/{$config["skin"]}/icons/join.svg' as='image'/>
 	");
 }
 

@@ -904,10 +904,11 @@ function getEditControls($id)
 		400 => "<a href='javascript:Conversation.strikethrough(\"$id\");void(0)' id='format-s' title='&lt;s&gt;{$language["Strike"]}&lt;/s&gt;' accesskey='t'><span>{$language["Strike"]}</span></a>",
 		500 => "<a href='javascript:Conversation.link(\"$id\");void(0)' id='format-a' class='link' title='&lt;a href=&#39;https://example.com&#39;&gt;{$language["Link"]}&lt;/a&gt;' accesskey='l'><span>{$language["Link"]}</span></a>",
 		600 => "<a href='javascript:Conversation.image(\"$id\");void(0)' id='format-img' title='{$language["Image"]} &lt;img src=&#39;https://example.com/image.jpg&#39;&gt;' accesskey='m'><span>{$language["Image"]}</span></a>",
-		700 => "<a href='javascript:Conversation.quote(\"$id\");void(0)' id='format-quote' title='&lt;blockquote&gt;{$language["Quote"]}&lt;/blockquote&gt;' accesskey='q'><span>{$language["Quote"]}</span></a>",
-		800 => "<a href='javascript:Conversation.fixed(\"$id\");void(0)' id='format-code' title='&lt;pre&gt;{$language["Fixed"]}&lt;/pre&gt;' accesskey='f'><span>{$language["Fixed"]}</span></a>",
-		850 => "</span>",
-		900 => "<span class='formattingCheckbox'><input type='checkbox' id='$id-previewCheckbox' class='checkbox' onclick='Conversation.togglePreview(\"$id\",this.checked)' accesskey='p'/> <label for='$id-previewCheckbox'>{$language["Preview"]}</label></span>",
+		700 => "<a href='javascript:Conversation.video(\"$id\");void(0)' id='format-video' title='{$language["Video"]} &lt;video src=&#39;https://example.com/video.mp4&#39;&gt;' accesskey='v'><span>{$language["Video"]}</span></a>",
+		800 => "<a href='javascript:Conversation.quote(\"$id\");void(0)' id='format-quote' title='&lt;blockquote&gt;{$language["Quote"]}&lt;/blockquote&gt;' accesskey='q'><span>{$language["Quote"]}</span></a>",
+		900 => "<a href='javascript:Conversation.fixed(\"$id\");void(0)' id='format-code' title='&lt;pre&gt;{$language["Fixed"]}&lt;/pre&gt;' accesskey='f'><span>{$language["Fixed"]}</span></a>",
+		950 => "</span>",
+		1000 => "<span class='formattingCheckbox'><input type='checkbox' id='$id-previewCheckbox' class='checkbox' onclick='Conversation.togglePreview(\"$id\",this.checked)' accesskey='p'/> <label for='$id-previewCheckbox'>{$language["Preview"]}</label></span>",
 	);
 	
 	$this->callHook("getEditControls", array(&$controls));
@@ -1173,11 +1174,11 @@ function addMember($name)
 	if (!$memberId) {
 		switch (strtolower($name)) {
 			// Members
-			case $language["Member-plural"]:
-			case "members":
-				$memberId = "Member";
-				$memberName = $language["Member-plural"];
-				break;
+			// case $language["Member-plural"]:
+			// case "members":
+			//	$memberId = "Member";
+			//	$memberName = $language["Member-plural"];
+			//	break;
 			// Moderators
 			case $language["Moderator-plural"]:
 			case "moderators":

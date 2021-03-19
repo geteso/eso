@@ -1778,8 +1778,9 @@ bold: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<b>", "</b
 italic: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<i>", "</i>");},
 strikethrough: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<s>", "</s>");},
 header: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<h1>", "</h1>");},
-link: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<a href='http://example.com'>", "</a>", "http://example.com", "link text");},
-image: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<img src='", "'>", "", "http://example.com/image.jpg");},
+link: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<a href='https://example.com'>", "</a>", "https://example.com", "link text");},
+image: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<img src='", "'>", "", "https://example.com/image.jpg");},
+video: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<video src='", "'>", "", "https://example.com/video.mp4");},
 fixed: function(id) {Conversation.wrapText(getById(id + "-textarea"), "<pre>", "</pre>");},
 
 // Quotes.

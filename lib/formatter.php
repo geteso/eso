@@ -39,6 +39,8 @@ function Formatter()
 		"strikethrough" => new Formatter_Strikethrough($this),
 		"link" => new Formatter_Link($this),
 		"image" => new Formatter_Image($this),
+		"video" => new Formatter_Video($this),
+		"audio" => new Formatter_Audio($this),
 		"list" => new Formatter_List($this),
 		"quote" => new Formatter_Quote($this),
 		"fixedBlock" => new Formatter_Fixed_Block($this),
@@ -780,6 +782,116 @@ function image($src, $alt = "", $title = "")
 function revert($string)
 {
 	$string = preg_replace("/<img(.*?)\/>/", "&lt;img$1&gt;", $string);
+	return $string;
+}
+
+}
+
+
+class Formatter_Video {
+
+var $formatter;
+var $modes = array("video_html");
+	
+function Formatter_Video(&$formatter)
+{
+	$this->formatter =& $formatter;
+}
+	
+function format()
+{	
+	$this->formatter->lexer->mapFunction("video_html", array($this, "video_html"));
+
+	$allowedModes = $this->formatter->getModes($this->formatter->allowedModes["whitespace"]);
+	foreach ($allowedModes as $mode) {
+		$this->formatter->lexer->addSpecialPattern('&lt;video.+?\/?&gt;', $mode, "video_html");
+	}
+}
+
+function video_html($match, $state)
+{
+	if (preg_match("`src=(&#39;|&quot;)(https?:\/\/[^\s]+?)\\1`", $match, $src)) $src = $src[2];
+	else {
+		$this->formatter->output .= $match;
+		return true;
+	}
+	$title = "";
+	if (preg_match("`title=(&#39;|&quot;)(.+?)\\1`", $match, $title)) $title = $title[2];
+	$this->video($src, $title);
+	return true;
+}
+
+// Add a video tag to the output.
+function video($src, $title = "")
+{
+	if (!empty($title)) $titleQuote = strpos($title, "&#39;") === false ? "'" : '"';
+	$this->formatter->output .= "<video controls " . (!empty($title) ? " title=$titleQuote$title$titleQuote" : "") . "/><source src='$src'/></video/>";
+}
+
+// Revert video tags to their formatting code.
+function revert($string)
+{
+	// Clean up the beginning of the video tag.
+	if (preg_match("/<video controls (.*?)\/>/", $string)) $string = str_replace("<source src='", "<video src='", $string);
+	// Remove the controls and title attributes, if any.
+	$string = preg_replace("/<video controls (.*?)\/>/", "", $string);
+	// Clean up the end of the video tag.
+	$string = str_replace("'/></video/>", "'>", $string);
+	return $string;
+}
+
+}
+
+
+class Formatter_Audio {
+
+var $formatter;
+var $modes = array("audio_html");
+	
+function Formatter_Audio(&$formatter)
+{
+	$this->formatter =& $formatter;
+}
+	
+function format()
+{	
+	$this->formatter->lexer->mapFunction("audio_html", array($this, "audio_html"));
+
+	$allowedModes = $this->formatter->getModes($this->formatter->allowedModes["whitespace"]);
+	foreach ($allowedModes as $mode) {
+		$this->formatter->lexer->addSpecialPattern('&lt;audio.+?\/?&gt;', $mode, "audio_html");
+	}
+}
+
+function audio_html($match, $state)
+{
+	if (preg_match("`src=(&#39;|&quot;)(https?:\/\/[^\s]+?)\\1`", $match, $src)) $src = $src[2];
+	else {
+		$this->formatter->output .= $match;
+		return true;
+	}
+	$title = "";
+	if (preg_match("`title=(&#39;|&quot;)(.+?)\\1`", $match, $title)) $title = $title[2];
+	$this->audio($src, $title);
+	return true;
+}
+
+// Add a audio tag to the output.
+function audio($src, $title = "")
+{
+	if (!empty($title)) $titleQuote = strpos($title, "&#39;") === false ? "'" : '"';
+	$this->formatter->output .= "<audio controls " . (!empty($title) ? " title=$titleQuote$title$titleQuote" : "") . "/><source src='$src'/></audio/>";
+}
+
+// Revert audio tags to their formatting code.
+function revert($string)
+{
+	// Clean up the beginning of the audio tag.
+	if (preg_match("/<audio controls (.*?)\/>/", $string)) $string = str_replace("<source src='", "<audio src='", $string);
+	// Remove the controls and title attributes, if any.
+	$string = preg_replace("/<audio controls (.*?)\/>/", "", $string);
+	// Clean up the end of the audio tag.
+	$string = str_replace("'/></audio/>", "'>", $string);
 	return $string;
 }
 

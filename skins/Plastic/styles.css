@@ -226,7 +226,9 @@ hr {display:none}
 .p .hdr .controls span {font-size:100%}
 .p .hdr a.button {padding:1px 4px}
 .p .body {line-height:1.3; overflow:auto; padding:5px 10px 0}
-.p .body img {vertical-align:bottom; max-width:720px}
+.p .body img {vertical-align:bottom; max-width:100%}
+.p .body video {max-width:100%; background:rgba(0,0,0,0.05)}
+.p .body video, .p .body audio {margin-bottom:-4px}
 .p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:110px}
 .p.r {border-right-style:solid; border-right-width:110px; border-left-style:solid; border-left-width:1px; border-bottom-style:solid; border-bottom-width:1px}
 .p.r div.avatar {float:right; margin-right:-110px}
@@ -488,7 +490,6 @@ ul.fl {z-index:1}
 ul.fr {z-index:0; right:25px}
 th.author, th.lastPost, th.star {display:none}
 td.author, td.lastPost, td.star {display:none}
-.p .body img {max-width:100%}
 #name-message, #email-message, #password-message, #confirm-message {clear:left; padding-left:146px}
 }
 
