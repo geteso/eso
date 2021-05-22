@@ -17,20 +17,28 @@ if(!defined("IN_ESO"))exit;
 <!-- Apple -->
 <meta name='apple-mobile-web-app-capable' content='yes'>
 <meta name='apple-mobile-web-app-title' content='<?php echo $config["forumTitle"];?>'>
+<meta name='apple-mobile-web-app-status-bar-style' content='default'>
+<link rel='apple-touch-icon' href='<?php echo $config["baseURL"] . $this->skin->getForumIcon(); ?>'>
 
 <!-- Open Graph -->
-<meta property='og:site_name' content='<?php echo $config["forumTitle"]; ?>'>
-<meta property='og:title' content='<?php echo ($this->controller->title ? $this->controller->title . "" : "") ?>'>
+<meta property='og:site_name' content='<?php echo $config["forumTitle"];?>'>
+<?php if (!empty($this->controller->title)): ?>
+<meta property='og:title' content="<?php echo $this->controller->title;?>">
+<?php else: ?>
+<meta property='og:title' content="<?php echo $config["forumTitle"];?>">
+<?php endif; ?>
 <meta property='og:type' content='website'>
+<meta property='og:image' content='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
 <meta property='og:url' content='<?php echo $config["baseURL"];?>'>
 <!-- og:description added to head @ conversation.controller, search.controller -->
 
 <!-- Twitter -->
-<meta name='twitter:title' content='<?php echo ($this->controller->title ? $this->controller->title . "" : "") ?>'>
+<meta name='twitter:title' content="<?php echo ($this->controller->title ? $this->controller->title . " - " : "").$config["forumTitle"];?>">
 <meta name='twitter:card' content='summary'>
+<meta name='twitter:image' content='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
 <!-- twitter:description added to head @ conversation.controller, search.controller -->
 
-<!-- PWA manifest -->
+<!-- Web app manifest -->
 <link rel="manifest" href="/site.webmanifest">
 
 <?php echo $this->head();?> 

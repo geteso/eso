@@ -86,6 +86,11 @@ function settingsInit(&$adminController)
 	 	and $this->eso->validateToken(@$_POST["token"])
 		and $this->changeLogo()) $this->eso->message("changesSaved");
 
+	// Change the forum icon?
+	if (isset($_POST["changeIcon"])
+	 	and $this->eso->validateToken(@$_POST["token"])
+		and $this->changeIcon()) $this->eso->message("changesSaved");
+
 	// Save the settings?
 	if (isset($_POST["saveSettings"])
 	 	and $this->eso->validateToken(@$_POST["token"])
@@ -118,7 +123,6 @@ function saveSettings()
 
 	return true;
 }
-
 
 // Change the forum logo.
 function changeLogo()
@@ -324,6 +328,214 @@ function changeLogo()
 	
 	$config["forumLogo"] = $logoFile . "." . $avatarFormat;
 	$this->writeSettingsConfig(array("forumLogo" => $config["forumLogo"]));
+	
+	return true;
+}
+
+// Change the forum icon.
+function changeIcon()
+{
+	if (empty($_POST["icon"]["type"])) return false;
+	global $config;
+	
+	$allowedTypes = array("image/jpeg", "image/png", "image/gif", "image/pjpeg", "image/x-png");
+	
+	// This is where the forum icon will be saved, suffixed with an extension (eg. .jpg).
+	$iconFile = "config/icon";
+	
+	switch ($_POST["icon"]["type"]) {
+		
+		// Upload an avatar from the user's computer.
+		case "upload":
+			
+			// Check for an error submitting the file and make sure the upload is a valid image file type.
+			if ($_FILES["iconUpload"]["error"] != 0
+				or !in_array($_FILES["iconUpload"]["type"], $allowedTypes)
+				or !is_uploaded_file($_FILES["iconUpload"]["tmp_name"])) {
+				$this->eso->message("avatarError");
+				return false;
+			}
+			
+			$type = $_FILES["iconUpload"]["type"];
+			$file = $_FILES["iconUpload"]["tmp_name"];
+			break;
+		
+		// Upload an avatar from a remote URL.
+		case "url":
+			
+			// Make sure we can open URLs with fopen, otherwise there's no point in continuing!
+			if (!ini_get("allow_url_fopen")) return false;
+			
+			// Remove HTML entities and spaces from the URL.
+			$url = str_replace(" ", "%20", html_entity_decode($_POST["icon"]["url"]));
+			
+			// Get the image's type.
+			$info = @getimagesize($url);
+			$type = $info["mime"];
+			$file = $iconFile;
+			
+			// Check the type of the image, and open file read/write handlers.
+			if (!in_array($type, $allowedTypes)
+				or (($rh = fopen($url, "rb")) === false)
+				or (($wh = fopen($file, "wb")) === false)) {
+				$this->eso->message("avatarError");
+				return false;
+			}
+			
+			// Transfer the image from the remote location to our server.
+			while (!feof($rh)) {
+				if (fwrite($wh, fread($rh, 1024)) === false) {
+					$this->eso->message("avatarError");
+					return false;
+				}
+			}
+			fclose($rh); fclose($wh);
+			break;
+		
+		// Unset the user's avatar.
+		case "none":
+		
+			// If the user doesn't have an avatar, we don't need to do anything!
+			if (empty($config["forumIcon"])) return true;
+			
+			// Delete the avatar and thumbnail files.
+			$file = $config["forumIcon"];
+			if (file_exists($file)) @unlink($file);
+			
+			$config["forumIcon"] = "";
+			$this->writeSettingsConfig(array("forumIcon" => ""));
+			return true;
+			
+		default: return false;
+	}
+	
+	// Phew, we got through all that. Now let's turn the image into a resource...
+	switch ($type) {
+		case "image/jpeg": case "image/pjpeg": $image = @imagecreatefromjpeg($file); break;
+		case "image/x-png": case "image/png": $image = @imagecreatefrompng($file); break;
+		case "image/gif": $image = @imagecreatefromgif($file);
+	}
+	if (!$image) {
+		$this->eso->message("avatarError");
+		return false;
+	}
+	// ...and get its dimensions.
+	list($curWidth, $curHeight) = getimagesize($file);
+	
+	// if (!empty($_POST["resizeIcon"])) {
+		$newWidth = 256;
+		$newHeight = 256;
+	// }
+	
+
+		
+		// Set the destination.
+		$destination = $iconFile;
+		
+		if (file_exists($config["forumIcon"])) @unlink($config["forumIcon"]);
+
+		// If the new max dimensions exist and are different from the current dimensions, we're gonna want to resize.
+		if (($newWidth or $newHeight) and ($newWidth !== $curWidth or $newHeight !== $curHeight)) {
+			
+			// Work out the resize ratio and calculate the dimensions of the new image.
+			$widthRatio = $newWidth / $curWidth;
+			$heightRatio = $newHeight / $curHeight;
+			$ratio = ($widthRatio and $widthRatio <= $heightRatio) ? $widthRatio : $heightRatio;
+			$width = $ratio * $curWidth;
+			$height = $ratio * $curHeight;
+			$needsToBeResized = true;
+		}
+		
+		// Otherwise just use the current dimensions.
+		else {
+			$width = $curWidth;
+			$height = $curHeight;
+			$needsToBeResized = false;
+		}
+
+		// If it's a gif that doesn't need to be resized (and it's not a thumbnail), we move instead of resampling 
+		// so as to preserve animation.
+		if (!$needsToBeResized and $type == "image/gif") {
+			
+			// Read the gif file's contents.
+			$handle = fopen($file, "r"); 
+			$contents = fread($handle, filesize($file)); 
+			fclose($handle);
+			
+			// Filter the first 256 characters, making sure there are no HTML tags of any kind.
+			// We have to do this because IE6 has a major security issue where if it finds any HTML in the first 256
+			// characters, it interprets the rest of the document as HTML (even though it's clearly an image!)
+			$tags = array("!-", "a hre", "bgsound", "body", "br", "div", "embed", "frame", "head", "html", "iframe", "input", "img", "link", "meta", "object", "plaintext", "script", "style", "table");
+			$re = array();
+			foreach ($tags as $tag) {
+				$part = "(?:<";
+				$length = strlen($tag);
+				for ($i = 0; $i < $length; $i++) $part .= "\\x00*" . $tag[$i];
+				$re[] = $part . ")";
+			}
+			
+			// If we did find any HTML tags, we're gonna have to lose the animation by resampling the image.
+			if (preg_match("/" . implode("|", $re) . "/", substr($contents, 0, 255))) $needsToBeResized = true;
+			
+			// But if it's all safe, write the image to the avatar file!
+			else writeFile($destination . ".gif", $contents);
+		}
+
+		// If this is a gif image and it needs to be resized, if it's a thumbnail, or if it's any other type of image...
+		if ($needsToBeResized or $type != "image/gif") {
+			
+			// -waves magic wand- Now, let's create the image!
+			$newImage = imagecreatetruecolor($newWidth, $newHeight);
+			
+			// Preserve the alpha for pngs and gifs.
+			if (in_array($type, array("image/png", "image/gif", "image/x-png"))) {
+				imagecolortransparent($newImage, imagecolorallocate($newImage, 0, 0, 0));
+				imagealphablending($newImage, false);
+				imagesavealpha($newImage, true);
+			}
+			
+			// (Oh yeah, the reason we're doin' the whole imagecopyresampled() thing even for images that don't need to 
+			// be resized is because it helps prevent a possible cross-site scripting attack in which the file has 
+			// malicious data after the header.)
+			imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $curWidth, $curHeight);
+			
+			// Save the image to the correct destination and format.
+			switch ($type) {
+				// jpeg
+				case "image/jpeg": case "image/pjpeg":
+					if (!imagejpeg($newImage, "$destination.jpg", 85)) $saveError = true;
+					break;
+				// png
+				case "image/x-png": case "image/png":
+					if (!imagepng($newImage, "$destination.png")) $saveError = true;
+					break;
+				// gif - the only way to preserve gif transparency is to save the image as a png... but we'll still 
+				// pretend that it's a gif!
+				case "image/gif":
+					if (!imagepng($newImage, "$destination.gif")) $saveError = true;
+			}
+			if (!empty($saveError))  {
+				$this->eso->message("avatarError");
+				return false;
+			}
+
+			// Clean up.
+			imagedestroy($newImage);
+		}
+	
+	// Clean up temporary stuff.
+	imagedestroy($image);
+//	@unlink($file);
+	
+	// Depending on the type of image that was uploaded, update the user's avatarFormat field.
+	switch ($type) {
+		case "image/jpeg": case "image/pjpeg": $avatarFormat = "jpg"; break;
+		case "image/x-png": case "image/png": $avatarFormat = "png"; break;
+		case "image/gif": $avatarFormat = "gif";
+	}
+	
+	$config["forumIcon"] = $iconFile . "." . $avatarFormat;
+	$this->writeSettingsConfig(array("forumIcon" => $config["forumIcon"]));
 	
 	return true;
 }

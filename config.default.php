@@ -5,7 +5,7 @@
 
 if (!defined("IN_ESO")) exit;
 
-define("ESO_VERSION", "beta-1.0");
+define("ESO_VERSION", "1.0.0-p.2");
 
 $defaultConfig = array(
 // This following block is filled out by the installer in config/config.php.
@@ -26,7 +26,11 @@ $defaultConfig = array(
 // This following block may be filled out manually.
 // Be careful when editing this.  You could break your forum.
 "forumLogo" => false, // Path to an image file to replace the logo.  False for skin default.
+"forumIcon" => false, // Same thing as before, but for the icon.
 "sitemapCacheTime" => 3600, // Amount of time by which sitemaps are kept in cache.  (3600 seconds = 1 hour.)
+"manifestCacheTime" => 3600, // Same thing as before, but for the web app manifest.
+"manifestDisplay" => "standalone", // The preferred way to display your forum as a web app.  Standalone to behave like an app.
+// see https://www.w3.org/TR/appmanifest/#dfn-display-modes-values for details
 "verboseFatalErrors" => false, // Dumps SQL information in fatal errors.  Don't keep this enabled for production.
 "basePath" => "", // The base path to use when including or writing to any files.
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
@@ -38,7 +42,8 @@ $defaultConfig = array(
 "minPasswordLength" => 6,
 "cookieExpire" => 2592000, // Amount of time by which cookies are kept.  (2592000 seconds = 30 days.)
 "cookieDomain" => "", // Sets a custom cookie domain.  Set it to .yourdomain.com to have the cookie set across all subdomains.  Keep blank to use baseURL.
-"userOnlineExpire" => 300, // Amount of time by which a user's last seen time is before the user goes offline.  (300 seconds = 5 minutes.)
+"allowWeirdCharacters" => false, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
+"userOnlineExpire" => 4500, // Amount of time by which a user's last seen time is before the user goes offline.  (300 seconds = 5 minutes.)
 "messageDisplayTime" => 20, // Amount of time by which most messages floating above the navigation bar disappear.  (20 seconds = 20 seconds.  lol.)
 
 "results" => 20, // Number of conversations to list for a normal search.

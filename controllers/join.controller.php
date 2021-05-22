@@ -228,6 +228,9 @@ function validateName(&$name)
 	$name = substr($name, 0, 31);
 	if (in_array(strtolower($name), $this->reservedNames)) return "nameTaken";
 	if (!strlen($name)) return "nameEmpty";
+	if (empty($config["allowWeirdCharacters"])) {
+		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
+	}
 	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
 	if (@$this->eso->db->result($this->eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $this->eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
 		return "nameTaken";

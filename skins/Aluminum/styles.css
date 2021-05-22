@@ -15,12 +15,12 @@ a, .link, .p .hdr a.link {color:#003483}
 /* Misc */
 .fl {float:left}
 .fr {float:right}
-.clear {clear:both; font-size:1px; height:1px; margin:0; padding:0; width:1px}
+.clear {clear:both; font-size:1px; margin:0; padding:0; width:1px}
 small, dt {color:#888; font-size:90%}
 small a, dt a {color:#55f}
 #loading {background:#dcff52; border:solid #d4e58f; border-width:0 1px 1px 1px; font-size:120%; padding:5px 15px; position:fixed; right:10px; top:0; z-index:10000; box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px; -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px}
 .strike {text-decoration:line-through}
-img.avatar, div.avatar img {width:100px; height:100px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
+img.avatar, div.avatar img {width:105px; height:105px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
 .enabled, #skins a:hover {background:#ffa}
 .disabled {color:#888; cursor:default}
 .disabled:hover {color:#888; text-decoration:none}
@@ -95,7 +95,7 @@ a.s5 {font-size:90%}
 #search {font-size:150%; min-width:100px; overflow:hidden; padding-right:7.1em; margin-bottom:10px}
 #body #search {background:#d6dce5; padding:10px 19.2em 10px 10px; margin:0}
 #search .fr {margin-right:-18.5em; width:18.5em}
-#searchText {border-right:0; float:left; height:21px; min-width:100px; width:100%; margin-right:-100%; padding-right:2em; background:#fff url(icons/search.gif) no-repeat 5px 6px; padding-left:23px; border-color:#555}
+#searchText {border-right:0; float:left; height:21px; min-width:100px; width:100%; margin-right:-100%; padding-right:2em; background:#fff url(search.gif) no-repeat 5px 6px; padding-left:23px; border-color:#555}
 #search.withStartConversation {padding-right:18.5em}
 #submit {float:left; font-size:100%; position:relative; border-top-left-radius:0; border-bottom-left-radius:0}
 #submit input {font-size:100%; margin-left:-5px; padding-left:8px; width:5.5em}
@@ -227,11 +227,11 @@ hr {display:none}
 .p .body img {vertical-align:bottom; max-width:100%}
 .p .body video {max-width:100%; background:#d6dce5}
 .p .body video, .p .body audio {margin-bottom:-4px}
-.p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:110px}
-.p.r {border-right-style:solid; border-right-width:110px; border-left-style:solid; border-left-width:1px; border-bottom-style:solid; border-bottom-width:1px}
-.p.r div.avatar {float:right; margin-right:-110px}
-.p.l {border-left-style:solid; border-left-width:110px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
-.p.l div.avatar {float:left; margin-left:-110px}
+.p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:115px}
+.p.r {border-right-style:solid; border-right-width:115px; border-left-style:solid; border-left-width:1px; border-bottom-style:solid; border-bottom-width:1px}
+.p.r div.avatar {float:right; margin-right:-115px}
+.p.l {border-left-style:solid; border-left-width:115px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
+.p.l div.avatar {float:left; margin-left:-115px}
 .p .parts {width:100%}
 .p.r .parts {float:left}
 .p.l .parts {float:right}
@@ -241,7 +241,7 @@ hr {display:none}
 .deleted .hdr {margin:0}
 
 /* Reply to a conversation */
-.p .edit {padding:5px 0 10px 0}
+.p .edit {padding:5px 10px 10px 10px}
 .r .edit {padding:5px 10px 10px 0; padding-left:10px}
 .l .edit {padding:5px 0 10px 10px; padding-right:10px}
 .p .body textarea {height:25em; width:fill-available; width:-webkit-fill-available; width:-moz-available}
@@ -314,11 +314,12 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .stats div {float:none; font-size:115%; margin-left:35%}
 #admin .stats li {border-bottom:1px solid #ddd; padding-left:10px}
 #admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
-#admin .logoForm label, #admin .settingsForm label {width:20em;}
+#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
 #admin input.checkbox {margin:3px 5px 5px 0}
 #admin .clear {display:none}
 .form.logoForm img {border:1px dashed #bbb; padding:5px}
-.form.logoForm li:last-child {margin-top:-20px}
+.form.iconForm img {width:128px; height:128px; border:1px solid #ddd}
+.form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
   
 /* Plugins */
 #plugins .controls {float:right}
@@ -354,10 +355,11 @@ form#settingsAvatar {padding-bottom:8px}
 .p.profile {margin-bottom:0}
 
 /* Members online */
-#membersOnline .p {border-style:solid; border-width:2px; margin-bottom:2px}
-#membersOnline .hdr {margin:0}
-#membersOnline .p .hdr {padding-left:0}
-#membersOnline .avatar {width:32px; height:32px; margin:-10px 10px -10px 0; vertical-align:middle}
+#membersOnline .p {margin-bottom:4px; border:0}
+#membersOnline .hdr {margin:0; padding-left:0}
+#membersOnline .hdr > a:first-child {margin-right:8px; display:inline-block}
+#membersOnline .avatar {width:30px; height:30px; margin:-10px 0 -10px 0; vertical-align:middle}
+#membersOnline .p:last-child {margin-bottom:0}
 #fieldmembers .warning {margin:unset}
 
 /* Footer */
@@ -503,13 +505,13 @@ td.author, td.lastPost, td.star {display:none}
 .form.settingsForm li:last-child {width:20em}
 .form.settingsForm li:last-child label {width:20em!important}
 .form.settingsForm li:nth-last-child(2) div, .form.settingsForm li:nth-last-child(3) div {position:absolute; padding-left:2px} 
-#admin .logoForm label, #admin .settingsForm label {width:auto}
-.form.logoForm li {margin-bottom:10px}
-.form.logoForm li label {text-align:left}
-.form.logoForm li input {clear:left; max-width:20em}
-.form.logoForm li:last-child {width:20em; margin-top:0}
-.form.logoForm li:last-child label {width:20em!important}
-.form.logoForm li div {clear:left}
+#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:auto}
+.form.logoForm li, .form.iconForm li {margin-bottom:10px}
+.form.logoForm li label, .form.iconForm li label {text-align:left}
+.form.logoForm li input, .form.iconForm li input {clear:left; max-width:20em}
+.form.logoForm li:last-child, .form.iconForm li:last-child {width:20em; margin-top:0}
+.form.logoForm li:last-child label, .form.iconForm li:last-child label {width:20em!important}
+.form.logoForm li div, .form.iconForm li div {clear:left}
 }
 
 @media only screen and (max-width:735px) {
@@ -566,7 +568,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #hdr, #bar {padding-left:10px; padding-right:10px}
 #tagArea {display:none}
 #searchResults table.c {margin-top:0}
-#ftr {margin-left:10px; margin-right:10px; margin-bottom:0}
+#ftr {margin-left:10px; margin-right:10px; margin-bottom:10px}
 #cInfo h2 {margin-right:10px}
 .p.deleted {margin-bottom:10px}
 .p.l div.avatar, .p.r div.avatar {display:none}
@@ -629,6 +631,7 @@ label#lbl-fgcf {width:12em; display:none}
 }
 
 @media only screen and (max-width:395px) {
+#membersOnline .hdr span {display:none}
 #basicSettings .form.settingsForm li:nth-child(-n+3) div {width:100%}
 #admin .settingsForm input.text, #admin .settingsForm select {width:-webkit-fill-available}
 }
@@ -643,6 +646,5 @@ label#lbl-fgcf {width:12em; display:none}
 
 @media only screen and (max-width:308px) {
 #addMember {width:5em}
-#membersOnline .hdr span {display:none}
 tbody#conversations td strong {word-break:break-all}
 }

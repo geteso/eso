@@ -28,8 +28,8 @@ if(!defined("IN_ESO"))exit;
 
 <?php // Upload an avatar. ?>
 <li>
-<label for='upload' class='radio'>
-<input type='radio' class='radio' value='upload' name='avatar[type]' id='upload'<?php if(@$_POST["avatar"]["type"]=="upload")echo " checked='checked'";?>/>
+<label for='iconUpload' class='radio'>
+<input type='radio' class='radio' value='upload' name='avatar[type]' id='iconUpload'<?php if(@$_POST["avatar"]["type"]=="upload")echo " checked='checked'";?>/>
 <?php echo $language["Upload an avatar"];?>
 </label>
 <input id='upl-ava' name='avatarUpload' type='file' class='text' size='20' onchange='document.getElementById("upload").checked="true"'/>
@@ -38,8 +38,8 @@ if(!defined("IN_ESO"))exit;
 <?php // Get an avatar from URL.
 if(ini_get("allow_url_fopen")):?>
 <li>
-<label for='url' class='radio'>
-<input type='radio' class='radio' value='url' name='avatar[type]' id='url'<?php if(@$_POST["avatar"]["type"]=="url")echo " checked='checked'";?>/>
+<label for='iconUrl' class='radio'>
+<input type='radio' class='radio' value='url' name='avatar[type]' id='iconUrl'<?php if(@$_POST["avatar"]["type"]=="url")echo " checked='checked'";?>/>
 <?php echo $language["Enter the web address of an avatar"];?>
 </label>
 <input id='upl-url' name='avatar[url]' type='text' class='text' onkeypress='document.getElementById("url").checked="true"' value='<?php if(!empty($_POST["avatar"]["url"]))echo $_POST["avatar"]["url"];?>'/>
@@ -109,22 +109,22 @@ endforeach;
 <ul class='form' id='settingsPasswordForm'>
 	
 <li>
-<label><?php echo $language["New password"];?> <small><?php echo $language["optional"];?></small></label> <input type='password' name='settingsPasswordEmail[new]' class='text' autofill='new-password' value='<?php echo @$_POST["settingsPasswordEmail"]["new"];?>'/>
+<label><?php echo $language["New password"];?> <small><?php echo $language["optional"];?></small></label> <input type='password' name='settingsPasswordEmail[new]' class='text' autocomplete='new-password' value='<?php echo @$_POST["settingsPasswordEmail"]["new"];?>'/>
 <?php if(!empty($this->messages["new"]))echo $this->eso->htmlMessage($this->messages["new"]);?>
 </li>
 
 <li>
-<label><small><?php echo $language["Confirm password"];?></small></label> <input type='password' name='settingsPasswordEmail[confirm]' class='text' autofill='new-password' value=''/>
+<label><small><?php echo $language["Confirm password"];?></small></label> <input type='password' name='settingsPasswordEmail[confirm]' class='text' autocomplete='new-password' value=''/>
 <?php if(!empty($this->messages["confirm"]))echo $this->eso->htmlMessage($this->messages["confirm"]);?>
 </li>
 
 <li>
-<label><?php echo $language["New email"];?> <small><?php echo $language["optional"];?></small></label> <input type='text' name='settingsPasswordEmail[email]' class='text' autofill='email' value='<?php echo @$_POST["settingsPasswordEmail"]["email"];?>'/>
+<label><?php echo $language["New email"];?> <small><?php echo $language["optional"];?></small></label> <input type='text' name='settingsPasswordEmail[email]' class='text' autocomplete='email' value='<?php echo @$_POST["settingsPasswordEmail"]["email"];?>'/>
 <?php if(!empty($this->messages["email"]))echo $this->eso->htmlMessage($this->messages["email"]);?>
 </li>
 
 <li>
-<label><?php echo $language["My current password"];?></label> <input type='password' name='settingsPasswordEmail[current]' class='text' autofill='current-password'/>
+<label><?php echo $language["My current password"];?></label> <input type='password' name='settingsPasswordEmail[current]' class='text' autocomplete='current-password'/>
 <?php if(!empty($this->messages["current"]))echo $this->eso->htmlMessage($this->messages["current"]);?>
 </li>
 

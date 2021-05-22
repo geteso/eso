@@ -13,7 +13,7 @@ if($this->numberOnline):?>
 <div id='membersOnline'>
 <?php while(list($memberId,$name,$avatarFormat,$color,$account,$lastSeen,$lastAction)=$this->eso->db->fetchRow($this->online)):?>
 <div class='p c<?php echo $color;?>'><div class='hdr'>
-<?php if($this->numberOnline<20):?><img src='<?php echo $this->eso->getAvatar($memberId,$avatarFormat,"thumb");?>' alt='' class='avatar'/><?php endif;?>
+<a href='<?php echo makeLink("profile",$memberId);?>'><img src='<?php echo $this->eso->getAvatar($memberId,$avatarFormat,"thumb");?>' alt='' class='avatar'/></a>
 <h3><a href='<?php echo makeLink("profile",$memberId);?>'><?php echo $name;?></a></h3>
 <span><?php echo $lastAction;?> (<?php echo relativeTime($lastSeen);?>)</span>
 </div></div>

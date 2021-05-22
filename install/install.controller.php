@@ -217,6 +217,7 @@ Disallow: /online/
 Disallow: /join/
 Disallow: /forgot-password/
 Disallow: /conversation/new/
+Disallow: /site.webmanifest/
 Sitemap: {$config["baseURL"]}sitemap.php");
 	
 	// Prepare to log in the administrator.

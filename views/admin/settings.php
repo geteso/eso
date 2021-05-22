@@ -31,7 +31,7 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <li><label class='checkbox'><?php echo $language["Show forum description"]; ?></label>
 <div><input type='checkbox' class='checkbox' name='showForumDescription' value='1'<?php echo !empty($config["showForumDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
 
-<li><label></label> <span class='button'><input type='submit' name='saveSettings' value='Save changes'/></span></li>
+<li><label></label> <span class='button'><input type='submit' name='saveSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>
 
 </ul>
 
@@ -47,7 +47,7 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
 
 <ul class='form logoForm'>
-		
+
 <li><label><?php echo $language["Current logo"]; ?></label>
 <div><img src='<?php echo $this->eso->skin->getForumLogo(); ?>'/></div></li>
 
@@ -66,7 +66,42 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <?php echo $language["Use default logo"]; ?></label></li>
 
 <li><label></label><span class='button'>
-<input type='submit' name='changeLogo' value='Change logo'/></span></li>
+<input type='submit' name='changeLogo' value='<?php echo $language["Change logo"]; ?>'/></span></li>
+
+</ul>
+
+</form>
+</fieldset>
+
+<fieldset>
+<legend><?php echo $language["Forum icon"]; ?></legend>
+
+<div class='msg info'><?php echo $language["iconInfo"]; ?></div>
+
+<form action='<?php echo makeLink("admin", "settings"); ?>' id='settingsIcon' method='post' enctype='multipart/form-data'>
+<input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
+
+<ul class='form iconForm'>
+
+<li><label><?php echo $language["Current icon"]; ?></label>
+<div><img src='<?php echo $this->eso->skin->getForumIcon(); ?>'/></div></li>
+
+<li><label for='upload' class='radio'>
+<input type='radio' class='radio' value='upload' name='icon[type]' id='upload'/>
+<?php echo $language["Upload an icon from your computer"]; ?></label>
+<input name='iconUpload' type='file' class='text' size='20' onchange='getById("upload").checked="true"'/></li>
+
+<li><label for='url' class='radio'>
+<input type='radio' class='radio' value='url' name='icon[type]' id='url'/>
+<?php echo $language["Enter the web address of an icon"]; ?></label>
+<input name='icon[url]' type='text' class='text' onkeypress='getById("url").checked="true"' value=''/></li>
+
+<li><label for='none' class='radio'>
+<input type='radio' class='radio' value='none' name='icon[type]' id='none'/>
+<?php echo $language["Use default icon"]; ?></label></li>
+
+<li><label></label><span class='button'>
+<input type='submit' name='changeIcon' value='<?php echo $language["Change icon"]; ?>'/></span></li>
 
 </ul>
 

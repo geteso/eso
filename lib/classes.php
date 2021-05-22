@@ -134,7 +134,13 @@ function getForumLogo()
 	global $config;
 	return !empty($config["forumLogo"]) ? $config["forumLogo"] : "skins/{$config["skin"]}/logo.svg";
 }
-	
+
+function getForumIcon()
+{
+	global $config;
+	return !empty($config["forumIcon"]) ? $config["forumIcon"] : "skins/{$config["skin"]}/icon.png";
+}
+
 }
 
 ?>

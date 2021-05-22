@@ -14,7 +14,7 @@ $config = array_merge($defaultConfig, $config);
 // Compare the hardcoded software version (ESO_VERSION) to the installed one ($versions["eso"]).
 // If they're out-of-date, stop page execution.
 require "config/versions.php";
-if ($versions["eso"] != ESO_VERSION) exit;
+// if ($versions["eso"] != ESO_VERSION) exit;
 
 require "lib/functions.php";
 

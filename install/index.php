@@ -58,7 +58,7 @@ switch ($install->step) {
 
 // Fatal checks.
 case "fatalChecks": ?>
-<h1><img src='logo.svg' data-fallback='logo.png' alt='esoForum logo'/>Uh oh, something's not right!</h1>
+<h1><img src='logo.svg' data-fallback='logo.png' alt='Forum logo'/>Uh oh, something's not right!</h1>
 <p>The following errors were found with your forum's setup. They must be resolved before you can continue the installation.</p>
 <hr/>
 <ul>
@@ -72,7 +72,7 @@ case "fatalChecks": ?>
 
 // Warning checks.
 case "warningChecks": ?>
-<h1><img src='logo.svg' data-fallback='logo.png' alt='esoForum logo'/>Warning!</h1>
+<h1><img src='logo.svg' data-fallback='logo.png' alt='Forum logo'/>Warning!</h1>
 <p>The following errors were found with your forum's setup. You can continue the installation without resolving them, but some functionality may be limited.</p>
 <hr/>
 <ul>
@@ -110,29 +110,29 @@ case "info": ?>
 <?php if (isset($install->errors["mysql"])): ?><div class='warning msg'><?php echo $install->errors["mysql"]; ?></div><?php endif; ?>
 
 <ul class='form'>
-<li><label>MySQL host address</label> <input id='mysqlHost' name='mysqlHost' tabindex='3' type='text' class='text' value='<?php echo isset($_POST["mysqlHost"]) ? $_POST["mysqlHost"] : "localhost"; ?>'/></li>
+<li><label>MySQL host address</label> <input id='mysqlHost' name='mysqlHost' tabindex='3' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["mysqlHost"]) ? $_POST["mysqlHost"] : "localhost"; ?>'/></li>
 
-<li><label>MySQL username</label> <input id='mysqlUser' name='mysqlUser' tabindex='4' type='text' class='text' placeholder='esoman' value='<?php echo @$_POST["mysqlUser"]; ?>'/></li>
+<li><label>MySQL username</label> <input id='mysqlUser' name='mysqlUser' tabindex='4' type='text' class='text' placeholder='esoman' autocomplete='off' value='<?php echo @$_POST["mysqlUser"]; ?>'/></li>
 
-<li><label>MySQL password</label> <input id='mysqlPass' name='mysqlPass' tabindex='5' type='password' class='text' value='<?php echo @$_POST["mysqlPass"]; ?>'/></li>
+<li><label>MySQL password</label> <input id='mysqlPass' name='mysqlPass' tabindex='5' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["mysqlPass"]; ?>'/></li>
 
-<li><label>MySQL database</label> <input id='mysqlDB' name='mysqlDB' tabindex='6' type='text' class='text' placeholder='esodb' value='<?php echo @$_POST["mysqlDB"]; ?>'/></li>
+<li><label>MySQL database</label> <input id='mysqlDB' name='mysqlDB' tabindex='6' type='text' class='text' placeholder='esodb' autocomplete='off' value='<?php echo @$_POST["mysqlDB"]; ?>'/></li>
 </ul>
 
 <hr/>
 <p>The software will use the following information to set up your administrator account on your forum.</p>
 
 <ul class='form'>
-<li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='7' type='text' class='text' placeholder='Simon' value='<?php echo @$_POST["adminUser"]; ?>'/>
+<li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='7' type='text' class='text' placeholder='Simon' autocomplete='username' value='<?php echo @$_POST["adminUser"]; ?>'/>
 <?php if (isset($install->errors["adminUser"])): ?><div class='warning msg'><?php echo $install->errors["adminUser"]; ?></div><?php endif; ?></li>
 	
-<li><label>Administrator email</label> <input id='adminEmail' name='adminEmail' tabindex='8' type='text' class='text' placeholder='simon@example.com' value='<?php echo @$_POST["adminEmail"]; ?>'/>
+<li><label>Administrator email</label> <input id='adminEmail' name='adminEmail' tabindex='8' type='text' class='text' placeholder='simon@example.com' autocomplete='email' value='<?php echo @$_POST["adminEmail"]; ?>'/>
 <?php if (isset($install->errors["adminEmail"])): ?><span class='warning msg'><?php echo $install->errors["adminEmail"]; ?></span><?php endif; ?></li>
 	
-<li><label>Administrator password</label> <input id='adminPass' name='adminPass' tabindex='9' type='password' class='text' value='<?php echo @$_POST["adminPass"]; ?>'/>
+<li><label>Administrator password</label> <input id='adminPass' name='adminPass' tabindex='9' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminPass"]; ?>'/>
 <?php if (isset($install->errors["adminPass"])): ?><span class='warning msg'><?php echo $install->errors["adminPass"]; ?></span><?php endif; ?></li>
 	
-<li><label>Confirm password</label> <input id='adminConfirm' name='adminConfirm' tabindex='10' type='password' class='text' value='<?php echo @$_POST["adminConfirm"]; ?>'/>
+<li><label>Confirm password</label> <input id='adminConfirm' name='adminConfirm' tabindex='10' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminConfirm"]; ?>'/>
 <?php if (isset($install->errors["adminConfirm"])): ?><span class='warning msg'><?php echo $install->errors["adminConfirm"]; ?></span><?php endif; ?></li>
 </ul>
 
@@ -144,9 +144,9 @@ case "info": ?>
 <?php if (isset($install->errors["tablePrefix"])): ?><p class='warning msg'><?php echo $install->errors["tablePrefix"]; ?></p><?php endif; ?>
 
 <ul class='form'>
-<li><label>MySQL table prefix</label> <input name='tablePrefix' id='tablePrefix' tabindex='12' type='text' class='text' value='<?php echo isset($_POST["tablePrefix"]) ? $_POST["tablePrefix"] : "et_"; ?>'/></li>
+<li><label>MySQL table prefix</label> <input name='tablePrefix' id='tablePrefix' tabindex='12' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["tablePrefix"]) ? $_POST["tablePrefix"] : "et_"; ?>'/></li>
 
-<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='13' class='text' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='13' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
 
 <li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='14' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
 </ul>
