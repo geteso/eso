@@ -227,11 +227,11 @@ $language = array(
 
 "forgotPassword" => array(
 "subject" => "Did you forget your password, %s?",
-"body" => "%s, some one (hopefully you!) has submitted a forgotten password request for your account on the forum '%s'. If you do not wish to change your password, just ignore this email and nothing will happen.\n\nHowever, if you did forget your password and wish to set a new one, visit the following link:\n%s"),
+"body" => "%s, some one (hopefully you!) has submitted a forgotten password request for your account on %s. If you do not wish to change your password, just ignore this email and nothing will happen.\n\nHowever, if you did forget your password and wish to set a new one, visit the following link:\n%s"),
 
 "join" => array(
 "subject" => "%s, please validate your account",
-"body" => "%s, someone (hopefully you!) has signed up to the forum '%s' with this email address.\n\nIf this was you, simply visit the following link and your account will be activated:\n%s"),
+"body" => "%s, someone (hopefully you!) has signed up to %s with this email address.\n\nIf this was you, simply visit the following link and your account will be activated:\n%s"),
 
 "privateAdd" => array(
 "subject" => "%s, you have been added to a private conversation",
@@ -384,7 +384,7 @@ $messages = array(
 "setNewPassword" => array("class" => "info", "message" => "Alright! Now, what do you want your new password to be?"),
 "skinAdded" => array("class" => "success", "message" => "The skin was successfully added!"),
 "suspended" => array("class" => "warning", "message" => "Ouch! A forum moderator has <strong>suspended</strong> your account. It sucks, but until the suspension is lifted you won't be able to do much around here. Hey, screw them!"),
-"updatesAvailable" => array("class" => "info", "message" => "A new version of eso (<strong>%s</strong>) is available for download. You have version {$versions["eso"]}. <strong><a href='https://github.com/geteso'>Get it now</a></strong>!"),
+// "updatesAvailable" => array("class" => "info", "message" => "A new version of eso (<strong>%s</strong>) is available for download. You have version {$versions["eso"]}. <strong><a href='https://github.com/geteso'>Get it now</a></strong>!"),
 "verifyEmail" => array("class" => "success", "message" => "Before you can start using your newly-created account, you'll need to verify your email address. Within the next minute or two you should receive an email from us containing a link to activate your account. <strong>Check your spam folder</strong> if you don't receive this email shortly!"),
 "viewMore" => array("class" => "info", "message" => "Your search found more than {$config["results"]} conversations. <a href='%s' onclick='Search.viewMore();return false'>View more</a>"),
 "waitToReply" => array("class" => "warning", "message" => "You must wait at least {$config["timeBetweenPosts"]} seconds between starting or replying to conversations. Take a deep breath and try again."),
