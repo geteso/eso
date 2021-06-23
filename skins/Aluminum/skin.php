@@ -19,12 +19,6 @@ function init()
 	$this->eso->addCSS("skins/{$config["skin"]}/ie6.css", "ie6");
 	$this->eso->addCSS("skins/{$config["skin"]}/ie7.css", "ie7");
 	$this->eso->addToHead("<link rel='shortcut icon' type='image/ico' href='skins/{$config["skin"]}/favicon.ico'/>");
-	// Preload the default forum logo to evade flickering upon hover.
-	$this->eso->addToHead("
-	<link rel='preload' href='skins/{$config["skin"]}/logo.svg' as='image'/>
-	<link rel='preload' href='skins/{$config["skin"]}/icons/profile.svg' as='image'/>
-	<link rel='preload' href='skins/{$config["skin"]}/icons/join.svg' as='image'/>
-	");
 }
 
 // Generate button HTML.
