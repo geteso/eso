@@ -12,23 +12,24 @@ if (!isset($config)) exit;
 $config = array_merge($defaultConfig, $config);
 
 require "lib/functions.php";
+require "lib/classes.php";
 
 // If site.webmanifest is recent then we'll just use the cached version.
 // Otherwise, we'll regenerate the manifest.
 if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() - $config["manifestCacheTime"] - 200) {
 	writeFile("site.webmanifest",
 	"{
-		'name': '{$config["forumTitle"]}',
-		'description': '{$config["forumDescription"]}',
-		'icons': [
-			{
-				'src': '{$config["baseURL"]} . {$this->skin->getForumIcon()}',
-				'sizes': '256x256'
-			}
-		],
-		'start_url': '{$config["baseURL"]}',
-		'display': '{$config["manifestDisplay"]}'
-	}");
+	'name': '{$config["forumTitle"]}',
+	'description': '{$config["forumDescription"]}',
+	'icons': [
+		{
+			'src': '{$config["baseURL"]} . {$eso->skin->getForumIcon()}',
+			'sizes': '256x256'
+		}
+	],
+	'start_url': '{$config["baseURL"]}',
+	'display': '{$config["manifestDisplay"]}'
+}");
 }
 
 header("Content-type: application/manifest+json");

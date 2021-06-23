@@ -1682,7 +1682,7 @@ cancelEdit: function(postId) {
 toggleSticky: function() {
 	var label = getElementsByClassName(getById("cLabels"), "sticky")[0];
 	toggle(label);
-	getById("stickyLink").innerHTML = eso.language[label.showing ? "Unsticky" : "Sticky"];
+	getById("stickyLink").value = eso.language[label.showing ? "Unsticky" : "Sticky"];
 	Ajax.request({
 		"url": eso.baseURL + "ajax.php?controller=conversation",
 		"post": "action=toggleSticky&id=" + Conversation.id
@@ -1693,7 +1693,7 @@ toggleSticky: function() {
 toggleLock: function() {
 	label = getElementsByClassName(getById("cLabels"), "locked")[0];
 	toggle(label);
-	getById("lockLink").innerHTML = eso.language[label.showing ? "Unlock" : "Lock"];
+	getById("lockLink").value = eso.language[label.showing ? "Unlock" : "Lock"];
 	Ajax.request({
 		"url": eso.baseURL + "ajax.php?controller=conversation",
 		"post": "action=toggleLock&id=" + Conversation.id
