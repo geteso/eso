@@ -49,20 +49,20 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <ul class='form logoForm'>
 
 <li><label><?php echo $language["Current logo"]; ?></label>
-<div><img src='<?php echo $this->eso->skin->getForumLogo(); ?>'/></div></li>
+<div><img src='<?php echo $this->eso->skin->getForumLogo();?>'/></div></li>
 
-<li><label for='upload' class='radio'>
-<input type='radio' class='radio' value='upload' name='logo[type]' id='upload'/>
+<li><label for='logoUpload' class='radio'>
+<input type='radio' class='radio' value='upload' name='logo[type]' id='logoUpload'/>
 <?php echo $language["Upload a logo from your computer"]; ?></label>
 <input name='logoUpload' type='file' class='text' size='20' onchange='getById("upload").checked="true"'/></li>
 
-<li><label for='url' class='radio'>
-<input type='radio' class='radio' value='url' name='logo[type]' id='url'/>
+<li><label for='logoUrl' class='radio'>
+<input type='radio' class='radio' value='url' name='logo[type]' id='logoUrl'/>
 <?php echo $language["Enter the web address of a logo"]; ?></label>
 <input name='logo[url]' type='text' class='text' onkeypress='getById("url").checked="true"' value=''/></li>
 
-<li><label for='none' class='radio'>
-<input type='radio' class='radio' value='none' name='logo[type]' id='none'/>
+<li><label for='logoNone' class='radio'>
+<input type='radio' class='radio' value='none' name='logo[type]' id='logoNone'/>
 <?php echo $language["Use default logo"]; ?></label></li>
 
 <li><label></label><span class='button'>
@@ -86,18 +86,18 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 <li><label><?php echo $language["Current icon"]; ?></label>
 <div><img src='<?php echo $this->eso->skin->getForumIcon(); ?>'/></div></li>
 
-<li><label for='upload' class='radio'>
-<input type='radio' class='radio' value='upload' name='icon[type]' id='upload'/>
+<li><label for='iconUpload' class='radio'>
+<input type='radio' class='radio' value='upload' name='icon[type]' id='iconUpload'/>
 <?php echo $language["Upload an icon from your computer"]; ?></label>
 <input name='iconUpload' type='file' class='text' size='20' onchange='getById("upload").checked="true"'/></li>
 
-<li><label for='url' class='radio'>
-<input type='radio' class='radio' value='url' name='icon[type]' id='url'/>
+<li><label for='iconUrl' class='radio'>
+<input type='radio' class='radio' value='url' name='icon[type]' id='iconUrl'/>
 <?php echo $language["Enter the web address of an icon"]; ?></label>
 <input name='icon[url]' type='text' class='text' onkeypress='getById("url").checked="true"' value=''/></li>
 
-<li><label for='none' class='radio'>
-<input type='radio' class='radio' value='none' name='icon[type]' id='none'/>
+<li><label for='iconNone' class='radio'>
+<input type='radio' class='radio' value='none' name='icon[type]' id='iconNone'/>
 <?php echo $language["Use default icon"]; ?></label></li>
 
 <li><label></label><span class='button'>

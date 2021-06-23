@@ -13,12 +13,13 @@ if(!defined("IN_ESO"))exit;
 
 <title><?php echo ($this->controller->title?$this->controller->title." - ":"").$config["forumTitle"];?></title>
 <meta name='title' content='<?php echo ($this->controller->title?$this->controller->title." - ":"").$config["forumTitle"];?>'>
+<link rel='preload' href='<?php echo $this->skin->getForumLogo();?>' as='image'>
 
 <!-- Apple -->
 <meta name='apple-mobile-web-app-capable' content='yes'>
 <meta name='apple-mobile-web-app-title' content='<?php echo $config["forumTitle"];?>'>
 <meta name='apple-mobile-web-app-status-bar-style' content='default'>
-<link rel='apple-touch-icon' href='<?php echo $config["baseURL"] . $this->skin->getForumIcon(); ?>'>
+<link rel='apple-touch-icon' href='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
 
 <!-- Open Graph -->
 <meta property='og:site_name' content='<?php echo $config["forumTitle"];?>'>
@@ -63,7 +64,7 @@ if(!defined("IN_ESO"))exit;
 <h1>
 <?php endif; ?>
 
-<a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo(); ?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
+<a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo();?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
 <span id='forumTitle'><?php echo $config["forumTitle"];?>
 <?php if (($config["showForumDescription"] == "true") && ($this->action == "search")): ?>
 <small id='forumDescription'><?php echo $config["forumDescription"];?></small>
