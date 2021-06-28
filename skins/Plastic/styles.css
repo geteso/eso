@@ -220,6 +220,7 @@ hr {display:none}
 .p .hdr span, .p .hdr form {display:inline; font-size:90%; margin-left:7px}
 .p .hdr select, .p .hdr input.save {background:none; border:1px dotted #aaa; display:inline; padding:0; margin:-1px 0 -2px 0}
 .p .hdr select option {background:#fff}
+.p .hdr select:empty {display:none!important}
 .p .hdr input.save {padding:0 2px}
 .p .hdr .pInfo {float:left}
 .p .hdr .controls {float:right}

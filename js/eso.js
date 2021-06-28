@@ -1019,7 +1019,7 @@ displayPosts: function(scrollTo) {
 			"<span title='", post.date, "'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ");
 		if (post.editTime) html.push("<span>", makeEditedBy(post.editMember, relativeTime(post.editTime)), "</span> ");
 		// Output the member's account.
-		if (post.accounts.length > 0) {
+		if (post.account.length > 0) {
 			html.push("<span><select onchange='Conversation.changeMemberGroup(", post.memberId, ",this.value)' name='group'>");
 			for (var i in post.accounts) {
 				html.push("<option value='", post.accounts[i], "'");
