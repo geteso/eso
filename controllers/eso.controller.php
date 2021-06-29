@@ -586,7 +586,11 @@ function canChangeGroup($memberId, $group)
 	global $config;
 	if (!$this->user or !$this->user["moderator"] or $memberId == $this->user["memberId"] or $memberId == $config["rootAdmin"]) return false;
 	if ($this->user["admin"]) return $this->memberGroups;
-	if ($this->user["moderator"] and ($group == "Member" or $group == "Suspended")) return array("Member", "Suspended");
+	if ($this->user["moderator"] and ($group == "Member" or $group == "Suspended")) {
+		return array("Member", "Suspended");
+	} else {
+		return false;
+	}
 }
 
 // Returns whether or not the logged in user is suspended.
