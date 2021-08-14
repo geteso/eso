@@ -132,6 +132,7 @@ $language = array(
 "Moderator" => "Moderator",
 "Moderator-plural" => "Moderators",
 "My current password" => "My current password",
+"My profile" => "My profile",
 "My settings" => "My settings",
 "MySQL queries" => "MySQL queries",
 "Never" => "Never",

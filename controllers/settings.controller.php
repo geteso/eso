@@ -430,7 +430,7 @@ function changeColor($color)
 	global $config;
 	
 	// Make sure the color exists within the current skin!
-	$color = max(0, min((int)$color, $this->eso->skin->numberOfColors));
+	$color = max(1, min((int)$color, $this->eso->skin->numberOfColors));
 
 	// Update the database and session variables with the new color.
 	$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET color=$color WHERE memberId={$this->eso->user["memberId"]}");

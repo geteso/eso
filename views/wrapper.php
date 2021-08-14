@@ -13,7 +13,7 @@ if(!defined("IN_ESO"))exit;
 
 <title><?php echo ($this->controller->title?$this->controller->title." - ":"").$config["forumTitle"];?></title>
 <meta name='title' content='<?php echo ($this->controller->title?$this->controller->title." - ":"").$config["forumTitle"];?>'>
-<link rel='preload' href='<?php echo $this->skin->getForumLogo();?>' as='image'>
+<link rel='preload' href='<?php echo $config["baseURL"] . $this->skin->getForumLogo();?>' as='image'>
 
 <!-- Apple -->
 <meta name='apple-mobile-web-app-capable' content='yes'>
@@ -40,7 +40,7 @@ if(!defined("IN_ESO"))exit;
 <!-- twitter:description added to head @ conversation.controller, search.controller -->
 
 <!-- Web app manifest -->
-<link rel="manifest" href="/site.webmanifest">
+<link rel="manifest" href="site.webmanifest">
 
 <?php echo $this->head();?> 
 </head>

@@ -156,9 +156,9 @@ function init()
 		$this->eso->addToHead("<meta name='description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
 		$this->eso->addToHead("<meta property='og:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
 		$this->eso->addToHead("<meta name='twitter:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
-		if (!$this->eso->user) $this->eso->addToFooter("<a id='fgtpasftr' href='" . makeLink("forgot-password") . "'>{$language["Forgot your password"]}</a>");
-		if ($this->eso->user) $this->eso->addToFooter("<a id='markasread' href='" . makeLink("?markAsRead") . "'>{$language["Mark all conversations as read"]}</a>");
-		if ($this->eso->user) $this->eso->addToFooter("<a id='startaconv' href='" . makeLink("conversation/new") . "'>{$language["Start a conversation"]}</a>");
+		if (!$this->eso->user) $this->eso->addToFooter("<a id='forgotPassword' href='" . makeLink("forgot-password") . "'>{$language["Forgot your password"]}</a>");
+		if ($this->eso->user) $this->eso->addToFooter("<a id='markAsRead' href='" . makeLink("?markAsRead") . "'>{$language["Mark all conversations as read"]}</a>");
+		if ($this->eso->user) $this->eso->addToFooter("<a id='startConversation' href='" . makeLink("conversation/new") . "'>{$language["Start a conversation"]}</a>");
 		
 		// If this is not technically the homepage (if it's a search page) the we don't want it to be indexed.
 		if (@$_GET["q1"] == "search") $this->eso->addToHead("<meta name='robots' content='noindex, noarchive'/>");

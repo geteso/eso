@@ -19,16 +19,16 @@ require "lib/classes.php";
 if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() - $config["manifestCacheTime"] - 200) {
 	writeFile("site.webmanifest",
 	"{
-	'name': '{$config["forumTitle"]}',
-	'description': '{$config["forumDescription"]}',
-	'icons': [
+	\"name\": \"{$config["forumTitle"]}\",
+	\"description\": \"{$config["forumDescription"]}\",
+	\"icons\": [
 		{
-			'src': '{$config["baseURL"]} . {$eso->skin->getForumIcon()}',
-			'sizes': '256x256'
+			\"src\": \"{$config["baseURL"]} . {$eso->skin->getForumIcon()}\",
+			\"sizes\": \"256x256\"
 		}
 	],
-	'start_url': '{$config["baseURL"]}',
-	'display': '{$config["manifestDisplay"]}'
+	\"start_url\": \"{$config["baseURL"]}\",
+	\"display\": \"{$config["manifestDisplay"]}\"
 }");
 }
 
