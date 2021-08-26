@@ -202,13 +202,7 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 <?php endif;if($post["lastAction"]):?><span><?php printf($lastAction,$post["lastAction"]);?></span>
 <?php endif;foreach((array)$post["info"] as $info)echo "<span>$info</span>\n";?>
 </div>
-<div class='controls'>
-<?php if($this->editingPost==$post["id"]):echo implode(" ",$this->getEditControls("p".$post["id"]));else:?>
-<?php if($this->canReply()===true)echo str_replace("%s",$post["id"],$quoteLink)," ";?>
-<?php if($post["canEdit"])echo str_replace("%s",$post["id"],$editLink)," ",str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$deleteLink)," ";?>
-<?php foreach((array)$post["controls"] as $control)echo $control," ";?>
-<?php endif;?>
-</div>
+<div class='controls'><?php if($this->editingPost==$post["id"]):echo implode(" ",$this->getEditControls("p".$post["id"]));else:?><?php if($this->canReply()===true)echo str_replace("%s",$post["id"],$quoteLink)," ";?><?php if($post["canEdit"])echo str_replace("%s",$post["id"],$editLink)," ",str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$deleteLink)," ";?><?php foreach((array)$post["controls"] as $control)echo $control," ";?><?php endif;?></div>
 </div>
 <div class='body<?php if($this->editingPost==$post["id"]):?> edit<?php endif;?>'>
 <?php echo $this->editingPost==$post["id"]?$this->getEditArea($post["id"],$this->formatForEditing($post["body"])):$this->displayPost($post["body"]);?> 
