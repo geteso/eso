@@ -557,7 +557,10 @@ ul.fl, ul.fr {white-space:nowrap}
 }
 
 @media only screen and (max-width:620px) {
-#search, #bar .fr {display:none}
+#wrapper.small #search {display:none}
+#search.withStartConversation {padding-right:calc(7.15em + 12px)!important}
+#search .fr {margin-right:-7.15em; width:7.15em}
+#bar .fr, #new {display:none}
 #searchResults {border-top:1px solid #ccc; border-bottom:0; border-image:linear-gradient(to top, #ccc, #aaa); border-image-slice:1}
 #startConversation {display:inline-block; margin:3px 0 10px 0}
 #markasread {margin-bottom:0}
@@ -574,7 +577,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #body {padding:15px 10px; padding-top:10px; padding-bottom:0; overflow:hidden}
 #loading {right:10px}
 #hdr, #bar {padding-left:10px; padding-right:10px}
-#tagArea {display:none}
+#tags {display:none}
 #searchResults table.c {margin-top:0}
 #ftr {margin-left:10px; margin-right:10px; margin-bottom:10px}
 #cInfo h2 {margin-right:10px}
