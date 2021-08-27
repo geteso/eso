@@ -38,7 +38,7 @@ h3 {font-size:120%; font-weight:bold}
 #hdr h1 img {height:36px; margin-right:15px}
 #hdr h1 img, #forumTitle {vertical-align:middle}
 #stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
-.small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:100px; white-space:nowrap}
+.small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
 .small #hdr h1 img {height:30px}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
 
@@ -195,7 +195,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 #allowed dd {margin:0}
 #allowedList {display:block; font-size:90%; margin:5px 0}
 #allowed a.d:hover {color:#f00; text-decoration:line-through}
-#addMember {width:9em; margin-right:-5px; margin-bottom:5px; border-top-right-radius:0; border-bottom-right-radius:0}
+#addMember {width:9em; height:14px; margin:0 -5px 5px 0; border-right:0; border-top-right-radius:0; border-bottom-right-radius:0}
 #addMemberSubmit {border-top-left-radius:0; border-bottom-left-radius:0}
 
 /* Pagination */
@@ -335,6 +335,10 @@ form#settingsAvatar {padding-bottom:8px}
 #plugins .controls a, #plugins .toggle {font-size:90%; background:#cdffba; width:4.5em; text-align:center; display:block; float:left; color:#258500; padding:2px 0}
 #plugins .controls a, #plugins .enabled .toggle {color:#888; background:#e4e4e4}
 #plugins .controls a, #plugins small, #plugins strong {margin-left:10px}
+#plugins .toggle:hover {background-color:#a3e18c; text-decoration:none}
+#plugins .toggle:active {background-color:#64b346}
+#plugins .enabled .toggle:hover, #plugins .controls a:hover {background-color:#ccc; text-decoration:none}
+#plugins .enabled .toggle:active, #plugins .controls a:active {background-color:#a4a4a4}
 #plugins ul {list-style:none; margin:0; padding:0}
 #plugins li {border-bottom:1px solid #ddd; display:block; padding:5px}
 #plugins li strong {font-weight:normal; font-size:120%}
@@ -451,7 +455,7 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .c27 .hdr, .p .c27 .hdr, #palette .c27 {background:#cdc5bd} .c27 {border-color:#cdc5bd; background:#cdc5bd2e}
   
 /* Specific values */
-#forgotPassword, #markAsRead, #startConversation {line-height:1.5; margin:10px 0 0 0; padding:0 5px 0 5px; background:#e5e5e5; color:#000; width:fit-content; text-align:center; display:inline-block}
+#forgotPassword, #markAsRead, #startConversation {line-height:1.5; margin:10px 0 0 0; padding:0 5px 0 5px; background:#e4e4e4; color:#000; width:fit-content; text-align:center; display:inline-block}
 #forgotPassword, #startConversation {display:none}
 #forgotPassword {margin:10px 0 10px 0}
 #forgotPassword:hover, #markAsRead:hover, #startConversation:hover {background-color:#ccc; text-decoration:none}
@@ -538,9 +542,8 @@ select#avatarAlignment {margin-bottom:10px}
 select#language, select#avatarAlignment {max-width:20em; width:96%}
 #settingsOtherForm .checkbox {margin-left:20px; width:auto}
 #settingsOtherForm input {position:absolute; left:41px}
-}
 
-@media only screen and (max-width:735px) {
+/* Change your avatar */
 #lbl-avt {display:none}
 #upl-ava, #upl-url {clear:left; max-width:20em; width:96%}
 #settingsAvatar li:last-child {margin-top:0}
@@ -558,6 +561,10 @@ ul.fl, ul.fr {white-space:nowrap}
 #accountInformation .form input {clear:left}
 }
 
+@media only screen and (max-width:670px) {
+.form input[name="installPlugin"] {width:15em}
+}
+
 @media only screen and (max-width:620px) {
 #wrapper.small #search {display:none}
 #search.withStartConversation {padding-right:7.15em}
@@ -572,6 +579,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #admin .menu li.active a {margin-right:0; border-left:unset; border-bottom:unset}
 #admin .menu li:first-child a {border:none}
 #admin .inner {padding-top:10px}
+.form input[name="installPlugin"] {width:inherit}
 }
 
 @media only screen and (max-width:570px) {
@@ -597,9 +605,8 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 #palette {margin-left:2px; margin-right:0}
 #settingsOtherForm input {left:26px}
 .profile .form li, #report {padding-left:0}
-}
 
-@media only screen and (max-width:570px) {
+/* Conversations */
 #sconvo .hdr {min-height:16px}
 .p .hdr .controls {float:none; clear:left; overflow:auto; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px; background:#ddd; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
 #cPosts .p .hdr .controls a:first-child {margin-left:10px}
@@ -656,10 +663,6 @@ label#lbl-fgcf {width:12em; display:none}
 #basicSettings .form.settingsForm li:nth-child(-n+3) div {width:100%}
 #admin .settingsForm input.text, #admin .settingsForm select {width:-webkit-fill-available}
 }
-
-@media only screen and (max-width:320px) {
-#nav-skin, #nav-plgn {display:none}
-}
   
 @media only screen and (max-width:340px) {
 #discardDraft {clear:left; margin:5px 0 0 0}
@@ -667,4 +670,8 @@ label#lbl-fgcf {width:12em; display:none}
 
 @media only screen and (max-width:330px) {
 tbody#conversations td strong {word-break:break-all}
+}
+
+@media only screen and (max-width:320px) {
+#nav-skin, #nav-plgn {display:none}
 }
