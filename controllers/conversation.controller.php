@@ -1450,6 +1450,7 @@ function validateTitle(&$title)
 {
 	$title = substr($title, 0, 63);
 	if (!strlen($title)) return "emptyTitle";
+	if (strpos($title, '0') === 0) return "emptyTitle";
 	return $this->callHook("validateTitle", array(&$title), true);
 }
 

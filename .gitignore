@@ -1,4 +1,4 @@
-# Ignore system files.
+# System files
 .DS_Store
 .DS_Store?
 ._*
@@ -7,3 +7,28 @@
 ehthumbs.db
 Thumbs.db
 *~
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Visual Studio Code settings
+.vscode/*
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# Local history for Visual Studio Code
+.history/

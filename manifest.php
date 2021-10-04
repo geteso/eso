@@ -23,7 +23,7 @@ if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() -
 	\"description\": \"{$config["forumDescription"]}\",
 	\"icons\": [
 		{
-			\"src\": \"{$config["baseURL"]} . {$eso->skin->getForumIcon()}\",
+			\"src\": \"{$config["baseURL"]} . {$this->eso->skin->getForumIcon()}\",
 			\"sizes\": \"256x256\"
 		}
 	],

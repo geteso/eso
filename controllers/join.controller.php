@@ -228,6 +228,7 @@ function validateName(&$name)
 	$name = substr($name, 0, 31);
 	if (in_array(strtolower($name), $this->reservedNames)) return "nameTaken";
 	if (!strlen($name)) return "nameEmpty";
+	if (strpos($name, '0') === 0) return "nameEmpty";
 	if (empty($config["allowWeirdCharacters"])) {
 		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
 	}

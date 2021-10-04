@@ -280,6 +280,25 @@ function getLanguages()
 	return $languages;
 }
 
+// Get the installed skins and their details by reading the skins/ directory.
+function getSkins()
+{
+	global $language, $config;
+	$skins = array();
+	if ($handle = opendir("skins")) {
+	    while (false !== ($file = readdir($handle))) {
+			// Make sure the skin is valid, and set up its class.
+	        if ($file[0] != "." and is_dir("skins/$file") and file_exists("skins/$file/skin.php") and (include_once "skins/$file/skin.php") and class_exists($file)) {
+	        	// $file = substr($file, 0, strrpos($file, "."));
+				$skins[] = $file;
+			}
+	    }
+	    closedir($handle);
+	}
+	ksort($skins);
+	return $skins;
+}
+
 // Check for updates to the software.
 function checkForUpdates()
 {

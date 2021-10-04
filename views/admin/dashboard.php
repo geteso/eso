@@ -23,11 +23,11 @@ Ajax.request({
 <?php if (file_exists("install/")) echo $this->eso->htmlMessage("removeDirectoryWarning", "install/"); ?>
 
 <fieldset>
-<legend><?php echo translate("Forum statistics"); ?></legend>
+<legend><?php echo $language["Forum statistics"];?></legend>
 <ul class='form stats'>
 
 <?php foreach ($this->stats as $k => $v): ?>
-<li><label><?php echo translate($k); ?></label>
+<li><label><?php echo $language[$k]; ?></label>
 <div><?php echo $v; ?></div></li>
 <?php endforeach; ?>
 
@@ -36,11 +36,11 @@ Ajax.request({
 </fieldset>
 
 <fieldset>
-<legend><?php echo translate("Server information"); ?></legend>
+<legend><?php echo $language["Server information"];?></legend>
 <ul class='form stats'>
 
 <?php foreach ($this->serverInfo as $k => $v): ?>
-<li><label><?php echo translate($k); ?></label>
+<li><label><?php echo $language[$k]; ?></label>
 <div><?php echo $v; ?></div></li>
 <?php endforeach; ?>
 
