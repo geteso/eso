@@ -105,9 +105,9 @@ function init()
 						$this->addToBar("left", "<a href='" . makeLink("") . "' id='nav-home'><span class='button'><input type='submit' value='{$language["Home"]}'></span></a>", 200);
 						$this->addToBar("left", "<a href='" . makeLink("profile") . "' id='mbl-prof'><span class='button'><input type='submit' value='{$language["My profile"]}'></span></a>", 300);
 						$this->addToBar("left", "<a href='" . makeLink("settings") . "' id='nav-sett'><span class='button'><input type='submit' value='{$language["My settings"]}'></span></a>", 400);
-                        $this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='nav-conv'><span class='button'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
-                        $this->addToBar("left", "<a href='" . makeLink("logout") . "' id='nav-exit'><span class='button'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
-                        if ($this->user["admin"])
+						$this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='nav-conv'><span class='button'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
+						$this->addToBar("left", "<a href='" . makeLink("logout") . "' id='nav-exit'><span class='button'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
+						if ($this->user["admin"])
  				$this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
 		
@@ -269,7 +269,7 @@ function getLanguages()
 {
 	$languages = array();
 	if ($handle = opendir("languages")) {
-	    while (false !== ($v = readdir($handle))) {
+		while (false !== ($v = readdir($handle))) {
 			if (!in_array($v, array(".", "..")) and substr($v, -4) == ".php" and $v[0] != ".") {
 				$v = substr($v, 0, strrpos($v, "."));
 				$languages[] = $v;
@@ -286,14 +286,14 @@ function getSkins()
 	global $language, $config;
 	$skins = array();
 	if ($handle = opendir("skins")) {
-	    while (false !== ($file = readdir($handle))) {
+		while (false !== ($file = readdir($handle))) {
 			// Make sure the skin is valid, and set up its class.
-	        if ($file[0] != "." and is_dir("skins/$file") and file_exists("skins/$file/skin.php") and (include_once "skins/$file/skin.php") and class_exists($file)) {
-	        	// $file = substr($file, 0, strrpos($file, "."));
+			if ($file[0] != "." and is_dir("skins/$file") and file_exists("skins/$file/skin.php") and (include_once "skins/$file/skin.php") and class_exists($file)) {
+				// $file = substr($file, 0, strrpos($file, "."));
 				$skins[] = $file;
 			}
-	    }
-	    closedir($handle);
+		}
+		closedir($handle);
 	}
 	ksort($skins);
 	return $skins;

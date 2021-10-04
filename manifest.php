@@ -17,18 +17,18 @@ require "lib/classes.php";
 // If site.webmanifest is recent then we'll just use the cached version.
 // Otherwise, we'll regenerate the manifest.
 if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() - $config["manifestCacheTime"] - 200) {
-	writeFile("site.webmanifest",
-	"{
-	\"name\": \"{$config["forumTitle"]}\",
-	\"description\": \"{$config["forumDescription"]}\",
-	\"icons\": [
+		writeFile("site.webmanifest",
+		"{
+		\"name\": \"{$config["forumTitle"]}\",
+		\"description\": \"{$config["forumDescription"]}\",
+		\"icons\": [
 		{
-			\"src\": \"{$config["baseURL"]} . {$this->eso->skin->getForumIcon()}\",
-			\"sizes\": \"256x256\"
+				\"src\": \"{$config["baseURL"]} . {$this->eso->skin->getForumIcon()}\",
+				\"sizes\": \"256x256\"
 		}
-	],
-	\"start_url\": \"{$config["baseURL"]}\",
-	\"display\": \"{$config["manifestDisplay"]}\"
+		],
+		\"start_url\": \"{$config["baseURL"]}\",
+		\"display\": \"{$config["manifestDisplay"]}\"
 }");
 }
 

@@ -110,10 +110,10 @@ $language = array(
 "Jump to unread" => "Jump to unread",
 "Just now" => "Just now",
 "labels" => array(
-    "sticky" => "Sticky",
-    "private" => "Private",
-    "draft" => "Draft",
-    "locked" => "Locked"
+	"sticky" => "Sticky",
+	"private" => "Private",
+	"draft" => "Draft",
+	"locked" => "Locked"
 ),
 "Labels" => "Labels",
 "Last" => "Last",

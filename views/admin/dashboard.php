@@ -10,12 +10,12 @@ if (!defined("IN_ESO")) exit;
 <script type='text/javascript'>
 // <![CDATA[
 Ajax.request({
- 	"url": eso.baseURL + "ajax.php?controller=admin&section=dashboard",
- 	"post": "action=checkForUpdates",
- 	"success": function() {
- 		if (this.result) getById("updateMessage").innerHTML = this.result;
- 		show(getById("updateMessage"), {animation: "verticalSlide"});
- 	}
+	"url": eso.baseURL + "ajax.php?controller=admin&section=dashboard",
+	"post": "action=checkForUpdates",
+	"success": function() {
+		if (this.result) getById("updateMessage").innerHTML = this.result;
+		show(getById("updateMessage"), {animation: "verticalSlide"});
+	}
 })
 // ]]>
 </script>
