@@ -42,7 +42,7 @@ function ajax()
 function dashboardInit(&$adminController)
 {
 	global $config;
- 	$this->title = translate("Dashboard");
+	$this->title = $language["Dashboard"];
 	$this->subView = "admin/dashboard.php";
 	
 	// Get forum statistics to be outputted in the view.
@@ -76,10 +76,8 @@ function dashboardAjax(&$adminController)
 function settingsInit(&$adminController)
 {
 	global $language, $config;
-	//$this->title = $language["Dashboard"];
 	$this->subView = "admin/settings.php";
-	
-		$this->languages = $this->eso->getLanguages();
+	$this->languages = $this->eso->getLanguages();
 
 	// Change the forum logo?
 	if (isset($_POST["changeLogo"])

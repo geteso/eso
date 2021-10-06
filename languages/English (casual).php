@@ -92,6 +92,7 @@ $language = array(
 "Forum language" => "Forum language",
 "Forum icon" => "Forum icon",
 "Forum logo" => "Forum logo",
+"Forum settings" => "Forum settings",
 "Forum statistics" => "Forum statistics",
 "Forum title" => "Forum title",
 "Forum version" => "Forum version",
@@ -267,6 +268,7 @@ $language["gambits"] = array(
 // These gambits are pretty much evaluated as-they-are.
 // tag:, author:, contributor:, and quoted: are combined with a value after the colon (:).
 // For example: tag:video games, author:myself
+"100" => "100",
 "tag:" => "tag:",
 "author:" => "author:",
 "contributor:" => "contributor:",
@@ -274,6 +276,7 @@ $language["gambits"] = array(
 "myself" => "myself",
 "draft" => "draft",
 "has attachments" => "has attachments",
+"limit:" => "limit:",
 "locked" => "locked",
 "order by newest" => "order by newest",
 "order by posts" => "order by posts",

@@ -57,6 +57,7 @@ function init()
 		array(array($this, "gambitRandom"), 'return $term == strtolower($language["gambits"]["random"]);'),
 		array(array($this, "gambitReverse"), 'return $term == strtolower($language["gambits"]["reverse"]);'),
 		array(array($this, "gambitMoreResults"), 'return $term == strtolower($language["gambits"]["more results"]);'),
+		array(array($this, "gambitLimit"), 'return strpos($term, strtolower($language["gambits"]["limit:"])) === 0;'),
 		array(array($this, "fulltext"), 'return $term;'),
 	));
 	
@@ -70,8 +71,9 @@ function init()
 		$language["gambits"]["dead"] => "s4",
 		$language["gambits"]["has replies"] => "s2",
 		$language["gambits"]["has &gt;10 posts"] => "s4",
+		$language["gambits"]["limit:"] . $language["gambits"]["100"] => "s2",
 		$language["gambits"]["locked"] => "s4 lockedText",
-		$language["gambits"]["more results"] => "s2",
+//		$language["gambits"]["more results"] => "s2",
 		$language["gambits"]["order by newest"] => "s4",
 		$language["gambits"]["order by posts"] => "s2",
 		$language["gambits"]["random"] => "s5",
@@ -245,9 +247,12 @@ function getConversationIDs($search = "")
 	if (!$this->eso->user) $this->condition("conversations", "c.posts!=0 AND c.private=0");
 	else $this->condition("conversations", "c.startMember={$this->eso->user["memberId"]} OR (c.posts>0 AND (c.private=0 OR EXISTS (SELECT allowed FROM {$config["tablePrefix"]}status WHERE conversationId=c.conversationId AND memberId IN ('{$this->eso->user["account"]}',{$this->eso->user["memberId"]}) AND allowed=1)))");
 	
-	// Process the search string into individial terms, but only keep the first 10 terms!
+	// Process the search string into individial terms.
+	// Replace all "-" signs with "+!", and then split the string by "+".  Negated terms will then be prefixed with "!".
+	// Only keep the first 5 terms, just to keep the load on the database down!
 	$terms = !empty($search) ? explode("+", strtolower(str_replace("-", "+!", trim($search, " +-")))) : array();
-	$terms = array_slice($terms, 0, 10);
+//	$terms = array_slice($terms, 0, 10);
+	$terms = array_slice(array_filter($terms), 0, 5);
 	
 	// Take each term, match it with a gambit, and execute the gambit's function.
 	foreach ($terms as $term) {
@@ -615,6 +620,14 @@ function gambitMoreResults(&$search, $term, $negate)
 	if (!$negate) $search->limit($config["moreResults"]);
 }
 
+// Limit gambit: display a particular number of conversations.
+function gambitLimit(&$search, $term, $negate)
+{
+	global $language;
+	$term = trim(substr($term, strlen($language["gambits"]["limit:"])));
+	if (!$negate && is_numeric($term)) $search->limit($term);
+}
+
 // Draft gambit: get conversations which are drafts or contain a draft for the logged in user.
 function gambitDraft(&$search, $term, $negate)
 {
@@ -666,6 +679,7 @@ function gambitRandom(&$search, $term, $negate)
 function gambitReverse(&$search, $term, $negate)
 {
 	if (!$negate) $search->reverse = true;
+	$search->condition("conversations", "(c.lastPostTime) IS NOT NULL", $negate);
 }
 
 // Locked gambit: get conversations which are locked.

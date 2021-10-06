@@ -39,17 +39,17 @@ function init()
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 
-    // 1.0.0 beta 3 -> 1.0.0 pre 1 (referred to as "beta-1.0")
-    if ($versions["eso"] == "1.0.0b3") {
-        $versions["eso"] = "beta-1.0";
-        writeConfigFile("../config/versions.php", '$versions', $versions);
-    }
+	// 1.0.0 beta 3 -> 1.0.0 pre 1 (referred to as "beta-1.0")
+	if ($versions["eso"] == "1.0.0b3") {
+		$versions["eso"] = "beta-1.0";
+		writeConfigFile("../config/versions.php", '$versions', $versions);
+	}
 
-    // 1.0.0 pre 1 -> 1.0.0 pre 2
-    if ($versions["eso"] == "beta-1.0") {
-        $versions["eso"] = "1.0.0-p.2";
-        writeConfigFile("../config/versions.php", '$versions', $versions);
-    }
+	// 1.0.0 pre 1 -> 1.0.0 pre 2
+	if ($versions["eso"] == "beta-1.0") {
+		$versions["eso"] = "1.0.0-p.2";
+		writeConfigFile("../config/versions.php", '$versions', $versions);
+	}
 	
 	// Write the program version to the versions.php file.
 	if ($versions["eso"] != ESO_VERSION) {
