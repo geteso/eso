@@ -58,7 +58,7 @@ foreach ($this->plugins as $k => $plugin): ?>
 <div class='controls'>
 <?php if (!empty($plugin["settings"])): ?><a href='javascript:toggleSettings("<?php echo $k; ?>");void(0)'><?php echo $language["settings"]; ?></a><?php endif; ?>
 </div>
-<a href='<?php echo makeLink("admin", "plugins", "?toggle=$k", "&token={$_SESSION["token"]}"); ?>' class='toggle'><?php echo $plugin["loaded"] ? translate("Disable") : translate("Enable"); ?></a>	
+<a href='<?php echo makeLink("admin", "plugins", "?toggle=$k", "&token={$_SESSION["token"]}"); ?>' class='toggle'><?php echo $plugin["loaded"] ? $language["Disable"] : $language["Enable"]; ?></a>	
 <strong><?php echo $plugin["name"]; ?></strong>
 <small><?php printf($language["version"], $plugin["version"]); ?> <?php printf($language["author"], $plugin["author"]); ?></small> <small><?php echo $plugin["description"]; ?></small>
 

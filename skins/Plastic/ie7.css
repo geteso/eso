@@ -1,7 +1,0 @@
-/* Fixes for Internet Explorer 7 */
-/* Trigger hasLayout/position:relative on various elements */
-#body, .p, .p .hdr, #hdr, #messages .msg, #search, #reset {zoom:1}
-#reply, #cBody, #cContent, .overflowDiv, #body, .p, .p .hdr, .p .body {position:relative; zoom:1}
-/* The search bar doesn't like having a left margin for some odd reason. */
-pre {font-size:100%}
-.p .controls .formattingButtons a {margin-top:0; margin-bottom:0}

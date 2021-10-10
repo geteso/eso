@@ -1,139 +1,72 @@
 @media all {
 /* Main tags */
-body {font-family:arial,helvetica,sans-serif; font-size:75%; margin:0; -webkit-text-size-adjust: none; padding-top:0px !important; min-width:320px; background:linear-gradient(#e4e5ea, #fff 70%); background-repeat:no-repeat}
-input, textarea, select, button {font-family:arial,helvetica,sans-serif; font-size:100%; outline:none}
-p {line-height:1.4; margin:0 0 1em 0}
-a img {border:0}
-abbr {cursor:help}
-
-/* Links */
-a {text-decoration:none}
-a:hover {color:#000; text-decoration:underline}
-a:active {color:#666}
-a, .link, .p .hdr a.link {color:#00f}
+body {background:linear-gradient(#e4e5ea, #fff 70%); background-repeat:no-repeat}
 
 /* Misc */
-.fl {float:left}
-.fr {float:right}
-.clear {clear:both; font-size:1px; margin:0; padding:0; width:1px}
-small, dt {color:#888; font-size:90%}
+small, dt {color:#888}
 small a, dt a {color:#55f}
-#loading {background:#dcff52; border:solid #d4e58f; border-width:0 1px 1px 1px; font-size:120%; padding:5px 15px; position:fixed; right:25px; top:0; z-index:10000; box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px; -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px}
-.strike {text-decoration:line-through}
-img.avatar, div.avatar img {width:105px; height:105px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
+#loading {background:#dcff52; border:solid #d4e58f; border-width:0 1px 1px 1px; box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px; -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px}
 .enabled, #skins a:hover {background:#ffa}
-.disabled {color:#888; cursor:default}
+.disabled {color:#888}
 .disabled:hover {color:#888; text-decoration:none}
-h2 {font-size:160%; font-weight:normal}
-h3 {font-size:120%; font-weight:bold}
 .highlight {background:yellow}
-#appearance #preview {margin-bottom:0}
 
 /* Header */
-#hdr {background:linear-gradient(#fff, #fff, #e4e5ea); overflow:hidden; padding:0 25px; position:relative}
-#hdr h1 {float:left; font-size:190%; font-weight:normal; margin:0; padding:17px 0}
+#hdr {background:linear-gradient(#fff, #fff, #e4e5ea)}
 #hdr h1 a {color:#000}
 #hdr h1 a:hover {text-decoration:none}
 #hdr h1 a:hover span {text-decoration:underline}
-#hdr h1 img {height:36px; margin-right:15px}
-#hdr h1 img, #forumTitle {vertical-align:middle}
-#stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
-.small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
-.small #hdr h1 img {height:30px}
-#hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
-
-/* Header with forum description */
-#forumDescription {font-size:12px}
-#hdr h1#hasForumDescription img {float:left}
-#hdr h1#hasForumDescription #forumTitle {float:right; position:absolute; font-size:20px}
-#hdr h1#hasForumDescription #forumDescription {display:block; white-space:nowrap}
 
 /* User bar */
-#bar {background: linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02); line-height:18px; overflow:hidden; padding:6px 25px; height:18px}
-#bar ul {list-style-type:none; margin:0; padding:0}
-#bar li {float:left; margin:0}
-#bar .fl li {margin-right:3px}
-#bar .fr li {margin-left:3px}
-#bar strong {font-size:120%}
+#bar {background:linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02)}
 #bar strong a {color:#000}
-#bar form {font-size:90%; margin-top:-1px; margin-bottom:-2px}
-#bar .text {width:8em}
-#bar input.text {height:14px; border-radius:0; -webkit-appearance:none}
-#bar span.button {height:18px; border-radius:0}
-#bar img {vertical-align:-4px}
-#bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
+#bar span.button {border-radius:0}
 #bar li a span.button, #bar li a span.button {background:linear-gradient(#f7f7f7, #d8d9e1); box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); border:1px solid #bbb}
 #bar li a span.button input, #bar li a span.button input {color:#000; text-shadow:#ececec 0 1px}
 #bar li a span.button:hover, #bar li a span.button:hover {box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .15)}
 #bar li a span.button:active, #bar li a span.button:active {box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .5)}
-#login {margin-top:-6.5px!important; padding-top:5.5px; padding-bottom:5.5px; padding-right:3px; border-top:0; border-bottom:0; border-left:0; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
-#nav-dpav select {height:20px; margin-left:3px; border-radius:0; border-color:#bbb; box-shadow:inset 0 5px 10px rgba(0,0,0,.07); background:#fff}
+#login {border-top:0; border-bottom:0; border-left:0; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
+#nav-dpav select {border-radius:0; border-color:#bbb; box-shadow:inset 0 5px 10px rgba(0,0,0,.07); background:#fff}
 #nav-exit span.button, #rss span.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%)!important; border:1px solid #1a6b9d!important; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)!important}
 #nav-exit span.button input, #rss span.button input {color:#fff!important; text-shadow:#046b9e 0 1px!important}
 #nav-exit span.button:hover, #rss span.button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)!important}
 #nav-exit span.button:active, #rss span.button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)!important}
-a#nav-exit {display:block; margin-top:-6px; padding-top:6px; padding-bottom:3px; padding-left:3.5px; border-top:0; border-bottom:0; border-left:1px solid; border-right:0; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
-strong#nav-prof {margin-right:5px}
-#mbl-prof {display:none}
-#mbl-prof span {display:none}
-
-/* Header and bar package */
-#hdrbarpack {top:0; z-index:100; position:relative}
+a#nav-exit {border-top:0; border-bottom:0; border-left:1px solid; border-right:0; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
 
 /* Body */
-#body {background:linear-gradient(#e5e7e9, #fff); background-repeat:no-repeat; background-size:100% 90px; padding:10px 25px; padding-bottom:0}
-#wrapper {max-width:1000px; border-top:0; border-bottom:0; border-left:1px solid; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #fff); border-image-slice:1; background:#fff; margin:0 auto}
+#body {background:linear-gradient(#e5e7e9, #fff); background-repeat:no-repeat; background-size:100% 90px}
+#wrapper {border-top:0; border-bottom:0; border-left:1px solid; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #fff); border-image-slice:1; background:#fff}
 
 /* Tags & gambits */
-#tagArea {margin-bottom:10px; border:1px dashed #bbb}
-#tags, #gambits {line-height:1.2; margin:10px 10px 10px; text-align:justify}
-#tags a, #gambits a {margin-right:0.7em}
+#tagArea {border:1px dashed #bbb}
 #tags a {color:#777}
 #gambits a {color:#00f}
-a.s1 {font-size:140%}
-a.s2 {font-size:115%}
-a.s3 {font-size:110%}
-a.s4 {font-size:100%}
-a.s5 {font-size:90%}
 
 /* Search form */
-#search {font-size:150%; min-width:100px; overflow:hidden; padding-right:7.1em; margin-bottom:10px}
-#search .fr {margin-right:-18.5em; width:18.5em}
-#searchText {border-right:0; float:left; height:21px; min-width:100px; width:100%; margin-right:-100%; padding-right:2em}
-#search.withStartConversation {padding-right:18.5em}
-#submit {float:left; font-size:100%; position:relative; border-top-left-radius:0; border-bottom-left-radius:0}
-#submit input {font-size:100%; margin-left:-5px; padding-left:8px; width:5.5em}
-#new {float:right; font-size:100%}
-#new input {font-size:100%; width:10.5em}
-#reset {display:block; float:left; height:27px; line-height:23px; overflow:hidden; text-align:center; width:1.5em; color:#bbb}
+#searchText {border-right:0}
+#submit {border-top-left-radius:0; border-bottom-left-radius:0}
+#reset {color:#bbb}
 #searchText:focus + .fr #reset {color:#555}
 #reset:hover, #searchText:focus ~ #reset:hover {text-decoration:none; color:#000}
 
 /* Messages */
-#messages .msg {margin:0}
-.msg .close {float:right; border:1px solid #fff; color:#fff; text-decoration:none; padding:0 5px; margin:-2px -4px 0 0}
+.msg .close {border:1px solid #fff; color:#fff; text-decoration:none}
 .msg .close:hover {background:#fff; color:#000; text-decoration:none}
 .msg .close:active {background:#aaa}
-.msg {background:#ddd; line-height:1.4; margin:0 0 1em 0; padding:5px 10px}
+.msg {background:#ddd}
 .info {background:#fad163; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
 .success {background:#cf0}
 .warning {background:#c00; color:#fff; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
 .warning a, .warning a:hover {color:#fff; text-decoration:underline}
-.msg code {background:none}
 
-/* Stars */ 
-.star1, .star0 {cursor:default; display:block; font-size:600%; font-weight:normal; height:0.4em; line-height:0.8; overflow:hidden; width:0.4em}
-a.star1, a.star0 {cursor:pointer}
+/* Stars */
 .star0 {color:#ccc}
 a.star0:hover {color:#fe7}
 .star1, a.star1:hover {color:#fc0}
 a.star0:active, a.star1:active {color:#e4b600}
 .starred td {background:#ffa}
-.star1 span, .star0 span {display:none}
-.starInline {cursor:inherit; display:none; display:inline-block; font-size:350%; margin-bottom:-4px}
 
 /* Conversation labels */
-.label {font-size:90%; padding:0 5px; white-space:nowrap}
 .locked {background:#999; color:#fff}
 .private {background:#7b00ad; color:#fff}
 #gambits a.privateText {color:#7b00ad}
@@ -145,285 +78,120 @@ a.star0:active, a.star1:active {color:#e4b600}
 #gambits a.draftText {color:#0b2}
 
 /* Conversations table */
-.c {margin:10px 0 1px; width:100%}
-.c th {background-color:#ddd; font-weight:normal; font-size:90%; padding:6px 0; text-align:left}
-.c td {border-bottom:1px solid #ddd; line-height:1.1; padding:5px 0}
-.c .labels {margin-right:3px}
-.c strong {font-size:120%; font-weight:bold}
-.c .read {font-weight:normal}
-.c strong a {color:#000; margin:0}
-.c a {margin-left:8.5px; margin-bottom:-5px}
-.c .author a, .c .lastPost a {color:#000; margin:0}
-.c td.avatar {padding:4px 10px 4px 4px; width:32px; text-align:center}
-.c td.avatar img {width:30px; height:30px; object-fit:cover; vertical-align:middle; border:1px solid #ddd}
-.c td.star {width:3.5em}
-.c .posts {padding:5px 10px; text-align:center}
-.c td.posts {font-size:175%}
+.c th {background-color:#ddd}
+.c td {border-bottom:1px solid #ddd}
+.c strong a {color:#000}
+.c .author a, .c .lastPost a {color:#000}
+.c td.avatar img {border:1px solid #ddd}
 .c .p1 {color:#000}
 .c .p2 {color:#666}
 .c .p3 {color:#aaa}
-#jumplink a {margin-left:unset; margin-right:10px}
-#newResults td {padding:1px 0; border:0}
-#newResults .msg {margin:0; padding:3px 0; font-size:90%; text-align:center}
-#newResults a {margin:0; font-weight:bold}
-#more .msg {margin:0; margin-top:-2px; padding:3px 0; text-align:center; font-size:90%}
-#more .msg a {font-weight:bold}
+#newResults td {border:0}
 #searchResults {border-left:1px solid #ddd; border-right:1px solid #ddd}
 #searchResults tbody > tr:nth-of-type(even) {background-color:#f4f4f4}
-#searchResults .msg.warning {margin:0}
 
 /* Conversation header */
-#cHdr {margin:0 0 10px; overflow:hidden; padding:10px; border:1px solid #bbb}
+#cHdr {border:1px solid #bbb}
 /* Info and title (left part) */
-#cInfo {float:left; overflow:hidden; width:60%}
-#cInfo .star1, #cInfo .star0 {float:left; margin:2px 13px 0 2px; padding-top:7px; text-shadow:#fe7 0 0 2px}
-#cInfo h2 {font-size:100%; margin:0; overflow:hidden}
-#cInfo #cTitle {font-size:180%; font-weight:normal; margin:0.15em 0 0 0; word-wrap:break-word}
-#cTitle {display:block; padding-top:3px}
-#cInfo .editable {box-shadow:none}
-#cInfo .text {width:75%}
-#cInfo .editable {background:none; border-width:0; padding:3px}
-#cInfo .editable:hover {border-style:dashed; border-width:1px; padding:2px}
-#cInfo .editable:focus {border-style:solid; border-width:1px; padding:2px; box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
-#cInfo dl {margin:0}
-#cInfo dt {clear:left; float:left; line-height:2.1em; margin:5px 11px 0 0; padding-bottom:1px; text-align:right; width:3em}
-#cInfo dd {display:block; line-height:2em; margin:0; padding-top:4px}
-#cInfo .button {line-height:1}
+#cInfo .star1, #cInfo .star0 {text-shadow:#fe7 0 0 2px}
+#cInfo .editable:hover {border-style:dashed; border-width:1px}
+#cInfo .editable:focus {border-style:solid; border-width:1px; box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
 #cTags a {color:#000}
 /* Members allowed (right part) */
-#allowed {float:right; text-align:right; width:40%}
-#allowed dd {margin:0}
-#allowedList {display:block; font-size:90%; margin:5px 0}
 #allowed a.d:hover {color:#f00; text-decoration:line-through}
-#addMember {width:9em; height:14px; margin:0 -5px 5px 0; border-right:0; border-top-right-radius:0; border-bottom-right-radius:0}
+#addMember {border-right:0; border-top-right-radius:0; border-bottom-right-radius:0}
 #addMemberSubmit {border-top-left-radius:0; border-bottom-left-radius:0}
 
 /* Pagination */
-.pg {background:#fff; clear:both; font-size:95%; line-height:1.8em; margin:0 0 10px; overflow:hidden; padding:0 10em; text-align:center}
-.pg li {border:1px solid #bbb; display:block; float:left; list-style-type:none}
-.pg li.left {margin-left:-10em; margin-right:-1px; width:10em}
-.pg li.right {margin-left:-1px; margin-right:-10em; width:10em}
-.pg li.middle {border-width:1px 0; cursor:pointer; margin:0 -1px; width:100%}
-.pg .viewing {bottom:-1px; cursor:E-resize; cursor:col-resize; margin-top:-2px; position:relative; white-space:nowrap}
-.pg .viewing div {background:#d7eef4; border:1px solid #879ec4; overflow:hidden; padding:0 2px;}
+.pg {background:#fff}
+.pg li {border:1px solid #bbb}
+.pg li.middle {border-width:1px 0}
+.pg .viewing div {background:#d7eef4; border:1px solid #879ec4}
 .pg .viewing:hover div {background:#e9f3f2}
 .pg .viewing:active div {background:#abcbe3}
-.pg .unread {background:#ffc; color:#f71; display:block; margin-top:-20px; overflow:hidden; white-space:nowrap}
-.pg li.left a, .pg li.right a {cursor:pointer; display:block; float:left; overflow:hidden; text-align:center; width:6em; white-space:nowrap}
-.pg li.left a.first, .pg li.right a.last {width:4em}
+.pg .unread {background:#ffc; color:#f71}
 
 /* Conversation post */
-hr {display:none}
-.p {margin-bottom:10px; border-left-style:solid; border-left-width:1px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
-.p .hdr {margin-bottom:5px; overflow:hidden; padding:5px 10px}
+.p {border-left-style:solid; border-left-width:1px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
 .p .hdr, .p .hdr small, .p .hdr a {color:#000}
-.p .hdr h3, .p .hdr h4 {border:0; display:inline; font-size:120%; font-weight:bold; margin:0}
-.p .hdr span, .p .hdr form {display:inline; font-size:90%; margin-left:7px}
-.p .hdr select, .p .hdr input.save {background:none; border:dashed rgba(0,0,0,0.2); border-width:1px; display:inline; padding-top:1px; margin:-1px 0 -2px 0}
+.p .hdr select, .p .hdr input.save {border:dashed rgba(0,0,0,0.2); border-width:1px}
 .p .hdr select option {background:#fff}
-.p .hdr input.save {padding:0 2px}
-.p .hdr .pInfo {float:left}
-.p .hdr .controls {float:right; padding-top:1px}
-.p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; background:rgba(0,0,0,0.1); width:3.5em; text-align:center; display:inline-block}
+.p .hdr .controls a {background:rgba(0,0,0,0.1)}
 .p .hdr .controls a:hover {background-color:#fff; text-decoration:none}
 .p .hdr .controls a:active {background-color:#888}
-.p .hdr .controls span {font-size:100%}
-.p .hdr a.button {padding:1px 4px}
-.p .body {line-height:1.3; overflow:auto; padding:5px 10px 0}
-.p .body img {vertical-align:bottom; max-width:100%}
-.p .body video {max-width:100%; background:rgba(0,0,0,0.05)}
-.p .body video, .p .body audio {margin-bottom:-4px}
-.p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:115px}
-.p.r {border-right-style:solid; border-right-width:115px; border-left-style:solid; border-left-width:1px; border-bottom-style:solid; border-bottom-width:1px}
-.p.r div.avatar {float:right; margin-right:-115px}
-.p.l {border-left-style:solid; border-left-width:115px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
-.p.l div.avatar {float:left; margin-left:-115px}
-.p .parts {width:100%}
-.p.r .parts {float:left}
-.p.l .parts {float:right}
-#cPosts p {word-wrap:break-word; text-align:justify}
-#cPosts p:empty {display:none}
+.p .body video {background:rgba(0,0,0,0.05)}
 .deleted, .deleted .hdr, .deleted .hdr a {color:#888}
 .deleted {background:#eee; border-color:#eee}
-.deleted .hdr {margin:0}
 
 /* Reply to a conversation */
-.p .edit {padding:5px 10px 10px 10px}
-.r .edit {padding:5px 10px 10px 0; padding-left:10px}
-.l .edit {padding:5px 0 10px 10px; padding-right:10px}
-.p .body textarea {height:25em; width:fill-available; width:-webkit-fill-available; width:-moz-available}
-.p .editButtons {text-align:right}
 .editButtons .button {border-radius:0}
 .editButtons .big {border-radius:5px; border-top-left-radius:0; border-top-right-radius:0}
-#reply-preview p {text-align:justify}
-#discardDraft, #submitPost {margin-left:5px}
 
 /* Formatting buttons */
-.p .controls {margin:-1px 0 -3px 0}
-.p .controls .formattingButtons {overflow:hidden; display:block; float:left; margin-left:5px; margin-right:5px}
-.p .controls .formattingButtons a span {margin-left:0}
 .p .controls .formattingButtons a:hover {background-color:#fff; text-decoration:none}
 .p .controls .formattingButtons a:active {background-color:#888}
-.p .hdr .formattingButtons a:last-child {margin-right:0}
-#reply-previewCheckbox {margin-top:2px; margin-left:0}
-#format-b {font-weight:bold}
-#format-i {font-style:italic}
-#format-h {text-decoration:underline}
-#format-s {text-decoration:line-through}
-#format-code {font-family:monospace; font-size:120%; line-height:1.4}
-
-/* Formatting checkbox */
-.formattingCheckbox {font-size:90%!important; display:inline-table!important; margin-left:0!important}
-.formattingCheckbox input {height:12px; display:inline-flex; display:-webkit-inline-flex; margin:0!important; margin-top:2px!important; margin-right:4px!important}
-.formattingCheckbox label {display:inline-block; margin-top:3px}
 
 /* Code, quotes, headers */
-pre, code, .fixed {font-family:monospace; font-size:120%; overflow-x:auto; white-space:pre-wrap; white-space:-moz-pre-wrap !important; white-space:-pre-wrap; white-space:-o-pre-wrap; word-wrap:break-word}
-pre {border:1px dashed #bbb; margin:0 10px 1em; padding:7px}
+pre {border:1px dashed #bbb}
 code {background:#e6e6e6}
-blockquote {background:rgba(0,0,0,0.05); border:solid rgba(0,0,0,0.1); border-width:1px; margin:0 0 1em; padding:8px 10px 0 10px; color:#555}
-blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2); display:block; font-style:normal; font-weight:bold; padding-bottom:2px}
-blockquote p {margin-bottom:.75em}
-.p .body h3 {border-bottom:1px solid #bbb; margin:0 0 5px}
-.p hr {display:block; color:#bbb; border:solid #bbb; border-width:1px 0 0; height:1px}
-
-/* Join this forum */
-#join input.text {font-size:140%}
-#join .msg {padding:4px 10px}
-#jconfm {padding:5px 0 15px 0; line-height:1.5}
-
-/* My settings */
-#settings .post {margin:0}
-#settings .submit {margin-bottom:5px}
-#preview .body {overflow:visible}
-form#settingsAvatar {padding-bottom:8px}
-#settingsAvatar label {width:20em}
-#settingsAvatar li:last-child {margin-top:-20px}
-#settingsPassword label {width:12em}
-#settingsOther label {width:32em}
-#settingsOther input.checkbox, #settingsOther input.radio {margin:3px 5px 5px 0}
-.hidden#settingsOther, .hidden#settingsPassword {margin-bottom:5px; padding-bottom:0}
-/* Color palette */
-#palette {margin:-10px 0 12px; margin-left:-8px; margin-right:-10px}
-#palette table {position:relative; width:100%} 
-#palette td {padding:0 2px 0 0; vertical-align:top} 
-#palette a {display:block; height:35px; margin-top:2px}
-#palette a.selected {height:40px; margin-top:0}
-#palette table#tblfirst a.selected {margin-top:-3px}
-#palette table#tblsecond a.selected {height:37px}
+blockquote {background:rgba(0,0,0,0.05); border:solid rgba(0,0,0,0.1); border-width:1px; color:#555}
+blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
+.p .body h3 {border-bottom:1px solid #bbb}
+.p hr {color:#bbb; border:solid #bbb; border-width:1px 0 0}
 
 /* Admin */
-#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; margin:-15px -25px; background:#fff}
-#admin .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0; border-right:1px solid #ccc}
-#admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
-#admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
-#admin .menu li.active a {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; margin-right:-1px; color:#000; font-weight:bold}
-#admin .inner {padding:15px 25px; padding-bottom:2px; margin-bottom:15px; border-left:1px solid #ccc}
-#admin .stats label {font-weight:normal; text-align:left; width:30%}
-#admin .stats div {float:none; font-size:115%; margin-left:35%}
-#admin .stats li {border-bottom:1px solid #ddd; padding-left:10px}
-#admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
-#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
-#admin input.checkbox {margin:3px 5px 5px 0}
-#admin .clear {display:none}
-.form.logoForm img {border:1px dashed #bbb; padding:5px}
-.form.iconForm img {width:128px; height:128px; border:1px solid #ddd}
-.form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
-  
+#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; background:#fff}
+#admin .menu {border-right:1px solid #ccc}
+#admin .menu li.active a {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; color:#000}
+#admin .inner {border-left:1px solid #ccc}
+#admin .stats li {border-bottom:1px solid #ddd}
+.form.logoForm img {border:1px dashed #bbb}
+.form.iconForm img {border:1px solid #ddd}
+
 /* Plugins */
-#plugins .controls {float:right}
-#plugins .controls a, #plugins .toggle {font-size:90%; background:#cdffba; width:4.5em; text-align:center; display:block; float:left; color:#258500; padding:2px 0}
+#plugins .controls a, #plugins .toggle {background:#cdffba; color:#258500}
 #plugins .controls a, #plugins .enabled .toggle {color:#888; background:#e4e4e4}
-#plugins .controls a, #plugins small, #plugins strong {margin-left:10px}
 #plugins .toggle:hover {background-color:#a3e18c; text-decoration:none}
 #plugins .toggle:active {background-color:#64b346}
 #plugins .enabled .toggle:hover, #plugins .controls a:hover {background-color:#ccc; text-decoration:none}
 #plugins .enabled .toggle:active, #plugins .controls a:active {background-color:#a4a4a4}
-#plugins ul {list-style:none; margin:0; padding:0}
-#plugins li {border-bottom:1px solid #ddd; display:block; padding:5px}
-#plugins li strong {font-weight:normal; font-size:120%}
-#plugins li.enabled strong {font-weight:bold}
-#plugins li form {margin:15px 5px}
-#plugins li .settings {background:#fff; padding:5px 20px; margin-top:5px}
-#plugins li form label {margin-bottom:10px; width:25em}
-#plugins li input.checkbox {margin:2px 7px 2px 0}
-#plugins li li {border:0; padding:0}
+#plugins li {border-bottom:1px solid #ddd}
+#plugins li .settings {background:#fff}
 
 /* Skins */
-#skins ul {list-style:none; margin:0; padding:0}
-#skins li {float:left; width:297px}
-#skins a {color:#000; display:block; padding:10px}
+#skins a {color:#000}
 #skins a:hover {text-decoration:none}
-#skins strong {font-weight:normal; font-size:120%}
-#skins li.enabled strong {font-weight:bold}
-#skins small {margin-left:10px}
-#skins .preview {background:#eee; border:1px solid #ddd; color:#ddd; display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center; width:275px}
-#skins .preview span {display:block; margin-top:65px}
+#skins .preview {background:#eee; border:1px solid #ddd; color:#ddd}
 #skins a:hover .preview, #skins .enabled .preview {border-color:#aaa}
 
 /* Profile */
-.profile .body {overflow:visible; padding:5px 10px}
-.profile .form label {font-weight:normal; text-align:left; width:30%}
-.profile .form div {float:none; font-size:115%; margin-left:35%}
-.profile .form li {border-bottom:1px solid rgba(0,0,0,0.1); padding-left:10px}
-.profile div.about {margin:0 0 1em 0}
-.p.profile {margin-bottom:0}
-
-/* Members online */
-#membersOnline .p {margin-bottom:4px; border:0}
-#membersOnline .hdr {margin:0; padding-left:0}
-#membersOnline .hdr > a:first-child {margin-right:8px; display:inline-block}
-#membersOnline .avatar {width:30px; height:30px; margin:-10px 0 -10px 0; vertical-align:middle}
-#membersOnline .p:last-child {margin-bottom:0}
-#fieldmembers .warning {margin:unset}
+.profile .form li {border-bottom:1px solid rgba(0,0,0,0.1)}
 
 /* Footer */
-#ftr {font-size:90%; margin:5px 25px 20px; overflow:hidden}
-#ftr ul {margin:0; padding:0}
-#ftr #copyright {margin:0; padding:10px; border:1px dashed #ccc}
-#ftr small {font-size:inherit}
-#ftr small:not(:first-child) {padding-top:5px}
+#ftr #copyright {border:1px dashed #ccc}
 
 /* Inputs, buttons, and other form elements */
-form {margin:0}
-input.text, textarea {background:#fff; border:1px solid #bbb; padding:2px}
+input.text, textarea {background:#fff; border:1px solid #bbb}
 input.text:focus, textarea:focus {border-color:#777}
 #cInfo .editable:focus {background:#fff}
 input::placeholder {color:#aaa}
 .placeholder {color:#aaa}
-input.checkbox, input.radio {padding:0; margin:0 2px 0 5px; vertical-align:-2px}
-label.checkbox, label.radio {cursor:pointer}
-fieldset {border:1px solid #ccc; margin:5px 0 10px 0; padding:0 15px 15px}
-legend {color:#000; font-size:140%; font-weight:bold; padding:5px 10px 10px}
+fieldset {border:1px solid #ccc}
+legend {color:#000}
 fieldset legend a {color:#000}
-fieldset.hidden {border-width:1px 0 0; padding:0 16px 0}
+fieldset.hidden {border-width:1px 0 0}
 fieldset.hidden legend a {color:#666}
-fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
-
-/* Structured forms */
-.form label {float:left; line-height:1.5; margin:0 1em 1px 0; text-align:right; width:12em}
-.form div label {float:none; margin:0; text-align:left; width:auto}
-.form label.long {text-align:left; width:100%}
-.form label.radio {cursor:pointer; text-align:left}
-.form input.text, .form select {float:left; margin:0; width:20em}
-.form div {float:left; line-height:1.5}
-.form div input.text, .form div select {float:none}
-.form {margin:0; padding:0}
-.form li {display:block; list-style:none; margin-bottom:4px; overflow:hidden}
-.form .msg {float:left; font-size:95%; margin:0 0 0 10px; padding:2px 10px}
 
 /* Buttons */
-.button, .button input {cursor:pointer; display:-moz-inline-box; display:inline-block; height:20.3px; padding:0; text-align:center; text-shadow:#046b9e 0 -1px}
-.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); margin:0; border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%); height:18px}
-.button input {background:none; border:0; color:#fff; margin-left:5px; margin-right:5px; height:18px}
-.big {height:25px}
-.big input {font-size:140%; height:26px}
+.button, .button input {text-shadow:#046b9e 0 -1px}
+.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)}
+.button input {color:#fff}
 .button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)}
 .button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)}
-.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 1px #ffffff; cursor:default}
-.bigDisabled, .bigDisabled:active, .bigDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 1px #ffffff; cursor:default}
-.buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input {color:#999; text-shadow:#fff 0 1px; cursor:default}
-.bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {color:#999; text-shadow:#fff 0 1px; cursor:default}
+.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 1px #ffffff}
+.bigDisabled, .bigDisabled:active, .bigDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 1px #ffffff}
+.buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input {color:#999; text-shadow:#fff 0 1px}
+.bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {color:#999; text-shadow:#fff 0 1px}
 
 /* Post colors */
 .c1 .hdr, .p .c1 .hdr, #palette .c1 {background:#dfdfdf} .c1 {border-color:#dfdfdf; background:#eee}
@@ -454,224 +222,24 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .c26 .hdr, .p .c26 .hdr, #palette .c26 {background:#e7d0bb} .c26 {border-color:#e7d0bb; background:#e7d0bb2e}
 .c27 .hdr, .p .c27 .hdr, #palette .c27 {background:#cdc5bd} .c27 {border-color:#cdc5bd; background:#cdc5bd2e}
   
-/* Specific values */
-#forgotPassword, #markAsRead, #startConversation {line-height:1.5; margin:10px 0 0 0; padding:0 5px 0 5px; background:#e4e4e4; color:#000; width:fit-content; text-align:center; display:inline-block}
-#forgotPassword, #startConversation {display:none}
-#forgotPassword {margin:10px 0 10px 0}
+/* Special properties */
+#forgotPassword, #markAsRead, #startConversation {background:#e4e4e4; color:#000}
 #forgotPassword:hover, #markAsRead:hover, #startConversation:hover {background-color:#ccc; text-decoration:none}
 #forgotPassword:active, #markAsRead:active, #startConversation:active {background-color:#888}
-div#ftr {margin-top:0}
-#accountInformation input {max-width:20em; width:96%}
-#settingsOther {padding:0 15px 12px}
-td.author, td.lastPost {max-width:95px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-ul.form.stats {word-break:break-word; -ms-word-break:break-word}
-#cInfo #saveTitleTags {display:none !important}
 input.text, textarea, .pg {box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
-#report {padding-left:10px}
-#beenLoggedOutShadow {width:100% !important; height:100% !important}
 
-@keyframes Gradient {
-0% {background-position:0% 50%}
-50% {background-position:100% 50%}
-100% {background-position:0% 50%}
-}
-
-@-webkit-keyframes Gradient {   
-0% {background-position:0% 50%}
-50% {background-position:100% 50%}
-100% {background-position:0% 50%}
-}
-
-@-moz-keyframes Gradient {   
-0% {background-position:0% 50%}
-50% {background-position:100% 50%}
-100% {background-position:0% 50%}
-}
-
-@media print {
-#hdr, #bar, .pg .left, .pg .right, #reply, .avatar, .p .controls {display:none}
-.pg {padding:0}
-hr {display:block}
-.p.r, .p.l {border:0}
-}
-
-/* Mobile support */
+/* Mobile properties */
 @media only screen and (max-width:1000px) {
 #wrapper {border-left:0; border-right:0}
-#editedBy, span.star0 {display:none}
-#nav-prof, #nav-conv {display:none}
-#nav-dpav {visibility:hidden}
-#mbl-prof {display:inherit}
-#bar {height:18px}
-ul.fl, ul.fr {position:absolute}
-ul.fl {z-index:1}
-ul.fr {z-index:0; right:25px}
-th.author, th.lastPost, th.star {display:none}
-td.author, td.lastPost, td.star {display:none}
-#name-message, #email-message, #password-message, #confirm-message {clear:left; padding-left:146px}
-}
-
-@media only screen and (max-width:870px) {
-.form.settingsForm li {margin-bottom:10px}
-.form.settingsForm li label {text-align:left; width:auto}
-.form.settingsForm li div {clear:left}
-.form.settingsForm li .checkbox {margin-left:20px}
-.form.settingsForm li:last-child {width:20em}
-.form.settingsForm li:last-child label {width:20em!important}
-.form.settingsForm li:nth-last-child(2) div, .form.settingsForm li:nth-last-child(3) div {position:absolute; padding-left:2px} 
-#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:auto}
-.form.logoForm li, .form.iconForm li {margin-bottom:10px}
-.form.logoForm li label, .form.iconForm li label {text-align:left}
-.form.logoForm li input, .form.iconForm li input {clear:left; max-width:20em}
-.form.logoForm li:last-child, .form.iconForm li:last-child {width:20em; margin-top:0}
-.form.logoForm li:last-child label, .form.iconForm li:last-child label {width:20em!important}
-.form.logoForm li div, .form.iconForm li div {clear:left}
-}
-
-@media only screen and (max-width:800px) {
-#reply .hdr {min-height:16px}
-#reply .pInfo {display:none}
-}
-
-@media only screen and (max-width:735px) {
-#settingsOtherForm label {text-align:left; width:auto}
-#language, #avatarAlignment {clear:left}
-#settingsOther .form li {margin-bottom:5px}
-select#language {margin-bottom:5px}
-select#avatarAlignment {margin-bottom:10px}
-select#language, select#avatarAlignment {max-width:20em; width:96%}
-#settingsOtherForm .checkbox {margin-left:20px; width:auto}
-#settingsOtherForm input {position:absolute; left:41px}
-
-/* Change your avatar */
-#lbl-avt {display:none}
-#upl-ava, #upl-url {clear:left; max-width:20em; width:96%}
-#settingsAvatar li:last-child {margin-top:0}
-#settingsAvatar label.radio {width:auto}
-/* #settingsAvatar .button {margin-left:-1px} */
-#appearance .form li {margin-bottom:10px}
-}
-
-@media only screen and (max-width:710px) {
-div#copyright {margin-top:0}
-ul.fl, ul.fr {white-space:nowrap}
-#name-message, #email-message, #password-message, #confirm-message {padding-left:0; margin-right:4px}
-#name-message .msg.info, #name-message .msg.warning, #email-message .msg.info, #email-message .msg.warning, #password-message .msg.info, #password-message .msg.warning, #confirm-message .msg.info, #confirm-message .msg.warning {margin-left:0}
-#accountInformation .form label {text-align:left}
-#accountInformation .form input {clear:left}
-}
-
-@media only screen and (max-width:670px) {
-.form input[name="installPlugin"] {width:15em}
 }
 
 @media only screen and (max-width:620px) {
-#wrapper.small #search {display:none}
-#search.withStartConversation {padding-right:7.15em}
-#search .fr {margin-right:-7.15em; width:7.15em}
-#bar .fr, #new {display:none}
-#startConversation {display:inline-block; margin:3px 0 10px 0}
-#markasread {margin-bottom:0}
-#admin {margin-top:0; border-left:0; border-image:none; background:unset}
-#admin .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available; border:1px solid #ccc}
-#admin .menu li {display:block; margin-right:0}
-#admin .menu li a {display:block; margin:0; background-color:#eee; border-top:1px solid #ccc}
-#admin .menu li.active a {margin-right:0; border-left:unset; border-bottom:unset}
-#admin .menu li:first-child a {border:none}
-#admin .inner {padding-top:10px}
-.form input[name="installPlugin"] {width:inherit}
+#admin .menu {border:1px solid #ccc}
+#admin .menu li a {background-color:#eee; border-top:1px solid #ccc}
 }
 
+/* Formatting controls */
 @media only screen and (max-width:570px) {
-#body {padding:15px 10px; padding-top:10px; padding-bottom:0; overflow:hidden}
-#loading {right:10px}
-#hdr, #bar {padding-left:10px; padding-right:10px}
-#tags {display:none}
-#searchResults table.c {margin-top:0}
-#ftr {margin-left:10px; margin-right:10px; margin-bottom:10px}
-#cInfo h2 {margin-right:10px}
-#cInfo #cTitle {margin:0}
-#sconvo .pInfo, .star0, .star1 {display:none}
-#cInfo dt {width:auto}
-.p.deleted {margin-bottom:10px}
-.p.l div.avatar, .p.r div.avatar {display:none}
-.p.l {border-left-width:1px}
-.p.r {border-right-width:1px}
-blockquote {margin:0 0 1em}
-#allowed {margin-block-start:0; margin-bottom:0}
-#preview {margin-bottom:0}
-#appearance .p .body {padding:5px 0 0}
-form#settingsAvatar {padding-left:10px; padding-right:10px}
-#palette {margin-left:2px; margin-right:0}
-#settingsOtherForm input {left:26px}
-.profile .form li, #report {padding-left:0}
-
-/* Conversations */
-#sconvo .hdr {min-height:16px}
-.p .hdr .controls {float:none; clear:left; overflow:auto; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px; background:#ddd; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
-#cPosts .p .hdr .controls a:first-child {margin-left:10px}
-#cPosts .p .hdr .controls .formattingButtons {margin-left:10px; margin-right:10px}
-#cPosts .p .hdr .controls .formattingButtons a:first-child {margin-left:0}
-#reply .controls {clear:none; margin:-1px 0 -3px 0; padding:0; background:inherit; box-shadow:none}
-.p .hdr .controls:blank {display:none}
-.p .hdr .controls:empty {display:none}
-#reply .formattingButtons {margin:0}
-.formattingCheckbox {clear:left; float:left; width:-webkit-fill-available; margin-top:3px; margin-bottom:3px; padding-top:3px; border-top:1px solid rgba(0,0,0,0.2)}
-#cPosts .p .hdr .controls .formattingCheckbox {padding-left:10px}
-.p.deleted .controls span a {margin-left:3px}
-.p.deleted .body {margin-top:5px}
-}
-
-@media only screen and (max-width:500px) {
-#nav-fgpw {display:none}
-#forgotPassword {display:inline-block}
-/* #login {padding-right:0; border-right:0} */
-#nav-join span.button {margin-right:-20px}
-}
-
-@media only screen and (max-width:490px) {
-#settingsPassword .form li {margin-bottom:10px}
-#settingsPasswordForm label {text-align:left}
-#settingsPasswordForm input.text {clear:left; max-width:20em; width:96%}
-#lbl-pass {display:none}
-fieldset#forgot-pass {padding:0 15px 10px}
-#forgot-password .form label {text-align:right; width:auto}
-#forgot-password input#email {clear:left; max-width:20em; width:96%}
-label#lbl-fgps {width:12em; display:none}
-#forgot-password .button {margin-top:6px; margin-bottom:6px}
-#forgot-pass-reset .form li {margin-bottom:10px}
-#forgot-pass-reset .form label {text-align:right; width:auto}
-#forgot-pass-reset input {clear:left; max-width:20em; width:96%}
-label#lbl-fgcf {width:12em; display:none}
-#forgot-pass-reset .button {margin-top:2px; margin-left:-1px}
-#addPlugin ul.form li:first-child, #addSkin ul.form li:first-child {margin-bottom:10px}
-#addPlugin ul.form li:first-child label, #addSkin ul.form li:first-child label {text-align:left}
-#addPlugin ul.form li:first-child input, #addSkin ul.form li:first-child input {clear:left}
-#addPlugin ul.form li:last-child label, #addSkin ul.form li:last-child label {display:none}
-}
-
-@media only screen and (max-width:420px) {
-#addMember {width:5em}
-}
-
-@media only screen and (max-width:405px) {
-#rememberMe, #rememberChk {display:none}
-}
-
-@media only screen and (max-width:395px) {
-#membersOnline .hdr span {display:none}
-#basicSettings .form.settingsForm li:nth-child(-n+3) div {width:100%}
-#admin .settingsForm input.text, #admin .settingsForm select {width:-webkit-fill-available}
-}
-  
-@media only screen and (max-width:340px) {
-#discardDraft {clear:left; margin:5px 0 0 0}
-}
-
-@media only screen and (max-width:330px) {
-tbody#conversations td strong {word-break:break-all}
-}
-
-@media only screen and (max-width:320px) {
-#nav-skin, #nav-plgn {display:none}
+.p .hdr .controls {background:#ddd; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
+.formattingCheckbox {border-top:1px solid rgba(0,0,0,0.2)}
 }

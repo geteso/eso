@@ -47,6 +47,7 @@ $language = array(
 "Check for updates" => "Check for updates",
 "Confirm password" => "Confirm password",
 "Conversation" => "Conversation",
+"Conversation-plural" => "Conversation-plural",
 "conversations" => "conversations",
 "Conversations participated in" => "Conversations participated in",
 "Conversations started" => "Conversations started",

@@ -1,0 +1,563 @@
+@media all {
+/* Main tags */
+body {font-family:arial,helvetica,sans-serif; font-size:75%; margin:0; -webkit-text-size-adjust:none; padding-top:0px!important; min-width:320px}
+input, textarea, select, button {font-family:arial,helvetica,sans-serif; font-size:100%; outline:none}
+p {line-height:1.4; margin:0 0 1em 0}
+a img {border:0}
+abbr {cursor:help}
+
+/* Links */
+a {text-decoration:none}
+a:hover {color:#000; text-decoration:underline}
+a:active {color:#666}
+a, .link, .p .hdr a.link {color:#00f}
+
+/* Misc */
+.fl {float:left}
+.fr {float:right}
+.clear {clear:both; font-size:1px; margin:0; padding:0; width:1px}
+small, dt {font-size:90%}
+#loading {font-size:120%; padding:5px 15px; position:fixed; right:25px; top:0; z-index:10000}
+.strike {text-decoration:line-through}
+img.avatar, div.avatar img {width:105px; height:105px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
+.disabled {cursor:default}
+h2 {font-size:160%; font-weight:normal}
+h3 {font-size:120%; font-weight:bold}
+#appearance #preview {margin-bottom:0}
+
+/* Header */
+#hdr {overflow:hidden; padding:0 25px; position:relative}
+#hdr h1 {float:left; font-size:190%; font-weight:normal; margin:0; padding:17px 0}
+#hdr h1 img {height:36px; margin-right:15px}
+#hdr h1 img, #forumTitle {vertical-align:middle}
+#stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
+.small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
+.small #hdr h1 img {height:30px}
+#hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
+
+/* Forum description */
+#forumDescription {font-size:12px}
+#hdr h1#hasForumDescription img {float:left}
+#hdr h1#hasForumDescription #forumTitle {float:right; position:absolute; font-size:20px}
+#hdr h1#hasForumDescription #forumDescription {display:block; white-space:nowrap}
+
+/* User bar */
+#bar {line-height:18px; overflow:hidden; padding:6px 25px; height:18px}
+#bar ul {list-style-type:none; margin:0; padding:0}
+#bar li {float:left; margin:0}
+#bar .fl li {margin-right:3px}
+#bar .fr li {margin-left:3px}
+#bar strong {font-size:120%}
+#bar form {font-size:90%; margin-top:-1px; margin-bottom:-2px}
+#bar .text {width:8em}
+#bar input.text {height:14px; border-radius:0; -webkit-appearance:none}
+#bar span.button {height:18px}
+#bar img {vertical-align:-4px}
+#bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
+#login {margin-top:-6.5px!important; padding-top:5.5px; padding-bottom:5.5px; padding-right:3px}
+a#nav-exit {display:block; margin-top:-6px; padding-top:6px; padding-bottom:3px; padding-left:3.5px}
+#nav-dpav select {height:20px; margin-left:3px}
+strong#nav-prof {margin-right:5px}
+#mbl-prof {display:none}
+#mbl-prof span {display:none}
+
+/* Header and bar */
+#hdrbarpack {top:0; z-index:100; position:relative}
+
+/* Body */
+#body {padding:10px 25px; padding-bottom:0}
+#wrapper {max-width:1000px; margin:0 auto}
+
+/* Tags & gambits */
+#tagArea {margin-bottom:10px}
+#tags, #gambits {line-height:1.2; margin:10px 10px 10px; text-align:justify}
+#tags a, #gambits a {margin-right:0.7em}
+a.s1 {font-size:140%}
+a.s2 {font-size:115%}
+a.s3 {font-size:110%}
+a.s4 {font-size:100%}
+a.s5 {font-size:90%}
+
+/* Search form */
+#search {font-size:150%; min-width:100px; overflow:hidden; padding-right:7.1em; margin-bottom:10px}
+#search .fr {margin-right:-18.5em; width:18.5em}
+#searchText {float:left; height:21px; min-width:100px; width:100%; margin-right:-100%; padding-right:2em}
+#search.withStartConversation {padding-right:18.5em}
+#submit {float:left; font-size:100%; position:relative}
+#submit input {font-size:100%; margin-left:-5px; padding-left:8px; width:5.5em}
+#new {float:right; font-size:100%}
+#new input {font-size:100%; width:10.5em}
+#reset {display:block; float:left; height:27px; line-height:23px; overflow:hidden; text-align:center; width:1.5em}
+
+/* Messages */
+#messages .msg {margin:0}
+.msg .close {float:right; padding:0 5px; margin:-2px -4px 0 0}
+.msg {line-height:1.4; margin:0 0 1em 0; padding:5px 10px}
+.msg code {background:none}
+
+/* Stars */ 
+.star1, .star0 {cursor:default; display:block; font-size:600%; font-weight:normal; height:0.4em; line-height:0.8; overflow:hidden; width:0.4em}
+a.star1, a.star0 {cursor:pointer}
+.star1 span, .star0 span {display:none}
+.starInline {cursor:inherit; display:none; display:inline-block; font-size:350%; margin-bottom:-4px}
+
+/* Conversation labels */
+.label {font-size:90%; padding:0 5px; white-space:nowrap}
+
+/* Conversations table */
+.c {margin:10px 0 1px; width:100%}
+.c th {font-weight:normal; font-size:90%; padding:6px 0; text-align:left}
+.c td {line-height:1.1; padding:5px 0}
+.c .labels {margin-right:3px}
+.c strong {font-size:120%; font-weight:bold}
+.c .read {font-weight:normal}
+.c strong a {margin:0}
+.c a {margin-left:8.5px; margin-bottom:-5px}
+.c .author a, .c .lastPost a {margin:0}
+.c td.avatar {padding:4px 10px 4px 4px; width:32px; text-align:center}
+.c td.avatar img {width:30px; height:30px; object-fit:cover; vertical-align:middle}
+.c td.star {width:3.5em}
+.c .posts {padding:5px 10px; text-align:center}
+.c td.posts {font-size:175%}
+#jumplink a {margin-left:unset; margin-right:10px}
+#newResults td {padding:1px 0}
+#newResults .msg {margin:0; padding:3px 0; font-size:90%; text-align:center}
+#newResults a {margin:0; font-weight:bold}
+#more .msg {margin:0; margin-top:-2px; padding:3px 0; text-align:center; font-size:90%}
+#more .msg a {font-weight:bold}
+#searchResults .msg.warning {margin:0}
+
+/* Conversation header */
+#cHdr {margin:0 0 10px; overflow:hidden; padding:10px}
+/* Info and title (left part) */
+#cInfo {float:left; overflow:hidden; width:60%}
+#cInfo .star1, #cInfo .star0 {float:left; margin:2px 13px 0 2px; padding-top:7px}
+#cInfo h2 {font-size:100%; margin:0; overflow:hidden}
+#cInfo #cTitle {font-size:180%; font-weight:normal; margin:0.15em 0 0 0; word-wrap:break-word}
+#cTitle {display:block; padding-top:3px}
+#cInfo .editable {box-shadow:none}
+#cInfo .text {width:75%}
+#cInfo .editable {background:none; border-width:0; padding:3px}
+#cInfo .editable:hover, #cInfo .editable:focus {padding:2px}
+#cInfo dl {margin:0}
+#cInfo dt {clear:left; float:left; line-height:2.1em; margin:5px 11px 0 0; padding-bottom:1px; text-align:right; width:3em}
+#cInfo dd {display:block; line-height:2em; margin:0; padding-top:4px}
+#cInfo .button {line-height:1}
+/* Members allowed (right part) */
+#allowed {float:right; text-align:right; width:40%}
+#allowed dd {margin:0}
+#allowedList {display:block; font-size:90%; margin:5px 0}
+#addMember {width:9em; height:14px; margin:0 -5px 5px 0}
+
+/* Pagination */
+.pg {clear:both; font-size:95%; line-height:1.8em; margin:0 0 10px; overflow:hidden; padding:0 10em; text-align:center}
+.pg li {display:block; float:left; list-style-type:none}
+.pg li.left {margin-left:-10em; margin-right:-1px; width:10em}
+.pg li.right {margin-left:-1px; margin-right:-10em; width:10em}
+.pg li.middle {cursor:pointer; margin:0 -1px; width:100%}
+.pg .viewing {bottom:-1px; cursor:E-resize; cursor:col-resize; margin-top:-2px; position:relative; white-space:nowrap}
+.pg .viewing div {overflow:hidden; padding:0 2px}
+.pg .unread {display:block; margin-top:-20px; overflow:hidden; white-space:nowrap}
+.pg li.left a, .pg li.right a {cursor:pointer; display:block; float:left; overflow:hidden; text-align:center; width:6em; white-space:nowrap}
+.pg li.left a.first, .pg li.right a.last {width:4em}
+
+/* Conversation post */
+hr {display:none}
+.p {margin-bottom:10px}
+.p .hdr {margin-bottom:5px; overflow:hidden; padding:5px 10px}
+.p .hdr h3, .p .hdr h4 {border:0; display:inline; font-size:120%; font-weight:bold; margin:0}
+.p .hdr span, .p .hdr form {display:inline; font-size:90%; margin-left:7px}
+.p .hdr select, .p .hdr input.save {background:none; display:inline; padding-top:1px; margin:-1px 0 -2px 0}
+.p .hdr input.save {padding:0 2px}
+.p .hdr .pInfo {float:left}
+.p .hdr .controls {float:right; padding-top:1px}
+.p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; width:3.5em; text-align:center; display:inline-block}
+.p .hdr .controls span {font-size:100%}
+.p .hdr a.button {padding:1px 4px}
+.p .body {line-height:1.3; overflow:auto; padding:5px 10px 0}
+.p .body img {vertical-align:bottom; max-width:100%}
+.p .body video {max-width:100%}
+.p .body video, .p .body audio {margin-bottom:-4px}
+.p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:115px}
+.p.r {border-right-style:solid; border-right-width:115px; border-left-style:solid; border-left-width:1px; border-bottom-style:solid; border-bottom-width:1px}
+.p.r div.avatar {float:right; margin-right:-115px}
+.p.l {border-left-style:solid; border-left-width:115px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
+.p.l div.avatar {float:left; margin-left:-115px}
+.p .parts {width:100%}
+.p.r .parts {float:left}
+.p.l .parts {float:right}
+#cPosts p {word-wrap:break-word; text-align:justify}
+#cPosts p:empty {display:none}
+.deleted .hdr {margin:0}
+
+/* Reply to a conversation */
+.p .edit {padding:5px 10px 10px 10px}
+.r .edit {padding:5px 10px 10px 0; padding-left:10px}
+.l .edit {padding:5px 0 10px 10px; padding-right:10px}
+.p .body textarea {height:25em; width:fill-available; width:-webkit-fill-available; width:-moz-available}
+.p .editButtons {text-align:right}
+#reply-preview p {text-align:justify}
+#discardDraft, #submitPost {margin-left:5px}
+
+/* Formatting buttons */
+.p .controls {margin:-1px 0 -3px 0}
+.p .controls .formattingButtons {overflow:hidden; display:block; float:left; margin-left:5px; margin-right:5px}
+.p .controls .formattingButtons a span {margin-left:0}
+.p .hdr .formattingButtons a:last-child {margin-right:0}
+#reply-previewCheckbox {margin-top:2px; margin-left:0}
+#format-b {font-weight:bold}
+#format-i {font-style:italic}
+#format-h {text-decoration:underline}
+#format-s {text-decoration:line-through}
+#format-code {font-family:monospace; font-size:120%; line-height:1.4}
+
+/* Formatting checkbox */
+.formattingCheckbox {font-size:90%!important; display:inline-table!important; margin-left:0!important}
+.formattingCheckbox input {height:12px; display:inline-flex; display:-webkit-inline-flex; margin:0!important; margin-top:2px!important; margin-right:4px!important}
+.formattingCheckbox label {display:inline-block; margin-top:3px}
+
+/* Code, quotes, headers */
+pre, code, .fixed {font-family:monospace; font-size:120%; overflow-x:auto; white-space:pre-wrap; white-space:-moz-pre-wrap !important; white-space:-pre-wrap; white-space:-o-pre-wrap; word-wrap:break-word}
+pre {margin:0 10px 1em; padding:7px}
+blockquote {margin:0 0 1em; padding:8px 10px 0 10px}
+blockquote cite {display:block; font-style:normal; font-weight:bold; padding-bottom:2px}
+blockquote p {margin-bottom:.75em}
+.p .body h3 {margin:0 0 5px}
+.p hr {display:block; height:1px}
+
+/* Join this forum */
+#join input.text {font-size:140%}
+#join .msg {padding:4px 10px}
+
+/* My settings */
+#settings .post {margin:0}
+#settings .submit {margin-bottom:5px}
+#preview .body {overflow:visible}
+form#settingsAvatar {padding-bottom:8px}
+#settingsAvatar label {width:20em}
+#settingsAvatar li:last-child {margin-top:-20px}
+#settingsPassword label {width:12em}
+#settingsOther label {width:32em}
+#settingsOther input.checkbox, #settingsOther input.radio {margin:3px 5px 5px 0}
+.hidden#settingsOther, .hidden#settingsPassword {margin-bottom:5px; padding-bottom:0}
+/* Color palette */
+#palette {margin:-10px 0 12px; margin-left:-8px; margin-right:-10px}
+#palette table {position:relative; width:100%} 
+#palette td {padding:0 2px 0 0; vertical-align:top} 
+#palette a {display:block; height:35px; margin-top:2px}
+#palette a.selected {height:40px; margin-top:0}
+#palette table#tblfirst a.selected {margin-top:-3px}
+#palette table#tblsecond a.selected {height:37px}
+
+/* Admin */
+#admin {margin:-15px -25px}
+#admin .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0}
+#admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
+#admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
+#admin .menu li.active a {margin-right:-1px; font-weight:bold}
+#admin .inner {padding:15px 25px; padding-bottom:2px; margin-bottom:15px}
+#admin .stats label {font-weight:normal; text-align:left; width:30%}
+#admin .stats div {float:none; font-size:115%; margin-left:35%}
+#admin .stats li {padding-left:10px}
+#admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
+#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
+#admin input.checkbox {margin:3px 5px 5px 0}
+#admin .clear {display:none}
+.form.logoForm img {padding:5px}
+.form.iconForm img {width:128px; height:128px}
+.form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
+
+/* Plugins */
+#plugins .controls {float:right}
+#plugins .controls a, #plugins .toggle {font-size:90%; width:4.5em; text-align:center; display:block; float:left; padding:2px 0}
+#plugins .controls a, #plugins small, #plugins strong {margin-left:10px}
+#plugins ul {list-style:none; margin:0; padding:0}
+#plugins li {display:block; padding:5px}
+#plugins li strong {font-weight:normal; font-size:120%}
+#plugins li.enabled strong {font-weight:bold}
+#plugins li form {margin:15px 5px}
+#plugins li .settings {padding:5px 20px; margin-top:5px}
+#plugins li form label {margin-bottom:10px; width:25em}
+#plugins li input.checkbox {margin:2px 7px 2px 0}
+#plugins li li {border:0; padding:0}
+
+/* Skins */
+#skins ul {list-style:none; margin:0; padding:0}
+#skins li {float:left; width:297px}
+#skins a {display:block; padding:10px}
+#skins strong {font-weight:normal; font-size:120%}
+#skins li.enabled strong {font-weight:bold}
+#skins small {margin-left:10px}
+#skins .preview {display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center; width:275px}
+#skins .preview span {display:block; margin-top:65px}
+
+/* Profile */
+.profile .body {overflow:visible; padding:5px 10px}
+.profile .form label {font-weight:normal; text-align:left; width:30%}
+.profile .form div {float:none; font-size:115%; margin-left:35%}
+.profile .form li {padding-left:10px}
+.profile div.about {margin:0 0 1em 0}
+.p.profile {margin-bottom:0}
+
+/* Members online */
+#membersOnline .p {margin-bottom:4px; border:0}
+#membersOnline .hdr {margin:0; padding-left:0}
+#membersOnline .hdr > a:first-child {margin-right:8px; display:inline-block}
+#membersOnline .avatar {width:30px; height:30px; margin:-10px 0 -10px 0; vertical-align:middle}
+#membersOnline .p:last-child {margin-bottom:0}
+#fieldmembers .warning {margin:unset}
+
+/* Footer */
+#ftr {font-size:90%; margin:5px 25px 20px; overflow:hidden}
+#ftr ul {margin:0; padding:0}
+#ftr #copyright {margin:0; padding:10px}
+#ftr small {font-size:inherit}
+#ftr small:not(:first-child) {padding-top:5px}
+
+/* Inputs, buttons, and other form elements */
+form {margin:0}
+input.text, textarea {padding:2px}
+input.checkbox, input.radio {padding:0; margin:0 2px 0 5px; vertical-align:-2px}
+label.checkbox, label.radio {cursor:pointer}
+fieldset {margin:5px 0 10px 0; padding:0 15px 15px}
+legend {font-size:140%; font-weight:bold; padding:5px 10px 10px}
+fieldset.hidden {padding:0 16px 0}
+fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
+
+/* Structured forms */
+.form label {float:left; line-height:1.5; margin:0 1em 1px 0; text-align:right; width:12em}
+.form div label {float:none; margin:0; text-align:left; width:auto}
+.form label.long {text-align:left; width:100%}
+.form label.radio {cursor:pointer; text-align:left}
+.form input.text, .form select {float:left; margin:0; width:20em}
+.form div {float:left; line-height:1.5}
+.form div input.text, .form div select {float:none}
+.form {margin:0; padding:0}
+.form li {display:block; list-style:none; margin-bottom:4px; overflow:hidden}
+.form .msg {float:left; font-size:95%; margin:0 0 0 10px; padding:2px 10px}
+
+/* Buttons */
+.button, .button input {cursor:pointer; display:-moz-inline-box; display:inline-block; height:20.3px; padding:0; text-align:center}
+.button {margin:0; height:18px}
+.button input {background:none; border:0; margin-left:5px; margin-right:5px; height:18px}
+.big {height:25px}
+.big input {font-size:140%; height:26px}
+.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
+.buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
+
+/* Special properties */
+#forgotPassword, #markAsRead, #startConversation {line-height:1.5; margin:10px 0 0 0; padding:0 5px 0 5px; width:fit-content; text-align:center; display:inline-block}
+#forgotPassword, #startConversation {display:none}
+#forgotPassword {margin:10px 0 10px 0}
+div#ftr {margin-top:0}
+#accountInformation input {max-width:20em; width:96%}
+#settingsOther {padding:0 15px 12px}
+td.author, td.lastPost {max-width:95px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+ul.form.stats {word-break:break-word; -ms-word-break:break-word}
+#cInfo #saveTitleTags {display:none!important}
+#beenLoggedOutShadow {width:100%!important; height:100%!important}
+
+@keyframes Gradient {
+0% {background-position:0% 50%}
+50% {background-position:100% 50%}
+100% {background-position:0% 50%}
+}
+
+@-webkit-keyframes Gradient {   
+0% {background-position:0% 50%}
+50% {background-position:100% 50%}
+100% {background-position:0% 50%}
+}
+
+@-moz-keyframes Gradient {   
+0% {background-position:0% 50%}
+50% {background-position:100% 50%}
+100% {background-position:0% 50%}
+}
+
+@media print {
+#hdr, #bar, .pg .left, .pg .right, #reply, .avatar, .p .controls {display:none}
+.pg {padding:0}
+hr {display:block}
+.p.r, .p.l {border:0}
+}
+
+/* Mobile properties */
+@media only screen and (max-width:1000px) {
+#editedBy, span.star0 {display:none}
+#nav-prof, #nav-conv {display:none}
+#nav-dpav {visibility:hidden}
+#mbl-prof {display:inherit}
+#bar {height:18px}
+ul.fl, ul.fr {position:absolute}
+ul.fl {z-index:1}
+ul.fr {z-index:0; right:25px}
+th.author, th.lastPost, th.star {display:none}
+td.author, td.lastPost, td.star {display:none}
+#name-message, #email-message, #password-message, #confirm-message {clear:left; padding-left:146px}
+}
+
+@media only screen and (max-width:870px) {
+.form.settingsForm li {margin-bottom:10px}
+.form.settingsForm li label {text-align:left; width:auto}
+.form.settingsForm li div {clear:left}
+.form.settingsForm li .checkbox {margin-left:20px}
+.form.settingsForm li:last-child {width:20em}
+.form.settingsForm li:last-child label {width:20em!important}
+.form.settingsForm li:nth-last-child(2) div, .form.settingsForm li:nth-last-child(3) div {position:absolute; padding-left:2px} 
+#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:auto}
+.form.logoForm li, .form.iconForm li {margin-bottom:10px}
+.form.logoForm li label, .form.iconForm li label {text-align:left}
+.form.logoForm li input, .form.iconForm li input {clear:left; max-width:20em}
+.form.logoForm li:last-child, .form.iconForm li:last-child {width:20em; margin-top:0}
+.form.logoForm li:last-child label, .form.iconForm li:last-child label {width:20em!important}
+.form.logoForm li div, .form.iconForm li div {clear:left}
+}
+
+@media only screen and (max-width:800px) {
+#reply .hdr {min-height:16px}
+#reply .pInfo {display:none}
+}
+
+@media only screen and (max-width:735px) {
+#settingsOtherForm label {text-align:left; width:auto}
+#language, #avatarAlignment {clear:left}
+#settingsOther .form li {margin-bottom:5px}
+select#language {margin-bottom:5px}
+select#avatarAlignment {margin-bottom:10px}
+select#language, select#avatarAlignment {max-width:20em; width:96%}
+#settingsOtherForm .checkbox {margin-left:20px; width:auto}
+#settingsOtherForm input {position:absolute; left:41px}
+
+/* Change your avatar */
+#lbl-avt {display:none}
+#upl-ava, #upl-url {clear:left; max-width:20em; width:96%}
+#settingsAvatar li:last-child {margin-top:0}
+#settingsAvatar label.radio {width:auto}
+/* #settingsAvatar .button {margin-left:-1px} */
+#appearance .form li {margin-bottom:10px}
+}
+
+@media only screen and (max-width:710px) {
+div#copyright {margin-top:0}
+ul.fl, ul.fr {white-space:nowrap}
+#name-message, #email-message, #password-message, #confirm-message {padding-left:0; width:calc(100% - 5px)}
+#accountInformation .msg {margin-left:0}
+#accountInformation .form label {text-align:left}
+#accountInformation .form input {clear:left}
+}
+
+@media only screen and (max-width:670px) {
+.form input[name="installPlugin"] {width:15em}
+}
+
+@media only screen and (max-width:620px) {
+#wrapper.small #search {display:none}
+#search.withStartConversation {padding-right:7.15em}
+#search .fr {margin-right:-7.15em; width:7.15em}
+#bar .fr, #new {display:none}
+#startConversation {display:inline-block; margin:3px 0 10px 0}
+#markasread {margin-bottom:0}
+#admin {margin-top:0; border-left:0; border-image:none; background:unset}
+#admin .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available}
+#admin .menu li {display:block; margin-right:0}
+#admin .menu li a {display:block; margin:0}
+#admin .menu li.active a {margin-right:0; border-left:unset; border-bottom:unset}
+#admin .menu li:first-child a {border:none}
+#admin .inner {padding-top:10px}
+.form input[name="installPlugin"] {width:inherit}
+}
+
+@media only screen and (max-width:570px) {
+#body {padding:15px 10px; padding-top:10px; padding-bottom:0; overflow:hidden}
+#loading {right:10px}
+#hdr, #bar {padding-left:10px; padding-right:10px}
+#tags {display:none}
+#searchResults table.c {margin-top:0}
+#ftr {margin-left:10px; margin-right:10px; margin-bottom:10px}
+#cInfo h2 {margin-right:10px}
+#cInfo #cTitle {margin:0}
+#sconvo .pInfo, .star0, .star1 {display:none}
+#cInfo dt {width:auto}
+.p.deleted {margin-bottom:10px}
+.p.l div.avatar, .p.r div.avatar {display:none}
+.p.l {border-left-width:1px}
+.p.r {border-right-width:1px}
+blockquote {margin:0 0 1em}
+#allowed {margin-block-start:0; margin-bottom:0}
+#preview {margin-bottom:0}
+#appearance .p .body {padding:5px 0 0}
+form#settingsAvatar {padding-left:10px; padding-right:10px}
+#palette {margin-left:2px; margin-right:0}
+#settingsOtherForm input {left:26px}
+.profile .form li, #report {padding-left:0}
+
+/* Formatting controls */
+#sconvo .hdr {min-height:16px}
+.p .hdr .controls {float:none; clear:left; overflow:auto; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
+#cPosts .p .hdr .controls a:first-child {margin-left:10px}
+#cPosts .p .hdr .controls .formattingButtons {margin-left:10px; margin-right:10px}
+#cPosts .p .hdr .controls .formattingButtons a:first-child {margin-left:0}
+#reply .controls {clear:none; margin:-1px 0 -3px 0; padding:0; background:inherit; box-shadow:none}
+.p .hdr .controls:blank {display:none}
+.p .hdr .controls:empty {display:none}
+#reply .formattingButtons {margin:0}
+.formattingCheckbox {clear:left; float:left; width:-webkit-fill-available; margin-top:3px; margin-bottom:3px; padding-top:3px}
+#cPosts .p .hdr .controls .formattingCheckbox {padding-left:10px}
+.p.deleted .controls span a {margin-left:3px}
+.p.deleted .body {margin-top:5px}
+}
+
+@media only screen and (max-width:500px) {
+#nav-fgpw {display:none}
+#forgotPassword {display:inline-block}
+/* #login {padding-right:0; border-right:0} */
+#nav-join span.button {margin-right:-20px}
+}
+
+@media only screen and (max-width:490px) {
+#settingsPassword .form li {margin-bottom:10px}
+#settingsPasswordForm label {text-align:left}
+#settingsPasswordForm input.text {clear:left; max-width:20em; width:96%}
+#lbl-pass {display:none}
+fieldset#forgot-pass {padding:0 15px 10px}
+#forgot-password .form label {text-align:right; width:auto}
+#forgot-password input#email {clear:left; max-width:20em; width:96%}
+label#lbl-fgps {width:12em; display:none}
+#forgot-password .button {margin-top:6px; margin-bottom:6px}
+#forgot-pass-reset .form li {margin-bottom:10px}
+#forgot-pass-reset .form label {text-align:right; width:auto}
+#forgot-pass-reset input {clear:left; max-width:20em; width:96%}
+label#lbl-fgcf {width:12em; display:none}
+#forgot-pass-reset .button {margin-top:2px; margin-left:-1px}
+#addPlugin ul.form li:first-child, #addSkin ul.form li:first-child {margin-bottom:10px}
+#addPlugin ul.form li:first-child label, #addSkin ul.form li:first-child label {text-align:left}
+#addPlugin ul.form li:first-child input, #addSkin ul.form li:first-child input {clear:left}
+#addPlugin ul.form li:last-child label, #addSkin ul.form li:last-child label {display:none}
+}
+
+@media only screen and (max-width:420px) {
+#addMember {width:5em}
+}
+
+@media only screen and (max-width:405px) {
+#rememberMe, #rememberChk {display:none}
+}
+
+@media only screen and (max-width:395px) {
+#membersOnline .hdr span {display:none}
+#basicSettings .form.settingsForm li:nth-child(-n+3) div {width:100%}
+#admin .settingsForm input.text, #admin .settingsForm select {width:-webkit-fill-available}
+}
+  
+@media only screen and (max-width:340px) {
+#discardDraft {clear:left; margin:5px 0 0 0}
+}
+
+@media only screen and (max-width:330px) {
+tbody#conversations td strong {word-break:break-all}
+}
+
+@media only screen and (max-width:320px) {
+#nav-skin, #nav-plgn {display:none}
+}
