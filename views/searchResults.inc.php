@@ -43,14 +43,14 @@ function columnConversation(&$search,$conversation)
     $html.="><a href='".makeLink($conversation["id"],$conversation["slug"])."' data-instant>".highlight($conversation["title"],$_SESSION["highlight"])."</a></strong><br/>";
     
     // If the conversation is unread, show a "jump to unread" link.
-    if ($search->eso->user["name"] and $conversation["unread"]) $html .= "<small id='jumplink'><a href='" . makeLink($conversation["id"], $conversation["slug"], "?start=unread") . "'>{$language["Jump to unread"]}</a></small>";
-
-    // Jump to last/unread link, depending on the user.
-    // if($search->eso->user["name"] and $conversation["unread"])$html.="<small><a href='".makeLink($conversation["id"],$conversation["slug"],"?start=unread")."'>{$language["Jump to unread"]}</a></small>";
-    // else $html.="<small><a href='".makeLink($conversation["id"],$conversation["slug"],"?start=last")."'>{$language["Jump to last"]}</a></small>";
+    // if ($search->eso->user["name"] and $conversation["unread"]) $html .= "<small id='jumplink'><a href='" . makeLink($conversation["id"], $conversation["slug"], "?start=unread") . "'>{$language["Jump to unread"]}</a></small>";
     
     // We can't forget tags.
     $html .= "<small class='tags'>{$conversation["tags"]}</small>";
+	
+    // Jump to last/unread link, depending on the user.
+    if ($search->eso->user["name"] and $conversation["unread"]) $html .= "<small id='unreadPost'><a href='" . makeLink($conversation["id"], $conversation["slug"], "?start=unread") . "'>{$language["Jump to unread"]}</a></small>";
+    else $html .= "<small id='lastPost'><a href='" . makeLink($conversation["id"], $conversation["slug"], "?start=last") . "'>{$language["Jump to last"]}</a></small>";
     
     $search->callHook("getConversationColumn", array(&$html, $conversation));
     

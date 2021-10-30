@@ -12,13 +12,13 @@ small a, dt a {color:#55f}
 .highlight {background:yellow}
 
 /* Header */
-#hdr {background:linear-gradient(#fff, #fff, #e4e5ea)}
+#hdr {background:linear-gradient(#fff, #e4e5ea)}
 #hdr h1 a {color:#000}
 #hdr h1 a:hover {text-decoration:none}
 #hdr h1 a:hover span {text-decoration:underline}
 
 /* User bar */
-#bar {background:linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02)}
+#bar {background:linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 0 5px 0 #ababab}
 #bar strong a {color:#000}
 #bar span.button {border-radius:0}
 #bar li a span.button, #bar li a span.button {background:linear-gradient(#f7f7f7, #d8d9e1); box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); border:1px solid #bbb}
@@ -27,14 +27,14 @@ small a, dt a {color:#55f}
 #bar li a span.button:active, #bar li a span.button:active {box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .5)}
 #login {border-top:0; border-bottom:0; border-left:0; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
 #nav-dpav select {border-radius:0; border-color:#bbb; box-shadow:inset 0 5px 10px rgba(0,0,0,.07); background:#fff}
-#nav-exit span.button, #rss span.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%)!important; border:1px solid #1a6b9d!important; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)!important}
-#nav-exit span.button input, #rss span.button input {color:#fff!important; text-shadow:#046b9e 0 1px!important}
-#nav-exit span.button:hover, #rss span.button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)!important}
-#nav-exit span.button:active, #rss span.button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)!important}
+#bar li #nav-exit span.button, #bar li #rss span.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)}
+#bar li #nav-exit span.button input, #bar li #rss span.button input {color:#fff; text-shadow:#046b9e 0 1px}
+#bar li #nav-exit span.button:hover, #bar li #rss span.button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)}
+#bar li #nav-exit span.button:active, #bar li #rss span.button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)}
 a#nav-exit {border-top:0; border-bottom:0; border-left:1px solid; border-right:0; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
 
 /* Body */
-#body {background:linear-gradient(#e5e7e9, #fff); background-repeat:no-repeat; background-size:100% 90px}
+#body {background:linear-gradient(#ecedee, #fff); background-repeat:no-repeat; background-size:100% 90px}
 #wrapper {border-top:0; border-bottom:0; border-left:1px solid; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #fff); border-image-slice:1; background:#fff}
 
 /* Tags & gambits */
@@ -93,10 +93,14 @@ a.star0:active, a.star1:active {color:#e4b600}
 /* Conversation header */
 #cHdr {border:1px solid #bbb}
 /* Info and title (left part) */
-#cInfo .star1, #cInfo .star0 {text-shadow:#fe7 0 0 2px}
-#cInfo .editable:hover {border-style:dashed; border-width:1px}
+#cInfo #cTitle:not(.text) {border-style:solid; border-width:1px; border-color:#ddd}
+#cInfo:not(.text) {border-style:none; border-width:1px}
+#cInfo .editable {border-style:dashed; border-width:1px; border-color:#bbb}
+#cInfo .editable:hover {border-style:dashed; border-width:1px; border-color:#777}
 #cInfo .editable:focus {border-style:solid; border-width:1px; box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
-#cTags a {color:#000}
+#cTags a {background:#e4e4e4; color:#000}
+#cTags a:hover {background-color:#ccc; text-decoration:none}
+#cTags a:active {background-color:#888}
 /* Members allowed (right part) */
 #allowed a.d:hover {color:#f00; text-decoration:line-through}
 #addMember {border-right:0; border-top-right-radius:0; border-bottom-right-radius:0}

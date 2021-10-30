@@ -7,7 +7,7 @@ if (!defined("IN_ESO")) exit;
 class Plastic extends Skin {
 
 var $name = "Plastic";
-var $version = "1.1";
+var $version = "1.2";
 var $author = "eso";
 var $numberOfColors = 27;
 
@@ -15,8 +15,8 @@ var $numberOfColors = 27;
 function init()
 {
 	global $config;
-	$this->eso->addCSS("skins/base.css");
 	$this->eso->addCSS("skins/{$config["skin"]}/styles.css");
+	$this->eso->addCSS("skins/base.css");
 	$this->eso->addCSS("skins/ie6.css", "ie6");
 	$this->eso->addCSS("skins/ie7.css", "ie7");
 	$this->eso->addToHead("<link rel='shortcut icon' type='image/ico' href='skins/{$config["skin"]}/favicon.ico'/>");

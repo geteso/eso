@@ -1407,7 +1407,7 @@ function linkTags($tags)
 {
 	$tags = explode(", ", $tags);
 	foreach ($tags as $k => $tag) $tags[$k] = "<a href='" . makeLink("search", "?q2=tag:$tag") . "'>$tag</a>";
-	return implode(", ", $tags);
+	return implode(" ", $tags);
 }
 
 // Remove quotes from a post to prevent nested quotes when quoting the post.
