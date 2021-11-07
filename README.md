@@ -17,7 +17,7 @@
 ---
 
 ### About the project
-Our software is based on an earlier incarnation of an unmaintained project named [*esoTalk*](https://github.com/esotalk/esoTalk) headed by <a href="http://tobyzerner.com/">Toby Zerner</a>.  We started a small, private forum by the name of "esotalk.ga" in order to test our fork of the software on the date of 2/22/18.  More than three years later, this forum software now services the forum itself, which has grown significantly.
+Our software is based on an earlier incarnation of an unmaintained project named [*esoTalk*](https://github.com/esotalk/esoTalk) headed by <a href="http://tobyzerner.com/">Toby Zerner</a>.  We started a small, private forum by the name of "esotalk.ga" in order to test our fork of the software almost four years ago.  Fast forward to the present, this forum software now revolves around the forum itself, which has grown into a place for members to discuss what they please.
 
 That doesn't mean it isn't great for individual forums, though.  Since then, we've added an administrator panel and are in the process of following a roadmap to better fulfill the needs of our users.  Changes are always being made as our users [make suggestions on the forum](https://geteso.org/1020/), something that we openly encourage.  We are not affiliated with the original *esoTalk* project.
 
@@ -25,7 +25,7 @@ That doesn't mean it isn't great for individual forums, though.  Since then, we'
 **It's very easy to create your own forum** and doesn't require much (if any) command-line experience.  **For an extremely novice tutorial, see [this tutorial](https://github.com/geteso/eso/wiki/The-beginner's-guide-to-creating-your-forum)**.  Otherwise, dependencies are listed below.
 
 1. **[Apache](https://apache.org)** or [lighttpd](https://www.lighttpd.net) (not yet tested).
-2. A recent version of **[MySQL](https://www.mysql.com)** and an empty database.
+2. **[MySQL](https://www.mysql.com) 5.7 or greater** and an empty database.
 2. **[PHP 5.3-5.6](https://www.php.net/releases/5_6_0.php)** as version seven is not yet supported.
 4. **PHP-MySQL and PHP-GD** extensions.
 

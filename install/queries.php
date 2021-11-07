@@ -58,7 +58,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}status (
 	lastRead smallint unsigned NOT NULL default '0',
 	draft text,
 	PRIMARY KEY  (conversationId, memberId)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
 // Create the members table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}members";
@@ -84,7 +84,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	UNIQUE KEY members_name (name),
 	UNIQUE KEY members_email (email),
 	KEY members_password (password)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
 // Create the tags table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}tags";
@@ -92,7 +92,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}tags (
 	tag varchar(31) NOT NULL,
 	conversationId int unsigned NOT NULL,
 	PRIMARY KEY  (conversationId, tag)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
 // Create the searches table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}searches";
