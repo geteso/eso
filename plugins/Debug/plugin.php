@@ -164,7 +164,7 @@ function renderDebug($eso)
 	echo "<h3><a href='#' onclick='toggle(document.getElementById(\"debugQueries\"), {animation:\"verticalSlide\"});return false'>{$language["MySQL queries"]} (<span id='debugQueriesCount'>" . count($_SESSION["queries"]) . "</span>)</a></h3>
 	<ul id='debugQueries' class='fixed'>";
 	if (!count($_SESSION["queries"])) echo "<li></li>";
-	else foreach ($_SESSION["queries"] as $query) echo "<li>" . sanitize($query[0]) . " <small>(" . $query[1] . " {$language["seconds"]})</small></li>";
+	else foreach ($_SESSION["queries"] as $query) echo "<li>" . sanitizeHTML($query[0]) . " <small>(" . $query[1] . " {$language["seconds"]})</small></li>";
 	$_SESSION["queries"] = array();
 	
 	// POST + GET + FILES information.
@@ -172,20 +172,20 @@ function renderDebug($eso)
 	<h3><a href='#' onclick='toggle(document.getElementById(\"debugPostGetFiles\"), {animation:\"verticalSlide\"});return false'>{$language["POST + GET + FILES information"]}</a></h3>
 	<div id='debugPostGetFiles'>
 	<p style='white-space:pre' class='fixed' id='debugPost'>\$_POST = ";
-	echo sanitize(print_r($_POST, true));
+	echo sanitizeHTML(print_r($_POST, true));
 	echo "</p><p style='white-space:pre' class='fixed' id='debugGet'>\$_GET = ";
-	echo sanitize(print_r($_GET, true));
+	echo sanitizeHTML(print_r($_GET, true));
 	echo "</p><p style='white-space:pre' class='fixed' id='debugFiles'>\$_FILES = ";
-	echo sanitize(print_r($_FILES, true));
+	echo sanitizeHTML(print_r($_FILES, true));
 	echo "</p>
 	</div>";
 	
 	// SESSION + COOKIE information.
 	echo "<h3><a href='#' onclick='toggle(document.getElementById(\"debugSessionCookie\"), {animation:\"verticalSlide\"});return false'>{$language["SESSION + COOKIE information"]}</a></h3>
 	<div id='debugSessionCookie'><p style='white-space:pre' class='fixed' id='debugSession'>\$_SESSION = ";
-	echo sanitize(print_r($_SESSION, true));
+	echo sanitizeHTML(print_r($_SESSION, true));
 	echo "</p><p style='white-space:pre' class='fixed' id='debugCookie'>\$_COOKIE = ";
-	echo sanitize(print_r($_COOKIE, true));
+	echo sanitizeHTML(print_r($_COOKIE, true));
 	echo "</p></div>";
 	
 	// Hooked functions.

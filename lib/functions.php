@@ -28,6 +28,12 @@ function desanitize($value)
 	}
 }
 
+// Sanitize a string for outputting in a HTML context.
+function sanitizeHTML($value)
+{
+	return htmlentities($value, ENT_QUOTES, "UTF-8");
+}
+
 // Sanitize HTTP header-sensitive characters (CR and LF.)
 function sanitizeForHTTP($value)
 {

@@ -41,7 +41,7 @@ function init()
 	$this->eso->addVarToJS("time", time());
 	
 	// Work out the title of the page.
-	$this->title = $this->conversation["id"] ? $this->conversation["title"] : $language["Start a conversation"];
+	$this->title = $this->conversation["id"] ? sanitizeHTML($conversation["title"]) : $language["Start a conversation"];
 
 	// If the user is attempting to start a conversation but they don't have permission, discontinue.
 	// (The view will show an error.)
@@ -236,9 +236,9 @@ function init()
 		if (strlen($description) > 255) $description = substr($description, 0, strrpos($description, " ")) . " ...";
 		$description = strip_tags(str_replace(array("</p>", "</h3>", "</pre>"), " ", $description));
 		$this->eso->addToHead("<meta name='keywords' content='" . str_replace(", ", ",", $this->conversation["tags"]) . "'/>");
-		$this->eso->addToHead("<meta name='description' content='$description'/>");
-		$this->eso->addToHead("<meta property='og:description' content='$description'/>");
-		$this->eso->addToHead("<meta name='twitter:description' content='$description'/>");
+		$this->eso->addToHead("<meta name='description' content='".sanitizeHTML($description)."'/>");
+		$this->eso->addToHead("<meta property='og:description' content='".sanitizeHTML($description)."'/>");
+		$this->eso->addToHead("<meta name='twitter:description' content='".sanitizeHTML($description)."'/>");
 		
 		// Add JavaScript variables which contain conversation information.
 		$this->eso->addVarToJS("conversation", array(
