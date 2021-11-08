@@ -171,7 +171,7 @@ function doInstall()
 	// Run the queries one by one and halt if there's an error!
 	include "queries.php";
 	foreach ($queries as $query) {
-		if (!$this->query($query)) return array(1 => "<code>" . sanitize($this->error()) . "</code><p><strong>The query that caused this error was</strong></p><pre>" . sanitize($query) . "</pre>");
+		if (!$this->query($query)) return array(1 => "<code>" . sanitizeHTML($this->error()) . "</code><p><strong>The query that caused this error was</strong></p><pre>" . sanitizeHTML($query) . "</pre>");
 	}
 	
 	// Write the $config variable to config.php.

@@ -68,7 +68,7 @@ function init()
 			while (list($id, $member, $content, $time) = $this->eso->db->fetchRow($result)) {
 				$this->items[] = array(
 					"title" => $member,
-					"description" => sanitize($this->format($content)),
+					"description" => sanitizeHTML($this->format($content)),
 					"link" => $config["baseURL"] . makeLink("post", $id),
 					"date" => date("D, d M Y H:i:s O", $time)
 				);
@@ -85,7 +85,7 @@ function init()
 			while (list($postId, $title, $member, $content, $time) = $this->eso->db->fetchRow($result)) {
 				$this->items[] = array(
 					"title" => "$member - $title",
-					"description" => sanitize($this->format($content)),
+					"description" => sanitizeHTML($this->format($content)),
 					"link" => $config["baseURL"] . makeLink("post", $postId),
 					"date" => date("D, d M Y H:i:s O", $time)
 				);

@@ -25,10 +25,10 @@ if (get_magic_quotes_gpc()) {
 	$_COOKIE = array_map("undoMagicQuotes", $_COOKIE);
 }
 
-// Sanitize the request data. This is pretty much the same as using htmlentities. 
-$_POST = sanitize($_POST);
-$_GET = sanitize($_GET);
-$_COOKIE = sanitize($_COOKIE);
+// Sanitize the request data using htmlentities.
+$_POST = sanitizeHTML($_POST);
+$_GET = sanitizeHTML($_GET);
+$_COOKIE = sanitizeHTML($_COOKIE);
 
 // Set up the Install controller, which will perform all installation tasks.
 require "install.controller.php";
@@ -217,7 +217,7 @@ case "finish": ?>
 <strong>Queries run</strong>
 <pre>
 <?php if (isset($_SESSION["queries"]) and is_array($_SESSION["queries"]))
-	foreach ($_SESSION["queries"] as $query) echo sanitize($query) . ";<br/><br/>"; ?>
+	foreach ($_SESSION["queries"] as $query) echo sanitizeHTML($query) . ";<br/><br/>"; ?>
 </pre>
 <hr/>
 </div>

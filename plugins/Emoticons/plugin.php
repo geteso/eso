@@ -133,7 +133,7 @@ function format()
 {
 	// Make an array of regular-expression-safe emoticon patterns.
 	$patterns = array();
-	foreach ($this->emoticons as $k => $v) $patterns[] = preg_quote(sanitize($k), "/");
+	foreach ($this->emoticons as $k => $v) $patterns[] = preg_quote(sanitizeHTML($k), "/");
 	
 	// Map a function to handle emoticons.
 	$this->formatter->lexer->mapFunction("emoticon", array($this, "emoticon"));

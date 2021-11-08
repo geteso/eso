@@ -80,7 +80,7 @@ function init()
 	// Queries run.
 	if (isset($_SESSION["queries"]) and is_array($_SESSION["queries"])) {
 		$messageBody .= "<strong>Queries run</strong><pre style='overflow:auto'>";
-		foreach ($_SESSION["queries"] as $query) $messageBody .= sanitize($query) . ";<br/><br/>";
+		foreach ($_SESSION["queries"] as $query) $messageBody .= sanitizeHTML($query) . ";<br/><br/>";
 		$_SESSION["queries"] = array();
 		$messageBody .= "</pre>";
 	}
