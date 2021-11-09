@@ -104,10 +104,10 @@ function init()
 	if ($this->conversation["id"]) {
 	
 		// If the slug in the URL is not the same as the actual slug, redirect.
-		if (@$_GET["q3"] != $this->conversation["slug"]) {
-			header("HTTP/1.1 301 Moved Permanently");
-			redirect($this->conversation["id"], $this->conversation["slug"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
-		}
+//		if (@$_GET["q3"] != $this->conversation["slug"]) {
+//			header("HTTP/1.1 301 Moved Permanently");
+//			redirect($this->conversation["id"], $this->conversation["slug"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
+//		}
 		
 		// Work out which post we are starting from.
 		if (!empty($_GET["start"])) {
@@ -1450,7 +1450,7 @@ function validateTitle(&$title)
 {
 	$title = substr($title, 0, 63);
 	if (!strlen($title)) return "emptyTitle";
-	if (strpos($title, '0') === 0) return "emptyTitle";
+//	if (strpos($title, '0') === 0) return "emptyTitle";
 	return $this->callHook("validateTitle", array(&$title), true);
 }
 
