@@ -25,10 +25,10 @@ if (get_magic_quotes_gpc()) {
 	$_COOKIE = array_map("undoMagicQuotes", $_COOKIE);
 }
 
-// Sanitize the request data using htmlentities.
-$_POST = sanitizeHTML($_POST);
-$_GET = sanitizeHTML($_GET);
-$_COOKIE = sanitizeHTML($_COOKIE);
+// Sanitize the request data using sanitize().
+$_POST = sanitize($_POST);
+$_GET = sanitize($_GET);
+$_COOKIE = sanitize($_COOKIE);
 
 // Set up the Install controller, which will perform all installation tasks.
 require "install.controller.php";

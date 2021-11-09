@@ -4,13 +4,11 @@
 
 if (!defined("IN_ESO")) exit;
 
-// Substitute sensitive characters with html entities and trim.
+// Substitute sensitive characters with a replacement character.
 function sanitize($value)
 {
-	if (!is_array($value)) {
-		$replace = array("&" => "&amp;", "<" => "&lt;", ">" => "&gt;", "'" => "&#39;", "\"" => "&quot;", "\\" => "&#92;", "\x00" => "");
-		return strtr(trim($value), $replace);
-	} else {
+	if (!is_array($value)) return htmlentities($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+	else {
 		foreach ($value as $k => $v) $value[$k] = sanitize($v);
 		return $value;
 	}
@@ -19,10 +17,8 @@ function sanitize($value)
 // Replace sanitized sensitive characters with their raw values.
 function desanitize($value)
 {
-	if (!is_array($value)) {
-		$replace = array("&amp;" => "&", "&lt;" => "<", "&gt;" => ">", "&#39;" => "'", "&#039;" => "'", "&quot;" => "\"", "&#92;" => "\\", "&#092;" => "\\");
-		return strtr($value, $replace);
-	} else {
+	if (!is_array($value)) return html_entity_decode($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+	else {
 		foreach ($value as $k => $v) $value[$k] = desanitize($v);
 		return $value;
 	}
@@ -55,19 +51,42 @@ function escapeDoubleQuotes($value)
 // Create a conversation title slug from a given string. Any non-alphanumeric characters will be converted to "-".
 function slug($string)
 {
-	// Convert special latin letters and other characters to HTML entities.
- 	$slug = htmlentities(desanitize($string), ENT_QUOTES, "UTF-8");
+	// If there are any characters other than basic alphanumeric, space, punctuation, then we need to attempt transliteration.
+	if (preg_match("/[^\x20-\x7f]/", $string)) {
 
- 	// With those HTML entities, either convert them back to a normal letter, or remove them.
- 	$slug = preg_replace(array("/&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);/i", "/&[^;]{2,6};/"), array("$1", " "), $slug);
+		// Thanks to krakos for this code!
+		if (function_exists('transliterator_transliterate')) {
 
- 	global $eso;
- 	if (!empty($eso)) $eso->callHook("GenerateSlug", array(&$slug));
+			// Unicode decomposition rules states that these cannot be decomposed, hence we have to deal with them manually.
+			// Note: even though "scharfe s" is commonly transliterated as "sz", in this context "ss" is preferred as it's the most popular method among German speakers.
+			$src = array('œ', 'æ', 'đ', 'ø', 'ł', 'ß', 'Œ', 'Æ', 'Đ', 'Ø', 'Ł');
+			$dst = array('oe','ae','d', 'o', 'l', 'ss', 'OE', 'AE', 'D', 'O', 'L');
+			$string = str_replace($src, $dst, $string);
 
- 	// Now replace non-alphanumeric characters with a hyphen, and remove multiple hyphens.
- 	$slug = strtolower(trim(preg_replace(array("/[^0-9a-z]/i", "/-+/"), "-", $slug), "-"));
+			// Using transliterator to get rid of accents and convert non-Latin to Latin.
+			$string = transliterator_transliterate("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC; [:Punctuation:] Remove; Lower();", $string);
+		
+		}
+		else {
 
-	return substr($slug, 0, 63);
+			// A fallback to the old method.
+			// Convert special Latin letters and other characters to HTML entities.
+			$string = htmlentities($string, ENT_NOQUOTES, "UTF-8");
+
+			// With those HTML entities, either convert them back to a normal letter, or remove them.
+			$string = preg_replace(array("/&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml|caron);/i", "/&[^;]{2,6};/"), array("$1", " "), $string);
+
+		}
+	}
+
+	// Allow plugins to alter the slug.
+	global $eso;
+	if (!empty($eso)) $eso->callHook("GenerateSlug", array(&$string));
+
+	// Now replace non-alphanumeric characters with a hyphen, and remove multiple hyphens.
+	$slug = str_replace(' ','-',trim(preg_replace('~[^\\pL\d]+~u',' ',mb_strtolower($string, "UTF-8"))));
+
+	return mb_substr($slug, 0, 63, "UTF-8");
 }
 
 // Finds $words in $text and puts a span with class='highlight' around them.

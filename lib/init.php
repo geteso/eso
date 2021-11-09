@@ -68,10 +68,10 @@ if (!empty($config["useFriendlyURLs"]) and isset($_SERVER["REQUEST_URI"])) {
 	for ($i = 1, $count = count($parts); $i <= $count; $i++) $_GET["q$i"] = $parts[$i - 1];
 }
 
-// Sanitize the request data using htmlentities.
-$_POST = sanitizeHTML($_POST);
-$_GET = sanitizeHTML($_GET);
-$_COOKIE = sanitizeHTML($_COOKIE);
+// Sanitize the request data using sanitize().
+$_POST = sanitize($_POST);
+$_GET = sanitize($_GET);
+$_COOKIE = sanitize($_COOKIE);
 
 // Include and set up the main controller.
 require "controllers/eso.controller.php";
