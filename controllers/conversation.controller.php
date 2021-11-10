@@ -109,6 +109,12 @@ function init()
 //			redirect($this->conversation["id"], $this->conversation["slug"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
 //		}
 		
+		// If there is a slug in the URL, redirect.
+		if (!empty(@$_GET["q3"])) {
+			header("HTTP/1.1 301 Moved Permanently");
+			redirect($this->conversation["id"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
+		}
+		
 		// Work out which post we are starting from.
 		if (!empty($_GET["start"])) {
 			switch ($_GET["start"]) {
