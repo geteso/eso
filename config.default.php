@@ -37,12 +37,13 @@ $defaultConfig = array(
 "showForumDescription" => true, // Whether or not to display the forum description on the homepage.
 
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
+"usePrettyURLs" => false, // ex. example.com/conversation/1-welcome-to-simon-s-test-forum
 "useModRewrite" => true, // ex. example.com/conversation/1 (requires mod_rewrite and a .htaccess file!)
 "skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)
 "minPasswordLength" => 6,
 "cookieExpire" => 2592000, // Amount of time by which cookies are kept.  (2592000 seconds = 30 days.)
 "cookieDomain" => "", // Sets a custom cookie domain.  Set it to .yourdomain.com to have the cookie set across all subdomains.  Keep blank to use baseURL.
-"allowWeirdCharacters" => false, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
+"nonAsciiCharacters" => true, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
 "userOnlineExpire" => 4500, // Amount of time by which a user's last seen time is before the user goes offline.  (300 seconds = 5 minutes.)
 "messageDisplayTime" => 20, // Amount of time by which most messages floating above the navigation bar disappear.  (20 seconds = 20 seconds.  lol.)
 

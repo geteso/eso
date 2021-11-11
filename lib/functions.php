@@ -210,6 +210,16 @@ function makeLink()
 	return $link;
 }
 
+// Generate a URL to a conversation based on its ID and slug.
+// The exact output of the function depends on the value of $config["usePrettyURLs"].
+// ex. conversationLink($id, $slug) -> "/1", "/1-welcome-to-simon-s-test-forum"
+function conversationLink($conversationId, $conversationSlug)
+{
+	global $config;
+	$conversationLink = !empty($config["usePrettyURLs"]) ? $conversationId . "-" . $conversationSlug : $conversationId;
+	return $conversationLink;
+}
+
 // Generate a link to the current page. To get a form to submit to the same page: <form action='curLink()'.
 function curLink()
 {
