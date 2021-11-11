@@ -105,12 +105,12 @@ if($this->conversation["postCount"]>0){
 // Generate the buttons.
 $previousButton=$this->startFrom<=0
 	?"<a class='previous disabled'>{$language["Previous"]}</a>"
-	:"<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?start=".max(0,$this->startFrom-$config["postsPerPage"]))."' class='previous'>{$language["Previous"]}</a>";
-$firstButton="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"])."' class='first'>{$language["First"]}</a>";
-$lastButton="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?start=last")."' class='last'>{$language["Last"]}</a>";
+	:"<a href='".makeLink($this->conversation["id"],"?start=".max(0,$this->startFrom-$config["postsPerPage"]))."' class='previous'>{$language["Previous"]}</a>";
+$firstButton="<a href='".makeLink($this->conversation["id"])."' class='first'>{$language["First"]}</a>";
+$lastButton="<a href='".makeLink($this->conversation["id"],"?start=last")."' class='last'>{$language["Last"]}</a>";
 $nextButton=$this->startFrom+min($config["postsPerPage"],$this->conversation["postCount"]-$this->startFrom)>=$this->conversation["postCount"]
 	?"<a class='next disabled'>{$language["Next"]}</a>"
-	:"<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?start=".min($this->conversation["postCount"],$this->startFrom+$config["postsPerPage"]))."' class='next'>{$language["Next"]}</a>";
+	:"<a href='".makeLink($this->conversation["id"],"?start=".min($this->conversation["postCount"],$this->startFrom+$config["postsPerPage"]))."' class='next'>{$language["Next"]}</a>";
 
 // Generate the viewing text: "11-30 of 41 posts".
 $viewing=sprintf($language["viewingPosts"],"<span class='pgFrom'>".($this->startFrom+1)."</span>","<span class='pgTo'>".($this->startFrom+min($config["postsPerPage"],$this->conversation["postCount"]-$this->startFrom))."</span>","<span class='pgCount'>{$this->conversation["postCount"]}</span>");
@@ -120,7 +120,7 @@ $paginationHtml="<ul id='pagination' class='pg'>
 <li class='left'>$previousButton $firstButton</li>
 <li class='middle'>
 <div style='width:$showingPercent%; margin-left:$leftPercent%; margin-right:$rightPercent%;' class='viewing' title='".strip_tags($viewing)."'><div>$viewing</div></div>
-<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?start=unread")."' style='width:$unreadWidth%; margin-left:$unreadLeft%;' class='unread'>{$language["unread"]}</a>
+<a href='".makeLink($this->conversation["id"],"?start=unread")."' style='width:$unreadWidth%; margin-left:$unreadLeft%;' class='unread'>{$language["unread"]}</a>
 </li>
 <li class='right'>$lastButton $nextButton</li>
 </ul>";
@@ -136,7 +136,7 @@ echo $paginationHtml;
 // <![CDATA[
 <?php
 // Make lots of link templates that can be used by JavaScript (functions below), and when rendering the posts in PHP (further below).
-$memberLink="<a href='".makeLink("profile","%d")."'>%s</a>";$editedBy="({$language["edited by"]} %s %s)";$deletedBy="({$language["deleted by"]})";$quoteLink="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?quotePost=%s",$this->startFrom?"&start=$this->startFrom":"","#reply")."' onclick='Conversation.quotePost(%s);return false'>{$language["quote"]}</a>";$editLink="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?editPost=%s",$this->startFrom?"&start=$this->startFrom":"","#p%s")."' onclick='Conversation.editPost(%s);return false'>{$language["edit"]}</a>";$deleteLink="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?deletePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.deletePost(%s);return false'>{$language["delete"]}</a>";$restoreLink="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?restorePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.restorePost(%s);return false'>{$language["restore"]}</a>";$showDeletedLink="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?showDeletedPost=%s",$this->startFrom?"&start=$this->startFrom":"")."' onclick='Conversation.showDeletedPost(%s);return false'>{$language["show"]}</a>";$hideDeletedLink="<a href='".makeLink($this->conversation["id"],$this->conversation["slug"],"?start=$this->startFrom")."' onclick='Conversation.hideDeletedPost(%s);return false'>{$language["hide"]}</a>";$lastAction="(<abbr title='%s'>{$language["online"]}</abbr>)";$permalink=makeLink("post","%s");?>
+$memberLink="<a href='".makeLink("profile","%d")."'>%s</a>";$editedBy="({$language["edited by"]} %s %s)";$deletedBy="({$language["deleted by"]})";$quoteLink="<a href='".makeLink($this->conversation["id"],"?quotePost=%s",$this->startFrom?"&start=$this->startFrom":"","#reply")."' onclick='Conversation.quotePost(%s);return false'>{$language["quote"]}</a>";$editLink="<a href='".makeLink($this->conversation["id"],"?editPost=%s",$this->startFrom?"&start=$this->startFrom":"","#p%s")."' onclick='Conversation.editPost(%s);return false'>{$language["edit"]}</a>";$deleteLink="<a href='".makeLink($this->conversation["id"],"?deletePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.deletePost(%s);return false'>{$language["delete"]}</a>";$restoreLink="<a href='".makeLink($this->conversation["id"],"?restorePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.restorePost(%s);return false'>{$language["restore"]}</a>";$showDeletedLink="<a href='".makeLink($this->conversation["id"],"?showDeletedPost=%s",$this->startFrom?"&start=$this->startFrom":"")."' onclick='Conversation.showDeletedPost(%s);return false'>{$language["show"]}</a>";$hideDeletedLink="<a href='".makeLink($this->conversation["id"],"?start=$this->startFrom")."' onclick='Conversation.hideDeletedPost(%s);return false'>{$language["hide"]}</a>";$lastAction="(<abbr title='%s'>{$language["online"]}</abbr>)";$permalink=makeLink("post","%s");?>
 function makeMemberLink(memberId, member) {return "<?php echo $memberLink;?>".replace("%d", memberId).replace("%s", member);}
 function makeEditedBy(member, time) {return "<?php echo $editedBy;?>".replace("%s", member).replace("%s", time);}
 function makeDeletedBy(member) {return "<?php echo $deletedBy;?>".replace("%s", member);}

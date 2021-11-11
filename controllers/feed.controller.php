@@ -59,7 +59,7 @@ function init()
 			// Past this point, the user is allowed to view the conversation.
 			// Set the title, link, description, etc.
 			$this->title = "{$conversation["title"]} - {$config["forumTitle"]}";
-			$this->link = $config["baseURL"] . makeLink($conversation["id"], $conversation["slug"]);
+			$this->link = $config["baseURL"] . makeLink($conversation["id"]);
 			$this->description = $conversation["tags"];
 			$this->pubDate = date("D, d M Y H:i:s O", $conversation["lastActionTime"]);
 			
