@@ -18,13 +18,20 @@ function init()
 	// If we're already logged in, go to 'My settings'.
 	if ($this->eso->user) redirect("settings");
 	
+	// If registration is closed, show a message.
+	if (empty($config["registrationOpen"])) {
+		$this->eso->message("registrationClosed", false);
+		return;
+	}
+
 	// Set the title.
 	global $language, $config;
 	$this->title = $language["Join this forum"];
 
-	if (isset($_GET["q2"])) {
+	// Only respond to requests for verification emails if we require e-mail verification.
+	if (($config["registrationRequireVerification"] == "email") && isset($_GET["q2"])) {
 		
-		// If the user is requesting that we resend their verifcaiton email...
+		// If the user is requesting that we resend their verification email...
 		if ($_GET["q2"] == "sendVerification") {
 			$memberId = (int)@$_GET["q3"];
 			if (list($email, $name, $password) = $this->eso->db->fetchRow("SELECT email, name, password FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND account='Unvalidated'")) $this->sendVerificationEmail($email, $name, $memberId . $password);
@@ -35,9 +42,9 @@ function init()
 		// Otherwise, if there's a verification hash in the URL, attempt to verify the user.
 		else $this->validateMember($_GET["q2"]);
 		return;
-		
+
 	}
-		
+	
 	// Define the elements in the join form.
 	$this->form = array(
 		
@@ -153,6 +160,11 @@ function addMember()
 			: "'{$field["input"]}'";
 	}
 	
+	// If we're not requiring verification, add a field to the query that "validates" the member without a validation hash.
+	if (empty($config["registrationRequireVerification"])) {
+		$insertData["account"] = "'Member'";
+	}
+
 	// Add a few extra fields to the query.
 	$insertData["color"] = "FLOOR(1 + (RAND() * {$this->eso->skin->numberOfColors}))";
 	$insertData["language"] = "'" . $this->eso->db->escape($config["language"]) . "'";
@@ -172,19 +184,21 @@ function addMember()
 	$this->callHook("afterAddMember", array($memberId));
 	
 	// Email the member with a verification link so that they can verify their account.
-	$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($config["salt"] . $_POST["join"]["password"]));
+	if ($config["registrationRequireVerification"] == "email") {
+		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($config["salt"] . $_POST["join"]["password"]));
+	}
 	
 	return true;
 }
 
-// Send a verfication email.
+// Send a verification email.
 function sendVerificationEmail($email, $name, $verifyHash)
 {
 	global $language, $config;
 	sendEmail($email, sprintf($language["emails"]["join"]["subject"], $name), sprintf($language["emails"]["join"]["body"], $name, $config["forumTitle"], $config["baseURL"] . makeLink("join", $verifyHash)));
 }
 
-// Validate a member with the provided a validation hash.
+// Validate a member with the provided validation hash.
 function validateMember($hash)
 {
 	global $config;

@@ -377,6 +377,7 @@ $messages=array(
 "pluginCannotBeEnabled" => array("class" => "warning","message" => "The plugin <em>%s</em> cannot be enabled: %s"),
 "postTooLong" => array("class" => "warning","message" => "Your post is too long. The maximum number of characters allowed is ".number_format($config["maxCharsPerPost"]).". Please shorten your post and re-submit."),
 "reenterInformation" => array("class" => "info","message" => "Please reenter this information."),
+"registrationClosed" => array("class" => "info", "message" => "User registration has been disabled on this forum."),
 "setNewPassword" => array("class" => "info","message" => "Please choose a new password."),
 "skinAdded" => array("class" => "success","message" => "The skin was successfully added."),
 "suspended" => array("class" => "warning","message" => "A forum moderator has <strong>suspended</strong> your account. Until the suspension is lifted you will not be able to perform many actions on this forum."),

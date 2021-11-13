@@ -36,10 +36,18 @@ $defaultConfig = array(
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
 "showForumDescription" => true, // Whether or not to display the forum description on the homepage.
 
+// Skins and plugins.
+"skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)
+"plugins" => array("Captcha"), // A list of enabled plugins.  (This is overridden by config/plugins.php.)
+
+// Login and registration settings.
+"badLoginsPerMinute" => "10", // Amount of failed login attempts a user is limited to per minute.
+"registrationOpen" => "true", // Whether or not new accounts can be made on your forum.
+"registrationRequireVerification" => "email", // false | "email" = require email verification | "approval" = require admin approval
+
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
 "usePrettyURLs" => false, // ex. example.com/conversation/1-welcome-to-simon-s-test-forum
 "useModRewrite" => true, // ex. example.com/conversation/1 (requires mod_rewrite and a .htaccess file!)
-"skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)
 "minPasswordLength" => 6,
 "cookieExpire" => 2592000, // Amount of time by which cookies are kept.  (2592000 seconds = 30 days.)
 "cookieDomain" => "", // Sets a custom cookie domain.  Set it to .yourdomain.com to have the cookie set across all subdomains.  Keep blank to use baseURL.
