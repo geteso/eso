@@ -506,7 +506,9 @@ function writeFile($file, $contents)
 // Regenerate the session token.
 function regenerateToken()
 {
-	$_SESSION["token"] = md5(uniqid(rand()));
+	session_regenerate_id(true);
+	$_SESSION["token"] = substr(md5(uniqid(rand())), 0, 13);
+	$_SESSION["userAgent"] = md5($_SERVER["HTTP_USER_AGENT"]);
 }
 
 // htmlspecialchars_decode for PHP 4.

@@ -51,6 +51,8 @@ if (!session_id()) {
 
 // Prevent session highjacking: check the current IP address against the one that initiated the session.
 if ($_SERVER["REMOTE_ADDR"] != $_SESSION["ip"]) session_destroy();
+// Check the current user agent against the one that initiated the session.
+if (md5($_SERVER["HTTP_USER_AGENT"]) != $_SESSION["userAgent"]) session_destroy();
 
 // Undo register_globals.
 undoRegisterGlobals();

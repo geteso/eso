@@ -997,7 +997,7 @@ function validatePost($post)
 function deletePost($postId)
 {
 	// Don't even bother trying if they're not logged in.
-	if (!$this->eso->user) {
+	if (!$this->eso->user or $this->eso->isUnvalidated()) {
 		$this->eso->message("noPermission");
 		return false;
 	}
@@ -1031,7 +1031,7 @@ function deletePost($postId)
 function restorePost($postId)
 {
 	// Don't even bother trying if they're not logged in.
-	if (!$this->eso->user) {
+	if (!$this->eso->user or $this->eso->isUnvalidated()) {
 		$this->eso->message("noPermission");
 		return false;
 	}	
@@ -1524,6 +1524,7 @@ function canLock()
 function canReply()
 {
 	if (!$this->eso->user) return "loginRequired";
+	if ($this->eso->isUnvalidated()) return "noPermission";
 	if ($this->eso->isSuspended()) return "suspended";
 	if ($this->conversation["locked"] and !$this->eso->user["moderator"]) return "locked";
 	return true;
@@ -1547,6 +1548,7 @@ function canEditPost($postId, $memberId = false, $account = false, $deleteMember
 function canStartConversation()
 {
 	if (!$this->eso->user) return "loginRequired";
+	if ($this->eso->isUnvalidated()) return "noPermission";
 	if ($this->eso->isSuspended()) return "suspended";
 	return true;
 }

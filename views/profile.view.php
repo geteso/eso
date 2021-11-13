@@ -14,7 +14,10 @@ if(!defined("IN_ESO"))exit;
 <div class='hdr'>
 <div class='pInfo'>
 <h3><?php echo $this->member["name"];?></h3>
-<span><?php echo $language[$this->member["account"]];?></span>
+<?php if(!empty($this->eso->canChangeGroup($this->member["memberId"], $this->member["account"]))):?><form action='<?php echo curLink();?>' method='post'><div style='display:inline'><select onchange='Conversation.changeMemberGroup(<?php echo $this->member["memberId"];?>,this.value)' name='group'>
+	<?php foreach($this->eso->canChangeGroup($this->member["memberId"], $this->member["account"]) as $group):?><option value='<?php echo $group;?>'<?php if($group==$this->member["account"])echo " selected='selected'";?>><?php echo $language[$group];?></option><?php endforeach;?></select></div> <noscript><div style='display:inline'><input name='saveGroup' type='submit' value='Save' class='save'/><input type='hidden' name='member' value='<?php echo $this->member["memberId"];?>'/></div></noscript></form>
+<?php elseif($this->member["account"]!="Member"):?><span><?php echo $language[$this->member["account"]];?></span>
+<?php endif;?>
 </div>
 </div>
 <div class='body'>

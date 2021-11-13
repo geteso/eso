@@ -189,7 +189,7 @@ function login($name = false, $password = false, $hash = false)
 			$_SESSION["user"] = $this->user = $data;
 			
 			// Regenerate the session ID and token.
-			session_regenerate_id();
+//			session_regenerate_id();
 			regenerateToken();
 			
 			// If the "remember me" box was checked, set a cookie, and set the cookieIP field in the database.
@@ -604,9 +604,25 @@ function canChangeGroup($memberId, $group)
 {
 	global $config;
 	if (!$this->user or !$this->user["moderator"] or $memberId == $this->user["memberId"] or $memberId == $config["rootAdmin"]) return false;
-	if ($this->user["admin"]) return $this->memberGroups;
+//	if ($this->user["admin"]) return $this->memberGroups;
+
+	// If the $member's group is validated, return a complete list of $memberGroups.
+	// Administrator, Moderator, Member, and Suspended.
+	if ($this->user["admin"] and ($group != "Unvalidated")) return $this->memberGroups;
+	//
+	// If their $member's group is unvalidated, return that same list but add "Unvalidated."
+	if ($this->user["admin"] and ($group == "Unvalidated")) {
+		$this->memberGroups[5] = "Unvalidated";
+		return $this->memberGroups;
+	}
+
+	// Moderators don't get to choose from a complete list.
 	if ($this->user["moderator"] and ($group == "Member" or $group == "Suspended")) {
 		return array("Member", "Suspended");
+	//
+	// Again, let's not forget about the unvalidated group...
+	} elseif ($this->user["moderator"] and ($group == "Unvalidated")) {
+		return array("Member", "Suspended", "Unvalidated");
 	} else {
 		return false;
 	}
@@ -625,6 +641,22 @@ function isSuspended()
 		$this->user["suspended"] = $account == "Suspended";
 	}
 	return $this->user["suspended"];
+}
+
+// Returns whether or not the logged in user has been validated or not.
+// Does not return "Member", only "Unvalidated" if the user is unvalidated.
+function isUnvalidated()
+{
+	global $config;
+	if (!$this->user) return false;
+	
+	// If we don't know whether or not the user has been validated, get it from the database and cache it for later.
+	if ($this->user["unvalidated"] !== true and $this->user["unvalidated"] !== false) {
+		$account = $this->db->result("SELECT account FROM {$config["tablePrefix"]}members WHERE memberId={$this->user["memberId"]}", 0);
+		$this->user["account"] = $_SESSION["user"]["account"] = $account;
+		$this->user["unvalidated"] = $account == "Unvalidated";
+	}
+	return $this->user["unvalidated"];
 }
 
 }
