@@ -93,7 +93,6 @@ a.star0:active, a.star1:active {color:#e4b600}
 /* Conversation header */
 #cHdr {border:1px solid #bbb}
 /* Info and title (left part) */
-#cInfo #cTitle:not(.text) {border-style:solid; border-width:1px; border-color:#ddd}
 #cInfo:not(.text) {border-style:none; border-width:1px}
 #cInfo .editable {border-style:dashed; border-width:1px; border-color:#bbb}
 #cInfo .editable:hover {border-style:dashed; border-width:1px; border-color:#777}
