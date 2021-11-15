@@ -104,6 +104,6 @@ if (!$this->numberOfConversations): echo $this->eso->htmlMessage("noSearchResult
 // On the other hand, if there were too many results, show a "show more" message.
 elseif ($this->limit==$config["results"] + 1 and $this->numberOfConversations > $config["results"]): ?>
 <div id='more'>
-<?php echo $this->eso->htmlMessage("viewMore", array(makeLink("search", urlencode(@$_SESSION["search"] . (@$_SESSION["search"] ? " + " : "")."more results")))); ?>
+<?php echo $this->eso->htmlMessage("viewMore", array(makeLink("search", urlencode(@$_SESSION["search"] . (@$_SESSION["search"] ? " + " : "").$language["gambits"]["limit:"].$language["gambits"]["100"])))); ?>
 </div>
 <?php endif; ?>

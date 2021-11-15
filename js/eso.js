@@ -2107,7 +2107,7 @@ updateCurrentResults: function() {
 
 // View more search results - just search with the "more results" gambit.
 viewMore: function() {
-	Search.search(getById("searchText").value + (getById("searchText").value ? " + " : "") + eso.language["more results"]);
+	Search.gambit(eso.language["limit:"] + eso.language["100"]);
 },
 
 // Show new activity - an alias for reperforming the current search.
