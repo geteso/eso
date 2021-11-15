@@ -4,10 +4,12 @@
 
 $language = array(
 
+// Defines the character set that this language uses.
 "charset" => "utf-8",
 
 "*" => "*",
-"Dashboard" => "Dashboard",
+
+// Human-friendly dates and times (e.g. edited by Simon 5 minutes ago).
 "dateFormat" => "j F Y, g:i a T", // see https://php.net/manual/en/function.date.php for details
 "day ago" => "Yesterday",
 "days ago" => "%d days ago",
@@ -23,6 +25,7 @@ $language = array(
 "weeks ago" => "%d weeks ago",
 "year ago" => "Last year",
 "years ago" => "%d years ago",
+
 "a private conversation" => "a private conversation",
 "Account information" => "Account information",
 "Add a new plugin" => "Add a new plugin",
@@ -35,8 +38,10 @@ $language = array(
 "Appearance settings" => "Appearance settings",
 "Are you human" => "Are you human?",
 "author" => "by %s",
+
 "Basic settings" => "Basic settings",
 "Bold" => "Bold",
+
 "Cancel" => "Cancel",
 "Can't make it out" => "Can't make it out? <a href='%s'>Try another one!</a>",
 "Change avatar" => "Change avatar",
@@ -47,12 +52,13 @@ $language = array(
 "Check for updates" => "Check for updates",
 "Confirm password" => "Confirm password",
 "Conversation" => "Conversation",
-"Conversation-plural" => "Conversation-plural",
+"Conversation-plural" => "Conversations",
 "conversations" => "conversations",
 "Conversations participated in" => "Conversations participated in",
 "Conversations started" => "Conversations started",
 "Current icon" => "Current icon",
 "Current logo" => "Current logo",
+
 "Dashboard" => "Dashboard",
 "Debug information" => "Debug information",
 "Default forum language" => "Default forum language",
@@ -64,6 +70,7 @@ $language = array(
 "Discard draft" => "Discard draft",
 "Display avatars" => "Display avatars",
 "do not display avatars" => "do not display avatars",
+
 "edit" => "edit",
 "edited by" => "edited by",
 "Email" => "Email",
@@ -77,6 +84,7 @@ $language = array(
 "Enter your email" => "Enter your email",
 "Everyone" => "Everyone",
 "exampleTags" => "ex. movies, winter olympics, cooking",
+
 "Fatal error" => "Uh oh! It's a fatal error...",
 "fatalErrorMessage" => "<p>Your forum has encountered an nasty error which is making it impossible to do whatever it is that you're doing. But don't feel down - <strong>here are a few things you can try</strong>:</p>
 <ul>
@@ -98,23 +106,28 @@ $language = array(
 "Forum title" => "Forum title",
 "Forum version" => "Forum version",
 "forumDescription" => "%s is a web-forum discussing %s, and %s.",
+
 "go to this post" => "go to this post",
+
 "Header" => "Header",
 "hide" => "hide",
 "Home" => "Home",
 "Hooked functions" => "Hooked functions",
 "hour" => "hour",
 "hours" => "hours",
+
 "iconInfo" => "Your forum icon appears next to links and web clips in order to represent your forum. Your logo will be automatically refitted to be 256 pixels by 256 pixels.",
 "Image" => "Image",
 "Installed plugins" => "Installed plugins",
 "Installed skins" => "Installed skins",
 "Italic" => "Italic",
+
 "Join this forum" => "Join this forum!",
 "Join us" => "Join us",
 "Jump to last" => "Jump to last",
 "Jump to unread" => "Jump to unread",
 "Just now" => "Just now",
+
 "labels" => array(
 	"sticky" => "Sticky",
 	"private" => "Private",
@@ -132,7 +145,7 @@ $language = array(
 "Log in" => "Log in",
 "Log out" => "Log out",
 "logoInfo" => "On most skins, your forum logo appears near the title in the header of your forum. Your logo will be automatically resized to be 32 pixels high.",
-"Start a conversation" => "Start a conversation",
+
 "Mark all conversations as read" => "Mark all conversations as read",
 "Member" => "Member",
 "member online" => "<a href='" . makeLink("online") . "'>member online</a>",
@@ -146,6 +159,7 @@ $language = array(
 "My settings" => "My settings",
 "MySQL queries" => "MySQL queries",
 "MySQL version" => "MySQL version",
+
 "Never" => "Never",
 "New conversations in the past week" => "New conversations in the past week",
 "New email" => "New email",
@@ -155,6 +169,7 @@ $language = array(
 "No avatar" => "No avatar",
 "No preview" => "No preview",
 "Number of characters" => "Number of characters",
+
 "on alternating sides" => "on alternating sides",
 "on the left" => "on the left",
 "on the right" => "on the right",
@@ -162,6 +177,7 @@ $language = array(
 "Online members" => "Online members",
 "optional" => "(optional)",
 "Other settings" => "Other settings",
+
 "Page loaded in" => "Page loaded in just over <strong><span id='debugLoadTime'>%s</span> seconds</strong>",
 "Password" => "Password",
 "Permalink to this post" => "Permalink to this post",
@@ -177,13 +193,16 @@ $language = array(
 "post per day" => "that's about 1 post per day",
 "posts per day" => "that's about %s posts per day",
 "POST + GET + FILES information" => "POST + GET + FILES information",
+
 "quote" => "quote",
 "Quote" => "\"Quote\"",
+
 "Recent posts" => "Recent posts",
 "Recover password" => "Get me a new password!",
 "Remember me" => "Remember me",
 "restore" => "restore",
 "RSS" => "RSS",
+
 "Sample captcha image" => "Sample captcha image",
 "Save changes" => "Save changes",
 "Save draft" => "Save draft",
@@ -210,8 +229,10 @@ $language = array(
 "Strike" => "Strike",
 "Submit post" => "Submit post!",
 "Suspended" => "Suspended",
+
 "Tags" => "Tags",
 "Type the letters you see" => "Type the letters you see in the image",
+
 "Unlock" => "Unlock",
 "unread" => "unread",
 "Unstarred" => "Unstarred",
@@ -229,11 +250,14 @@ $language = array(
 "Use default icon" => "Use default icon",
 "Use default logo" => "Use default logo",
 "Username" => "Username",
+
 "version" => "version %s",
 "Video" => "Video",
 "Viewing" => "Viewing:",
 "viewingPosts" => "<b>%s-%s</b> of %s posts",
 
+
+// Emails.
 "emails" => array(
 
 "forgotPassword" => array(
@@ -259,6 +283,7 @@ $language = array(
 "ajaxRequestPending" => "Hey! We're still processing some of your stuff! If you navigate away from this page you might lose any recent changes you've made, so wait a few seconds, ok?",
 "ajaxDisconnected" => "Unable to communicate with the server. Wait a few seconds and <a href='javascript:Ajax.resumeAfterDisconnection()'>try again</a>, or <a href='' onclick='window.location.reload();return false'>refresh the page</a>.",
 );
+
 
 $language["gambits"] = array(
 
@@ -320,6 +345,7 @@ $language["gambits"] = array(
 "active" => "active" // as in "active last 180 days"
 );
 
+
 $language["gambits"] += array(
 
 // Now the hard bit. This is a regular expression to test for the "active" gambit.
@@ -344,6 +370,8 @@ $language["gambits"] += array(
 
 );
 
+
+// Messages.
 $messages = array(
 "accountNotYetVerified" => array("class" => "info", "message" => "You need to verify your account before you can log in with it! If you didn't receive the verification email, <a href='%s'>click here to get it sent again</a>."),
 "accountValidated" => array("class" => "success", "message" => "Cool! Your account has been validated and you can now start participating in conversations. Why not <a href='" . makeLink("new") . "'>start one</a> yourself?"),
