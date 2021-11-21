@@ -18,14 +18,16 @@ function init()
 	// If we're already logged in, go to 'My settings'.
 	if ($this->eso->user) redirect("settings");
 	
+	global $config;
+
 	// If registration is closed, show a message.
 	if (empty($config["registrationOpen"])) {
 		$this->eso->message("registrationClosed", false);
-		return;
+		redirect("");
 	}
 
 	// Set the title.
-	global $language, $config;
+	global $language;
 	$this->title = $language["Join this forum"];
 
 	// Only respond to requests for verification emails if we require e-mail verification.
