@@ -4,6 +4,16 @@
 
 if(!defined("IN_ESO"))exit;
 ?>
+
+<?php
+// If the user can't sign up, inform them with an error message.
+if(($error=$this->canJoin())!==true):
+echo $this->eso->htmlMessage($error);
+
+// If they can, show the form.
+else:
+?>
+
 <form action='<?php echo makeLink("join");?>' method='post' id='join'>
 	
 <?php

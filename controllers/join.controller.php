@@ -17,17 +17,9 @@ function init()
 {
 	// If we're already logged in, go to 'My settings'.
 	if ($this->eso->user) redirect("settings");
-	
-	global $config;
-
-	// If registration is closed, show a message.
-	if (empty($config["registrationOpen"])) {
-		$this->eso->message("registrationClosed", false);
-		redirect("");
-	}
 
 	// Set the title.
-	global $language;
+	global $language, $config;
 	$this->title = $language["Join this forum"];
 
 	// Only respond to requests for verification emails if we require e-mail verification.
@@ -103,8 +95,17 @@ function init()
 	
 	// If the form has been submitted, validate it and add the member into the database.
 	if (isset($_POST["join"]) and $this->addMember()) {
-		$this->eso->message("verifyEmail", false);
-		redirect("");
+		if ($config["registrationRequireVerification"] == "email") {
+			$this->eso->message("verifyEmail", false);
+			redirect("");
+		} elseif ($config["registrationRequireVerification"] == "approval") {
+			$this->eso->message("waitForApproval", false);
+			redirect("");
+		} elseif (empty($config["registrationRequireVerification"])) {
+			$hash = md5($config["salt"] . $_POST["join"]["password"]);
+			$this->eso->login($_POST["join"]["name"], false, $hash);
+			redirect("");
+		}
 	}
 }
 
@@ -151,6 +152,9 @@ function addMember()
 	
 	// If there was a validation error, don't continue.
 	if ($validationError) return false;
+
+	// If registration has been disabled, there's no need to go any further.
+	if (($error = $this->canJoin()) !== true) return false;
 	
 	// Construct the query to insert the member into the database.
 	// Loop through the form fields and use their "databaseField" and "input" attributes for the query.
@@ -190,6 +194,12 @@ function addMember()
 		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($config["salt"] . $_POST["join"]["password"]));
 	}
 	
+	return true;
+}
+
+// To join, registration must be open.
+function canJoin() {
+	if (empty($config["registrationOpen"])) return "registrationClosed";
 	return true;
 }
 

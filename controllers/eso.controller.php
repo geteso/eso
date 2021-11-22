@@ -181,7 +181,24 @@ function login($name = false, $password = false, $hash = false)
 			
 			// If their account is unvalidated, show a message with a link to resend a verification email.
 			if ($data["account"] == "Unvalidated") {
+				if ($config["registrationRequireVerification"] == "email") {
+					$this->message("accountNotYetVerified", false, makeLink("join", "sendVerification", $data["memberId"]));
+					return false;
+				} elseif ($config["registrationRequireVerification"] == "approval") {
+					$this->message("waitForApproval", false);
+					return false;
+				}
+			}
+
+			// If their account is unvalidated and we're using email verification, show a message with a link to resend a verification email.
+			if ($data["account"] == "Unvalidated" and $config["registrationRequireVerification"] == "email") {
 				$this->message("accountNotYetVerified", false, makeLink("join", "sendVerification", $data["memberId"]));
+				return false;
+			}
+			// If we're manually approving accounts, show a message that says to wait for approval.
+			// Even if this forum doesn't require verification, accounts that were made before that change will need approval.
+			elseif ($data["account"] == "Unvalidated") {
+				$this->message("waitForApproval", false);
 				return false;
 			}
 			
