@@ -109,6 +109,11 @@ endforeach;
 <ul class='form' id='settingsPasswordForm'>
 	
 <li>
+<label><?php echo $language["New username"];?> <small><?php echo $language["optional"];?></small></label> <input type='text' name='settingsPasswordEmail[username]' class='text' autocomplete='username' value='<?php echo @$_POST["settingsPasswordEmail"]["username"];?>'/>
+<?php if(!empty($this->messages["username"]))echo $this->eso->htmlMessage($this->messages["username"]);?>
+</li>
+	
+<li>
 <label><?php echo $language["New password"];?> <small><?php echo $language["optional"];?></small></label> <input type='password' name='settingsPasswordEmail[new]' class='text' autocomplete='new-password' value='<?php echo @$_POST["settingsPasswordEmail"]["new"];?>'/>
 <?php if(!empty($this->messages["new"]))echo $this->eso->htmlMessage($this->messages["new"]);?>
 </li>
