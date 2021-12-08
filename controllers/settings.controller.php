@@ -28,11 +28,13 @@ function init()
 	 	and $this->eso->validateToken(@$_POST["token"])
 		and $this->changeAvatar()) $this->eso->message("changesSaved");
 	
-	// Change the user's password or email.
+	// Change the user's username, password or email.
 	if (isset($_POST["settingsPasswordEmail"]["submit"])
 		and $this->eso->validateToken(@$_POST["token"])
 		and $this->changePasswordEmail()) {
 		$this->eso->message("changesSaved");
+		// Unset the user's session to avoid glitches.
+		unset($_SESSION["user"]);
 		redirect("settings");
 	}
 	
@@ -161,11 +163,36 @@ function saveSettings()
 	return true;
 }
 
-// Change the user's password and/or email.
+function validateUsername($username)
+{
+    global $config;
+
+    if (in_array(strtolower($username), $this->reservedNames)) return "invalidUsername";
+	if (!strlen($username)) return "invalidUsername";
+	if (is_numeric($username) && (int)$username === 0) return "invalidUsername";
+	if (empty($config["nonAsciiCharacters"])) {
+	        if (preg_match("/[^[:print:]]/", $username)) return "invalidUsername";
+	}
+	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $username)) return "invalidUsername";
+	if (@$this->eso->db->result($this->eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $this->eso->db->escape($username) . "' AND account!='Unvalidated'"), 0))
+            return "invalidUsername";
+}
+	
+// Change the user's username and/or password and/or email.
 function changePasswordEmail()
 {
 	global $config;
 	$updateData = array();
+	
+	// Are we setting a new username?
+	if (!empty($_POST["settingsPasswordEmail"]["username"])) {
+		
+		// Validate the username. If it's ok, add the updating part to the query.
+        $username = substr($_POST["settingsPasswordEmail"]["username"], 0, 31);
+	    if ($error = $this->validateUsername($username)) $this->messages["username"] = $error;
+		else $updateData["name"] = "'{$_POST["settingsPasswordEmail"]["username"]}'";
+		$this->messages["current"] = "reenterInformation";
+	}
 	
 	// Are we setting a new password?
 	if (!empty($_POST["settingsPasswordEmail"]["new"])) {
