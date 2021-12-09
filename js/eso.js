@@ -743,7 +743,7 @@ initPagination: function() {
 	// Loop through the bars and create an easy-to-access array of their child elements
 	paginations = [getById("pagination"), getById("paginationBottom")];
 	for (var i in paginations) {
-		pg = {
+		var pg = {
 			"bar": paginations[i],
 			"viewingPosts": getElementsByClassName(paginations[i], "viewing")[0],
 			"middle": getElementsByClassName(paginations[i], "middle")[0],
@@ -1198,7 +1198,7 @@ animatePagination: function() {
 moveHandle: function(marginLeft) {
 	marginLeft = Math.max(0, Math.min(100 - parseFloat(this.paginations[0].viewingPosts.style.width), marginLeft));
 	var marginRight = 100 - marginLeft - parseFloat(this.paginations[0].viewingPosts.style.width);
-	for (i in Conversation.paginations) {
+	for (var i in Conversation.paginations) {
 		Conversation.paginations[i].viewingPosts.style.marginLeft = marginLeft + "%";
 		Conversation.paginations[i].viewingPosts.style.marginRight = marginRight + "%";
 	}
@@ -1207,13 +1207,13 @@ moveHandle: function(marginLeft) {
 // Resize the handle - change the handle's width.
 resizeHandle: function(width) {
 	width = Math.max(0, Math.min(100, width));
-	for (i in Conversation.paginations) Conversation.paginations[i].viewingPosts.style.width = width + "%";
+	for (var i in Conversation.paginations) Conversation.paginations[i].viewingPosts.style.width = width + "%";
 },
 
 // Resize the unread area.
 resizeUnread: function(width) {
 	width = Math.max(0, Math.min(100, width));
-	for (i in Conversation.paginations) {
+	for (var i in Conversation.paginations) {
 		Conversation.paginations[i].unread.style.marginLeft = (100 - width) + "%";
 		Conversation.paginations[i].unread.style.width = width + "%";
 	}
@@ -1575,7 +1575,7 @@ hideDeletedPost: function(postId) {
 	for (var i in Conversation.posts) {
 		if (Conversation.posts[i].id == postId) {
 			Conversation.posts[i].body = "";
-			oldHeight = getById("p" + postId).offsetHeight;
+			var oldHeight = getById("p" + postId).offsetHeight;
 			Conversation.displayPosts();
 			Conversation.animateDeletePost(getById("p" + postId), oldHeight);
 			break;
@@ -2265,35 +2265,3 @@ hideFieldset: function(id) {
 }
 
 };
-
-
-
-// Service worker JavaScript.
-// Tells a client what should be cached in case the site goes offline.
-self.addEventListener('install', function(event) {
-    var offlinePage = new Request('offline.html');
-    event.waitUntil(
-        fetch(offlinePage).then(function(response) {
-            return caches.open('offline').then(function(cache) {
-                return cache.put(offlinePage, response);
-            });
-        }));
-});
-  
-// If the fetch fails, it'll show the offline page.
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        fetch(event.request).catch(function(error) {
-            return caches.open('offline').then(function(cache) {
-                return cache.match('offline.html');
-            });
-        }
-    ));
-});
-  
-// Adding an event that can be fired, which updates the offline page.
-self.addEventListener('refreshOffline', function(response) {
-    return caches.open('offline').then(function(cache) {
-        return cache.put(offlinePage, response);
-    });
-});
