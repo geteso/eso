@@ -56,3 +56,5 @@ Join.init();
 </script>
 
 </form>
+
+<?php endif;?>

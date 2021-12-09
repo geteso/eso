@@ -7,8 +7,10 @@ if (!defined("IN_ESO")) exit;
 // Substitute sensitive characters with a replacement character.
 function sanitize($value)
 {
-	if (!is_array($value)) return htmlentities($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
-	else {
+	if (!is_array($value)) {
+		$replace = array("&" => "&amp;", "<" => "&lt;", ">" => "&gt;", "'" => "&#39;", "\"" => "&quot;", "\\" => "&#92;", "\x00" => "");
+		return strtr(trim($value), $replace);
+	} else {
 		foreach ($value as $k => $v) $value[$k] = sanitize($v);
 		return $value;
 	}
@@ -17,8 +19,10 @@ function sanitize($value)
 // Replace sanitized sensitive characters with their raw values.
 function desanitize($value)
 {
-	if (!is_array($value)) return html_entity_decode($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
-	else {
+	if (!is_array($value)) {
+		$replace = array("&amp;" => "&", "&lt;" => "<", "&gt;" => ">", "&#39;" => "'", "&#039;" => "'", "&quot;" => "\"", "&#92;" => "\\", "&#092;" => "\\");
+		return strtr($value, $replace);
+	} else {
 		foreach ($value as $k => $v) $value[$k] = desanitize($v);
 		return $value;
 	}
