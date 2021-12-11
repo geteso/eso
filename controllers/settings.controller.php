@@ -8,6 +8,9 @@ class settings extends Controller {
 	
 var $view = "settings.view.php";
 var $messages = array();
+	
+// Reserved user names which cannot be used.
+var $reservedNames = array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself");
 
 // Initialize: perform any necessary saving actions, and define the form contents.
 function init()
@@ -169,6 +172,8 @@ function validateUsername($username)
 
     if (in_array(strtolower($username), $this->reservedNames)) return "invalidUsername";
 	if (!strlen($username)) return "invalidUsername";
+    	// Cap the username length, no more than 16 characters.
+    	if (strlen($username) > 16) return "invalidUsername";
 	if (is_numeric($username) && (int)$username === 0) return "invalidUsername";
 	if (empty($config["nonAsciiCharacters"])) {
 	        if (preg_match("/[^[:print:]]/", $username)) return "invalidUsername";
@@ -188,8 +193,8 @@ function changePasswordEmail()
 	if (!empty($_POST["settingsPasswordEmail"]["username"])) {
 		
 		// Validate the username. If it's ok, add the updating part to the query.
-        $username = substr($_POST["settingsPasswordEmail"]["username"], 0, 31);
-	    if ($error = $this->validateUsername($username)) $this->messages["username"] = $error;
+        	$username = substr($_POST["settingsPasswordEmail"]["username"], 0, 31);
+	    	if ($error = $this->validateUsername($username)) $this->messages["username"] = $error;
 		else $updateData["name"] = "'{$_POST["settingsPasswordEmail"]["username"]}'";
 		$this->messages["current"] = "reenterInformation";
 	}
