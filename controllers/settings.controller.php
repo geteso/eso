@@ -35,6 +35,16 @@ function init()
 		$this->eso->message("changesSaved");
 		redirect("settings");
 	}
+
+	// Change the user's name.
+	if (isset($_POST["settingsUsername"]["submit"])
+		and $this->eso->validateToken(@$_POST["token"])
+		and $this->changeUsername()) {
+		$this->eso->message("changesSaved");
+		// Unset the user's session to keep things from... breaking!
+		unset($_SESSION["user"]);
+		redirect("settings");
+	}
 	
 	// Loop through the languages directory to create a string of options to go in the language <select> tag.
 	$langOptions = "";
@@ -159,6 +169,35 @@ function saveSettings()
 	$this->callHook("afterSave");
 	
 	return true;
+}
+
+function changeUsername()
+{
+	global $config;
+	$updateData = array();
+
+	// Are we setting a new username?
+	if (!empty($_POST["settingsUsername"]["name"])) {
+
+		// Validate the name, then add the updating part to the query.
+		$name = substr($_POST["settingsUsername"]["name"], 0, 31);
+		if ($error = $this->validateName($name)) $this->messages["username"] = $error;
+		else $updateData["name"] = "'{$_POST["settingsUsername"]["name"]}'";
+		$this->messages["current"] = "reenterInformation";
+	}
+
+	// Check if the user entered their old password correctly.
+	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($config["salt"] . $_POST["settingsUsername"]["password"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
+
+	// Everything is valid and good to go! Run the query if necessary.
+	elseif (count($updateData)) {
+		$query = $this->eso->db->constructUpdateQuery("members", $updateData, array("memberId" => $this->eso->user["memberId"]));
+		$this->eso->db->query($query);
+		$this->messages = array();
+		return true;
+	}
+
+	return false;
 }
 
 // Change the user's password and/or email.
@@ -467,6 +506,22 @@ function addFieldset($fieldset, $legend, $position = false)
 function validateAvatarAlignment(&$alignment)
 {
 	if (!in_array($alignment, array("alternate", "right", "left", "none"))) $alignment = "alternate";
+}
+
+// Validate the name field: make sure it's not reserved, is long enough, doesn't contain invalid characters, and is not already taken by another member.
+function validateName(&$name)
+{
+	global $config;
+	$name = substr($name, 0, 31);
+	if (in_array(strtolower($name), $this->reservedNames)) return "nameTaken";
+	if (!strlen($name)) return "nameEmpty";
+	if (is_numeric($name) && (int)$name === 0) return "nameEmpty";
+	if (empty($config["nonAsciiCharacters"])) {
+		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
+	}
+	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
+	if (@$this->eso->db->result($this->eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $this->eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
+		return "nameTaken";
 }
 
 // Validate the language field: make sure the selected language actually exists.

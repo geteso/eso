@@ -134,4 +134,25 @@ endforeach;
 <?php if(!count($this->messages)):?><script type='text/javascript'>Settings.hideFieldset("settingsPassword")</script><?php endif;?>
 </form>
 
+<?php // Output the change my username form. ?>
+<form action='<?php echo makeLink("settings");?>' method='post'>
+<input type='hidden' name='token' value='<?php echo $_SESSION["token"];?>'/>
+<fieldset id='settingsUser'>
+<legend><a href='#' onclick='Settings.toggleFieldset("settingsUser");return false'><?php echo $language["Change my username"];?></a></legend>
+<ul class='form' id='settingsUserForm'>
+
+<li>
+<label><?php echo $language["New username"];?> <small><?php echo $language["optional"];?></small></label> <input type='text' name='settingsUsername[name]' class='text' autocomplete='name' value='<?php echo @$_POST["settingsUsername"]["name"];?>'/>
+<?php if(!empty($this->messages["username"]))echo $this->eso->htmlMessage($this->messages["username"]);?>
+</li>
+
+<li>
+<label><?php echo $language["My current password"];?></label> <input type='password' name='settingsUsername[password]' class='text' autocomplete='current-password'/>
+<?php if(!empty($this->messages["current"]))echo $this->eso->htmlMessage($this->messages["current"]);?>
+</li>
+
+</ul></fieldset>
+<?php if(!count($this->messages)):?><script type='text/javascript'>Settings.hideFieldset("settingsUser")</script><?php endif;?>
+</form>
+
 </div>
