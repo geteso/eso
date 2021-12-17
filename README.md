@@ -38,4 +38,4 @@ As always, the best way to contribute is by joining our forum and discussing the
 
 ---
 
-¹The geteso forum is not entirely unmoderated.  See [our about page](https://geteso.org/751/about-the-forum/) for details.
+¹The geteso forum is not entirely unmoderated.  See [our about page](https://geteso.org/about/2) for details.
