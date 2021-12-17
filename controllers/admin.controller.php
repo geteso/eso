@@ -19,6 +19,7 @@ function init()
  	$this->defaultSections = array("dashboard", "settings", "plugins", "skins");
  	$this->addSection("dashboard", "Dashboard", array($this, "dashboardInit"), array($this, "dashboardAjax"));
  	$this->addSection("settings", "Forum settings", array($this, "settingsInit"));
+	$this->addSection("members", "Member-plural", array($this, "membersInit"));
  	$this->addSection("plugins", "Plugins", array($this, "pluginsInit"));
  	$this->addSection("skins", "Skins", array($this, "skinsInit"));
 	
@@ -549,6 +550,36 @@ function writeSettingsConfig($newConfigElements)
 function addSection($id, $title, $initFunction, $ajaxFunction = false, $position = false)
 {
 	addToArrayString($this->sections, $id, array("title" => $title, "initFunction" => $initFunction, "ajaxFunction" => $ajaxFunction), $position);
+}
+
+function membersInit(&$adminController)
+{
+	global $language, $config;
+	$this->subView = "admin/members.php";
+	$this->languages = $this->eso->getLanguages();
+
+	// Save the settings?
+	if (isset($_POST["saveSettings"])
+	 	and $this->eso->validateToken(@$_POST["token"])
+		and $this->saveMembersSettings()) {
+			$this->eso->message("changesSaved");
+			refresh();
+		}
+	
+}
+
+function saveMembersSettings()
+{
+	$newConfig = array();
+	$registrationSettings = array("email", "approval", "false");
+	
+	if (in_array(@$_POST["requireVerification"], $registrationSettings)) $newConfig["registrationRequireVerification"] = $_POST["requireVerification"];
+	
+	$newConfig["registrationOpen"] = (bool)!empty($_POST["registrationOpen"]);
+	
+	if (count($newConfig)) $this->writeSettingsConfig($newConfig);
+
+	return true;
 }
 
 // Get all the plugins into an array and perform any plugin-related actions.
