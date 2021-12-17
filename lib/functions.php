@@ -263,6 +263,24 @@ function validateEmail(&$email)
 	elseif ($eso->db->numRows($eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE email='" . $eso->db->escape($email) . "' AND account!='Unvalidated'"))) return "emailTaken";
 }
 
+// Validate the name field: make sure it's not reserved, is long enough, doesn't contain invalid characters, and is not already taken by another member.
+function validateName(&$name)
+{
+	global $eso, $config;
+	$name = substr($name, 0, 31);
+	$reservedNames = array("guest", "member", "members", "mod", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself");
+
+	if (in_array(strtolower($name), $reservedNames)) return "nameTaken";
+	if (!strlen($name)) return "nameEmpty";
+	if (is_numeric($name) && (int)$name === 0) return "nameEmpty";
+	if (empty($config["nonAsciiCharacters"])) {
+		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
+	}
+	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
+	if (@$eso->db->result($eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
+		return "nameTaken";
+}
+
 // Validate a password field: make sure it's not too long, then encrypt it with a salt.
 function validatePassword(&$password)
 {

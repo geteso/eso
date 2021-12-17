@@ -47,7 +47,7 @@ function init()
 			100 => array(
 				"id" => "name",
 				"html" => @"<label>{$language["Username"]}</label> <input id='name' name='join[name]' type='text' class='text' autocomplete='username' value='{$_POST["join"]["name"]}' maxlength='16' tabindex='100'/>",
-				"validate" => array($this, "validateName"),
+				"validate" => "validateName",
 				"required" => true,
 				"databaseField" => "name",
 				"ajax" => true
@@ -245,22 +245,6 @@ function validateConfirmPassword($password)
 {
 	if ($password != (defined("AJAX_REQUEST") ? $_POST["password"] : $_POST["join"]["password"]))
 		return "passwordsDontMatch";
-}
-
-// Validate the name field: make sure it's not reserved, is long enough, doesn't contain invalid characters, and is not already taken by another member.
-function validateName(&$name)
-{
-	global $config;
-	$name = substr($name, 0, 31);
-	if (in_array(strtolower($name), $this->reservedNames)) return "nameTaken";
-	if (!strlen($name)) return "nameEmpty";
-	if (is_numeric($name) && (int)$name === 0) return "nameEmpty";
-	if (empty($config["nonAsciiCharacters"])) {
-		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
-	}
-	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
-	if (@$this->eso->db->result($this->eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $this->eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
-		return "nameTaken";
 }
 	
 }

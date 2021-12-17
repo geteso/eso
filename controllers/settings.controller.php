@@ -181,7 +181,7 @@ function changeUsername()
 
 		// Validate the name, then add the updating part to the query.
 		$name = substr($_POST["settingsUsername"]["name"], 0, 31);
-		if ($error = $this->validateName($name)) $this->messages["username"] = $error;
+		if ($error = validateName($name)) $this->messages["username"] = $error;
 		else $updateData["name"] = "'{$_POST["settingsUsername"]["name"]}'";
 		$this->messages["current"] = "reenterInformation";
 	}
@@ -506,22 +506,6 @@ function addFieldset($fieldset, $legend, $position = false)
 function validateAvatarAlignment(&$alignment)
 {
 	if (!in_array($alignment, array("alternate", "right", "left", "none"))) $alignment = "alternate";
-}
-
-// Validate the name field: make sure it's not reserved, is long enough, doesn't contain invalid characters, and is not already taken by another member.
-function validateName(&$name)
-{
-	global $config;
-	$name = substr($name, 0, 31);
-	if (in_array(strtolower($name), $this->reservedNames)) return "nameTaken";
-	if (!strlen($name)) return "nameEmpty";
-	if (is_numeric($name) && (int)$name === 0) return "nameEmpty";
-	if (empty($config["nonAsciiCharacters"])) {
-		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
-	}
-	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
-	if (@$this->eso->db->result($this->eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $this->eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
-		return "nameTaken";
 }
 
 // Validate the language field: make sure the selected language actually exists.
