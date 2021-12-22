@@ -42,7 +42,7 @@ function ajax()
 
 function dashboardInit(&$adminController)
 {
-	global $config;
+	global $config, $language;
 	$this->title = $language["Dashboard"];
 	$this->subView = "admin/dashboard.php";
 	

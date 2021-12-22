@@ -142,7 +142,7 @@ endforeach;
 <ul class='form' id='settingsUserForm'>
 
 <li>
-<label><?php echo $language["New username"];?> <small><?php echo $language["optional"];?></small></label> <input type='text' name='settingsUsername[name]' class='text' autocomplete='name' value='<?php echo @$_POST["settingsUsername"]["name"];?>'/>
+<label><?php echo $language["New username"];?> <small><?php echo $language["optional"];?></small><small style='display:block'><?php echo $language["changeYourName"];?></small></label> <input type='text' name='settingsUsername[name]' class='text' autocomplete='username' value='<?php echo @$_POST["settingsUsername"]["name"];?>'/>
 <?php if(!empty($this->messages["username"]))echo $this->eso->htmlMessage($this->messages["username"]);?>
 </li>
 
@@ -150,6 +150,8 @@ endforeach;
 <label><?php echo $language["My current password"];?></label> <input type='password' name='settingsUsername[password]' class='text' autocomplete='current-password'/>
 <?php if(!empty($this->messages["current"]))echo $this->eso->htmlMessage($this->messages["current"]);?>
 </li>
+
+<li><label id='lbl-pass'></label> <?php echo $this->eso->skin->button(array("value"=>$language["Save changes"],"name"=>"settingsUsername[submit]"));?></li>
 
 </ul></fieldset>
 <?php if(!count($this->messages)):?><script type='text/javascript'>Settings.hideFieldset("settingsUser")</script><?php endif;?>

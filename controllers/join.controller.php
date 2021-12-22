@@ -199,6 +199,7 @@ function addMember()
 
 // To join, registration must be open.
 function canJoin() {
+	global $config;
 	if (empty($config["registrationOpen"])) return "registrationClosed";
 	return true;
 }

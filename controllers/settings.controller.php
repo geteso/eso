@@ -16,7 +16,7 @@ function init()
 	if (!$this->eso->user) redirect("join");
 	
 	// Set the title.
-	global $language;
+	global $config, $language;
 	$this->title = $language["My settings"];	
 	
 	// Change the user's color.
@@ -183,7 +183,7 @@ function changeUsername()
 		$name = substr($_POST["settingsUsername"]["name"], 0, 31);
 		if ($error = validateName($name)) $this->messages["username"] = $error;
 		else $updateData["name"] = "'{$_POST["settingsUsername"]["name"]}'";
-		$this->messages["current"] = "reenterInformation";
+//		$this->messages["current"] = "reenterInformation";
 	}
 
 	// Check if the user entered their old password correctly.

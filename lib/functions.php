@@ -267,16 +267,24 @@ function validateEmail(&$email)
 function validateName(&$name)
 {
 	global $eso, $config;
-	$name = substr($name, 0, 31);
 	$reservedNames = array("guest", "member", "members", "mod", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself");
 
+	// Make sure the name isn't a reserved word.
 	if (in_array(strtolower($name), $reservedNames)) return "nameTaken";
+
+	// Make sure the name is not too small or large.
+	$length = mb_strlen($name, "UTF-8");
+	if ($length < 3 or $length > 20) return "invalidUsername";
+
+	// It can't be empty either!
 	if (!strlen($name)) return "nameEmpty";
 	if (is_numeric($name) && (int)$name === 0) return "nameEmpty";
+
+	// If we're not allowing weird characters, match anything outside of the non-extended ASCII alphabet.
 	if (empty($config["nonAsciiCharacters"])) {
 		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
 	}
-	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
+	
 	if (@$eso->db->result($eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
 		return "nameTaken";
 }
