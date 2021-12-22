@@ -4,7 +4,7 @@
 
 **Forum software that's lightweight and extensible.**
 
-<p align="justify"><b>eso is a web forum software</b> originally created for <a href="https://esotalk.net">geteso, the unmoderated¹ discussion board</a> which brings a whole new approach to how users interact.&nbsp&nbspUsing our software, webmasters can <b>create a functional and speedy forum</b> in a short manner of time.&nbsp&nbspIt's a small package and loads <i>freaky fast</i> on modern browsers using compression and an unsophisticated design.
+<p align="justify"><b>eso is a web forum software</b> originally created for <a href="https://geteso.org">geteso, the unmoderated¹ discussion board</a> which brings a whole new approach to how users interact.&nbsp&nbspUsing our software, webmasters can <b>create a functional and speedy forum</b> in a short manner of time.&nbsp&nbspIt's a small package and loads <i>freaky fast</i> on modern browsers using compression and an unsophisticated design.
 
 [![Code Size](https://img.shields.io/github/languages/code-size/geteso/eso?style=plastic)]()
 [![Issues](https://img.shields.io/github/issues/geteso/eso?style=plastic)]()
@@ -38,4 +38,4 @@ As always, the best way to contribute is by joining our forum and discussing the
 
 ---
 
-¹The geteso forum is not entirely unmoderated.  See [our about page](https://geteso.org/751/about-the-forum/) for details.
+¹The geteso forum is not entirely unmoderated.  See [our about page](https://geteso.org/about/2) for details.
