@@ -88,9 +88,14 @@ function slug($string)
 	if (!empty($eso)) $eso->callHook("GenerateSlug", array(&$string));
 
 	// Now replace non-alphanumeric characters with a hyphen, and remove multiple hyphens.
-	$slug = str_replace(' ','-',trim(preg_replace('~[^\\pL\d]+~u',' ',mb_strtolower($string, "UTF-8"))));
+	if (extension_loaded("mbstring")) {
+		$slug = str_replace(' ','-',trim(preg_replace('~[^\\pL\d]+~u',' ',mb_strtolower($string, "UTF-8"))));
+		return mb_substr($slug, 0, 63, "UTF-8");
+	} else {
+		$slug = strtolower(trim(preg_replace(array("/[^0-9a-z]/i", "/-+/"), "-", $string), "-"));
+		return substr($slug, 0, 63);
+	}
 
-	return mb_substr($slug, 0, 63, "UTF-8");
 }
 
 // Finds $words in $text and puts a span with class='highlight' around them.
