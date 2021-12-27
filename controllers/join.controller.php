@@ -101,7 +101,7 @@ function init()
 		} elseif ($config["registrationRequireVerification"] == "approval") {
 			$this->eso->message("waitForApproval", false);
 			redirect("");
-		} elseif (empty($config["registrationRequireVerification"])) {
+		} elseif ($config["registrationRequireVerification"] == "false") {
 			$hash = md5($config["salt"] . $_POST["join"]["password"]);
 			$this->eso->login($_POST["join"]["name"], false, $hash);
 			redirect("");
@@ -200,7 +200,7 @@ function addMember()
 // To join, registration must be open.
 function canJoin() {
 	global $config;
-	if (empty($config["registrationOpen"])) return "registrationClosed";
+	if ($config["registrationOpen"] == "false") return "registrationClosed";
 	return true;
 }
 
