@@ -519,9 +519,9 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 }
 
 @media only screen and (max-width:490px) {
-#settingsPassword .form li {margin-bottom:10px}
-#settingsPasswordForm label {text-align:left}
-#settingsPasswordForm input.text {clear:left; max-width:20em; width:96%}
+#settingsPassword .form li, #settingsUser .form li {margin-bottom:10px}
+#settingsPasswordForm label, #settingsUserForm label {text-align:left; width:auto}
+#settingsPasswordForm input.text, #settingsUserForm input.text {clear:left; max-width:20em}
 #lbl-pass {display:none}
 fieldset#forgot-pass {padding:0 15px 10px}
 #forgot-password .form label {text-align:right; width:auto}

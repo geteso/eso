@@ -88,9 +88,14 @@ function slug($string)
 	if (!empty($eso)) $eso->callHook("GenerateSlug", array(&$string));
 
 	// Now replace non-alphanumeric characters with a hyphen, and remove multiple hyphens.
-	$slug = str_replace(' ','-',trim(preg_replace('~[^\\pL\d]+~u',' ',mb_strtolower($string, "UTF-8"))));
+	if (extension_loaded("mbstring")) {
+		$slug = str_replace(' ','-',trim(preg_replace('~[^\\pL\d]+~u',' ',mb_strtolower($string, "UTF-8"))));
+		return mb_substr($slug, 0, 63, "UTF-8");
+	} else {
+		$slug = strtolower(trim(preg_replace(array("/[^0-9a-z]/i", "/-+/"), "-", $string), "-"));
+		return substr($slug, 0, 63);
+	}
 
-	return mb_substr($slug, 0, 63, "UTF-8");
 }
 
 // Finds $words in $text and puts a span with class='highlight' around them.
@@ -267,16 +272,24 @@ function validateEmail(&$email)
 function validateName(&$name)
 {
 	global $eso, $config;
-	$name = substr($name, 0, 31);
 	$reservedNames = array("guest", "member", "members", "mod", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself");
 
+	// Make sure the name isn't a reserved word.
 	if (in_array(strtolower($name), $reservedNames)) return "nameTaken";
+
+	// Make sure the name is not too small or large.
+	$length = mb_strlen($name, "UTF-8");
+	if ($length < 3 or $length > 20) return "invalidUsername";
+
+	// It can't be empty either!
 	if (!strlen($name)) return "nameEmpty";
 	if (is_numeric($name) && (int)$name === 0) return "nameEmpty";
+
+	// If we're not allowing weird characters, match anything outside of the non-extended ASCII alphabet.
 	if (empty($config["nonAsciiCharacters"])) {
 		if (preg_match("/[^[:print:]]/", $name)) return "invalidCharacters";
 	}
-	if (preg_match("/[" . preg_quote("!/%+-", "/") . "]/", $name)) return "invalidCharacters";
+	
 	if (@$eso->db->result($eso->db->query("SELECT 1 FROM {$config["tablePrefix"]}members WHERE name='" . $eso->db->escape($name) . "' AND account!='Unvalidated'"), 0))
 		return "nameTaken";
 }
