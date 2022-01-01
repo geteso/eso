@@ -128,9 +128,8 @@ function processRequestURI($requestURI)
 }
 
 // Generate a salt of $numOfChars characters long containing random letters, numbers, and symbols.
-function generateRandomString($numOfChars)
+function generateRandomString($numOfChars, $possibleChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#%^&*()_+=-{}[]:;<,>.?/`")
 {
-	$possibleChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#%^&*()_+=-{}[]:;<,>.?/`";
 	$salt = "";
 	for ($i = 0; $i < $numOfChars; $i++) $salt .= $possibleChars[rand(0, strlen($possibleChars) - 1)];
 	return $salt;
