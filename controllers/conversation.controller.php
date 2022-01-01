@@ -988,8 +988,13 @@ function displayPost($content)
 function validatePost($post)
 {
 	global $config;
-	if (strlen($post) > $config["maxCharsPerPost"]) return "postTooLong";
-	if (!strlen($post)) return "emptyPost";
+	if (function_exists('mb_strlen')) { // Use multibytes for UTF-8 support.
+		if (mb_strlen($post, "UTF-8") > $config["maxCharsPerPost"]) return "postTooLong";
+		if (!mb_strlen($post, "UTF-8")) return "emptyPost";
+	} else {
+		if (strlen($post) > $config["maxCharsPerPost"]) return "postTooLong";
+		if (!strlen($post)) return "emptyPost";
+	}
 	return $this->callHook("validatePost", array(&$post), true);
 }
 
