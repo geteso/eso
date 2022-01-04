@@ -146,7 +146,10 @@ function login($name = false, $password = false, $hash = false)
 	if (isset($_SESSION["user"])) return true;
 
 	// If a raw password was passed, convert it into a hash.
-	if ($name and $password) $hash = md5($config["salt"] . $password);
+	if ($name and $password) {
+		$salt = $this->db->query("SELECT salt FROM {$config["tablePrefix"]}members memberId={$this->eso->user["memberId"]}");
+		$hash = md5($salt . $password);
+	}
 	
 	// Otherwise attempt to get the member ID and password hash from a cookie.
 	elseif ($hash === false) {
@@ -221,6 +224,16 @@ function login($name = false, $password = false, $hash = false)
 	
 	// Didn't completely fill out the login form? Return an error.
 	elseif ($name or $password)	$this->message("incorrectLogin", false);
+
+	// If we're counting bad logins per minute and the signing-in user has made too many tries, block their IP address for a few minutes.
+//	if (!isset($cookie) && !empty($config["badLoginsPerMinute"])) {
+//		$login_key = "{$_SERVER['SERVER_NAME']}~login:{$_SERVER['REMOTE_ADDR']}";
+//		$tries = (int)apc_fetch($login_key);
+//		if ($tries >= $config["badLoginsPerMinute"]) {
+//			header("HTTP/1.1 429 Too Many Requests");
+//			$this->message("tooManyLogins", false);
+//		}
+//	}
 		
 	return false;
 }
@@ -662,7 +675,11 @@ function isUnvalidated()
 		$this->user["account"] = $_SESSION["user"]["account"] = $account;
 		$this->user["unvalidated"] = $account == "Unvalidated";
 	}
-	return $this->user["unvalidated"];
+	if ($this->user["account"] = "Unvalidated") {
+		$account = $this->db->result("SELECT account FROM {$config["tablePrefix"]}members WHERE memberId={$this->user["memberId"]}", 0);
+		$this->user["account"] = $_SESSION["user"]["account"] = $account;
+		$this->user["unvalidated"] = $account == "Unvalidated";
+	}
 }
 
 }

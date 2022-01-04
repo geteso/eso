@@ -175,7 +175,7 @@ function changeUsername()
 {
 	global $config;
 	$updateData = array();
-	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}")
+	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}");
 
 	// Are we setting a new username?
 	if (!empty($_POST["settingsUsername"]["name"])) {
@@ -206,7 +206,7 @@ function changePasswordEmail()
 {
 	global $config;
 	$updateData = array();
-	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}")
+	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}");
 	
 	// Are we setting a new password?
 	if (!empty($_POST["settingsPasswordEmail"]["new"])) {
