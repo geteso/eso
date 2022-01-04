@@ -42,9 +42,9 @@ function init()
 			
 			// If it's all good, update the password in the database, show a success message, and redirect.
 			if (!count($this->errors)) {
-				$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId=$memberId");
+				$salt = generateRandomString(32);
 				$passwordHash = md5($salt . $password);
-				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword=NULL, password='$passwordHash' WHERE memberId=$memberId");
+				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword=NULL, password='$passwordHash', salt='$salt' WHERE memberId=$memberId");
 				$this->eso->message("passwordChanged", false);
 				redirect("");
 			}
