@@ -67,6 +67,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	name varchar(31) NOT NULL,
 	email varchar(63) NOT NULL,
 	password char(32) NOT NULL,
+	salt char(32) NOT NULL,
 	color tinyint unsigned NOT NULL default '1',
 	account enum('Administrator','Moderator','Member','Suspended','Unvalidated') NOT NULL default 'Unvalidated',
 	language varchar(31) default '',
@@ -83,7 +84,8 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	PRIMARY KEY  (memberId),
 	UNIQUE KEY members_name (name),
 	UNIQUE KEY members_email (email),
-	KEY members_password (password)
+	KEY members_password (password),
+	KEY members_salt (salt)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
 // Create the tags table.
@@ -102,9 +104,10 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}searches (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
 // Create the account for the administrator.
+$salt = generateRandomString(32);
 $color = rand(1, 27);
-$queries[] = "INSERT INTO {$config["tablePrefix"]}members (memberId, name, email, password, color, account) VALUES 
-(1, '{$_SESSION["install"]["adminUser"]}', '{$_SESSION["install"]["adminEmail"]}', '" . md5($config["salt"] . $_SESSION["install"]["adminPass"]) . "', $color, 'Administrator')";
+$queries[] = "INSERT INTO {$config["tablePrefix"]}members (memberId, name, email, password, salt, color, account) VALUES 
+(1, '{$_SESSION["install"]["adminUser"]}', '{$_SESSION["install"]["adminEmail"]}', '" . md5($salt . $_SESSION["install"]["adminPass"]) . "', $salt, $color, 'Administrator')";
 
 // Create default conversations.
 $time = time();

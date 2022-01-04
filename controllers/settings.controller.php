@@ -175,6 +175,7 @@ function changeUsername()
 {
 	global $config;
 	$updateData = array();
+	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}")
 
 	// Are we setting a new username?
 	if (!empty($_POST["settingsUsername"]["name"])) {
@@ -187,7 +188,7 @@ function changeUsername()
 	}
 
 	// Check if the user entered their old password correctly.
-	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($config["salt"] . $_POST["settingsUsername"]["password"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
+	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($salt . $_POST["settingsUsername"]["password"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
 
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {
@@ -205,6 +206,7 @@ function changePasswordEmail()
 {
 	global $config;
 	$updateData = array();
+	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}")
 	
 	// Are we setting a new password?
 	if (!empty($_POST["settingsPasswordEmail"]["new"])) {
@@ -234,7 +236,7 @@ function changePasswordEmail()
 	}
 	
 	// Check if the user entered their old password correctly.
-	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($config["salt"] . $_POST["settingsPasswordEmail"]["current"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
+	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($salt . $_POST["settingsPasswordEmail"]["current"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
 	
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {

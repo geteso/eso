@@ -158,7 +158,7 @@ function doInstall()
 		"forumDescription" => $_SESSION["install"]["forumDescription"],
 		"language" => $_SESSION["install"]["language"],
 		"baseURL" => $_SESSION["install"]["baseURL"],
-		"salt" => generateRandomString(rand(32, 64)),
+		"salt" => generateRandomString(32),
 		"emailFrom" => "do_not_reply@{$_SERVER["HTTP_HOST"]}",
 		"cookieName" => preg_replace(array("/\s+/", "/[^\w]/"), array("_", ""), desanitize($_SESSION["install"]["forumTitle"])),
 		"useFriendlyURLs" => !empty($_SESSION["install"]["friendlyURLs"]),
