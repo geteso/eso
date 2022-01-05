@@ -300,6 +300,7 @@ function validatePassword(&$password)
 	$salt = generateRandomString(32);
 	if (strlen($password) < $config["minPasswordLength"]) return "passwordTooShort";
 	$password = md5($salt . $password);
+	return array($password, $salt);
 }
 
 // Work out the relative difference between the current time and a given timestamp.

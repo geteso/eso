@@ -175,7 +175,7 @@ function changeUsername()
 {
 	global $config;
 	$updateData = array();
-	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}");
+	$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
 
 	// Are we setting a new username?
 	if (!empty($_POST["settingsUsername"]["name"])) {
@@ -206,7 +206,10 @@ function changePasswordEmail()
 {
 	global $config;
 	$updateData = array();
-	$salt = $this->eso->db->query("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}");
+	$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
+	$passwordStuff = validatePassword($hash);
+//	$newPassword = array_shift($validatePassword($hash));
+//	$newSalt = array_pop(validatePassword($hash));
 	
 	// Are we setting a new password?
 	if (!empty($_POST["settingsPasswordEmail"]["new"])) {
@@ -219,7 +222,10 @@ function changePasswordEmail()
 		elseif ($_POST["settingsPasswordEmail"]["new"] != $_POST["settingsPasswordEmail"]["confirm"]) $this->messages["confirm"] = "passwordsDontMatch";
 		
 		// Alright, the password stuff is all good. Add the password updating part to the query.
-		else $updateData["password"] = "'$hash'";
+		else {
+			$updateData["password"] = "'$passwordStuff[0]'";
+			$updateData["salt"] = "'$passwordStuff[1]'";
+		}
 		
 		// Show a 'reenter information' message next to the current password field just in case we fail later on.
 		$this->messages["current"] = "reenterInformation"; 

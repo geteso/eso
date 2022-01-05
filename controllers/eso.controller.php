@@ -147,7 +147,7 @@ function login($name = false, $password = false, $hash = false)
 
 	// If a raw password was passed, convert it into a hash.
 	if ($name and $password) {
-		$salt = $this->db->query("SELECT salt FROM {$config["tablePrefix"]}members memberId={$this->eso->user["memberId"]}");
+		$salt = $this->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name='$name'", 0);
 		$hash = md5($salt . $password);
 	}
 	
