@@ -167,7 +167,7 @@ function addMember()
 	}
 	
 	// If we're not requiring verification, add a field to the query that "validates" the member without a validation hash.
-	if (empty($config["registrationRequireVerification"])) {
+	if ($config["registrationRequireVerification"] == false) {
 		$insertData["account"] = "'Member'";
 	}
 

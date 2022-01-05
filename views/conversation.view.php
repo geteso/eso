@@ -174,7 +174,7 @@ if(!empty($post["deleteMember"])):?>
 <span><?php printf($deletedBy,$post["deleteMember"]);?></span>
 </div>
 <div class='controls'>
-<?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span><?php endif;?> 
+<?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span><?php endif;?>
 </div>
 </div>
 <?php if($this->showingDeletedPost==$post["id"]):?><div class='body'><?php echo $post["body"];?></div><?php endif;?>
