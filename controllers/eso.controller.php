@@ -668,18 +668,13 @@ function isUnvalidated()
 {
 	global $config;
 	if (!$this->user) return false;
-	
-	// If we don't know whether or not the user has been validated, get it from the database and cache it for later.
-	if ($this->user["unvalidated"] !== true and $this->user["unvalidated"] !== false) {
-		$account = $this->db->result("SELECT account FROM {$config["tablePrefix"]}members WHERE memberId={$this->user["memberId"]}", 0);
-		$this->user["account"] = $_SESSION["user"]["account"] = $account;
-		$this->user["unvalidated"] = $account == "Unvalidated";
-	}
+
 	if ($this->user["account"] = "Unvalidated") {
 		$account = $this->db->result("SELECT account FROM {$config["tablePrefix"]}members WHERE memberId={$this->user["memberId"]}", 0);
 		$this->user["account"] = $_SESSION["user"]["account"] = $account;
 		$this->user["unvalidated"] = $account == "Unvalidated";
 	}
+	return $this->user["unvalidated"];
 }
 
 }
