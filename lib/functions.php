@@ -297,10 +297,9 @@ function validateName(&$name)
 function validatePassword(&$password)
 {
 	global $config;
-	$salt = generateRandomString(32);
 	if (strlen($password) < $config["minPasswordLength"]) return "passwordTooShort";
-	$password = md5($salt . $password);
-	return array($password, $salt);
+//	$hash = md5($salt . $password);
+//	return $hash;
 }
 
 // Work out the relative difference between the current time and a given timestamp.
