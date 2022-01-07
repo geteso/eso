@@ -207,24 +207,23 @@ function changePasswordEmail()
 	global $config;
 	$updateData = array();
 	$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
-	$passwordStuff = validatePassword($hash);
-//	$newPassword = array_shift($validatePassword($hash));
-//	$newSalt = array_pop(validatePassword($hash));
+	$newSalt = generateRandomString(32);
 	
 	// Are we setting a new password?
 	if (!empty($_POST["settingsPasswordEmail"]["new"])) {
 		
-		// Make a copy of the raw password; the validatePassword() function will automatically format it into a hash.
-		$hash = $_POST["settingsPasswordEmail"]["new"];
-		if ($error = validatePassword($hash)) $this->messages["new"] = $error;
+		// Make a copy of the raw password and format it into a hash.
+		$password = $_POST["settingsPasswordEmail"]["new"];
+		$hash = md5($newSalt . $password);
+		if ($error = validatePassword($password)) $this->messages["new"] = $error;
 		
 		// Do both of the passwords entered match?
 		elseif ($_POST["settingsPasswordEmail"]["new"] != $_POST["settingsPasswordEmail"]["confirm"]) $this->messages["confirm"] = "passwordsDontMatch";
 		
 		// Alright, the password stuff is all good. Add the password updating part to the query.
 		else {
-			$updateData["password"] = "'$passwordStuff[0]'";
-			$updateData["salt"] = "'$passwordStuff[1]'";
+			$updateData["password"] = "'$hash'";
+			$updateData["salt"] = "'$newSalt'";
 		}
 		
 		// Show a 'reenter information' message next to the current password field just in case we fail later on.

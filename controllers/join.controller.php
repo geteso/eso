@@ -101,8 +101,9 @@ function init()
 		} elseif ($config["registrationRequireVerification"] == "approval") {
 			$this->eso->message("waitForApproval", false);
 			redirect("");
-		} elseif (empty($config["registrationRequireVerification"])) {
-			$hash = md5($config["salt"] . $_POST["join"]["password"]);
+		} elseif ($config["registrationRequireVerification"] == false) {
+			$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name={$_POST["join"]["name"]}", 0);
+			$hash = md5($salt . $_POST["join"]["password"]);
 			$this->eso->login($_POST["join"]["name"], false, $hash);
 			redirect("");
 		}
@@ -171,6 +172,12 @@ function addMember()
 		$insertData["account"] = "'Member'";
 	}
 
+	// We also need to generate a hash and salt and add them to the query.
+	$salt = generateRandomString(32);
+	$hash = md5($salt . $field["password"])
+	$insertData["password"] = "'$hash'";
+	$insertData["salt"] = "'$salt'";
+
 	// Add a few extra fields to the query.
 	$insertData["color"] = "FLOOR(1 + (RAND() * {$this->eso->skin->numberOfColors}))";
 	$insertData["language"] = "'" . $this->eso->db->escape($config["language"]) . "'";
@@ -191,7 +198,7 @@ function addMember()
 	
 	// Email the member with a verification link so that they can verify their account.
 	if ($config["registrationRequireVerification"] == "email") {
-		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($config["salt"] . $_POST["join"]["password"]));
+		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($salt . $_POST["join"]["password"]));
 	}
 	
 	return true;

@@ -167,7 +167,7 @@ $language = array(
 "New email" => "New email",
 "New password" => "New password",
 "New posts in the past week" => "New posts in the past week",
-"New username",
+"New username" => "New username",
 "Next" => "Next &#155;",
 "No avatar" => "No avatar",
 "No preview" => "No preview",
