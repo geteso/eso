@@ -41,7 +41,7 @@ $defaultConfig = array(
 "plugins" => array("Captcha"), // A list of enabled plugins.  (This is overridden by config/plugins.php.)
 
 // Login and registration settings.
-"badLoginsPerMinute" => "10", // Amount of failed login attempts a user is limited to per minute.
+"loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.
 "registrationOpen" => "true", // Whether or not new accounts can be made on your forum.
 "registrationRequireVerification" => "email", // false | "email" = require email verification | "approval" = require admin approval
 

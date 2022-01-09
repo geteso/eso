@@ -433,6 +433,7 @@ $messages = array(
 "verifyEmail" => array("class" => "success", "message" => "Before you can start using your newly-created account, you'll need to verify your email address. Within the next minute or two you should receive an email from us containing a link to activate your account. <strong>Check your spam folder</strong> if you don't receive this email shortly!"),
 "viewMore" => array("class" => "info", "message" => "Your search found more than {$config["results"]} conversations. <a href='%s' onclick='Search.viewMore();return false'>View more</a>"),
 "waitForApproval" => array("class" => "success", "message" => "Before you can start using your newly-created account, it'll need to be manually approved. Within the next couple of hours or so your account should be able to post."),
+"waitToLogin" => array("class" => "warning", "message" => "Woah, slow down! Looks like you're trying to perform a few too many login attempts. Wait %s seconds and try again."),
 "waitToReply" => array("class" => "warning", "message" => "You must wait at least {$config["timeBetweenPosts"]} seconds between starting or replying to conversations. Take a deep breath and try again."),
 "waitToSearch" => array("class" => "warning", "message" => "Woah, slow down! Looks like you're trying to perform a few too many searches. Wait %s seconds and try again."),
 

@@ -103,6 +103,13 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}searches (
 	searchTime int unsigned NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
+// Create the logins table.
+$queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}logins";
+$queries[] = "CREATE TABLE {$config["tablePrefix"]}logins (
+	ip int unsigned NOT NULL,
+	loginTime int unsigned NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+
 // Create the account for the administrator.
 $salt = generateRandomString(32);
 $color = rand(1, 27);

@@ -174,7 +174,7 @@ function addMember()
 
 	// We also need to generate a hash and salt and add them to the query.
 	$salt = generateRandomString(32);
-	$hash = md5($salt . $field["password"])
+	$hash = md5($salt . $_POST["join"]["password"]);
 	$insertData["password"] = "'$hash'";
 	$insertData["salt"] = "'$salt'";
 

@@ -170,11 +170,49 @@ function login($name = false, $password = false, $hash = false)
 		
 		// Get the user's IP address, and validate it against the cookie IP address if they're logging in via cookie.
 		// Do some back-and-forth conversion so we only use the first three parts of the IP (the last will be 0.)
-		$ip = long2ip(ip2long($_SESSION["ip"]));
+//		$ip = long2ip(ip2long($_SESSION["ip"]));
+		$ip = (int)ip2long($_SESSION["ip"]);
 		$ip = sprintf("%u", ip2long(substr($ip, 0, strrpos($ip, ".")) . ".0"));
 		if (isset($cookie)) $components["where"][] = "cookieIP=" . ($ip ? $ip : "0");
 		
 		$this->callHook("beforeLogin", array(&$components));
+
+		// If we're counting logins per minute, impose some flood control measures.
+		if (!isset($cookie) and $config["loginsPerMinute"] > 0) {
+
+			// If we have a record of their logins in the session, check how many logins they've performed in the last
+			// minute.
+			if (!empty($_SESSION["logins"])) {
+				// Clean anything older than 60 seconds out of the logins array.
+				foreach ($_SESSION["logins"] as $k => $v) {
+					if ($v < time() - 60) unset($_SESSION["logins"][$k]);
+				}
+				// Have they performed >= $config["loginsPerMinute"] logins in the last minute? If so, don't continue.
+				if (count($_SESSION["logins"]) >= $config["loginsPerMinute"]) {
+					$this->eso->message("waitToLogin", true, array(60 - time() + min($_SESSION["logins"])));
+					return;
+				}
+			}
+
+			// However, if we don't have a record in the session, use the MySQL logins table.
+			else {
+				// Get the user's IP address.
+//				$ip = (int)ip2long($_SESSION["ip"]);
+				// Have they performed >= $config["loginsPerMinute"] logins in the last minute?
+				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip=$ip AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
+					$this->eso->message("waitToLogin", true, 60);
+					return;
+				}
+				// Log this attempt in the logins table.
+				$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ($ip, UNIX_TIMESTAMP())");
+				// Proactively clean the logins table of logins older than 60 seconds.
+				$this->eso->db->query("DELETE FROM {$config["tablePrefix"]}logins WHERE loginTime<UNIX_TIMESTAMP()-60");
+			}
+
+			// Log this attempt in the session array.
+			if (!isset($_SESSION["logins"]) or !is_array($_SESSION["logins"])) $_SESSION["logins"] = array();
+			$_SESSION["logins"][] = time();
+		}
 
 		// Run the query and get the data if there is a matching user.
 		$result = $this->db->query($this->db->constructSelectQuery($components));
@@ -202,12 +240,7 @@ function login($name = false, $password = false, $hash = false)
 			regenerateToken();
 			
 			// If the "remember me" box was checked, set a cookie, and set the cookieIP field in the database.
-			// if (@$_POST["login"]["rememberMe"]) {
-			//	$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP=$ip WHERE memberId={$_SESSION["user"]["memberId"]}");
-			//	setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
-			// }
-
-			// Assume that the signing-in user wants to be remembered, set a cookie, and set the cookieIP field in the database.
+//			if (@$_POST["login"]["rememberMe"]) {
 			if (@$_POST["login"]) {
 				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP=$ip WHERE memberId={$_SESSION["user"]["memberId"]}");
 				setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
@@ -224,16 +257,6 @@ function login($name = false, $password = false, $hash = false)
 	
 	// Didn't completely fill out the login form? Return an error.
 	elseif ($name or $password)	$this->message("incorrectLogin", false);
-
-	// If we're counting bad logins per minute and the signing-in user has made too many tries, block their IP address for a few minutes.
-//	if (!isset($cookie) && !empty($config["badLoginsPerMinute"])) {
-//		$login_key = "{$_SERVER['SERVER_NAME']}~login:{$_SERVER['REMOTE_ADDR']}";
-//		$tries = (int)apc_fetch($login_key);
-//		if ($tries >= $config["badLoginsPerMinute"]) {
-//			header("HTTP/1.1 429 Too Many Requests");
-//			$this->message("tooManyLogins", false);
-//		}
-//	}
 		
 	return false;
 }
