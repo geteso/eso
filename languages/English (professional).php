@@ -399,6 +399,7 @@ $messages=array(
 "noPluginsInstalled" => array("class" => "warning","message" => "No plugins are currently installed."),
 "noSearchResults" => array("class" => "warning","message" => "No conversations matching your search were found."),
 "noSkinsInstalled" => array("class" => "warning","message" => "No skins are currently installed."),
+"noUploadingPackages" => array("class" => "warning", "message" => "Uploading plugin and skin packages has been disabled on this forum."),
 "notWritable" => array("class" => "warning","message" => "<code>%s</code> is not writeable. Try <code>chmod</code>ing it to <code>777</code>, or if it doesn't exist, <code>chmod</code> the folder it is contained within."),
 "passwordChanged" => array("class" => "success","message" => "Your password has been changed. You may now log in with your new password."),
 "passwordEmailSent" => array("class" => "success","message" => "You have been sent an email containing a link to reset your password. Please check your spam folder if you don't receive it within the next minute or two."),

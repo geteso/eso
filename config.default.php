@@ -39,6 +39,7 @@ $defaultConfig = array(
 // Skins and plugins.
 "skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)
 "plugins" => array("Captcha"), // A list of enabled plugins.  (This is overridden by config/plugins.php.)
+"uploadPackages" => true, // Whether or not admins can upload plugin and skin packages to your forum.  Don't keep this enabled if you don't trust your admins.
 
 // Login and registration settings.
 "loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.

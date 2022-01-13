@@ -34,7 +34,8 @@ else: ?>
 <?php echo $this->eso->htmlMessage("noSkinsInstalled"); ?>
 <?php endif; ?>
 
-<?php // Add a new skin form. ?>
+<?php // If it's okay to upload skin packages, add a new skin form.
+if (!empty($config["uploadPackages"])): ?>
 <fieldset id='addSkin'>
 <legend><?php echo $language["Add a new skin"]; ?></legend>
 <?php echo $this->eso->htmlMessage("downloadSkins", "https://geteso.org/skins"); ?>
@@ -46,3 +47,8 @@ else: ?>
 </ul>
 </form>
 </fieldset>
+
+<?php // Otherwise if uploading packages is disabled, show a message.
+else: ?>
+<?php echo $this->eso->htmlMessage("noUploadingPackages"); ?>
+<?php endif; ?>

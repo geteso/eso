@@ -5,7 +5,8 @@
 if (!defined("IN_ESO")) exit;
 ?>
 
-<?php // Add a new plugin form. ?>
+<?php // If it's okay to upload plugin packages, add a new plugin form.
+if (!empty($config["uploadPackages"])): ?>
 <fieldset id='addPlugin'>
 <legend><?php echo $language["Add a new plugin"]; ?></legend>
 <?php echo $this->eso->htmlMessage("downloadPlugins", "https://geteso.org/plugins"); ?>
@@ -17,6 +18,11 @@ if (!defined("IN_ESO")) exit;
 </ul>
 </form>
 </fieldset>
+
+<?php // Otherwise if uploading packages is disabled, show a message.
+else: ?>
+<?php echo $this->eso->htmlMessage("noUploadingPackages"); ?>
+<?php endif; ?>
 
 <?php // If there are installed plugins to display.
 if (count($this->plugins)): ?>

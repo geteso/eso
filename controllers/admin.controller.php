@@ -593,7 +593,7 @@ function pluginsInit(&$adminController)
 	$this->subView = "admin/plugins.php";
 	
 	// If the 'add a new plugin' form has been submitted, attempt to install the uploaded plugin.
-	if (isset($_FILES["installPlugin"]) and $this->eso->validateToken(@$_POST["token"])) $this->installPlugin();
+	if (isset($_FILES["installPlugin"]) and $this->eso->validateToken(@$_POST["token"]) and !empty($config["uploadPackages"])) $this->installPlugin();
 	
 	// Get the installed plugins and their details by reading the plugins/ directory.
 	if ($handle = opendir("plugins")) {
@@ -756,7 +756,7 @@ function skinsInit()
 	
 	
 	// If the 'add a new skin' form has been submitted, attempt to install the uploaded skin.
-	if (isset($_FILES["installSkin"]) and $this->eso->validateToken(@$_POST["token"])) $this->installSkin();
+	if (isset($_FILES["installSkin"]) and $this->eso->validateToken(@$_POST["token"]) and !empty($config["uploadPackages"])) $this->installSkin();
 	
 	// Get the installed skins and their details by reading the skins/ directory.
 	if ($handle = opendir("skins")) {
