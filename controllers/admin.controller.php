@@ -12,16 +12,18 @@ var $sections = array();
 
 function init()
 {
+	global $language;
+	
 	// Non-admins aren't allowed here.
 	if (!$this->eso->user["admin"]) redirect("");
 
 	// Add the default sections to the menu.
- 	$this->defaultSections = array("dashboard", "settings", "plugins", "skins");
- 	$this->addSection("dashboard", "Dashboard", array($this, "dashboardInit"), array($this, "dashboardAjax"));
- 	$this->addSection("settings", "Forum settings", array($this, "settingsInit"));
-	$this->addSection("members", "Member-plural", array($this, "membersInit"));
- 	$this->addSection("plugins", "Plugins", array($this, "pluginsInit"));
- 	$this->addSection("skins", "Skins", array($this, "skinsInit"));
+ 	$this->defaultSections = array("dashboard", "settings", "members", "plugins", "skins");
+ 	$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
+ 	$this->addSection("settings", $language["Forum settings"], array($this, "settingsInit"));
+	$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
+ 	$this->addSection("plugins", $language["Plugins"], array($this, "pluginsInit"));
+ 	$this->addSection("skins", $language["Skins"], array($this, "skinsInit"));
 	
 	$this->callHook("init");
 	
