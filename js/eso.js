@@ -1014,8 +1014,9 @@ displayPosts: function(scrollTo) {
 		// Regardless of post 'groups', output this individual post.
 		html.push("<div", (!singlePost ? " id='p" + post.id + "'" : ""), ">",
 			"<div class='hdr'>",
-			"<div class='pInfo'>",
-			"<h3>", makeMemberLink(post.memberId, post.name), "</h3> ",
+			"<div class='pInfo'>");
+		if (side) html.push("<div class='thumb'>", makeMemberLink(post.memberId, "<img src='" + (post.thumb || ("skins/" + eso.skin + "/avatarThumb.svg")) + "' alt=''/>"), "</div>");
+		html.push("<h3>", makeMemberLink(post.memberId, post.name), "</h3> ",
 			"<span title='", post.date, "'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ");
 		if (post.editTime) html.push("<span>", makeEditedBy(post.editMember, relativeTime(post.editTime)), "</span> ");
 		// Output the member's account.

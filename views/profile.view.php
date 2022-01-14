@@ -13,6 +13,7 @@ if(!defined("IN_ESO"))exit;
 <div>
 <div class='hdr'>
 <div class='pInfo'>
+<div class='thumb'><a href='<?php echo makeLink("profile",$this->member["memberId"]);?>'><img src='<?php echo $this->eso->getAvatar($this->member["memberId"],$this->member["avatarFormat"],"thumb");?>' alt=''/></a></div>
 <h3><?php echo $this->member["name"];?></h3>
 <?php if(!empty($this->eso->canChangeGroup($this->member["memberId"], $this->member["account"]))):?><form action='<?php echo curLink();?>' method='post'><div style='display:inline'><select onchange='Conversation.changeMemberGroup(<?php echo $this->member["memberId"];?>,this.value)' name='group'>
 	<?php foreach($this->eso->canChangeGroup($this->member["memberId"], $this->member["account"]) as $group):?><option value='<?php echo $group;?>'<?php if($group==$this->member["account"])echo " selected='selected'";?>><?php echo $language[$group];?></option><?php endforeach;?></select></div> <noscript><div style='display:inline'><input name='saveGroup' type='submit' value='Save' class='save'/><input type='hidden' name='member' value='<?php echo $this->member["memberId"];?>'/></div></noscript></form>

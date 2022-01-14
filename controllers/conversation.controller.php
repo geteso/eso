@@ -731,6 +731,7 @@ function getPosts($criteria = array(), $display = false)
 			"accounts" => $this->eso->canChangeGroup($post["memberId"], $post["account"]),
 			"body" => $display ? $this->displayPost($post["content"]) : $post["content"],
 			"avatar" => $this->eso->getAvatar($post["memberId"], $post["avatarFormat"]),
+			"thumb" => $this->eso->getAvatar($post["memberId"], $post["avatarFormat"], "thumb"),
 			"editMember" => $post["editMember"],
 			"lastAction" => strip_tags($post["lastAction"])
 		// Extra information if the post *has* been deleted.
