@@ -34,12 +34,6 @@ if(!defined("IN_ESO"))exit;
 <meta name='title' content='<?php echo ($this->controller->title?$this->controller->title." - ":"").$config["forumTitle"];?>'>
 <link rel='preload' href='<?php echo $config["baseURL"] . $this->skin->getForumLogo();?>' as='image'>
 
-<!-- Apple -->
-<meta name='apple-mobile-web-app-capable' content='yes'>
-<meta name='apple-mobile-web-app-title' content='<?php echo $config["forumTitle"];?>'>
-<meta name='apple-mobile-web-app-status-bar-style' content='default'>
-<link rel='apple-touch-icon' href='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
-
 <!-- Open Graph -->
 <meta property='og:site_name' content='<?php echo $config["forumTitle"];?>'>
 <?php if (!empty($this->controller->title)): ?>
@@ -53,13 +47,28 @@ if(!defined("IN_ESO"))exit;
 <!-- og:description added to head @ conversation.controller, search.controller -->
 
 <!-- Twitter -->
-<meta name='twitter:title' content="<?php echo ($this->controller->title ? $this->controller->title . " - " : "").$config["forumTitle"];?>">
+<meta name='twitter:title' content='<?php echo ($this->controller->title?$this->controller->title." - ":"").$config["forumTitle"];?>'>
 <meta name='twitter:card' content='summary'>
 <meta name='twitter:image' content='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
 <!-- twitter:description added to head @ conversation.controller, search.controller -->
 
-<!-- Web app manifest -->
-<link rel="manifest" href="site.webmanifest">
+<!-- Progressive web app -->
+<link rel='manifest' href='site.webmanifest'>
+<meta name='format-detection' content='telephone=no'>
+<meta name='apple-mobile-web-app-title' content='<?php echo $config["forumTitle"];?>'>
+<?php if (!empty($config["manifestDisplay"]) and $config["manifestDisplay"] != "browser"): ?>
+<meta name='mobile-web-app-capable' content='yes'>
+<meta name='apple-mobile-web-app-capable' content='yes'>
+<?php endif; ?>
+
+<!-- Icons! -->
+<link rel='icon' type='image/png' href='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
+<link rel='apple-touch-icon' href='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
+<meta name='msapplication-TileImage' content='<?php echo $config["baseURL"] . $this->skin->getForumIcon();?>'>
+<?php if (!empty($config["themeColor"])): ?>
+<meta name='theme-color' content='#<?php echo $config["themeColor"];?>'>
+<meta name='msapplication-TileColor' content='#<?php echo $config["themeColor"];?>'>
+<?php endif; ?>
 
 <?php echo $this->head();?> 
 </head>

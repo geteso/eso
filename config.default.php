@@ -49,8 +49,8 @@ $defaultConfig = array(
 "forumIcon" => false, // Same thing as before, but for the icon.
 "sitemapCacheTime" => 3600, // Amount of time by which sitemaps are kept in cache.  (3600 seconds = 1 hour.)
 "manifestCacheTime" => 3600, // Same thing as before, but for the web app manifest.
-"manifestDisplay" => "standalone", // The preferred way to display your forum as a web app.  Standalone to behave like an app.
-// see https://www.w3.org/TR/appmanifest/#dfn-display-modes-values for details
+"manifestDisplay" => "browser", // The preferred way to display your forum in or outside of a browser.  Fullscreen, standalone, minimal-ui, or browser.
+// see https://www.w3.org/TR/mediaqueries-5/#display-mode for an explanation
 "verboseFatalErrors" => false, // Dumps SQL information in fatal errors.  Don't keep this enabled for production.
 "basePath" => "", // The base path to use when including or writing to any files.
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
@@ -60,6 +60,8 @@ $defaultConfig = array(
 "skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)
 "plugins" => array("Captcha"), // A list of enabled plugins.  (This is overridden by config/plugins.php.)
 "uploadPackages" => true, // Whether or not admins can upload plugin and skin packages to your forum.  Don't keep this enabled if you don't trust your admins.
+"themeColor" => false, // The suggested hex color that may accent the UI of a browser viewing your forum.  (ex. 4285f4)
+// see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color for details
 
 // Login and registration settings.
 "loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.
