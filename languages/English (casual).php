@@ -54,6 +54,7 @@ $language = array(
 "Add skin" => "Add skin",
 "Administrator" => "Administrator",
 "Administrator-plural" => "Administrators",
+"Allow registration" => "Allow registration",
 "Appearance settings" => "Appearance settings",
 "Are you human" => "Are you human?",
 "author" => "by %s",
@@ -222,8 +223,10 @@ $language = array(
 
 "Recent posts" => "Recent posts",
 "Recover password" => "Get me a new password!",
+"Registration settings" => "Registration settings",
 "Remember me" => "Remember me",
 "restore" => "restore",
+"Require verification" => "Require verification",
 "RSS" => "RSS",
 
 "Sample captcha image" => "Sample captcha image",
