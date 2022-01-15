@@ -1,8 +1,29 @@
 <?php
-// ajax.php
-// Fires events required for pages to load and display.
-
+/**
+ * This file is part of the eso project, a derivative of esoTalk.
+ * It has been modified by several contributors.  (contact@geteso.org)
+ * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 define("IN_ESO", 1);
+
+/**
+ * Ajax page: fires events required for an ajax page to load and display.
+ * Initializes controllers and plugins, works out what to display, and
+ * displays it.
+ */
 define("AJAX_REQUEST", 1);
 
 // Basic page initialization.
