@@ -52,7 +52,7 @@ function init()
 	$this->conversation["membersAllowed"] =& $this->getMembersAllowed();
 
 	// Add essential variables and language definitions to be accessible through JavaScript. 
-	$this->eso->addLanguageToJS("Starred", "Unstarred", "Lock", "Unlock", "Sticky", "Unsticky", "Moderator", "Moderator-plural", "Administrator", "Administrator-plural", "Member", "Member-plural", "Suspended", "confirmLeave", "confirmDiscard", "confirmDeleteConversation", "Never", "Just now", "year ago", "years ago", "month ago", "months ago", "week ago", "weeks ago", "day ago", "days ago", "hour ago", "hours ago", "minute ago", "minutes ago", "second ago", "seconds ago");
+	$this->eso->addLanguageToJS("Starred", "Unstarred", "Lock", "Unlock", "Sticky", "Unsticky", "Moderator", "Moderator-plural", "Administrator", "Administrator-plural", "Member", "Member-plural", "Suspended", "Unvalidated", "confirmLeave", "confirmDiscard", "confirmDeleteConversation", "Never", "Just now", "year ago", "years ago", "month ago", "months ago", "week ago", "weeks ago", "day ago", "days ago", "hour ago", "hours ago", "minute ago", "minutes ago", "second ago", "seconds ago");
 	$this->eso->addVarToJS("postsPerPage", $config["postsPerPage"]);
 	$this->eso->addVarToJS("autoReloadIntervalStart", $config["autoReloadIntervalStart"]);
 	$this->eso->addVarToJS("autoReloadIntervalMultiplier", $config["autoReloadIntervalMultiplier"]);	
