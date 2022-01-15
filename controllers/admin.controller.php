@@ -577,7 +577,7 @@ function membersInit(&$adminController)
 {
 	global $language, $config;
 	$this->subView = "admin/members.php";
-	$this->languages = $this->eso->getLanguages();
+	$this->registrationSettings = array("email", "approval", "false");
 
 	// Save the settings?
 	if (isset($_POST["saveSettings"])
@@ -592,9 +592,8 @@ function membersInit(&$adminController)
 function saveMembersSettings()
 {
 	$newConfig = array();
-	$registrationSettings = array("email", "approval", "false");
 	
-	if (in_array(@$_POST["requireVerification"], $registrationSettings)) $newConfig["registrationRequireVerification"] = $_POST["requireVerification"];
+	if (in_array(@$_POST["requireVerification"], $this->registrationSettings)) $newConfig["registrationRequireVerification"] = $_POST["requireVerification"];
 	
 	$newConfig["registrationOpen"] = (bool)!empty($_POST["registrationOpen"]);
 	
