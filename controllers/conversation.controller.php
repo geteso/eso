@@ -60,7 +60,7 @@ function init()
 	$this->eso->addVarToJS("time", time());
 	
 	// Work out the title of the page.
-	$this->title = $this->conversation["id"] ? sanitizeHTML($this->conversation["title"]) : $language["Start a conversation"];
+	$this->title = $this->conversation["id"] ? $this->conversation["title"] : $language["Start a conversation"];
 
 	// If the user is attempting to start a conversation but they don't have permission, discontinue.
 	// (The view will show an error.)
