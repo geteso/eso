@@ -54,6 +54,7 @@ $defaultConfig = array(
 "verboseFatalErrors" => false, // Dumps SQL information in fatal errors.  Don't keep this enabled for production.
 "basePath" => "", // The base path to use when including or writing to any files.
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
+"https" => false, // Whether or not to force HTTPS.
 "showForumDescription" => true, // Whether or not to display the forum description on the homepage.
 
 // Skins and plugins.

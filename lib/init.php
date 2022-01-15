@@ -85,6 +85,12 @@ if (get_magic_quotes_gpc()) {
 	$_COOKIE = array_map("undoMagicQuotes", $_COOKIE);
 }
 
+// Do we want to force HTTPS?
+if (!empty($config["https"]) and $_SERVER["HTTPS"] != "on") {
+    header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
+    exit;
+}
+
 // Replace GET values with ones from the request URI.  (ex. index.php/test/123 -> ?q1=test&q2=123)
 if (!empty($config["useFriendlyURLs"]) and isset($_SERVER["REQUEST_URI"])) {
 	$parts = processRequestURI($_SERVER["REQUEST_URI"]);
