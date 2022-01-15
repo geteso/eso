@@ -187,6 +187,7 @@ $language = array(
 "posts" => "posts",
 "Posts" => "Posts",
 "posts per day" => "that's about %s posts per day",
+"Powered by" => "Powered by",
 "profile" => "%s's profile",
 
 "quote" => "quote",

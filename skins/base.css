@@ -179,10 +179,10 @@ hr {display:none}
 .p .hdr select, .p .hdr input.save {background:none; display:inline; padding-top:1px; margin:-1px 0 -2px 0}
 .p .hdr input.save {padding:0 2px}
 .p .hdr .thumb {margin:0 8px 0 0; display:inline-block}
-.p .hdr .thumb img {width:30px; height:30px; margin:-10px 0 -10px 0; object-fit:cover; vertical-align:middle; image-rendering:auto}
+.p .hdr .thumb img {width:30px; height:30px; margin:-10px 0 -10px 0; object-fit:cover; display:block; image-rendering:auto}
 .p .hdr .pInfo {float:left}
 .p .hdr .pInfo .thumb {margin:0 8px 0 -10px; display:none}
-.p .hdr .pInfo .thumb img {height:24px; margin:-14px 0 -10px 0}
+.p .hdr .pInfo .thumb img {border-top-color:transparent; border-top-style:solid; border-top-width:3px; border-bottom-color:transparent; border-bottom-style:solid; border-bottom-width:3px; box-sizing:border-box}
 .p .hdr .controls {float:right; padding-top:1px}
 .p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; width:3.5em; text-align:center; display:inline-block}
 .p .hdr .controls span {font-size:100%}
@@ -363,7 +363,6 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 #accountInformation input {max-width:20em; width:96%}
 #settingsOther {padding:0 15px 12px}
 td.author, td.lastPost {max-width:95px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-ul.form.stats {word-break:break-word; -ms-word-break:break-word}
 #cInfo #saveTitleTags {display:none!important}
 #beenLoggedOutShadow {width:100%!important; height:100%!important}
 
@@ -559,10 +558,6 @@ label#lbl-fgcf {width:12em; display:none}
   
 @media only screen and (max-width:340px) {
 #discardDraft {clear:left; margin:5px 0 0 0}
-}
-
-@media only screen and (max-width:330px) {
-tbody#conversations td strong {word-break:break-all}
 }
 
 @media only screen and (max-width:320px) {

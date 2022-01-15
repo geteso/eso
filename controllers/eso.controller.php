@@ -111,6 +111,10 @@ function init()
  				$this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
 		
+		// The following text constitutes a copyright notification.
+		$this->eso->addToFooter("<p id='copyright'>Powered by <a href='https://geteso.org'>eso</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --></p>");
+		// End copyright notification.
+
 		// Set up some default JavaScript files and language definitions.
 		$this->addScript("js/eso.js", -1);
 		$this->addLanguageToJS("ajaxRequestPending", "ajaxDisconnected");

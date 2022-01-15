@@ -97,11 +97,7 @@ if(!defined("IN_ESO"))exit;
 ksort($this->footer);
 foreach ($this->footer as $v) echo "<li>$v</li>";
 ?></ul><?php endif; ?>
-<p id='copyright'>
-<!-- The following text constitutes a copyright notification. -->
-Powered by <a href='https://geteso.org'>eso</a> <?php if ($this->user["admin"]) echo ESO_VERSION; ?>
-<!-- End copyright notification. -->
-</p>
+
 </div>
 
 </div>
