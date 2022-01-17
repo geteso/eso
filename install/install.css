@@ -4,7 +4,7 @@ body, input, select, textarea, table {font-family:arial, helvetica, sans-serif; 
 input, select, textarea {font-size:100%}
 #container {margin:50px auto; width:55em; background:#f5f5ff; padding:20px; font-size:120%; line-height:1.4}
 h1 {margin:0 0 20px; font-size:150%; font-weight:normal; color:#32517e}
-h1 img {vertical-align:middle; margin-right:15px}
+h1 img {vertical-align:middle; height:36px; margin-right:15px}
 a {text-decoration:none; color:#00f}
 a:hover {text-decoration:underline; color:#000}
 hr {color:#bbf; border:solid #bbf; border-width:1px 0 0; height:1px; margin:15px 0}

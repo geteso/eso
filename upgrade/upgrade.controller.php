@@ -169,9 +169,10 @@ function upgrade_100p2()
 	global $config;
 
 	// Add the salt column to the members table and populate it with the configured salt.
-	if (!$this->numRows("SHOW COLUMNS FROM {$config["tablePrefix"]}members LIKE 'salt'"))
+	if (!$this->numRows("SHOW COLUMNS FROM {$config["tablePrefix"]}members LIKE 'salt'")) {
 		$this->query("ALTER TABLE {$config["tablePrefix"]}members ADD COLUMN salt char(64) NOT NULL AFTER password");
 		$this->query("UPDATE {$config["tablePrefix"]}members SET salt='{$config["salt"]}'");
+	}
 
 	// Add a constraint to salt in the members table.
 	if (!$this->numRows("SHOW INDEX FROM {$config["tablePrefix"]}members WHERE Key_name='members_salt'"))

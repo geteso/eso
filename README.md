@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://grntbg.github.io/esodev/img/logo.svg" alt="eso" width="150"/><br>
+<img src="https://try.geteso.org/assets/img/logo.svg" alt="eso" width="150"/><br>
 
 **Forum software that's lightweight and extensible.**
 

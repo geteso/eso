@@ -17,6 +17,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+/**
+ * Members view: displays registration settings and a list of unvalidated
+ * members for admins to bring them in.
+ */
 if (!defined("IN_ESO")) exit;
 ?>
 
