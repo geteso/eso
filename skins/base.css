@@ -19,7 +19,7 @@ a, .link, .p .hdr a.link {color:#00f}
 small, dt {font-size:90%}
 #loading {font-size:120%; padding:5px 15px; position:fixed; right:25px; top:0; z-index:10000}
 .strike {text-decoration:line-through}
-img.avatar, div.avatar img {width:105px; height:105px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
+img.avatar, div.avatar img {width:105px; max-height:151px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
 .disabled {cursor:default}
 h2 {font-size:160%; font-weight:normal}
 h3 {font-size:120%; font-weight:bold}
@@ -183,7 +183,7 @@ hr {display:none}
 .p .hdr .thumb img {width:30px; height:30px; margin:-10px 0 -10px 0; object-fit:cover; display:block; image-rendering:auto}
 .p .hdr .pInfo {float:left}
 .p .hdr .pInfo .thumb {margin:0 8px 0 -10px; display:none}
-.p .hdr .pInfo .thumb img {border-top-color:transparent; border-top-style:solid; border-top-width:3px; border-bottom-color:transparent; border-bottom-style:solid; border-bottom-width:3px; box-sizing:border-box}
+.p .hdr .pInfo .thumb img {border-top-color:transparent; border-top-style:solid; border-top-width:3px; box-sizing:border-box}
 .p .hdr .controls {float:right; padding-top:1px}
 .p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; width:3.5em; text-align:center; display:inline-block}
 .p .hdr .controls span {font-size:100%}
@@ -203,6 +203,7 @@ hr {display:none}
 #cPosts p {word-wrap:break-word; text-align:justify}
 #cPosts p:empty {display:none}
 .deleted .hdr {margin:0}
+.deleted .controls span, .deleted .controls span:nth-child(n+2) > a {margin-left:0}
 
 /* Reply to a conversation */
 .p .edit {padding:5px 10px 10px 10px}
@@ -501,17 +502,16 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 
 /* Formatting controls */
 #sconvo .hdr {min-height:16px}
-.p .hdr .controls {float:none; clear:left; overflow:overlay; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
-#cPosts .p .hdr .controls a:first-child {margin-left:10px}
+#cPosts .p .hdr .controls {float:none; clear:left; overflow:overlay; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
+#cPosts .p .hdr .controls a:first-child:not(.deleted .controls span a), #cPosts .deleted .hdr .controls span:first-child {margin-left:10px}
 #cPosts .p .hdr .controls .formattingButtons {margin-left:10px; margin-right:10px}
 #cPosts .p .hdr .controls .formattingButtons a:first-child {margin-left:0}
-#reply .controls {clear:none; margin:-1px 0 -3px 0; padding:0; background:inherit; box-shadow:none}
+#reply .controls {float:none; clear:none; overflow:overlay; margin:-1px 0 -3px 0; padding:0; background:inherit; box-shadow:none}
 .p .hdr .controls:blank {display:none}
 .p .hdr .controls:empty {display:none}
 #reply .formattingButtons {margin:0}
 .formattingCheckbox {clear:left; float:left; width:-webkit-fill-available; margin-top:3px; margin-bottom:3px; padding-top:3px}
 #cPosts .p .hdr .controls .formattingCheckbox {padding-left:10px}
-.p.deleted .controls span a {margin-left:3px}
 .p.deleted .body {margin-top:5px}
 }
 
