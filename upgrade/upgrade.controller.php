@@ -67,6 +67,7 @@ function init()
 
 	// 1.0.0 pre 1 -> 1.0.0 pre 2
 	if ($versions["eso"] == "beta-1.0") {
+		$this->upgrade_100p2();
 		$versions["eso"] = "1.0.0-p.2";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
@@ -160,6 +161,36 @@ function warning($msg)
 {
 	if (!isset($_SESSION["warnings"]) or !is_array($_SESSION["warnings"])) $_SESSION["warnings"] = array();
 	$_SESSION["warnings"][] = $msg;	
+}
+
+// 1.0.0 pre 1 -> 1.0.0 pre 2
+function upgrade_100p2()
+{
+	global $config;
+
+	// Add the salt column to the members table and populate it with the configured salt.
+	if (!$this->numRows("SHOW COLUMNS FROM {$config["tablePrefix"]}members LIKE 'salt'"))
+		$this->query("ALTER TABLE {$config["tablePrefix"]}members ADD COLUMN salt char(64) NOT NULL AFTER password");
+		$this->query("UPDATE {$config["tablePrefix"]}members SET salt='{$config["salt"]}'");
+
+	// Add a constraint to salt in the members table.
+	if (!$this->numRows("SHOW INDEX FROM {$config["tablePrefix"]}members WHERE Key_name='members_salt'"))
+		$this->query("CREATE INDEX members_salt ON {$config["tablePrefix"]}members (salt)");
+
+	// Create the logins table, used for search flood control.
+	if (!$this->numRows("SHOW TABLES LIKE '{$config["tablePrefix"]}logins'"))
+		$this->query("CREATE TABLE {$config["tablePrefix"]}logins (
+			ip int unsigned NOT NULL,
+			loginTime int unsigned NOT NULL
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+	
+	// Convert a few tables to InnoDB.
+	$this->query("ALTER TABLE {$config["tablePrefix"]}status ENGINE=InnoDB");
+	$this->query("ALTER TABLE {$config["tablePrefix"]}members ENGINE=InnoDB");
+	$this->query("ALTER TABLE {$config["tablePrefix"]}tags ENGINE=InnoDB");
+
+	$file = "service-worker.js";
+	if (file_exists("../$file")) @unlink("../$file") or $this->warning("Your forum could not delete <code>/$file</code>. Please delete it manually.");
 }
 
 // 1.0.0 beta 2 -> 1.0.0 beta 3
