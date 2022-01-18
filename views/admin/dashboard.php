@@ -48,7 +48,7 @@ Ajax.request({
 
 <?php foreach ($this->stats as $k => $v): ?>
 <li><label><?php echo $language[$k]; ?></label>
-<div><?php echo $v; ?></div></li>
+<div><?php echo number_format($v); ?></div></li>
 <?php endforeach; ?>
 
 <?php $this->callHook("forumStatistics"); ?>

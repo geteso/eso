@@ -65,10 +65,10 @@ function init()
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 
-	// 1.0.0 pre 1 -> 1.0.0 pre 2
+	// 1.0.0 pre 1 -> 1.0.0 delta 1
 	if ($versions["eso"] == "beta-1.0") {
-		$this->upgrade_100p2();
-		$versions["eso"] = "1.0.0-p.2";
+		$this->upgrade_100d1();
+		$versions["eso"] = "1.0.0d1";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 	
@@ -163,8 +163,8 @@ function warning($msg)
 	$_SESSION["warnings"][] = $msg;	
 }
 
-// 1.0.0 pre 1 -> 1.0.0 pre 2
-function upgrade_100p2()
+// 1.0.0 pre 1 -> 1.0.0 delta 1
+function upgrade_100d1()
 {
 	global $config;
 
