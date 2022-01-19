@@ -580,7 +580,7 @@ function membersInit(&$adminController)
 	$this->registrationSettings = array("email", "approval", "false");
 
 	// Save the settings?
-	if (isset($_POST["saveSettings"])
+	if (isset($_POST["saveMembersSettings"])
 	 	and $this->eso->validateToken(@$_POST["token"])
 		and $this->saveMembersSettings()) {
 			$this->eso->message("changesSaved");
