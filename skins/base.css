@@ -541,6 +541,7 @@ label#lbl-fgcf {width:12em; display:none}
 #addPlugin ul.form li:first-child label, #addSkin ul.form li:first-child label {text-align:left}
 #addPlugin ul.form li:first-child input, #addSkin ul.form li:first-child input {clear:left}
 #addPlugin ul.form li:last-child label, #addSkin ul.form li:last-child label {display:none}
+#addPlugin .warning, #addSkin .warning {margin:0}
 }
 
 @media only screen and (max-width:420px) {

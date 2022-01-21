@@ -372,8 +372,8 @@ function checkForUpdates()
 	// Write this as the latest update check time, so that another update check will not be performed for 24 hours.
 	writeConfigFile("config/lastUpdateCheck.php", '$lastUpdateCheck', time());
 	
-	// Get the latest version from geteso.org.
-	if (($handle = @fopen("https://geteso.org/latestVersion.txt", "r")) === false) return;
+	// Get the latest version from try.geteso.org.
+	if (($handle = @fopen("https://try.geteso.org/latestVersion.txt", "r")) === false) return;
 	$latestVersion = fread($handle, 8192);
 	fclose($handle);
 	

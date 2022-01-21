@@ -57,7 +57,7 @@ else: ?>
 if (!empty($config["uploadPackages"])): ?>
 <fieldset id='addSkin'>
 <legend><?php echo $language["Add a new skin"]; ?></legend>
-<?php echo $this->eso->htmlMessage("downloadSkins", "https://geteso.org/skins"); ?>
+<?php echo $this->eso->htmlMessage("downloadSkins", "https://try.geteso.org/skins"); ?>
 <form action='<?php echo makeLink("admin", "skins"); ?>' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
 <ul class='form'>
@@ -69,5 +69,8 @@ if (!empty($config["uploadPackages"])): ?>
 
 <?php // Otherwise if uploading packages is disabled, show a message.
 else: ?>
+<fieldset id='addSkin'>
+<legend><?php echo $language["Add a new skin"]; ?></legend>
 <?php echo $this->eso->htmlMessage("noUploadingPackages"); ?>
+</fieldset>
 <?php endif; ?>

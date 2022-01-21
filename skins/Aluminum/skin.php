@@ -26,8 +26,8 @@ if (!defined("IN_ESO")) exit;
 class Aluminum extends Skin {
 
 var $name = "Aluminum";
-var $version = "1.3";
-var $author = "eso";
+var $version = "2.0";
+var $author = "The eso team";
 var $numberOfColors = 27;
 
 // Add stylesheets and a favicon to the page header.

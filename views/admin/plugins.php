@@ -28,7 +28,7 @@ if (!defined("IN_ESO")) exit;
 if (!empty($config["uploadPackages"])): ?>
 <fieldset id='addPlugin'>
 <legend><?php echo $language["Add a new plugin"]; ?></legend>
-<?php echo $this->eso->htmlMessage("downloadPlugins", "https://geteso.org/plugins"); ?>
+<?php echo $this->eso->htmlMessage("downloadPlugins", "https://try.geteso.org/plugins"); ?>
 <form action='<?php echo makeLink("admin", "plugins"); ?>' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
 <ul class='form'>
@@ -112,5 +112,8 @@ endif; ?>
 
 <?php // Otherwise if there are no plugins installed, show a message.
 else: ?>
+<fieldset id='addPlugin'>
+<legend><?php echo $language["Add a new plugin"]; ?></legend>
 <?php echo $this->eso->htmlMessage("noPluginsInstalled"); ?>
+</fieldset>
 <?php endif; ?>
