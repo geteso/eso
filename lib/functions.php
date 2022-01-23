@@ -297,7 +297,7 @@ function validateName(&$name)
 
 	// Make sure the name is not too small or large.
 	$length = mb_strlen($name, "UTF-8");
-	if ($length < 3 or $length > 20) return "invalidUsername";
+	if ($length < 3 or $length > 20) return "nameEmpty";
 
 	// It can't be empty either!
 	if (!strlen($name)) return "nameEmpty";
