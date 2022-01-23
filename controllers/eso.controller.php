@@ -622,8 +622,8 @@ function getAvatar($memberId, $avatarFormat, $type = false)
 	if (!$avatarFormat) {
 		global $config;
 		switch ($type) {
-			case "l": return "skins/{$config["skin"]}/avatarDefault.svg";
-			case "r": return "skins/{$config["skin"]}/avatarDefault.svg";
+			case "l": return "skins/{$config["skin"]}/avatarLeft.svg";
+			case "r": return "skins/{$config["skin"]}/avatarRight.svg";
 			case "thumb": return "skins/{$config["skin"]}/avatarThumb.svg";
 		}
 	}
