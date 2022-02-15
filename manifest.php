@@ -26,12 +26,16 @@ define("IN_ESO", 1);
 // Include our config files.
 require "config.default.php";
 @include "config/config.php";
+@include "config/skin.php";
 if (!isset($config)) exit;
 // Combine config.default.php and config/config.php into $config.  The latter will override the former.
 $config = array_merge($defaultConfig, $config);
 
 require "lib/functions.php";
 require "lib/classes.php";
+
+if (!$config["forumIcon"]) $icon = "skins/{$config["skin"]}/icon.png";
+else $icon = "{$config["forumIcon"]}";
 
 // If site.webmanifest is recent then we'll just use the cached version.
 // Otherwise, we'll regenerate the manifest.
@@ -42,7 +46,7 @@ if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() -
 		\"description\": \"{$config["forumDescription"]}\",
 		\"icons\": [
 		{
-				\"src\": \"{$config["baseURL"]} . {$this->eso->skin->getForumIcon()}\",
+				\"src\": \"{$config["baseURL"]}" . $icon . "\",
 				\"sizes\": \"256x256\"
 		}
 		],
