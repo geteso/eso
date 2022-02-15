@@ -40,7 +40,10 @@ if (!empty($config["uploadPackages"])): ?>
 
 <?php // Otherwise if uploading packages is disabled, show a message.
 else: ?>
+<fieldset id='addPlugin'>
+<legend><?php echo $language["Add a new plugin"]; ?></legend>
 <?php echo $this->eso->htmlMessage("noUploadingPackages"); ?>
+</fieldset>
 <?php endif; ?>
 
 <?php // If there are installed plugins to display.

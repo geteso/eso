@@ -32,7 +32,7 @@ h3 {font-size:120%; font-weight:bold}
 #hdr h1 img, #forumTitle {vertical-align:middle}
 #stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
 .small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
-.small #hdr h1 img {height:30px}
+.small #hdr h1 img {height:32px}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
 
 /* Forum description */
@@ -278,7 +278,7 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
 #admin input.checkbox {margin:3px 5px 5px 0}
 #admin .clear {display:none}
-.form.logoForm img {padding:5px}
+.form.logoForm img {height:32px; padding:5px}
 .form.iconForm img {width:128px; height:128px}
 .form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
 
@@ -295,6 +295,7 @@ form#settingsAvatar {padding-bottom:8px}
 #plugins li form label {margin-bottom:10px; width:25em}
 #plugins li input.checkbox {margin:2px 7px 2px 0}
 #plugins li li {border:0; padding:0}
+#addPlugin .warning {margin:0}
 
 /* Skins */
 #skins ul {list-style:none; margin:0; padding:0}
@@ -305,6 +306,7 @@ form#settingsAvatar {padding-bottom:8px}
 #skins small {margin-left:10px}
 #skins .preview {display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center; width:275px}
 #skins .preview span {display:block; margin-top:65px}
+#addSkin .warning {margin:0}
 
 /* Profile */
 .profile .body {overflow:visible; padding:5px 10px}

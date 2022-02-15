@@ -131,7 +131,7 @@ function init()
 		}
 		
 		// The following text constitutes a copyright notification.
-		$this->eso->addToFooter("<p id='copyright'>{$language["Powered by"]} <a href='https://geteso.org'>eso</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --></p>");
+		$this->addToFooter("<p id='copyright'>{$language["Powered by"]} <a href='https://geteso.org'>eso</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --></p>", 1000);
 		// End copyright notification.
 
 		// Set up some default JavaScript files and language definitions.
