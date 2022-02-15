@@ -26,6 +26,7 @@ define("IN_ESO", 1);
 // Include our config files.
 require "config.default.php";
 @include "config/config.php";
+@include "config/skin.php";
 if (!isset($config)) exit;
 // Combine config.default.php and config/config.php into $config.  The latter will override the former.
 $config = array_merge($defaultConfig, $config);
