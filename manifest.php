@@ -33,6 +33,9 @@ $config = array_merge($defaultConfig, $config);
 require "lib/functions.php";
 require "lib/classes.php";
 
+if (!$config["forumIcon"]) $icon = "skins/{$config["skin"]}/icon.png";
+else $icon = "{$config["forumIcon"]}";
+
 // If site.webmanifest is recent then we'll just use the cached version.
 // Otherwise, we'll regenerate the manifest.
 if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() - $config["manifestCacheTime"] - 200) {
@@ -42,7 +45,7 @@ if (!file_exists("site.webmanifest") or filemtime("site.webmanifest") < time() -
 		\"description\": \"{$config["forumDescription"]}\",
 		\"icons\": [
 		{
-				\"src\": \"{$config["baseURL"]} . {$this->eso->skin->getForumIcon()}\",
+				\"src\": \"{$config["baseURL"]}" . $icon . "\",
 				\"sizes\": \"256x256\"
 		}
 		],
