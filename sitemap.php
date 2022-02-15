@@ -45,9 +45,7 @@ if (!file_exists("sitemap.xml") or filemtime("sitemap.xml") < time() - $config["
 	set_time_limit(0);
 
 	// Connect to the database.
-	require "lib/database.php";
-	$db = new Database();
-	if (!$db->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"])) exit;
+	$db = (@mysql_connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"]) and @mysql_select_db($config["mysqlDB"]));
 	
 	// Does sitemap.general.xml exist?  If not, create it.
 	if (!file_exists("sitemap.general.xml")) {
