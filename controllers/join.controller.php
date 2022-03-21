@@ -28,9 +28,6 @@ class join extends Controller {
 
 var $view = "join.view.php";
 
-// Reserved user names which cannot be used.
-var $reservedNames = array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself");
-
 // Initialize: define the form contents, and check to see if form data was submitted.
 function init()
 {

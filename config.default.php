@@ -25,7 +25,7 @@ if (!defined("IN_ESO")) exit;
  */
 
 // The version of the code.
-define("ESO_VERSION", "1.0.0d1");
+define("ESO_VERSION", "1.0.0d2");
 
 $defaultConfig = array(
 // This following block is filled out by the installer in config/config.php.
@@ -39,7 +39,6 @@ $defaultConfig = array(
 "language" => "English (casual)",
 "baseURL" => "",
 "rootAdmin" => 1,
-"salt" => "",
 "emailFrom" => "",
 "cookieName" => "",
 
@@ -47,6 +46,7 @@ $defaultConfig = array(
 // Be careful when editing this.  You could break your forum.
 "forumLogo" => false, // Path to an image file to replace the logo.  False for skin default.
 "forumIcon" => false, // Same thing as before, but for the icon.
+"sendEmail" => true, // Whether or not to send emails using the PHP mail() function.
 "sitemapCacheTime" => 3600, // Amount of time by which sitemaps are kept in cache.  (3600 seconds = 1 hour.)
 "manifestCacheTime" => 3600, // Same thing as before, but for the web app manifest.
 "manifestDisplay" => "browser", // The preferred way to display your forum in or outside of a browser.  Fullscreen, standalone, minimal-ui, or browser.
@@ -62,12 +62,15 @@ $defaultConfig = array(
 "plugins" => array("Captcha"), // A list of enabled plugins.  (This is overridden by config/plugins.php.)
 "uploadPackages" => true, // Whether or not admins can upload plugin and skin packages to your forum.  Don't keep this enabled if you don't trust your admins.
 "themeColor" => false, // The suggested hex color that may accent the UI of a browser viewing your forum.  (ex. 4285f4)
-// see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color for details
+// see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color for an explanation
 
 // Login and registration settings.
 "loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.
 "registrationOpen" => "true", // Whether or not new accounts can be made on your forum.
-"registrationRequireVerification" => "email", // false | "email" = require email verification | "approval" = require admin approval
+"registrationRequireEmail" => true, // Requires email verification to register on your forum.
+"registrationRequireApproval" => false, // Requires manual approval...
+// "registrationRequireVerification" => "email", // false | "email" = require email verification | "approval" = require admin approval
+"reservedNames" => array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself"), // Reserved user names which cannot be used.
 
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
 "usePrettyURLs" => false, // ex. example.com/conversation/1-welcome-to-simon-s-test-forum

@@ -290,7 +290,7 @@ function validateEmail(&$email)
 function validateName(&$name)
 {
 	global $eso, $config;
-	$reservedNames = array("guest", "member", "members", "mod", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself");
+	$reservedNames = $config["reservedNames"];
 
 	// Make sure the name isn't a reserved word.
 	if (in_array(strtolower($name), $reservedNames)) return "nameTaken";

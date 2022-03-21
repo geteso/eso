@@ -121,7 +121,7 @@ case "info": ?>
 <li><label>Default language</label> <div><select id='language' name='language' tabindex='2'>
 <?php foreach ($install->languages as $language) echo "<option value='$language'" . ((!empty($_POST["language"]) ? $_POST["language"] : "English (casual)") == $language ? " selected='selected'" : "") . ">$language</option>"; ?>
 </select><br/>
-<small>More language packs are <a href='https://try.geteso.org/languages'>available for download</a>.</small></div></li>
+<small>More language packs are <a href='https://geteso.org/languages'>available for download</a>.</small></div></li>
 </ul>
 
 <hr/>

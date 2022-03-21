@@ -1216,11 +1216,11 @@ function addMember($name)
 	if (!$memberId) {
 		switch (strtolower($name)) {
 			// Members
-			// case $language["Member-plural"]:
-			// case "members":
-			//	$memberId = "Member";
-			//	$memberName = $language["Member-plural"];
-			//	break;
+			case $language["Member-plural"]:
+			case "members":
+				$memberId = "Member";
+				$memberName = $language["Member-plural"];
+				break;
 			// Moderators
 			case $language["Moderator-plural"]:
 			case "moderators":
