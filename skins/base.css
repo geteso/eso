@@ -1,6 +1,6 @@
 @media all {
 /* Main tags */
-body {font-family:monospaced,Courier New,sans,serif,arial,helvetica,sans-serif; font-size:75%; margin:0; -webkit-text-size-adjust:none; padding-top:0px!important; min-width:320px}
+body {font-family:Courier New,sans,serif,arial,helvetica,sans-serif,monospaced; font-size:75%; margin:0; -webkit-text-size-adjust:none; padding-top:0px!important; min-width:320px}
 input, textarea, select, button {font-family:arial,helvetica,sans-serif; font-size:100%; outline:none}
 p {line-height:1.4; margin:0 0 1em 0}
 a img {border:0}
