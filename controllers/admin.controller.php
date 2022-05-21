@@ -587,15 +587,22 @@ function membersInit(&$adminController)
 			refresh();
 		}
 	
+	// Fetch a list of unvalidated mmbers.
+	$this->unvalidated = $this->eso->db->query("SELECT memberId, name, avatarFormat, IF(color>{$this->eso->skin->numberOfColors},{$this->eso->skin->numberOfColors},color), account, lastSeen, lastAction FROM {$config["tablePrefix"]}members WHERE account='Unvalidated' ORDER BY memberId DESC");
+	$this->numberUnvalidated = $this->eso->db->numRows($this->unvalidated);
 }
 
 function saveMembersSettings()
 {
 	$newConfig = array();
 	
-	if (in_array(@$_POST["requireVerification"], $this->registrationSettings)) $newConfig["registrationRequireVerification"] = $_POST["requireVerification"];
+//	if (in_array(@$_POST["requireVerification"], $this->registrationSettings)) $newConfig["registrationRequireVerification"] = $_POST["requireVerification"];
 	
 	$newConfig["registrationOpen"] = (bool)!empty($_POST["registrationOpen"]);
+
+	$newConfig["registrationRequireEmail"] = (bool)!empty($_POST["registrationRequireEmail"]);
+
+	$newConfig["registrationRequireApproval"] = (bool)!empty($_POST["registrationRequireApproval"]);
 	
 	if (count($newConfig)) $this->writeSettingsConfig($newConfig);
 

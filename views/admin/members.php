@@ -25,7 +25,7 @@
 if (!defined("IN_ESO")) exit;
 ?>
 
-<fieldset id='adminbasic'>
+<fieldset id='registrationSettings'>
 <legend><?php echo $language["Registration settings"];?></legend>
 
 <form action='<?php echo makeLink("admin", "members"); ?>' id='registrationSettings' method='post'>
@@ -33,18 +33,41 @@ if (!defined("IN_ESO")) exit;
 
 <ul class='form membersForm'>
 
-<li><label><?php echo $language["Require verification"]; ?><br/></label>
-<div><select name='requireVerification'><?php
-foreach ($this->registrationSettings as $v)
-echo "<option value='$v'" . ($config["registrationRequireVerification"] == $v ? " selected='selected'" : "") . ">$v</option>";	
-?></select></div></li>
-
 <li><label class='checkbox'><?php echo $language["Allow registration"]; ?></label>
 <div><input type='checkbox' class='checkbox' name='registrationOpen' value='1'<?php echo !empty($config["registrationOpen"]) ? " checked='checked'" : ""; ?>/></div></li>
+
+<li><label class='checkbox'><?php echo $language["Require email verification"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='registrationRequireEmail' value='1'<?php echo !empty($config["registrationRequireEmail"]) ? " checked='checked'" : ""; ?>/></div></li>
+
+<li><label class='checkbox'><?php echo $language["Require manual approval"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='registrationRequireApproval' value='1'<?php echo !empty($config["registrationRequireApproval"]) ? " checked='checked'" : ""; ?>/></div></li>
 
 <li><label></label> <span class='button'><input type='submit' name='saveMembersSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>
 
 </ul>
 
 </form>
+</fieldset>
+
+<fieldset id="fieldmembers">
+<legend><?php echo $language["Unvalidated members"];?></legend>
+
+<?php
+// If there are unvalidated members, list them.
+if($this->numberUnvalidated):?>
+
+<div id='membersOnline'>
+<?php while(list($memberId,$name,$avatarFormat,$color,$account)=$this->eso->db->fetchRow($this->unvalidated)):?>
+<div class='p c<?php echo $color;?>'><div class='hdr'>
+<div class='thumb'><a href='<?php echo makeLink("profile",$memberId);?>'><img src='<?php echo $this->eso->getAvatar($memberId,$avatarFormat,"thumb");?>' alt=''/></a></div>
+<h3><a href='<?php echo makeLink("profile",$memberId);?>'><?php echo $name;?></a></h3>
+<span><?php echo $lastAction;?> (<?php echo relativeTime($lastSeen);?>)</span>
+</div></div>
+<?php endwhile;?>
+</div>
+
+<?php
+// Otherwise, display a message.
+else:echo $this->eso->htmlMessage("noMembersUnvalidated");endif;?>
+
 </fieldset>
