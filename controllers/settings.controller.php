@@ -43,7 +43,7 @@ function init()
 		and $this->eso->validateToken(@$_GET["token"])) $this->changeColor($_GET["changeColor"]);
 	
 	// Change the user's avatar.
-	if (isset($_POST["changeAvatar"])
+	if (!empty($config["changeAvatar"]) and isset($_POST["changeAvatar"])
 	 	and $this->eso->validateToken(@$_POST["token"])
 		and $this->changeAvatar()) $this->eso->message("changesSaved");
 	
@@ -276,6 +276,8 @@ function changePasswordEmail()
 // Change the user's avatar.
 function changeAvatar()
 {
+	if (!$this->eso->user or $this->eso->isUnvalidated()) return false;
+	if ($this->eso->isSuspended()) return false;
 	if (empty($_POST["avatar"]["type"])) return false;
 	global $config;
 	

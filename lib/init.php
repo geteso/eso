@@ -26,6 +26,9 @@
  */
 if (!defined("IN_ESO")) exit;
 
+// Start a page load timer. We don't make use of it by default, but a plugin can if it needs to.
+define("PAGE_START_TIME", microtime(true));
+
 // Include our config files.
 require "config.default.php";
 @include "config/config.php";

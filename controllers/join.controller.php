@@ -39,7 +39,7 @@ function init()
 	$this->title = $language["Join this forum"];
 
 	// Only respond to requests for verification emails if we require e-mail verification.
-	if (($config["registrationRequireVerification"] == "email") && isset($_GET["q2"])) {
+	if (($config["registrationRequireEmail"] == true) && isset($_GET["q2"])) {
 		
 		// If the user is requesting that we resend their verification email...
 		if ($_GET["q2"] == "sendVerification") {
@@ -111,16 +111,14 @@ function init()
 	
 	// If the form has been submitted, validate it and add the member into the database.
 	if (isset($_POST["join"]) and $this->addMember()) {
-		if ($config["registrationRequireVerification"] == "email") {
+		if ($config["registrationRequireEmail"] == true) {
 			$this->eso->message("verifyEmail", false);
 			redirect("");
-		} elseif ($config["registrationRequireVerification"] == "approval") {
+		} elseif ($config["registrationRequireApproval"] == true) {
 			$this->eso->message("waitForApproval", false);
 			redirect("");
-		} elseif ($config["registrationRequireVerification"] == false) {
-			$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name={$_POST["join"]["name"]}", 0);
-			$hash = md5($salt . $_POST["join"]["password"]);
-			$this->eso->login($_POST["join"]["name"], false, $hash);
+		} else {
+			$this->eso->login($_POST["join"]["name"], $_POST["join"]["password"], false);
 			redirect("");
 		}
 	}
@@ -184,7 +182,7 @@ function addMember()
 	}
 	
 	// If we're not requiring verification, add a field to the query that "validates" the member without a validation hash.
-	if ($config["registrationRequireVerification"] == false) {
+	if ($config["registrationRequireEmail"] == false and $config["registrationRequireApproval"] == false) {
 		$insertData["account"] = "'Member'";
 	}
 
@@ -213,7 +211,7 @@ function addMember()
 	$this->callHook("afterAddMember", array($memberId));
 	
 	// Email the member with a verification link so that they can verify their account.
-	if ($config["registrationRequireVerification"] == "email") {
+	if ($config["registrationRequireEmail"] == true) {
 		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($salt . $_POST["join"]["password"]));
 	}
 	

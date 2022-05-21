@@ -69,7 +69,6 @@ $defaultConfig = array(
 "registrationOpen" => "true", // Whether or not new accounts can be made on your forum.
 "registrationRequireEmail" => true, // Requires email verification to register on your forum.
 "registrationRequireApproval" => false, // Requires manual approval...
-// "registrationRequireVerification" => "email", // false | "email" = require email verification | "approval" = require admin approval
 "reservedNames" => array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself"), // Reserved user names which cannot be used.
 
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
@@ -104,6 +103,7 @@ $defaultConfig = array(
 "avatarThumbWidth" => 64,
 "avatarThumbHeight" => 64,
 "avatarAlignment" => "alternate", // Default alignment preference for avatars.  Alternate, left, right, or none.  Individual users can override this.
+"changeAvatar" => true, // Whether or not to let users change their avatar.  Useful if your forum is tight on space or can't host images.
 );
 
 ?>

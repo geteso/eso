@@ -19,13 +19,13 @@
  */
 
 /**
- * Upload class: provides a way to easily validate and manage uploaded
+ * Uploader class: provides a way to easily validate and manage uploaded
  * files.  Typically, an upload should be validated using the
  * getUploadedFile() function, which will return the temporary filename
  * of the uploaded file.  This can then be saved with saveAs() or
  * saveAsImage().
  */
-class Upload {
+class Uploader {
 
 function iniToBytes($value)
 {

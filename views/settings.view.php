@@ -43,7 +43,8 @@ if(!defined("IN_ESO"))exit;
 <?php endfor;?>
 </tr></table></div>
 
-<?php // Avatar selection form. ?>
+<?php // If it's okay to upload avatars, add an avatar selection form.
+if (!empty($config["changeAvatar"])): ?>
 <form action='<?php echo makeLink("settings");?>' id='settingsAvatar' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"];?>'/>
 <ul class='form'>
@@ -56,6 +57,11 @@ if(!defined("IN_ESO"))exit;
 </label>
 <input id='upl-ava' name='avatarUpload' type='file' class='text' size='20' onchange='document.getElementById("upload").checked="true"'/>
 </li>
+
+<?php // Otherwise if avatar uploading is disabled, show a message.
+else: ?>
+<?php echo $this->eso->htmlMessage("avatarDisabled"); ?>
+<?php endif; ?>
 
 <?php // Get an avatar from URL.
 if(ini_get("allow_url_fopen")):?>

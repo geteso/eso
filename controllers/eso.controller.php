@@ -244,7 +244,7 @@ function login($name = false, $password = false, $hash = false)
 			$this->callHook("afterLogin", array(&$data));
 
 			// If their account is unvalidated and we're using email verification, show a message with a link to resend a verification email.
-			if ($data["account"] == "Unvalidated" and $config["registrationRequireVerification"] == "email") {
+			if ($data["account"] == "Unvalidated" and $config["registrationRequireEmail"] == true) {
 				$this->message("accountNotYetVerified", false, makeLink("join", "sendVerification", $data["memberId"]));
 				return false;
 			}

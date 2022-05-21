@@ -474,7 +474,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #admin .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available}
 #admin .menu li {display:block; margin-right:0}
 #admin .menu li a {display:block; margin:0}
-#admin .menu li.active a {margin-right:0; border-left:unset; border-bottom:unset}
+#admin .menu li.active a {margin-right:0; border-left:unset!important; border-bottom:unset!important}
 #admin .menu li:first-child a {border:none}
 #admin .inner {padding-top:10px}
 .form input[name="installPlugin"] {width:inherit}
@@ -504,8 +504,8 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 
 /* Formatting controls */
 #sconvo .hdr {min-height:16px}
-#cPosts .p .hdr .controls {float:none; clear:left; overflow:overlay; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
-#cPosts .p .hdr .controls a:first-child:not(.deleted .controls span a), #cPosts .deleted .hdr .controls span:first-child {margin-left:10px}
+#cPosts .p .hdr .controls {float:none; clear:left; position:relative; overflow:overlay; margin:21px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
+#cPosts .p .hdr .controls > a:first-child, #cPosts .deleted .hdr .controls span:first-child {margin-left:10px}
 #cPosts .p .hdr .controls .formattingButtons {margin-left:10px; margin-right:10px}
 #cPosts .p .hdr .controls .formattingButtons a:first-child {margin-left:0}
 #reply .controls {float:none; clear:none; overflow:overlay; margin:-1px 0 -3px 0; padding:0; background:inherit; box-shadow:none}
