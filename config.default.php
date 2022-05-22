@@ -65,6 +65,7 @@ $defaultConfig = array(
 // see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color for an explanation
 
 // Login and registration settings.
+"changeUsername" => true, // Whether or not accounts can change their usernames.
 "loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.
 "registrationOpen" => "true", // Whether or not new accounts can be made on your forum.
 "registrationRequireEmail" => true, // Requires email verification to register on your forum.

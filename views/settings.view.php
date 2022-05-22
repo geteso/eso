@@ -176,7 +176,7 @@ endforeach;
 
 <li>
 <label><?php echo $language["My current password"];?></label> <input type='password' name='settingsUsername[password]' class='text' autocomplete='current-password'/>
-<?php if(!empty($this->messages["current"]))echo $this->eso->htmlMessage($this->messages["current"]);?>
+<?php if(!empty($this->messages["password"]))echo $this->eso->htmlMessage($this->messages["password"]);?>
 </li>
 
 <li><label id='lbl-pass'></label> <?php echo $this->eso->skin->button(array("value"=>$language["Save changes"],"name"=>"settingsUsername[submit]"));?></li>

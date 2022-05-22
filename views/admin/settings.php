@@ -58,6 +58,79 @@ echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" 
 </form>
 </fieldset>
 
+<?php
+if ($this->eso->user["memberId"] == $config["rootAdmin"]): ?>
+<fieldset>
+<legend><?php echo $language["Advanced settings"];?></legend>
+
+<form action='<?php echo makeLink("admin", "settings"); ?>' id='advancedSettings' method='post'>
+<input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
+
+<ul class='form settingsForm'>
+
+<li><label class='checkbox'><?php echo $language["gzipOutput"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='gzipOutput' value='1'<?php echo !empty($config["gzipOutput"]) ? " checked='checked'" : ""; ?>/>
+<small><?php echo $language["gzipOutputInfo"]; ?></small></div></li>
+
+<li><label class='checkbox'><?php echo $language["httpsSetting"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='https' value='1'<?php echo !empty($config["https"]) ? " checked='checked'" : ""; ?>/>
+<small><?php echo $language["httpsInfo"]; ?></small></div></li>
+
+<li><label class='checkbox'><?php echo $language["uploadPackages"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='uploadPackages' value='1'<?php echo !empty($config["uploadPackages"]) ? " checked='checked'" : ""; ?>/>
+<small><?php echo $language["uploadPackagesInfo"]; ?></small></div></li>
+
+<li><label class='checkbox'><?php echo $language["changeUsername"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='changeUsername' value='1'<?php echo !empty($config["changeUsername"]) ? " checked='checked'" : ""; ?>/>
+<small><?php echo $language["changeUsernameInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["loginsPerMinute"]; ?></label>
+<div><input type='text' class='text' name='loginsPerMinute' value='<?php echo $config["loginsPerMinute"]; ?>'/>
+<small><?php echo $language["loginsMinuteInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["minPasswordLength"]; ?></label>
+<div><input type='text' class='text' name='minPasswordLength' value='<?php echo $config["minPasswordLength"]; ?>'/></div></li>
+
+<li><label class='checkbox'><?php echo $language["nonAsciiCharacters"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='nonAsciiCharacters' value='1'<?php echo !empty($config["nonAsciiCharacters"]) ? " checked='checked'" : ""; ?>/>
+<small><?php echo $language["nonAsciiInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["numberResults"]; ?></label>
+<div><input type='text' class='text' name='results' value='<?php echo $config["results"]; ?>'/>
+<small><?php echo $language["numberResultsInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["numberMoreResults"]; ?></label>
+<div><input type='text' class='text' name='moreResults' value='<?php echo $config["moreResults"]; ?>'/>
+<small><?php echo $language["numberMoreResultsInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["numberTagsInTagCloud"]; ?></label>
+<div><input type='text' class='text' name='numberOfTagsInTagCloud' value='<?php echo $config["numberOfTagsInTagCloud"]; ?>'/>
+</div></li>
+
+<li><label class='checkbox'><?php echo $language["showAvatarThumbnails"]; ?></label>
+<div><input type='checkbox' class='checkbox' name='showAvatarThumbnails' value='1'<?php echo !empty($config["showAvatarThumbnails"]) ? " checked='checked'" : ""; ?>/>
+</div></li>
+
+<li><label><?php echo $language["updateCurrentResultsInterval"]; ?></label>
+<div><input type='text' class='text' name='updateCurrentResultsInterval' value='<?php echo $config["updateCurrentResultsInterval"]; ?>'/>
+<small><?php echo $language["updateCurrentResultsInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["checkNewResultsInterval"]; ?></label>
+<div><input type='text' class='text' name='checkForNewResultsInterval' value='<?php echo $config["checkForNewResultsInterval"]; ?>'/>
+<small><?php echo $language["checkNewResultsInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["searchesPerMinute"]; ?></label>
+<div><input type='text' class='text' name='searchesPerMinute' value='<?php echo $config["searchesPerMinute"]; ?>'/>
+<small><?php echo $language["searchesMinuteInfo"]; ?></small></div></li>
+
+<li><label></label> <span class='button'><input type='submit' name='saveAdvancedSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>
+
+</ul>
+
+</form>
+</fieldset>
+<?php endif; ?>
+
 <fieldset>
 <legend><?php echo $language["Forum logo"]; ?></legend>
 

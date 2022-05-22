@@ -56,7 +56,7 @@ function init()
 	}
 
 	// Change the user's name.
-	if (isset($_POST["settingsUsername"]["submit"])
+	if (!empty($config["changeUsername"]) and isset($_POST["settingsUsername"]["submit"])
 		and $this->eso->validateToken(@$_POST["token"])
 		and $this->changeUsername()) {
 		$this->eso->message("changesSaved");
@@ -207,7 +207,7 @@ function changeUsername()
 	}
 
 	// Check if the user entered their old password correctly.
-	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($salt . $_POST["settingsUsername"]["password"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
+	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($salt . $_POST["settingsUsername"]["password"]) . "'", 0)) $this->messages["password"] = "incorrectPassword";
 
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {

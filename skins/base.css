@@ -292,7 +292,7 @@ form#settingsAvatar {padding-bottom:8px}
 #plugins li.enabled strong {font-weight:bold}
 #plugins li form {margin:15px 5px}
 #plugins li .settings {padding:5px 20px; margin-top:5px}
-#plugins li form label {margin-bottom:10px; width:25em}
+#plugins li form label {margin-bottom:10px; width:25em; width:50%}
 #plugins li input.checkbox {margin:2px 7px 2px 0}
 #plugins li li {border:0; padding:0}
 #addPlugin .warning {margin:0}
@@ -344,7 +344,7 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .form div label {float:none; margin:0; text-align:left; width:auto}
 .form label.long {text-align:left; width:100%}
 .form label.radio {cursor:pointer; text-align:left}
-.form input.text, .form select {float:left; margin:0; width:20em}
+.form input.text, .form select {float:left; margin:0; width:20em; width:40%}
 .form div {float:left; line-height:1.5}
 .form div input.text, .form div select {float:none}
 .form {margin:0; padding:0}
