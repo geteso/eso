@@ -474,7 +474,7 @@ $messages=array(
 "reenterInformation" => array("class" => "info","message" => "Please reenter this information."),
 "registrationClosed" => array("class" => "info", "message" => "User registration has been disabled on this forum."),
 "removeDirectoryWarning" => array("class" => "warning", "message" => "You haven't deleted the <code>%s</code> directory as we recommended. Please do so, as it'll help ensure your forum remains secure."),
-"resultsNumberError" => array("class" => "warning", "message" => "The number of results must be a value greater than 0."),
+"resultsNumberError" => array("class" => "warning", "message" => "The number of results must be a numeric value."),
 "setNewPassword" => array("class" => "info","message" => "Please choose a new password."),
 "skinAdded" => array("class" => "success","message" => "The skin was successfully added."),
 "suspended" => array("class" => "warning","message" => "A forum moderator has <strong>suspended</strong> your account. Until the suspension is lifted you will not be able to perform many actions on this forum."),

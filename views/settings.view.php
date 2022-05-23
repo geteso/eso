@@ -162,7 +162,8 @@ endforeach;
 <?php if(!count($this->messages)):?><script type='text/javascript'>Settings.hideFieldset("settingsPassword")</script><?php endif;?>
 </form>
 
-<?php // Output the change my username form. ?>
+<?php // If it's okay to change names, output the change my username form.
+if (!empty($config["changeUsername"])): ?>
 <form action='<?php echo makeLink("settings");?>' method='post'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"];?>'/>
 <fieldset id='settingsUser'>
@@ -184,5 +185,6 @@ endforeach;
 </ul></fieldset>
 <?php if(!count($this->messages)):?><script type='text/javascript'>Settings.hideFieldset("settingsUser")</script><?php endif;?>
 </form>
+<?php endif;?>
 
 </div>

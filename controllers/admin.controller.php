@@ -166,33 +166,34 @@ function saveAdvancedSettings()
 	$newConfig["changeUsername"] = (bool)!empty($_POST["changeUsername"]);
 
 	// Logins per minute must be greater than or equal to 1.
-	if (empty($_POST["loginsPerMinute"]) or ($_POST["loginsPerMinute"] < 1)) {$this->eso->message("loginsMinuteError"); return false;}
+	if (empty($_POST["loginsPerMinute"]) or !is_numeric($_POST["loginsPerMinute"]) or ($_POST["loginsPerMinute"] < 1)) {$this->eso->message("loginsMinuteError"); return false;}
 	$newConfig["loginsPerMinute"] = $_POST["loginsPerMinute"];
 
 	// Minimum password length must be greater than or equal to 1.
-	if (empty($_POST["minPasswordLength"]) or ($_POST["minPasswordLength"] < 1)) {$this->eso->message("passwordLengthError"); return false;}
+	if (empty($_POST["minPasswordLength"]) or !is_numeric($_POST["minPasswordLength"]) or ($_POST["minPasswordLength"] < 1)) {$this->eso->message("passwordLengthError"); return false;}
 	$newConfig["minPasswordLength"] = $_POST["minPasswordLength"];
 
 	$newConfig["nonAsciiCharacters"] = (bool)!empty($_POST["nonAsciiCharacters"]);
 
-	if (empty($_POST["results"]) or ($_POST["results"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
+	if (empty($_POST["results"]) or !is_numeric($_POST["results"])) {$this->eso->message("resultsNumberError"); return false;}
 	$newConfig["results"] = $_POST["results"];
 
-	if (empty($_POST["moreResults"]) or ($_POST["moreResults"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
+	if (!is_numeric($_POST["moreResults"])) {$this->eso->message("resultsNumberError"); return false;}
 	$newConfig["moreResults"] = $_POST["moreResults"];
 
-	if (empty($_POST["numberOfTagsInTagCloud"]) or ($_POST["numberOfTagsInTagCloud"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
+	if (!is_numeric($_POST["numberOfTagsInTagCloud"])) {$this->eso->message("resultsNumberError"); return false;}
 	$newConfig["numberOfTagsInTagCloud"] = $_POST["numberOfTagsInTagCloud"];
 
 	$newConfig["showAvatarThumbnails"] = (bool)!empty($_POST["showAvatarThumbnails"]);
 
-	if (empty($_POST["updateCurrentResultsInterval"]) or ($_POST["updateCurrentResultsInterval"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
+	if (!is_numeric($_POST["updateCurrentResultsInterval"])) {$this->eso->message("resultsNumberError"); return false;}
 	$newConfig["updateCurrentResultsInterval"] = $_POST["updateCurrentResultsInterval"];
 
-	if (empty($_POST["checkForNewResultsInterval"]) or ($_POST["checkForNewResultsInterval"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
+	if (!is_numeric($_POST["checkForNewResultsInterval"])) {$this->eso->message("resultsNumberError"); return false;}
 	$newConfig["checkForNewResultsInterval"] = $_POST["checkForNewResultsInterval"];
 
-	if (empty($_POST["searchesPerMinute"]) or ($_POST["searchesPerMinute"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
+	// Amount of searches limited to per minute must be greater than or equal to 1.
+	if (empty($_POST["searchesPerMinute"]) or !is_numeric($_POST["searchesPerMinute"]) or ($_POST["searchesPerMinute"] < 1)) {$this->eso->message("resultsNumberError"); return false;}
 	$newConfig["searchesPerMinute"] = $_POST["searchesPerMinute"];
 
 	if (count($newConfig)) $this->writeSettingsConfig($newConfig);
