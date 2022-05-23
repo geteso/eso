@@ -275,6 +275,7 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .stats div {float:none; font-size:115%; margin-left:35%}
 #admin .stats li {padding-left:10px}
 #admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
+#admin .settingsForm.advanced input.text, #admin .settingsForm.advanced select {font-size:100%}
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
 #admin input.checkbox {margin:3px 5px 5px 0}
 #admin .clear {display:none}
@@ -344,7 +345,7 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .form div label {float:none; margin:0; text-align:left; width:auto}
 .form label.long {text-align:left; width:100%}
 .form label.radio {cursor:pointer; text-align:left}
-.form input.text, .form select {float:left; margin:0; width:20em; width:40%}
+.form input.text, .form select {float:left; margin:0; width:20em}
 .form div {float:left; line-height:1.5}
 .form div input.text, .form div select {float:none}
 .form {margin:0; padding:0}
@@ -415,7 +416,7 @@ ul.fr {z-index:0; right:25px}
 .form.settingsForm li .checkbox {margin-left:20px}
 .form.settingsForm li:last-child {width:20em}
 .form.settingsForm li:last-child label {width:20em!important}
-.form.settingsForm li:nth-last-child(2) div, .form.settingsForm li:nth-last-child(3) div {position:absolute; padding-left:2px} 
+ul.form.settingsForm:not(.advanced) li:nth-last-child(2) div, ul.form.settingsForm:not(.advanced) li:nth-last-child(3) div {position:absolute; padding-left:2px} 
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:auto}
 .form.logoForm li, .form.iconForm li {margin-bottom:10px}
 .form.logoForm li label, .form.iconForm li label {text-align:left}

@@ -61,7 +61,10 @@ if($this->numberUnvalidated):?>
 <div class='p c<?php echo $color;?>'><div class='hdr'>
 <div class='thumb'><a href='<?php echo makeLink("profile",$memberId);?>'><img src='<?php echo $this->eso->getAvatar($memberId,$avatarFormat,"thumb");?>' alt=''/></a></div>
 <h3><a href='<?php echo makeLink("profile",$memberId);?>'><?php echo $name;?></a></h3>
-<span><?php echo $lastAction;?> (<?php echo relativeTime($lastSeen);?>)</span>
+<?php if(!empty($this->eso->canChangeGroup($memberId, $account))):?><form action='<?php echo curLink();?>' method='post'><div style='display:inline'><select onchange='Conversation.changeMemberGroup(<?php echo $memberId;?>,this.value)' name='group'>
+	<?php foreach($this->eso->canChangeGroup($memberId, $account) as $group):?><option value='<?php echo $group;?>'<?php if($group==$account)echo " selected='selected'";?>><?php echo $language[$group];?></option><?php endforeach;?></select></div> <noscript><div style='display:inline'><input name='saveGroup' type='submit' value='Save' class='save'/><input type='hidden' name='member' value='<?php echo $memberId;?>'/></div></noscript></form>
+<?php else:?><span><?php echo $language[$account];?></span>
+<?php endif;?>
 </div></div>
 <?php endwhile;?>
 </div>
