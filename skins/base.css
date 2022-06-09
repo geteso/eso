@@ -1,13 +1,13 @@
 @media all {
 /* Main tags */
-body {font-family:arial,helvetica,sans-serif; font-size:75%; margin:0; -webkit-text-size-adjust:none; padding-top:0px!important; min-width:320px}
+body {font-family:Courier New,sans,serif,arial,helvetica,sans-serif,monospaced; font-size:75%; margin:0; -webkit-text-size-adjust:none; padding-top:0px!important; min-width:320px}
 input, textarea, select, button {font-family:arial,helvetica,sans-serif; font-size:100%; outline:none}
 p {line-height:1.4; margin:0 0 1em 0}
 a img {border:0}
 abbr {cursor:help}
 
 /* Links */
-a {text-decoration:none}
+a {text-decoration:none, cursor: pointer}
 a:hover {color:#000; text-decoration:underline}
 a:active {color:#666}
 a, .link, .p .hdr a.link {color:#00f}
@@ -17,10 +17,10 @@ a, .link, .p .hdr a.link {color:#00f}
 .fr {float:right}
 .clear {clear:both; font-size:1px; margin:0; padding:0; width:1px}
 small, dt {font-size:90%}
-#loading {font-size:120%; padding:5px 15px; position:fixed; right:25px; top:0; z-index:10000}
+#loading {font-size:120%; padding:5px 15px; position:fixed; right:25px; top:0; z-index:10000; cursor:not-allowed}
 .strike {text-decoration:line-through}
 img.avatar, div.avatar img {width:105px; max-height:151px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
-.disabled {cursor:default}
+.disabled {cursor:not-allowed}
 h2 {font-size:160%; font-weight:normal}
 h3 {font-size:120%; font-weight:bold}
 #appearance #preview {margin-bottom:0}
@@ -36,7 +36,7 @@ h3 {font-size:120%; font-weight:bold}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
 
 /* Forum description */
-#forumDescription {font-size:12px}
+#forumDescription {font-size:12px; cursor:pointer}
 #hdr h1#hasForumDescription img {float:left}
 #hdr h1#hasForumDescription #forumTitle {float:right; position:absolute; font-size:20px}
 #hdr h1#hasForumDescription #forumDescription {display:block; white-space:nowrap}
@@ -45,7 +45,7 @@ h3 {font-size:120%; font-weight:bold}
 #bar {line-height:18px; overflow:hidden; padding:6px 25px; height:18px}
 #bar ul {list-style-type:none; margin:0; padding:0}
 #bar li {float:left; margin:0}
-#bar .fl li {margin-right:3px}
+#bar .fl li {margin-right:3px; float:center}
 #bar .fr li {margin-left:3px}
 #bar strong {font-size:120%}
 #bar form {font-size:90%; margin-top:-1px; margin-bottom:-2px}
@@ -91,9 +91,9 @@ a.s5 {font-size:90%}
 
 /* Messages */
 #messages .msg {margin:0}
-.msg .close {float:right; padding:0 5px; margin:-2px -4px 0 0}
+.msg .close {float:right; padding:0 5px; margin:-2px -4px 0 0; cursor:normal}
 .msg {line-height:1.4; margin:0 0 1em 0; padding:5px 10px}
-.msg code {background:none}
+.msg code {background:none, display:inline}
 
 /* Stars */ 
 .star1, .star0 {cursor:default; display:block; font-size:600%; font-weight:normal; height:0.4em; line-height:0.8; overflow:hidden; width:0.4em}
@@ -111,14 +111,14 @@ a.star1, a.star0 {cursor:pointer}
 .c .labels {margin-right:3px}
 .c strong {font-size:120%; font-weight:bold}
 .c .read {font-weight:normal}
-.c strong a {margin:0}
+.c strong a {margin:0; padding 2px 0}
 .c a {margin-left:8.5px; margin-bottom:-5px}
 .c .author a, .c .lastPost a {margin:0}
 .c td.avatar {padding:4px 0 4px 4px; width:32px; text-align:center}
 .c td.avatar img {width:30px; height:30px; object-fit:cover; vertical-align:middle}
 .c td.star {width:2em}
 .c td.star a {margin-left:5px}
-.c td.conversation {width:50%; word-break:break-word}
+.c td.conversation {width:50%; word-break:break-word, display:block}
 .c .conversation, .c .posts {padding:5px 10px}
 .c .posts {text-align:center}
 .c td.posts {font-size:175%}
@@ -148,9 +148,9 @@ small.tags:empty {margin:0}
 #cInfo .editable {background:none; padding:3px}
 #cInfo dl {margin:0}
 #cInfo dt {clear:left; float:left; line-height:2.1em; margin:5px 5px 0 0; width:32px}
-#cInfo dd {display:block; line-height:2em; margin:0; padding-top:4px}
+#cInfo dd {display:block; line-height:1.8em; margin:0; padding-top:4px}
 #cInfo .button {line-height:1}
-#cTags a {line-height:1.5; padding:0 5px 0 5px; width:fit-content; text-align:center}
+#cTags a {line-height:1.5; padding:0 5px 0 5px; width:75%; text-align:center}
 #cTags a:empty {display:none}
 /* Members allowed (right part) */
 #allowed {float:right; text-align:right; width:40%}
@@ -171,7 +171,7 @@ small.tags:empty {margin:0}
 .pg li.left a.first, .pg li.right a.last {width:4em}
 
 /* Conversation post */
-hr {display:none}
+hr {display:none,overflow:hidden}
 .p {margin-bottom:10px}
 .p .hdr {margin-bottom:5px; white-space:nowrap; overflow:hidden; overflow-x:scroll; overflow-y:hidden; -ms-overflow-style:none; scrollbar-width:none; padding:5px 10px}
 .p .hdr::-webkit-scrollbar {display:none}
@@ -241,11 +241,11 @@ blockquote p {margin-bottom:.75em}
 .p hr {display:block; height:1px}
 
 /* Join this forum */
-#join input.text {font-size:140%}
+#join input.text {font-size:140%, overflow:hidden}
 #join .msg {padding:4px 10px}
 
 /* My settings */
-#settings .post {margin:0}
+#settings .post {margin:0; padding:4px 3px}
 #settings .submit {margin-bottom:5px}
 #preview .body {overflow:visible}
 form#settingsAvatar {padding-bottom:8px}
@@ -265,7 +265,7 @@ form#settingsAvatar {padding-bottom:8px}
 #palette table#tblsecond a.selected {height:37px}
 
 /* Admin */
-#admin {margin:-15px -25px}
+#admin {margin:-15px -25px, padding: 1px}
 #admin .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0}
 #admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
 #admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
@@ -305,9 +305,9 @@ form#settingsAvatar {padding-bottom:8px}
 #skins strong {font-weight:normal; font-size:120%}
 #skins li.enabled strong {font-weight:bold}
 #skins small {margin-left:10px}
-#skins .preview {display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center; width:275px}
+#skins .preview {display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center, word-wrap: break-word; width:275px}
 #skins .preview span {display:block; margin-top:65px}
-#addSkin .warning {margin:0}
+#addSkin .warning {margin:0, padding:0px}
 
 /* Profile */
 .profile .body {overflow:visible; padding:5px 10px}
@@ -318,7 +318,7 @@ form#settingsAvatar {padding-bottom:8px}
 .p.profile {margin-bottom:0}
 
 /* Members online */
-#membersOnline .p {margin-bottom:4px; border:0}
+#membersOnline .p {margin-bottom:4px; border:0, padding: 3px}
 #membersOnline .p:last-child {margin-bottom:0}
 #membersOnline .hdr {margin:0; padding-left:0}
 #fieldmembers .warning {margin:unset}
@@ -485,7 +485,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #body {padding:15px 10px; padding-top:10px; padding-bottom:0; overflow:hidden}
 #loading {right:10px}
 #hdr, #bar {padding-left:10px; padding-right:10px}
-#tags {display:none}
+#tags {display:block; max-height:50px}
 #searchResults table.c {margin-top:0}
 #ftr {padding:0 10px 10px}
 #sconvo .pInfo {display:none}
@@ -563,8 +563,4 @@ label#lbl-fgcf {width:12em; display:none}
   
 @media only screen and (max-width:340px) {
 #discardDraft {clear:left; margin:5px 0 0 0}
-}
-
-@media only screen and (max-width:320px) {
-#nav-skin, #nav-plgn {display:none}
 }
