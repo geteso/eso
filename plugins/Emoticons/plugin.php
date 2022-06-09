@@ -27,31 +27,70 @@ class Emoticons extends Plugin {
 
 var $id = "Emoticons";
 var $name = "Emoticons";
-var $version = "1.0";
+var $version = "1.1";
 var $description = "Converts emoticon text entities into graphic emoticons";
-var $author = "eso";
+var $author = "eso, GigaHacer";
 
 var $emoticonDir = "plugins/Emoticons/";
 var $emoticons = array();
 
 function init()
 {
+    global $config, $language;
+
 	parent::init();
 	
 	// Add the emoticon CSS style to the head.
 	$this->eso->addToHead("<style type='text/css'>.emoticon {width:16px; height:16px; background:url({$this->emoticonDir}emoticons.svg); background-repeat:no-repeat}</style>");
 	
-	// Add the emoticon formatter that will parse and unparse emoticons.
-	$this->eso->formatter->addFormatter("emoticons", "Formatter_Emoticons");
-	
 	// Add a hook to convert emoticons to text in the feed.
 	if ($this->eso->action == "feed")
 		$this->eso->controller->addHook("formatPost", array($this, "revertEmoticons"));
+
+	// Language definitions.
+	$this->eso->addLanguage("noEmoticons", "No Emoticons</br><small>Won't convert text emoticons in your posts to graphic ones</small>");
+
+	// If we're on the settings view, add the emoticon setting!
+	if ($this->eso->action == "settings") {
+		$this->eso->controller->addHook("init", array($this, "addEmoticonSettings"));
+	}
+	
+	$this->eso->addHook("init", array($this, "addEmoticonFormatter"));
+}
+
+// Add the emoticon formatter that will parse and unparse emoticons.
+    // Only add the formatter if the current user hasn't opted out of graphical emoticons.
+function addEmoticonFormatter()
+{
+	if (empty($this->eso->user["emoticons"])) $this->eso->formatter->addFormatter("emoticons", "Formatter_Emoticons");
 }
 
 function revertEmoticons($controller, &$post)
 {
 	$post = $this->eso->formatter->modes["emoticons"]->revert($post);
+}
+
+// This is the part where we add the setting to the settings screen. Fun!
+function addEmoticonSettings(&$settings)
+{
+	global $language;
+
+	$settings->addToForm("settingsOther", array(
+		"id" => "emoticons",
+		"html" => "<label for='emoticons' class='checkbox'>{$language["noEmoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
+		"databaseField" => "emoticons",
+		"checkbox" => true
+	), 275);
+}
+
+// Add the table to the database.
+function upgrade($oldVersion)
+{
+	global $config;
+	
+	if (!$this->eso->db->numRows("SHOW COLUMNS FROM {$config["tablePrefix"]}members LIKE 'emoticons'")) {
+		$this->eso->db->query("ALTER TABLE {$config["tablePrefix"]}members ADD COLUMN emoticons tinyint(1) NOT NULL default '0'");
+	}
 }
 
 }
