@@ -253,7 +253,7 @@ function init()
 
 		// Add links to the bar.
 		// Add the RSS feed button.
-		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss'><span class='button'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
+		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss'><span class='button'><i class="icon-rss icon"></i></span></a>", 500);
 		
 		// Add the sticky/unsticky link if the user has permission.
 		if ($this->canSticky() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleSticky", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleSticky();return false'><span class='button'><input type='submit' id='stickyLink' value='" . $language[in_array("sticky", $this->conversation["labels"]) ? "Unsticky" : "Sticky"] . "'></span></a>", 400);
