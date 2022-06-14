@@ -69,7 +69,7 @@ if(!defined("IN_ESO"))exit;
 <meta name='theme-color' content='#<?php echo $config["themeColor"];?>'>
 <meta name='msapplication-TileColor' content='#<?php echo $config["themeColor"];?>'>
 <?php endif; ?>
-
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 <?php echo $this->head();?> 
 </head>
 
