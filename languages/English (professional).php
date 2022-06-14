@@ -243,7 +243,6 @@ $language = array(
 "restore" => "restore",
 "Require email verification" => "Require email verification",
 "Require manual approval" => "Require manual approval",
-"RSS" => "RSS",
 
 "Sample captcha image" => "Sample captcha image",
 "Save changes" => "Save changes",
