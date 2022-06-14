@@ -5,7 +5,7 @@ input, textarea, select, button {font-family:arial,helvetica,sans-serif; font-si
 p {line-height:1.4; margin:0 0 1em 0}
 a img {border:0}
 abbr {cursor:help}
-.icon i {color:#fff}
+.icon {color:#fff}
 
 /* Links */
 a {text-decoration:none, cursor: pointer}
