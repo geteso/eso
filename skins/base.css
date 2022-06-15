@@ -360,6 +360,9 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .big input {font-size:140%; height:26px}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
+  
+/* Post colors */
+.c0 .hdr, .p .c0 .hdr, #palette .c0 {background:#ffffff} .c0 {border-color:#ffffff; background:#fff}
 
 /* Special properties */
 #forgotPassword, #markAsRead, #startConversation {line-height:1.5; margin:0 0 10px 0; padding:0 5px 0 5px; width:fit-content; text-align:center; display:inline-block}
