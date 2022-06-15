@@ -40,7 +40,7 @@ a#nav-exit {border-top:0; border-bottom:0; border-left:1px solid; border-right:0
 /* Tags & gambits */
 #tagArea {border:1px dashed #bbb}
 #tags a {color:#777}
-#gambits a {color:#fff}
+#gambits a {color:#00f}
 
 /* Search form */
 #searchText {border-right:0}
@@ -64,7 +64,7 @@ a#nav-exit {border-top:0; border-bottom:0; border-left:1px solid; border-right:0
 a.star0:hover {color:#fe7}
 .star1, a.star1:hover {color:#fc0}
 a.star0:active, a.star1:active {color:#e4b600}
-.starred td {background:#ffb}
+.starred td {background:#ffa}
 
 /* Conversation labels */
 .locked {background:#999; color:#fff}
@@ -78,7 +78,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 #gambits a.draftText {color:#0b2}
 
 /* Conversations table */
-.c th {background-color:#ddd; border:dashed rgba(0,0,0,0.2)}
+.c th {background-color:#ddd}
 .c td {border-bottom:1px solid #ddd}
 .c strong a {color:#000}
 .c .author a, .c .lastPost a {color:#000}
@@ -117,7 +117,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 /* Conversation post */
 .p {border-left-style:solid; border-left-width:1px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
 .p .hdr, .p .hdr small, .p .hdr a {color:#000}
-.p .hdr select, .p .hdr input.save {border:dashed rgba(0,0,0,0.2); border-width:3px}
+.p .hdr select, .p .hdr input.save {border:dashed rgba(0,0,0,0.2); border-width:1px}
 .p .hdr select option {background:#fff}
 .p .hdr .controls a {background:rgba(0,0,0,0.1)}
 .p .hdr .controls a:hover {background-color:#fff; text-decoration:none}
@@ -132,7 +132,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 
 /* Formatting buttons */
 .p .controls .formattingButtons a:hover {background-color:#fff; text-decoration:none}
-.p .controls .formattingButtons a:active {background-color:#888; border:dashed rgba(0,0,0,0.2)}
+.p .controls .formattingButtons a:active {background-color:#888}
 
 /* Code, quotes, headers */
 pre {border:1px dashed #bbb}
@@ -159,19 +159,19 @@ blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
 #plugins .enabled .toggle:hover, #plugins .controls a:hover {background-color:#ccc; text-decoration:none}
 #plugins .enabled .toggle:active, #plugins .controls a:active {background-color:#a4a4a4}
 #plugins li {border-bottom:1px solid #ddd}
-#plugins li .settings {background:#fff; border:dashed rgba(0,0,0,0.2)}
+#plugins li .settings {background:#fff}
 
 /* Skins */
 #skins a {color:#000}
 #skins a:hover {text-decoration:none}
-#skins .preview {background:#eee; border:dashed rgba(0,0,0,0.2); color:#ddd}
+#skins .preview {background:#eee; border:1px solid #ddd; color:#ddd}
 #skins a:hover .preview, #skins .enabled .preview {border-color:#aaa}
 
 /* Profile */
 .profile .form li {border-bottom:1px solid rgba(0,0,0,0.1)}
 
 /* Footer */
-#ftr #copyright {border:1px dashed #000}
+#ftr #copyright {border:1px dashed #ccc}
 
 /* Inputs, buttons, and other form elements */
 input.text, textarea {background:#fff; border:1px solid #bbb}
@@ -197,7 +197,6 @@ fieldset.hidden legend a {color:#666}
 .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {color:#999; text-shadow:#fff 0 1px}
 
 /* Post colors */
-  #palette {border:dashed rgba(0,0,0,0.2)}
 .c1 .hdr, .p .c1 .hdr, #palette .c1 {background:#dfdfdf} .c1 {border-color:#dfdfdf; background:#eee}
 .c2 .hdr, .p .c2 .hdr, #palette .c2 {background:#d2d2d2} .c2 {border-color:#d2d2d2; background:#eee}
 .c3 .hdr, .p .c3 .hdr, #palette .c3 {background:#cf9eff} .c3 {border-color:#cf9eff; background:#cf9eff2e}
@@ -228,7 +227,7 @@ fieldset.hidden legend a {color:#666}
   
 /* Special properties */
 #forgotPassword, #markAsRead, #startConversation {background:#e4e4e4; color:#000}
-#forgotPassword:hover, #markAsRead:hover, #startConversation:hover {background-color:#ccc; border:dashed rgba(0,0,0,0.2); text-decoration:none}
+#forgotPassword:hover, #markAsRead:hover, #startConversation:hover {background-color:#ccc; text-decoration:none}
 #forgotPassword:active, #markAsRead:active, #startConversation:active {background-color:#888}
 input.text, textarea, .pg {box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
 
