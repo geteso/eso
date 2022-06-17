@@ -49,7 +49,7 @@ if (!defined("IN_ESO")) exit;
 </form>
 </fieldset>
 
-<fieldset id="fieldmembers">
+<fieldset id="registrationMembers">
 <legend><?php echo $language["Unvalidated members"];?></legend>
 
 <?php

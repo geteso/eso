@@ -2,12 +2,12 @@
 body {background:#fff; font-size:75%; min-width:260px}
 body, input, select, textarea, table {font-family:arial, helvetica, sans-serif; margin:0}
 input, select, textarea {font-size:100%}
-#container {margin:50px auto; width:55em; background:#f5f5ff; padding:20px; font-size:120%; line-height:1.4}
-h1 {margin:0 0 20px; font-size:150%; font-weight:normal; color:#32517e}
+#container {margin:50px auto; width:55em; background:#f5f5ff; border-radius:5px; padding:20px; font-size:120%; line-height:1.4}
+h1 {margin:0 0 10px; font-size:150%; font-weight:normal; color:#32517e}
 h1 img {vertical-align:middle; height:36px; margin-right:15px}
 a {text-decoration:none; color:#00f}
 a:hover {text-decoration:underline; color:#000}
-hr {color:#bbf; border:solid #bbf; border-width:1px 0 0; height:1px; margin:15px 0}
+hr {color:#bbf; border:dashed #bbf; border-width:1px 0 0; height:1px; margin:15px 0}
 #footer {text-align:right; font-size:90%}
 #footer .button {margin-left:5px; font-size:140%}
 pre {overflow:auto; padding-bottom:5px}

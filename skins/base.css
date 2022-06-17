@@ -212,7 +212,7 @@ hr {display:none}
 .p .body textarea {height:25em; width:fill-available; width:-webkit-fill-available; width:-moz-available}
 .p .editButtons {text-align:right}
 #reply-preview p {text-align:justify}
-#discardDraft, #submitPost {margin-left:5px}
+#discardDraft, #submitPost {margin-left:3px}
 
 /* Formatting buttons */
 .p .controls {margin:-1px 0 -3px 0}
@@ -282,6 +282,7 @@ form#settingsAvatar {padding-bottom:8px}
 .form.logoForm img {height:32px; padding:5px}
 .form.iconForm img {width:128px; height:128px}
 .form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
+#registrationMembers .msg {margin:0}
 
 /* Plugins */
 #plugins .controls {float:right}
@@ -419,7 +420,7 @@ ul.fr {z-index:0; right:25px}
 .form.settingsForm li .checkbox {margin-left:20px}
 .form.settingsForm li:last-child {width:20em}
 .form.settingsForm li:last-child label {width:20em!important}
-ul.form.settingsForm:not(.advanced) li:nth-last-child(2) div, ul.form.settingsForm:not(.advanced) li:nth-last-child(3) div {position:absolute; padding-left:2px} 
+#admin div.parentBox {position:absolute} 
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:auto}
 .form.logoForm li, .form.iconForm li {margin-bottom:10px}
 .form.logoForm li label, .form.iconForm li label {text-align:left}

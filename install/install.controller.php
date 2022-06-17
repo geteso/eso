@@ -131,6 +131,14 @@ function init()
 
 }
 
+// Obtain the hardcoded version of eso (ESO_VERSION).
+function getVersion()
+{
+	include "../config.default.php";
+	$version = ESO_VERSION;
+	return $version;
+}
+
 // Generate a default value for the baseURL based on server environment variables.
 function suggestBaseUrl()
 {

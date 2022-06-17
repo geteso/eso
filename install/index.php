@@ -79,14 +79,16 @@ switch ($install->step) {
 // Fatal checks.
 case "fatalChecks": ?>
 <h1><img src='logo.svg' data-fallback='logo.png' alt='Forum logo'/>Uh oh, something's not right!</h1>
-<p>The following errors were found with your forum's setup. They must be resolved before you can continue the installation.</p>
 <hr/>
+<p>The following errors were found with your forum's setup. They must be resolved before you can continue the installation.</p>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
 </ul>
 <p>If you run into any other problems or just want some help with the installation, feel free to join <a href='https://geteso.org'>geteso.org</a> where a bunch of friendly people will be happy to help you out.</p>
 <hr/>
 <p id='footer'><input class='button' value='Try again' type='submit'/></p>
+<hr/>
+<p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 
 
