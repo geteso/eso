@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Search controller: performs a search with gambits, and gets the tag
  * cloud.
  */
-class search extends Controller {
+class SearchController extends Controller {
 
 var $view = "search.view.php";
 var $tagCloud = array();

@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Profile controller: fetches member information to be displayed on the
  * profile view.
  */
-class profile extends Controller {
+class ProfileController extends Controller {
 
 var $view = "profile.view.php";
 var $member = array();

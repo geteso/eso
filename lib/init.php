@@ -61,9 +61,12 @@ if (isset($_SERVER["HTTP_HOST"])) {
 
 // Require essential files.
 require "functions.php";
-require "database.php";
 require "classes.php";
+require "database.php";
 require "formatter.php";
+
+// Set up the object factory.
+$factory = new Factory();
 
 // Start a session if one does not already exist.
 if (!session_id()) {
@@ -107,7 +110,7 @@ $_COOKIE = sanitize($_COOKIE);
 
 // Include and set up the main controller.
 require "controllers/eso.controller.php";
-$eso = new eso();
+$eso = $factory->make("eso");
 $eso->eso =& $eso;
 
 // Redirect if the 'Start a conversation' button was pressed.

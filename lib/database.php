@@ -24,7 +24,7 @@ if (!defined("IN_ESO")) exit;
  * running queries.  Also contains useful functions for constructing
  * queries.
  */
-class Database {
+class Database extends Hookable {
 
 var $eso;
 var $link;
@@ -45,7 +45,7 @@ function query($query, $fatal = true)
 	// If the query is empty, don't bother proceeding.
 	if (!$query) return false;
 	
-	$this->eso->callHook("beforeDatabaseQuery", array(&$query));
+	$this->callHook("beforeQuery", array(&$query));
 
 	// Execute the query. If there is a problem, display a formatted fatal error.
 	$result = mysql_query($query, $this->link);
@@ -54,7 +54,7 @@ function query($query, $fatal = true)
 		$this->eso->fatalError($config["verboseFatalErrors"] ? $error . "<p style='font:100% monospace; overflow:auto'>" . $this->highlightQueryErrors($query, $error) . "</p>" : "", "mysql");
 	}
 	
-	$this->eso->callHook("afterDatabaseQuery", array($query, &$result));
+	$this->callHook("afterQuery", array($query, &$result));
 	
 	return $result;
 }

@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Online controller: fetches a list of members currently online, ready
  * to be displayed in the view.
  */
-class online extends Controller {
+class OnlineController extends Controller {
 	
 var $view = "online.view.php";
 

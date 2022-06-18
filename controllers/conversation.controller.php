@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Conversation controller: controls anything to do with the conversation
  * view; posting, editing, pagination, deleting, etc.
  */
-class conversation extends Controller {
+class ConversationController extends Controller {
 
 var $view = "conversation.view.php";
 var $editingPost = false; // Are we editing a post (specified in $_GET["editPost"])?

@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Admin controller: handles the sections shown to admins, including the
  * admin dashboard and a way to change forum settings.
  */
-class admin extends Controller {
+class AdminController extends Controller {
 	
 var $view = "admin/admin.view.php";
 var $subView = "";

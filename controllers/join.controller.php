@@ -24,7 +24,7 @@ if (!defined("IN_ESO")) exit;
  * data, validates it, adds the member to the database, and handles the
  * link from the verification email.
  */
-class join extends Controller {
+class JoinController extends Controller {
 
 var $view = "join.view.php";
 
@@ -194,7 +194,7 @@ function addMember()
 
 	// Add a few extra fields to the query.
 	$insertData["color"] = "FLOOR(1 + (RAND() * {$this->eso->skin->numberOfColors}))";
-	$insertData["language"] = "'" . $this->eso->db->escape($config["language"]) . "'";
+//	$insertData["language"] = "'" . $this->eso->db->escape($config["language"]) . "'";
 	$insertData["avatarAlignment"] = "'{$_SESSION["avatarAlignment"]}'";
 	
 	$this->callHook("beforeAddMember", array(&$insertData));

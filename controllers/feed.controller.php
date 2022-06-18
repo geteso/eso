@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Feed controller: builds a list of items to be outputted as an RSS
  * feed.
  */
-class feed extends Controller {
+class FeedController extends Controller {
 
 // Feed data variables, outputted in the view.
 var $items = array();

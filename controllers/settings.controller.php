@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Settings controller: handles the 'my settings' page.  Changes avatar,
  * color, and handles settings forms.
  */
-class settings extends Controller {
+class SettingsController extends Controller {
 	
 var $view = "settings.view.php";
 var $messages = array();

@@ -24,7 +24,7 @@ if (!defined("IN_ESO")) exit;
  * reset their password, and handles this link to enable the user to set
  * a new password.
  */
-class forgotpassword extends Controller {
+class ForgotPasswordController extends Controller {
 
 var $view = "forgotPassword.view.php";
 var $title = "";

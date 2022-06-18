@@ -24,37 +24,61 @@
  */
 if (!defined("IN_ESO")) exit;
 
-// Hookable => a class in which code can be hooked on to.
-// Extend this class and then use $this->callHook("uniqueMarker") in the class code to call any code which has been hooked via $classInstance->addHook("uniqueMarker", "function").
+class Factory {
+	
+var $classNames = array(
+	"Database" => array("Database", "lib/database.php"),
+	"Formatter" => array("Formatter", "lib/formatter.php"),
+	"conversation" => array("ConversationController", "controllers/conversation.controller.php"),
+	"eso" => array("esoController", "controllers/eso.controller.php"),
+	"feed" => array("FeedController", "controllers/feed.controller.php"),
+	"forgot-password" => array("ForgotPasswordController", "controllers/forgot-password.controller.php"),
+	"join" => array("JoinController", "controllers/join.controller.php"),
+	"online" => array("OnlineController", "controllers/online.controller.php"),
+	"admin" => array("AdminController", "controllers/admin.controller.php"),
+	"post" => array("PostController", "controllers/post.controller.php"),
+	"profile" => array("ProfileController", "controllers/profile.controller.php"),
+	"search" => array("SearchController", "controllers/search.controller.php"),
+	"settings" => array("SettingsController", "controllers/settings.controller.php"),
+);
+
+function &make($class)
+{
+	if (!class_exists($this->classNames[$class][0])) require $this->classNames[$class][1];
+	$object = new $this->classNames[$class][0];
+	$object->className = $this->classNames[$class][0];
+	return $object;
+}
+
+function register($class, $className, $file)
+{
+	$this->classNames[$class] = array($className, $file);
+}
+
+}
+
+// Hookable - a class in which code can be hooked on to.
+// Extend this class and then use $this->callHook("uniqueMarker") in the class code to call any code which has been
+// hooked via $classInstance->addHook("uniqueMarker", "function").
 class Hookable {
 
-var $hookedFunctions = array();
+var $className;
 
-// Run all collective hooked functions for the specified marker.
-function callHook($marker, $parameters = array(), $return = false)
+function callHook($event, $parameters = array(), $return = false)
 {
-	if (isset($this->hookedFunctions[$marker]) and count($this->hookedFunctions[$marker])) {
-		
-		// Add the instance of this class to the parameters.
-		// We can't use array_unshift here because call-time pass-by-reference has been deprecated.
-		$parameters = is_array($parameters) ? array_merge(array(&$this), $parameters) : array(&$this);
-		
-		// Loop through the functions which have been hooked on this hook and execute them.
-		// If this hook requires a return value and the function we're running returns something, return that.
-		foreach ($this->hookedFunctions[$marker] as $function) {
-			if (($returned = call_user_func_array($function, $parameters)) and $return) return $returned;
-		}
+	global $eso;
+	// Add the instance of this class to the parameters.
+	// We can't use array_unshift here because call-time pass-by-reference has been deprecated.
+	$parameters = is_array($parameters) ? array_merge(array(&$this), $parameters) : array(&$this);
+	foreach ($eso->plugins as $plugin) {
+		if (method_exists($plugin, "Handler_{$this->className}_$event"))
+			// Loop through the functions which have been hooked on this hook and execute them.
+			// If this hook requires a return value and the function we're running returns something, return that.
+			if (($returned = call_user_func_array(array($plugin, "Handler_{$this->className}_$event"), $parameters)) and $return) return $returned;
 	}
 }
 
-// Hook a function.
-function addHook($hook, $function)
-{
-	$this->hookedFunctions[$hook][] = $function;
 }
-
-}
-
 
 // Defines a view and handles input.
 // Extend this class and then use $eso->registerController() to register your new controller.

@@ -20,10 +20,10 @@
 if (!defined("IN_ESO")) exit;
 
 /**
- * eso controller: handles global actions such as logging in/out,
- * preparing the bar, and collecting messages.
+ * esoController controller: handles global actions such as logging
+ * in/out, preparing the bar, and collecting messages.
  */
-class eso extends Controller {
+class esoController extends Controller {
 
 var $db;
 var $user;
@@ -49,13 +49,13 @@ var $memberGroups = array("Administrator", "Moderator", "Member", "Suspended");
 var $bar = array("left" => array(), "right" => array());
 var $plugins = array();
 
-// Class constructor: connect to the database and perform other initializations.
-function eso()
+// Initialize: set up the user and initialize the bar and other components of the page.
+function init()
 {	
-	global $config;
+	global $language, $config, $factory;
 
 	// Connect to the database by setting up the database class.
-	$this->db = new Database();
+	$this->db = $factory->make("Database");
 	$this->db->eso =& $this;
 	if (!$this->db->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]))
 		$this->fatalError($config["verboseFatalErrors"] ? $this->db->error() : "", "mysql");
@@ -64,13 +64,7 @@ function eso()
 	if (!isset($_SESSION["messages"]) or !is_array($_SESSION["messages"])) $_SESSION["messages"] = array();
 	
 	// Create an instance of the Formatter class.
-	$this->formatter = new Formatter();
-}
-
-// Initialize: set up the user and initialize the bar and other components of the page.
-function init()
-{
-	global $language, $config;
+	$this->formatter = $factory->make("Formatter");
 
 	// Log out if necessary.
 	if (@$_GET["q1"] == "logout") $this->logout();
@@ -382,14 +376,11 @@ function checkForUpdates()
 }
 
 // Check the first parameter of the URL against $name, and instigate the controller it refers to if they match.
-function registerController($name, $file)
+function registerController($identifier, $className, $file)
 {
-	if (@$_GET["q1"] == $name) {
-		require_once $file;
-		$this->action = $name;
-		$this->controller = new $name;
-		$this->controller->eso =& $this;
-	}
+	global $factory;
+	$this->allowedActions[] = $identifier;
+	$factory->register($identifier, $className, $file);
 }
 
 // Halt page execution and show a fatal error message.

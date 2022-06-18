@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Post controller: finds the conversation and position of a given post,
  * and redirects there.
  */
-class post extends Controller {
+class PostController extends Controller {
 
 function init()
 {

@@ -34,11 +34,11 @@ if (isset($_GET["controller"])) {
 	$eso->action = strtolower($_GET["controller"]);
 	
 	// Does this controller exist?
-	if (!in_array($eso->action, $eso->allowedActions) or !file_exists(dirname(__FILE__) . "/controllers/$eso->action.controller.php")) exit;
-	
+//	if (!in_array($eso->action, $eso->allowedActions) or !file_exists(dirname(__FILE__) . "/controllers/$eso->action.controller.php")) exit;
+	if (!in_array($eso->action, $eso->allowedActions)) exit;	
+
 	// Require and set it up.
-	require_once "controllers/$eso->action.controller.php";
-	$eso->controller = new $eso->action;
+	$eso->controller = $factory->make($eso->action);
 	$eso->controller->eso =& $eso;
 }
 
