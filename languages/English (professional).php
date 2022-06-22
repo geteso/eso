@@ -200,6 +200,7 @@ $language = array(
 "New username" => "New username",
 "Next" => "Next &#155;",
 "No avatar" => "No avatar",
+"No emoticons" => "No Emoticons</br><small>Won't convert text emoticons in your posts to graphic ones</small>",
 "No preview" => "No preview",
 "Number of characters" => "Number of characters",
 "numberMoreResults" => "Number of more results",

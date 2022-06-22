@@ -48,7 +48,7 @@ function init()
 		$this->eso->controller->addHook("formatPost", array($this, "revertEmoticons"));
 
 	// Language definitions.
-	$this->eso->addLanguage("noEmoticons", "No Emoticons</br><small>Won't convert text emoticons in your posts to graphic ones</small>");
+	$this->eso->addLanguage("No emoticons", "No Emoticons</br><small>Won't convert text emoticons in your posts to graphic ones</small>");
 
 	// If we're on the settings view, add the emoticon setting!
 	if ($this->eso->action == "settings") {
@@ -77,7 +77,7 @@ function addEmoticonSettings(&$settings)
 
 	$settings->addToForm("settingsOther", array(
 		"id" => "emoticons",
-		"html" => "<label for='emoticons' class='checkbox'>{$language["noEmoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
+		"html" => "<label for='emoticons' class='checkbox'>{$language["No emoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
 		"databaseField" => "emoticons",
 		"checkbox" => true
 	), 275);
