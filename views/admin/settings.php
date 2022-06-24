@@ -39,12 +39,6 @@ if (!defined("IN_ESO")) exit;
 <li><label><?php echo $language["Forum description"]; ?></label>
 <div><input type='text' class='text' name='forumDescription' value='<?php echo $config["forumDescription"]; ?>'/></div></li>
 
-<li><label><?php echo $language["Default forum language"]; ?><br/></label>
-<div><select name='forumLanguage'><?php
-foreach ($this->languages as $v)
-echo "<option value='$v'" . ($config["language"] == $v ? " selected='selected'" : "") . ">$v</option>";	
-?></select><br/><small><?php echo $language["languagePackInfo"]; ?></small></div></li>
-
 <li><label class='checkbox'><?php echo $language["Use friendly URLs"]; ?></label>
 <div class='parentBox'><input type='checkbox' class='checkbox' name='useFriendlyURLs' value='1'<?php echo !empty($config["useFriendlyURLs"]) ? " checked='checked'" : ""; ?>/></div></li>
 

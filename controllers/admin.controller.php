@@ -37,9 +37,10 @@ function init()
 	if (!$this->eso->user["admin"]) redirect("");
 
 	// Add the default sections to the menu.
- 	$this->defaultSections = array("dashboard", "settings", "members", "plugins", "skins");
+ 	$this->defaultSections = array("dashboard", "settings", "languages", "members", "plugins", "skins");
  	$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
  	$this->addSection("settings", $language["Forum settings"], array($this, "settingsInit"));
+	$this->addSection("languages", $language["Languages"], array($this, "languagesInit"));
 	$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
  	$this->addSection("plugins", $language["Plugins"], array($this, "pluginsInit"));
  	$this->addSection("skins", $language["Skins"], array($this, "skinsInit"));
@@ -141,8 +142,6 @@ function saveSettings()
     // Forum description must contain at least one character.
 	if (empty($_POST["forumDescription"]) or !strlen($_POST["forumDescription"])) {$this->eso->message("forumDescriptionError"); return false;}
 	$newConfig["forumDescription"] = $_POST["forumDescription"];
-	
-	if (in_array(@$_POST["forumLanguage"], $this->languages)) $newConfig["language"] = $_POST["forumLanguage"];
 	
 	$newConfig["useFriendlyURLs"] = (bool)!empty($_POST["useFriendlyURLs"]);
 
@@ -628,6 +627,11 @@ function writeSettingsConfig($newConfigElements)
 function addSection($id, $title, $initFunction, $ajaxFunction = false, $position = false)
 {
 	addToArrayString($this->sections, $id, array("title" => $title, "initFunction" => $initFunction, "ajaxFunction" => $ajaxFunction), $position);
+}
+
+function languagesInit(&$adminController)
+{
+	redirect("languages");
 }
 
 function membersInit(&$adminController)
