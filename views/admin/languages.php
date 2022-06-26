@@ -24,6 +24,22 @@
 if (!defined("IN_ESO")) exit;
 ?>
 
+<div id='admin'>
+	
+<ul class='menu'>
+<li><a href='<?php echo makeLink("admin"); ?>'><?php echo $language["Dashboard"];?></a></li>
+<li><a href='<?php echo makeLink("admin", "settings"); ?>'><?php echo $language["Forum settings"];?></a></li>
+<li class='active'><a href='<?php echo makeLink("admin", "languages"); ?>'><?php echo $language["Languages"];?></a></li>
+<li><a href='<?php echo makeLink("admin", "members"); ?>'><?php echo $language["Member-plural"];?></a></li>
+<li><a href='<?php echo makeLink("admin", "plugins"); ?>'><?php echo $language["Plugins"];?></a></li>
+<li><a href='<?php echo makeLink("admin", "skins"); ?>'><?php echo $language["Skins"];?></a></li>
+
+<li class='separator'></li>
+
+</ul>
+
+<div class='inner'>
+
 <fieldset id='addPlugin'>
 <legend><?php echo $language["Add a new language pack"]; ?></legend>
 <?php echo $this->eso->htmlMessage("downloadLanguagePacks", "https://geteso.org/languages"); ?>
@@ -67,3 +83,8 @@ else: ?>
 <?php echo $this->eso->htmlMessage("noLanguagesInstalled"); ?>
 </fieldset>
 <?php endif; ?>
+
+</div>
+
+<div class='clear'></div>
+</div>
