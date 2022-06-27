@@ -55,14 +55,12 @@ h3 {font-size:120%; font-weight:bold}
 #bar img {vertical-align:-4px}
 #bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
 #login {margin-top:-6.5px!important; padding-top:5.5px; padding-bottom:5.5px; padding-right:3px}
-a#nav-exit {display:block; margin-top:-6px; padding-top:6px; padding-bottom:3px; padding-left:3.5px}
-#nav-dpav select {height:20px; margin-left:3px}
-strong#nav-prof {margin-right:5px}
-#mbl-prof {display:none}
-#mbl-prof span {display:none}
+#displayAvatars select {height:20px; margin-left:3px}
+#bar strong#user {margin-right:5px}
+#bar #profile, #bar #profile span {display:none}
 
 /* Header and bar */
-#hdrbarpack {top:0; z-index:100; position:relative}
+#header {top:0; z-index:100; position:relative}
 
 /* Body */
 #body {padding:10px 25px; padding-bottom:0}
@@ -359,16 +357,16 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .button input {background:none; border:0; margin-left:5px; margin-right:5px; height:18px}
 .big {height:25px}
 .big input {font-size:140%; height:26px}
+.small {line-height:1.5; margin:0 0 10px 0; padding:0 5px 0 5px; width:fit-content}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
-  
+
 /* Post colors */
 .c0 .hdr, .p .c0 .hdr, #palette .c0 {background:#ffffff} .c0 {border-color:#ffffff; background:#fff}
 
 /* Special properties */
-#forgotPassword, #markAsRead, #startConversation {line-height:1.5; margin:0 0 10px 0; padding:0 5px 0 5px; width:fit-content; text-align:center; display:inline-block}
-#forgotPassword, #startConversation {display:none}
-#forgotPassword {margin:0 0 10px 0}
+#ftr-content #forgotPassword, #ftr-content #startConversation {display:none}
+#ftr-content #forgotPassword {margin:0 0 10px 0}
 #accountInformation input {max-width:20em; width:96%}
 #settingsOther {padding:0 15px 12px}
 td.author, td.lastPost {max-width:95px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
@@ -403,9 +401,9 @@ hr {display:block}
 /* Mobile properties */
 @media only screen and (max-width:1000px) {
 #editedBy, span.star0 {display:none}
-#nav-prof, #nav-conv {display:none}
-#nav-dpav {visibility:hidden}
-#mbl-prof {display:inherit}
+#bar #user, #bar #startConversation {display:none}
+#displayAvatars {visibility:hidden}
+#bar #profile {display:inherit}
 #bar {height:18px}
 ul.fl, ul.fr {position:absolute}
 ul.fl {z-index:1}
@@ -473,8 +471,8 @@ ul.fl, ul.fr {white-space:nowrap}
 #search.withStartConversation {padding-right:7.15em}
 #search .fr {margin-right:-7.15em; width:7.15em}
 #bar .fr, #new {display:none}
-#startConversation {display:inline-block}
-#markasread {margin-bottom:0}
+#ftr-content #startConversation {display:inline-block}
+#markAsRead {margin-bottom:0}
 #admin {margin-top:0; border-left:0; border-image:none; background:unset}
 #admin .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available}
 #admin .menu li {display:block; margin-right:0}
@@ -523,10 +521,10 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 }
 
 @media only screen and (max-width:500px) {
-#nav-fgpw {display:none}
-#forgotPassword {display:inline-block}
+#bar #forgotPassword {display:none}
+#ftr-content #forgotPassword {display:inline-block}
 /* #login {padding-right:0; border-right:0} */
-#nav-join span.button {margin-right:-20px}
+#joinLink .button {margin-right:-20px}
 }
 
 @media only screen and (max-width:490px) {
@@ -567,8 +565,4 @@ label#lbl-fgcf {width:12em; display:none}
   
 @media only screen and (max-width:340px) {
 #discardDraft {clear:left; margin:5px 0 0 0}
-}
-
-@media only screen and (max-width:320px) {
-#nav-skin, #nav-plgn {display:none}
 }

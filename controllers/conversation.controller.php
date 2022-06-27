@@ -248,7 +248,7 @@ function init()
 			foreach ($align as $k => $v)
 				$avatarAlignmentOptions .= "<option value='$k'" . (@$_SESSION["avatarAlignment"] == $k ? " selected='selected'" : "") . ">$v</option>";
 			// Add it to the bar.
-			$this->eso->addToBar("right", "<form action='" . curLink() . "' method='post' id='nav-dpav'><div><input type='hidden' name='token' value='{$_SESSION["token"]}'/>{$language["Display avatars"]}<select onchange='Conversation.changeAvatarAlignment(this.value)' name='avatarAlignment'>$avatarAlignmentOptions</select> <noscript><div style='display:inline'>" . $this->eso->skin->button(array("value" => $language["Save changes"])) . "</div></noscript></div></form>", 100);
+			$this->eso->addToBar("right", "<form action='" . curLink() . "' method='post' id='displayAvatars'><div><input type='hidden' name='token' value='{$_SESSION["token"]}'/>{$language["Display avatars"]}<select onchange='Conversation.changeAvatarAlignment(this.value)' name='avatarAlignment'>$avatarAlignmentOptions</select> <noscript><div style='display:inline'>" . $this->eso->skin->button(array("value" => $language["Save changes"])) . "</div></noscript></div></form>", 100);
 		}
 
 		// Add links to the bar.

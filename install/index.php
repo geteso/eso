@@ -84,8 +84,7 @@ case "fatalChecks": ?>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
 </ul>
-<p>If you run into any other problems or just want some help with the installation, feel free to join <a href='https://geteso.org'>geteso.org</a> where a bunch of friendly people will be happy to help you out.</p>
-<hr/>
+<p>If you run into any other problems or just want some help with the installation, feel free to join the <a href='https://forum.geteso.org'>esoBB support forum</a> where a bunch of friendly people will be happy to help you out.</p>
 <p id='footer'><input class='button' value='Try again' type='submit'/></p>
 <hr/>
 <p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
@@ -95,23 +94,24 @@ case "fatalChecks": ?>
 // Warning checks.
 case "warningChecks": ?>
 <h1><img src='logo.svg' data-fallback='logo.png' alt='Forum logo'/>Warning!</h1>
-<p>The following errors were found with your forum's setup. You can continue the installation without resolving them, but some functionality may be limited.</p>
 <hr/>
+<p>The following errors were found with your forum's setup. You can continue the installation without resolving them, but some functionality may be limited.</p>
 <ul>
 <?php foreach ($install->errors as $error) echo "<li>$error</li>"; ?>
 </ul>
-<p>If you run into any other problems or just want some help with the installation, feel free to join <a href='https://geteso.org'>geteso.org</a> where a bunch of friendly people will be happy to help you out.</p>
-<hr/>
+<p>If you run into any other problems or just want some help with the installation, feel free to join the <a href='https://forum.geteso.org'>esoBB support forum</a> where a bunch of friendly people will be happy to help you out.</p>
 <p id='footer'><input class='button' value='Next step &#155;' type='submit' name='next'/></p>
+<hr/>
+<p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 
 
 // Specify setup information.
 case "info": ?>
 <h1><img src='logo.svg' alt=''/>Specify setup information</h1>
+<hr/>
 <p>Welcome to the installer.  We need a few details from you so we can get your forum set up and ready to go.</p>
 <p>If you have any trouble, get help on <a href='https://geteso.org'>geteso.org</a>.</p>
-<hr/>
 
 <ul class='form'>
 <li><label>Forum title</label> <input id='forumTitle' name='forumTitle' tabindex='1' type='text' class='text' placeholder="e.g. Simon's Krav Maga Forum" value='<?php echo @$_POST["forumTitle"]; ?>'/>
@@ -173,8 +173,6 @@ case "info": ?>
 <li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='14' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
 </ul>
 
-<hr/>
-
 <input type='hidden' name='showAdvanced' id='showAdvanced' value='<?php echo $_POST["showAdvanced"]; ?>'/>
 <script type='text/javascript'>
 // <![CDATA[
@@ -192,12 +190,15 @@ function toggleAdvanced() {
 </div>
 
 <p id='footer' style='margin:0'><input type='submit' tabindex='15' value='Next step &#155;' class='button'/></p>
+<hr/>
+<p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 
 
 // Show an installation error.
 case "install": ?>
 <h1><img src='logo.svg' alt=''/>Uh oh! It's a fatal error...</h1>
+<hr/>
 <p class='warning msg'>The forum installer encountered an error.</p>
 <p>The installer has encountered a nasty error which is making it impossible to install a forum on your server. But don't feel down, <strong>here are a few things you can try</strong>:</p>
 <ul>
@@ -210,7 +211,6 @@ case "install": ?>
 <hr class='aboveToggle'/>
 <div id='error'>
 <?php echo $install->errors[1]; ?>
-<hr/>
 </div>
 <script type='text/javascript'>
 // <![CDATA[
@@ -224,12 +224,15 @@ hide(document.getElementById("error"));
 <input type='submit' class='button' value='&#139; Go back' name='back'/>
 <input type='submit' class='button' value='Try again'/>
 </p>
+<hr/>
+<p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 
 
 // Finish!
 case "finish": ?>
 <h1><img src='logo.svg' alt=''/>Congratulations!</h1>
+<hr/>
 <p>Your forum has been installed, and it should be ready to go.</p>
 <p>It's highly recommended that you <strong>remove the <code>install</code> folder</strong> to secure your forum.</p>
 
@@ -241,7 +244,6 @@ case "finish": ?>
 <?php if (isset($_SESSION["queries"]) and is_array($_SESSION["queries"]))
 	foreach ($_SESSION["queries"] as $query) echo sanitizeHTML($query) . ";<br/><br/>"; ?>
 </pre>
-<hr/>
 </div>
 <script type='text/javascript'>
 // <![CDATA[
@@ -252,6 +254,8 @@ hide(document.getElementById("advanced"));
 // ]]>
 </script>
 <p style='text-align:center' id='footer'><input type='submit' class='button' value='Take me to my forum!' name='finish'/></p>
+<hr/>
+<p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 
 }

@@ -82,8 +82,8 @@ if(!defined("IN_ESO"))exit;
 
 <div id='wrapper'<?php if($this->action!="search"):?> class='small'<?php endif;?>>
 
-<div id='hdrbarpack'>
-
+<!-- HEADER -->
+<div id='header'>
 <div id='hdr'>
 
 <?php if (($config["showForumDescription"] == "true") && ($this->action == "search")): ?>
@@ -107,7 +107,8 @@ if(!defined("IN_ESO"))exit;
 </p>
 <?php else:include "views/searchForm.inc.php";endif;?>
 </div>
-	
+
+<!-- NAVIGATION -->
 <div id='bar'>
 <?php if(count($this->bar["left"])):?><ul class='fl'><?php ksort($this->bar["left"]);foreach($this->bar["left"] as $v)echo "<li>$v</li>";?></ul><?php endif;?>
 <?php if(count($this->bar["right"])):?><ul class='fr'><?php ksort($this->bar["right"]);foreach($this->bar["right"] as $v)echo "<li>$v</li>";?></ul><?php endif;?>
@@ -116,20 +117,23 @@ if(!defined("IN_ESO"))exit;
 </div>
 
 <div id='body'>
+<div id='body-content'>
 <?php $this->controller->render();?>
+</div>
 </div>
 
 <?php $this->callHook("footer"); ?>
 <div id='ftr'>
+<div id='ftr-content'>
 <?php if (count($this->footer)): ?><ul><?php
 ksort($this->footer);
 foreach ($this->footer as $v) echo "<li>$v</li>";
 ?></ul><?php endif; ?>
-
 </div>
-
 </div>
-
 <?php $this->callHook("pageEnd");?>
+
+</div>
+
 </body>
 </html>
