@@ -33,17 +33,26 @@ function init()
 {
 	global $language;
 	
-	// Non-admins aren't allowed here.
-	if (!$this->eso->user["admin"]) redirect("");
+	// Non-admins/mods aren't allowed here.
+	if (!$this->eso->user["moderator"]) redirect("");
 
-	// Add the default sections to the menu.
- 	$this->defaultSections = array("dashboard", "settings", "languages", "members", "plugins", "skins");
- 	$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
- 	$this->addSection("settings", $language["Forum settings"], array($this, "settingsInit"));
-	$this->addSection("languages", $language["Languages"], array($this, "languagesInit"));
-	$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
- 	$this->addSection("plugins", $language["Plugins"], array($this, "pluginsInit"));
- 	$this->addSection("skins", $language["Skins"], array($this, "skinsInit"));
+	// Add the default sections to the menu if the user is an administrator.
+	if ($this->eso->user["admin"]) {
+ 		$this->defaultSections = array("dashboard", "settings", "languages", "members", "plugins", "skins");
+ 		$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
+ 		$this->addSection("settings", $language["Forum settings"], array($this, "settingsInit"));
+		$this->addSection("languages", $language["Languages"], array($this, "languagesInit"));
+		$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
+ 		$this->addSection("plugins", $language["Plugins"], array($this, "pluginsInit"));
+ 		$this->addSection("skins", $language["Skins"], array($this, "skinsInit"));
+	}
+	
+	// Add a limited array of the default sections to the menu if the user is an moderator.
+	if ($this->eso->user["moderator"]) {
+ 		$this->defaultSections = array("dashboard", "members");
+ 		$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
+		$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
+	}
 	
 	$this->callHook("init");
 	
