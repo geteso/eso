@@ -28,7 +28,7 @@ var $id = "Debug";
 var $name = "Debug";
 var $version = "1.0";
 var $description = "Shows programming debug information for administrators";
-var $author = "eso";
+var $author = "the esoBB team";
 var $defaultConfig = array(
 	"showToNonAdmins" => false
 );

@@ -69,7 +69,8 @@ function installLanguage()
 	}
 			
 	// Everything worked correctly - success!
-	if (!$error) $this->eso->message("languagePackAdded");
+	// todo
+	$this->eso->message("languagePackAdded");
 		
 	// Hmm, something went wrong. Show an error.
 	else $this->eso->message("invalidLanguagePack");

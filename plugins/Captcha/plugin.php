@@ -29,7 +29,7 @@ var $id = "Captcha";
 var $name = "Captcha";
 var $version = "1.0";
 var $description = "Provides image verification to prevent bots from joining";
-var $author = "eso";
+var $author = "the esoBB team";
 var $defaultConfig = array(
 	"numberOfCharacters" => 3
 );

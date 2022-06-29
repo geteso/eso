@@ -177,9 +177,9 @@ function init()
 		$this->eso->addToHead("<meta name='description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
 		$this->eso->addToHead("<meta property='og:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
 		$this->eso->addToHead("<meta name='twitter:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
-		if (!$this->eso->user) $this->eso->addToFooter("<a id='forgotPassword' class='button small' href='" . makeLink("forgot-password") . "'>{$language["Forgot your password"]}</a>", 100);
-		if ($this->eso->user) $this->eso->addToFooter("<a id='markAsRead' class='button small' href='" . makeLink("?markAsRead") . "'>{$language["Mark all conversations as read"]}</a>", 200);
-		if ($this->eso->user) $this->eso->addToFooter("<a id='startConversation' class='button small' href='" . makeLink("conversation/new") . "'>{$language["Start a conversation"]}</a>", 300);
+		if (!$this->eso->user) $this->eso->addToFooter("<a id='forgotPassword' class='button buttonSmall' href='" . makeLink("forgot-password") . "'>{$language["Forgot your password"]}</a>", 100);
+		if ($this->eso->user) $this->eso->addToFooter("<a id='markAsRead' class='button buttonSmall' href='" . makeLink("?markAsRead") . "'>{$language["Mark all conversations as read"]}</a>", 200);
+		if ($this->eso->user) $this->eso->addToFooter("<a id='startConversation' class='button buttonSmall' href='" . makeLink("conversation/new") . "'>{$language["Start a conversation"]}</a>", 300);
 		
 		// If this is not technically the homepage (if it's a search page) the we don't want it to be indexed.
 		if (@$_GET["q1"] == "search") $this->eso->addToHead("<meta name='robots' content='noindex, noarchive'/>");

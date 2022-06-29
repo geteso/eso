@@ -629,9 +629,56 @@ function addSection($id, $title, $initFunction, $ajaxFunction = false, $position
 	addToArrayString($this->sections, $id, array("title" => $title, "initFunction" => $initFunction, "ajaxFunction" => $ajaxFunction), $position);
 }
 
-function languagesInit(&$adminController)
+function languagesInit()
+{	
+	global $language, $config;
+	$this->title = $language["Languages"];
+	$this->subView = "admin/languages.php";
+	$this->languages = $this->eso->getLanguages();
+	
+	// If the "add a new language pack" form has been submitted, attempt to install the uploaded pack.
+	if (isset($_FILES["installLanguage"]) and $this->eso->validateToken(@$_POST["token"]) and !empty($config["uploadPackages"])) $this->installLanguage();
+
+	// Save the language settings.
+	if (isset($_POST["forumLanguage"])
+		and $this->eso->validateToken(@$_POST["token"])
+		and $this->changeLanguage(@$_POST["forumLanguage"])) {
+			$this->eso->message("changesSaved");
+			refresh();
+		}
+
+}
+
+function changeLanguage($language)
 {
-	redirect("languages");
+	$newConfig = array();
+
+	if (in_array($language, $this->languages)) $newConfig["language"] = $language;
+	else return false;
+
+    if (count($newConfig)) $this->writeSettingsConfig($newConfig);
+
+	return true;
+}
+
+// Install an uploaded language pack.
+function installLanguage()
+{
+	// If the uploaded file has any errors, don't proceed.
+	if ($_FILES["installLanguage"]["error"]) {
+		$this->eso->message("invalidLanguagePack");
+		return false;
+	}
+	
+	// Move the uploaded language pack into the languages directory.
+	if (!move_uploaded_file($_FILES["installLanguage"]["tmp_name"], "languages/{$_FILES["installLanguage"]["name"]}")) {
+		$this->eso->message("notWritable", false, "languages/");
+		return false;
+	}
+			
+	// Everything worked correctly - success!
+	// todo
+	$this->eso->message("languagePackAdded");
 }
 
 function membersInit(&$adminController)
@@ -725,7 +772,7 @@ function pluginsInit(&$adminController)
 	
 	// Toggle a plugin if necessary.
 	if (!empty($_GET["toggle"]) and $this->eso->validateToken(@$_GET["token"]) and $this->togglePlugin($_GET["toggle"]))
- 		redirect("admin", "plugins");	
+ 		redirect("admin", "plugins");
 }
 
 

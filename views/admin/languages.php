@@ -24,26 +24,12 @@
 if (!defined("IN_ESO")) exit;
 ?>
 
-<div id='admin'>
-	
-<ul class='menu'>
-<li><a href='<?php echo makeLink("admin"); ?>'><?php echo $language["Dashboard"];?></a></li>
-<li><a href='<?php echo makeLink("admin", "settings"); ?>'><?php echo $language["Forum settings"];?></a></li>
-<li class='active'><a href='<?php echo makeLink("admin", "languages"); ?>'><?php echo $language["Languages"];?></a></li>
-<li><a href='<?php echo makeLink("admin", "members"); ?>'><?php echo $language["Member-plural"];?></a></li>
-<li><a href='<?php echo makeLink("admin", "plugins"); ?>'><?php echo $language["Plugins"];?></a></li>
-<li><a href='<?php echo makeLink("admin", "skins"); ?>'><?php echo $language["Skins"];?></a></li>
-
-<li class='separator'></li>
-
-</ul>
-
-<div class='inner'>
-
-<fieldset id='addPlugin'>
+<?php // If it's okay to upload plugin packages, add a new plugin form.
+if (!empty($config["uploadPackages"])): ?>
+<fieldset id='addLanguage'>
 <legend><?php echo $language["Add a new language pack"]; ?></legend>
 <?php echo $this->eso->htmlMessage("downloadLanguagePacks", "https://geteso.org/languages"); ?>
-<form action='<?php echo makeLink("languages"); ?>' method='post' enctype='multipart/form-data'>
+<form action='<?php echo makeLink("admin", "languages"); ?>' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
 <ul class='form'>
 <li><label><?php echo $language["Upload a language pack"]; ?></label> <input name='installLanguage' type='file' class='text' size='20'/></li>
@@ -52,13 +38,21 @@ if (!defined("IN_ESO")) exit;
 </form>
 </fieldset>
 
+<?php // Otherwise if uploading packages is disabled, show a message.
+else: ?>
+<fieldset id='addLanguage'>
+<legend><?php echo $language["Add a new language pack"]; ?></legend>
+<?php echo $this->eso->htmlMessage("noUploadingPackages"); ?>
+</fieldset>
+<?php endif; ?>
+
 <?php // If there are installed language packs to display.
 if (count($this->languages)): ?>
 
 <fieldset id='adminbasic'>
 <legend><?php echo $language["Installed language packs"];?></legend>
 
-<form action='<?php echo makeLink("languages"); ?>' id='basicSettings' method='post'>
+<form action='<?php echo makeLink("admin", "languages"); ?>' id='basicSettings' method='post'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"]; ?>'/>
 
 <ul class='form settingsForm'>
@@ -83,8 +77,3 @@ else: ?>
 <?php echo $this->eso->htmlMessage("noLanguagesInstalled"); ?>
 </fieldset>
 <?php endif; ?>
-
-</div>
-
-<div class='clear'></div>
-</div>

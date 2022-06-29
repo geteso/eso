@@ -29,7 +29,7 @@ var $id = "Emoticons";
 var $name = "Emoticons";
 var $version = "1.1";
 var $description = "Converts emoticon text entities into graphic emoticons";
-var $author = "eso, GigaHacer";
+var $author = "the esoBB team";
 
 var $emoticonDir = "plugins/Emoticons/";
 var $emoticons = array();
@@ -48,7 +48,7 @@ function init()
 		$this->eso->controller->addHook("formatPost", array($this, "revertEmoticons"));
 
 	// Language definitions.
-	$this->eso->addLanguage("No emoticons", "No Emoticons</br><small>Won't convert text emoticons in your posts to graphic ones</small>");
+	$this->eso->addLanguage("Disable emoticons", "Disable image emoticons");
 
 	// If we're on the settings view, add the emoticon setting!
 	if ($this->eso->action == "settings") {
@@ -59,7 +59,7 @@ function init()
 }
 
 // Add the emoticon formatter that will parse and unparse emoticons.
-    // Only add the formatter if the current user hasn't opted out of graphical emoticons.
+// Only add the formatter if the current user hasn't opted out of graphical emoticons.
 function addEmoticonFormatter()
 {
 	if (empty($this->eso->user["emoticons"])) $this->eso->formatter->addFormatter("emoticons", "Formatter_Emoticons");
@@ -77,10 +77,10 @@ function addEmoticonSettings(&$settings)
 
 	$settings->addToForm("settingsOther", array(
 		"id" => "emoticons",
-		"html" => "<label for='emoticons' class='checkbox'>{$language["No emoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
+		"html" => "<label for='emoticons' class='checkbox'>{$language["Disable emoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
 		"databaseField" => "emoticons",
 		"checkbox" => true
-	), 275);
+	));
 }
 
 // Add the table to the database.

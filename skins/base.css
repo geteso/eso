@@ -123,7 +123,7 @@ a.star1, a.star0 {cursor:pointer}
 small.tags {margin-right:8.5px}
 small.tags:empty {margin:0}
 #unreadPost a, #lastPost a {margin:0}
-#newResults td {padding:1px 0}
+#newResults td {padding:0}
 #newResults .msg {margin:0; padding:3px 0; font-size:90%; text-align:center}
 #newResults a {margin:0; font-weight:bold}
 #more .msg {margin:0; margin-top:-2px; padding:3px 0; text-align:center; font-size:90%}
@@ -257,6 +257,7 @@ form#settingsAvatar {padding-bottom:8px}
 #palette {margin:-10px 0 12px; margin-left:-8px; margin-right:-10px}
 #palette table {position:relative; width:100%} 
 #palette td {padding:0 2px 0 0; vertical-align:top} 
+#palette td:hover a:not(.selected) {height:38px}
 #palette a {display:block; height:35px; margin-top:2px}
 #palette a.selected {height:40px; margin-top:0}
 #palette table#tblfirst a.selected {margin-top:-3px}
@@ -280,7 +281,6 @@ form#settingsAvatar {padding-bottom:8px}
 .form.logoForm img {height:32px; padding:5px}
 .form.iconForm img {width:128px; height:128px}
 .form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
-#registrationMembers .msg {margin:0}
 
 /* Plugins */
 #plugins .controls {float:right}
@@ -306,7 +306,6 @@ form#settingsAvatar {padding-bottom:8px}
 #skins small {margin-left:10px}
 #skins .preview {display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center; width:275px}
 #skins .preview span {display:block; margin-top:65px}
-#addSkin .warning {margin:0}
 
 /* Profile */
 .profile .body {overflow:visible; padding:5px 10px}
@@ -338,6 +337,7 @@ fieldset {margin:5px 0 10px 0; padding:0 15px 15px}
 legend {font-size:140%; font-weight:bold; padding:5px 10px 10px}
 fieldset.hidden {padding:0 16px 0}
 fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
+fieldset .warning:last-child {margin:0}
 
 /* Structured forms */
 .form label {float:left; line-height:1.5; margin:0 1em 1px 0; text-align:right; width:12em}
@@ -357,7 +357,7 @@ fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 .button input {background:none; border:0; margin-left:5px; margin-right:5px; height:18px}
 .big {height:25px}
 .big input {font-size:140%; height:26px}
-.small {line-height:1.5; margin:0 0 10px 0; padding:0 5px 0 5px; width:fit-content}
+.buttonSmall {line-height:1.5; margin:0 0 10px 0; padding:0 5px 0 5px; width:fit-content}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
 
@@ -472,7 +472,6 @@ ul.fl, ul.fr {white-space:nowrap}
 #search .fr {margin-right:-7.15em; width:7.15em}
 #bar .fr, #new {display:none}
 #ftr-content #startConversation {display:inline-block}
-#markAsRead {margin-bottom:0}
 #admin {margin-top:0; border-left:0; border-image:none; background:unset}
 #admin .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available}
 #admin .menu li {display:block; margin-right:0}
@@ -542,11 +541,11 @@ label#lbl-fgps {width:12em; display:none}
 #forgot-pass-reset input {clear:left; max-width:20em; width:96%}
 label#lbl-fgcf {width:12em; display:none}
 #forgot-pass-reset .button {margin-top:2px; margin-left:-1px}
-#addPlugin ul.form li:first-child, #addSkin ul.form li:first-child {margin-bottom:10px}
-#addPlugin ul.form li:first-child label, #addSkin ul.form li:first-child label {text-align:left}
-#addPlugin ul.form li:first-child input, #addSkin ul.form li:first-child input {clear:left}
-#addPlugin ul.form li:last-child label, #addSkin ul.form li:last-child label {display:none}
-#addPlugin .warning, #addSkin .warning {margin:0}
+#addPlugin ul.form li:first-child, #addSkin ul.form li:first-child, #addLanguage ul.form li:first-child {margin-bottom:10px}
+#addPlugin ul.form li:first-child label, #addSkin ul.form li:first-child label, #addLanguage ul.form li:first-child label {text-align:left}
+#addPlugin ul.form li:first-child input, #addSkin ul.form li:first-child input, #addLanguage ul.form li:first-child input {clear:left}
+#addPlugin ul.form li:last-child label, #addSkin ul.form li:last-child label, #addLanguage ul.form li:last-child label {display:none}
+#addPlugin .warning, #addSkin .warning, #addLanguage .warning {margin:0}
 }
 
 @media only screen and (max-width:420px) {
