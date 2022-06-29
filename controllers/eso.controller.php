@@ -28,7 +28,7 @@ class eso extends Controller {
 var $db;
 var $user;
 var $action;
-var $allowedActions = array("admin", "conversation", "feed", "forgot-password", "join", "languages", "online", "post", "profile", "search", "settings");
+var $allowedActions = array("admin", "conversation", "feed", "forgot-password", "join", "online", "post", "profile", "search", "settings");
 var $controller;
 var $view = "wrapper.php";
 var $language;
