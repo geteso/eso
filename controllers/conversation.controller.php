@@ -253,16 +253,16 @@ function init()
 
 		// Add links to the bar.
 		// Add the RSS feed button.
-		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss'><span class='button'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
+		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss'><span class='button buttonSmall'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
 		
 		// Add the sticky/unsticky link if the user has permission.
-		if ($this->canSticky() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleSticky", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleSticky();return false'><span class='button'><input type='submit' id='stickyLink' value='" . $language[in_array("sticky", $this->conversation["labels"]) ? "Unsticky" : "Sticky"] . "'></span></a>", 400);
+		if ($this->canSticky() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleSticky", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleSticky();return false'><span class='button buttonSmall'><input type='submit' id='stickyLink' value='" . $language[in_array("sticky", $this->conversation["labels"]) ? "Unsticky" : "Sticky"] . "'></span></a>", 400);
 		
 		// Add the lock/unlock link if the user has permission.
-		if ($this->canLock() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleLock", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleLock();return false'><span class='button'><input type='submit' id='lockLink' value='" . $language[$this->conversation["locked"] ? "Unlock" : "Lock"] . "'></span></a>", 300);
+		if ($this->canLock() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleLock", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleLock();return false'><span class='button buttonSmall'><input type='submit' id='lockLink' value='" . $language[$this->conversation["locked"] ? "Unlock" : "Lock"] . "'></span></a>", 300);
 		
 		// Add the delete conversation link if the user has permission.
-		if ($this->canDeleteConversation() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?delete", "&token={$_SESSION["token"]}") . "' onclick='return Conversation.deleteConversation()'><span class='button'><input type='submit' value='{$language["Delete conversation"]}'></span></a>", 200);
+		if ($this->canDeleteConversation() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?delete", "&token={$_SESSION["token"]}") . "' onclick='return Conversation.deleteConversation()'><span class='button buttonSmall'><input type='submit' value='{$language["Delete conversation"]}'></span></a>", 200);
 		
 		// Update the user's last action.
 		$this->updateLastAction();

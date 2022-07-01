@@ -156,7 +156,7 @@ function init()
 		$this->eso->addVarToJS("checkForNewResultsInterval", $config["checkForNewResultsInterval"]);
 		
 		// Add a link to the RSS feed in the bar.
-		$this->eso->addToBar("right", "<a href='" . makeLink("feed") . "' id='rss'><span class='button'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
+		$this->eso->addToBar("right", "<a href='" . makeLink("feed") . "' id='rss'><span class='button buttonSmall'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
 		
 		// Update the user's last action.
 		$this->eso->updateLastAction("");
@@ -174,9 +174,15 @@ function init()
 		// Add meta tags to the header, the "Mark all conversations as read" link to the footer, and a "Start a conversation" link for mobile support.
 		$this->eso->addToHead("<meta name='keywords' content='" . implode(",", $tags) . "'/>");
 		list($lastTag) = array_splice($tags, count($tags) - 1, 1);
-		$this->eso->addToHead("<meta name='description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
-		$this->eso->addToHead("<meta property='og:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
-		$this->eso->addToHead("<meta name='twitter:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
+		if (!empty($config["useForumDescription"])) {
+			$this->eso->addToHead("<meta name='description' content='" . sanitizeHTML($config["forumDescription"]) . "'/>");
+			$this->eso->addToHead("<meta property='og:description' content='" . sanitizeHTML($config["forumDescription"]) . "'/>");
+			$this->eso->addToHead("<meta name='twitter:description' content='" . sanitizeHTML($config["forumDescription"]) . "'/>");
+		} else {
+			$this->eso->addToHead("<meta name='description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
+			$this->eso->addToHead("<meta property='og:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
+			$this->eso->addToHead("<meta name='twitter:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
+		}
 		if (!$this->eso->user) $this->eso->addToFooter("<a id='forgotPassword' class='button buttonSmall' href='" . makeLink("forgot-password") . "'>{$language["Forgot your password"]}</a>", 100);
 		if ($this->eso->user) $this->eso->addToFooter("<a id='markAsRead' class='button buttonSmall' href='" . makeLink("?markAsRead") . "'>{$language["Mark all conversations as read"]}</a>", 200);
 		if ($this->eso->user) $this->eso->addToFooter("<a id='startConversation' class='button buttonSmall' href='" . makeLink("conversation/new") . "'>{$language["Start a conversation"]}</a>", 300);

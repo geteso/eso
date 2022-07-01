@@ -36,10 +36,10 @@ h3 {font-size:120%; font-weight:bold}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
 
 /* Forum description */
-#forumDescription {font-size:12px}
-#hdr h1#hasForumDescription img {float:left}
-#hdr h1#hasForumDescription #forumTitle {float:right; position:absolute; font-size:20px}
-#hdr h1#hasForumDescription #forumDescription {display:block; white-space:nowrap}
+#forumTitle, #forumDescription {overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+#wrapper:not(.small) #forumTitle {position:absolute; max-width:calc(100% - 160px)}
+#forumDescription {font-size:12px; display:block}
+h1#hasForumDescription #forumTitle {font-size:20px}
 
 /* User bar */
 #bar {line-height:18px; overflow:hidden; padding:6px 25px; height:18px}
@@ -51,7 +51,6 @@ h3 {font-size:120%; font-weight:bold}
 #bar form {font-size:90%; margin-top:-1px; margin-bottom:-2px}
 #bar .text {width:8em}
 #bar input.text {height:14px; border-radius:0; -webkit-appearance:none}
-#bar span.button {height:18px}
 #bar img {vertical-align:-4px}
 #bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
 #login {margin-top:-6.5px!important; padding-top:5.5px; padding-bottom:5.5px; padding-right:3px}
@@ -264,7 +263,7 @@ form#settingsAvatar {padding-bottom:8px}
 #palette table#tblsecond a.selected {height:37px}
 
 /* Admin */
-#admin {margin:-15px -25px}
+#admin {margin:-15px -25px; border:0; border-left-style:solid; border-left-width:175px}
 #admin .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0}
 #admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
 #admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
@@ -324,7 +323,7 @@ form#settingsAvatar {padding-bottom:8px}
 /* Footer */
 #ftr {font-size:90%; padding:0 25px 20px; overflow:hidden}
 #ftr ul {margin:0; padding:0; list-style-type:none}
-#ftr #copyright {margin:0; padding:10px}
+#ftr #copyright {margin:0; padding:10px 0 0}
 #ftr small {font-size:inherit}
 #ftr small:not(:first-child) {padding-top:5px}
 
@@ -337,7 +336,7 @@ fieldset {margin:5px 0 10px 0; padding:0 15px 15px}
 legend {font-size:140%; font-weight:bold; padding:5px 10px 10px}
 fieldset.hidden {padding:0 16px 0}
 fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
-fieldset .warning:last-child {margin:0}
+fieldset > .warning:last-child {margin:0}
 
 /* Structured forms */
 .form label {float:left; line-height:1.5; margin:0 1em 1px 0; text-align:right; width:12em}
@@ -357,7 +356,8 @@ fieldset .warning:last-child {margin:0}
 .button input {background:none; border:0; margin-left:5px; margin-right:5px; height:18px}
 .big {height:25px}
 .big input {font-size:140%; height:26px}
-.buttonSmall {line-height:1.5; margin:0 0 10px 0; padding:0 5px 0 5px; width:fit-content}
+.buttonSmall {line-height:1.5; width:fit-content}
+a.buttonSmall {padding:0 5px; text-decoration:none}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
 

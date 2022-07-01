@@ -25,6 +25,9 @@
 if (!defined("IN_ESO")) exit;
 ?>
 
+<?php
+// If the user is an administrator, display the settings form.
+if ($this->eso->user["admin"]):?>
 <fieldset id='registrationSettings'>
 <legend><?php echo $language["Registration settings"];?></legend>
 
@@ -48,6 +51,7 @@ if (!defined("IN_ESO")) exit;
 
 </form>
 </fieldset>
+<?php endif; ?>
 
 <fieldset id="registrationMembers">
 <legend><?php echo $language["Unvalidated members"];?></legend>

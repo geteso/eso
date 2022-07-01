@@ -114,20 +114,19 @@ function init()
  <input id='loginPassword' name='login[password]' type='password' class='text' autocomplete='current-password' placeholder='{$language["Password"]}'/>
  " . $this->skin->button(array("value" => $language["Log in"])) . "
  </div></form>", 100);
- 			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='joinLink'><span class='button'><input type='submit' value='{$language["Join us"]}'></span></a>", 200);
- 			$this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
+ 			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='joinLink'><span class='button buttonSmall'><input type='submit' value='{$language["Join us"]}'></span></a>", 200);
+ 			$this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
 		}
 		
 		// If the user IS logged in, we want to display their name and appropriate links.
 		else {
 						$this->addToBar("left", "<strong id='user'><a href='" . makeLink("profile") . "'>{$this->user["name"]}</a>:</strong>", 100);
-						$this->addToBar("left", "<a href='" . makeLink("") . "'><span class='button'><input type='submit' value='{$language["Home"]}'></span></a>", 200);
-						$this->addToBar("left", "<a href='" . makeLink("profile") . "' id='profile'><span class='button'><input type='submit' value='{$language["My profile"]}'></span></a>", 300);
-						$this->addToBar("left", "<a href='" . makeLink("settings") . "'><span class='button'><input type='submit' value='{$language["My settings"]}'></span></a>", 400);
-						$this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='startConversation'><span class='button'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
-						$this->addToBar("left", "<a href='" . makeLink("logout") . "' id='logout'><span class='button'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
-						if ($this->user["admin"])
- 				$this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
+						$this->addToBar("left", "<a href='" . makeLink("") . "'><span class='button buttonSmall'><input type='submit' value='{$language["Home"]}'></span></a>", 200);
+						$this->addToBar("left", "<a href='" . makeLink("profile") . "' id='profile'><span class='button buttonSmall'><input type='submit' value='{$language["My profile"]}'></span></a>", 300);
+						$this->addToBar("left", "<a href='" . makeLink("settings") . "'><span class='button buttonSmall'><input type='submit' value='{$language["My settings"]}'></span></a>", 400);
+						$this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='startConversation'><span class='button buttonSmall'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
+						$this->addToBar("left", "<a href='" . makeLink("logout") . "' id='logout'><span class='button buttonSmall'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
+						if ($this->user["moderator"]) $this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button buttonSmall'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
 		
 		// The following text constitutes a copyright notification.

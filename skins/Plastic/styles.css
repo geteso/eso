@@ -20,25 +20,21 @@ small a, dt a {color:#55f}
 /* User bar */
 #bar {background:linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 0 5px 0 #ababab}
 #bar strong a {color:#000}
-#bar .button {border-radius:0}
-#bar li a .button {background:linear-gradient(#f7f7f7, #d8d9e1); box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); border:1px solid #bbb}
-#bar li a .button input {color:#000; text-shadow:#ececec 0 1px}
-#bar li a .button:hover {box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .15)}
-#bar li a .button:active{box-shadow:0 1px 1px rgba(255, 255, 255, 0.5), inset 2px 2px 10px rgba(0, 0, 0, .5)}
 #login {border-top:0; border-bottom:0; border-left:0; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
-#bar #logout .button, #bar #rss .button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)}
-#bar #logout .button input, #bar #rss .button input {color:#fff; text-shadow:#046b9e 0 1px}
-#bar #logout .button:hover, #bar #rss .button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)}
-#bar #logout .button:active, #bar #rss .button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)}
+#bar #login .button, #bar #logout .button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d}
+#bar #login .button input, #bar #logout .button input {color:#fff; text-shadow:#046b9e 0 1px}
 #logout {display:block; margin-top:-6px; padding-top:6px; padding-bottom:3px; padding-left:3.5px; border-top:0; border-bottom:0; border-left:1px solid; border-right:0; border-image:linear-gradient(to bottom, #c1c1c1, #ababab); border-image-slice:1}
 #displayAvatars select {border-radius:0; border-color:#bbb; box-shadow:inset 0 5px 10px rgba(0,0,0,.07); background:#fff}
+/* RSS button */
+#bar #rss .button {background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzUgMTc1Ij4KICA8Y2lyY2xlIGN4PSIyNCIgY3k9IjE1MSIgcj0iMjQiIGZpbGw9IiNmZmYiLz4KICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTE2IDE3NUg4MkE4MiA4MiAwIDAgMCAwIDkzVjU5YTExNiAxMTYgMCAwIDEgMTE2IDExNnoiLz4KICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQwIDE3NUExNDAgMTQwIDAgMCAwIDAgMzVWMGExNzUgMTc1IDAgMCAxIDE3NSAxNzV6Ii8+Cjwvc3ZnPgo=') no-repeat center/13px, linear-gradient(#fdc855 25%, #fa9f15 50%, #f87602 50%, #fdb522 100%); width:19px; border:1px solid #db5605; border-radius:5px}
+#bar #rss .button input {visibility:hidden; color:#fff; text-shadow:#db5605 0 -1px}
 
 /* Body */
 #body {background:linear-gradient(#ecedee, #fff); background-repeat:no-repeat; background-size:100% 90px}
 #wrapper {border-top:0; border-bottom:0; border-left:1px solid; border-right:1px solid; border-image:linear-gradient(to bottom, #c1c1c1, #fff); border-image-slice:1; background:#fff}
 
 /* Tags & gambits */
-#tagArea {border:1px dashed #bbb}
+#tagArea {border:1px dashed #ccc}
 #tags a {color:#777}
 #gambits a {color:#00f}
 
@@ -143,7 +139,7 @@ blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
 .p hr {color:#bbb; border:solid #bbb; border-width:1px 0 0}
 
 /* Admin */
-#admin {border-left:175px solid #eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; background:#fff}
+#admin {border-color:#eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; background:#fff}
 #admin .menu {border-right:1px solid #ccc}
 #admin .menu li.active a {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; color:#000}
 #admin .inner {border-left:1px solid #ccc}
@@ -171,10 +167,10 @@ blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
 .profile .form li {border-bottom:1px solid rgba(0,0,0,0.1)}
 
 /* Footer */
-#ftr #copyright {border:1px dashed #ccc}
+#ftr #copyright {border-top:1px dashed #ccc}
 
 /* Inputs, buttons, and other form elements */
-input.text, textarea {background:#fff; border:1px solid #bbb}
+input.text, textarea {background:#fff; border:1px solid #bbb; box-shadow:inset 0 1px 3px #ccc}
 input.text:focus, textarea:focus {border-color:#777}
 #cInfo .editable:focus {background:#fff}
 input::placeholder {color:#aaa}
@@ -189,11 +185,11 @@ fieldset.hidden legend a {color:#666}
 .button, .button input {text-shadow:#046b9e 0 -1px}
 .button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)}
 .button input {color:#fff}
-.button:hover {box-shadow:inset 0px 0px 5px 2px rgb(255, 255, 255, .5)}
-.button:active {box-shadow:inset 0px 0px 15px 2px rgba(0, 0, 0, .5)}
-.buttonSmall {background:#e4e4e4; color:#000; text-shadow:#fff 0 1px; border:0; border-radius:0; box-shadow:none}
-.buttonSmall:hover {color:#000; text-decoration:none}
-.buttonSmall:active {color:#000}
+.button:hover {box-shadow:inset 0 0 0 2px rgb(255, 255, 255, .5)}
+.button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, .25)}
+.buttonSmall {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5)}
+.buttonSmall, .buttonSmall:active, .buttonSmall:hover {background:linear-gradient(#f7f7f7, #d8d9e1); color:#000; text-shadow:#fff 0 1px; border:1px solid #bbb; border-radius:0}
+.buttonSmall input, .buttonSmall:active input, .buttonSmall:hover input {color:#000; text-shadow:#fff 0 1px}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 1px #ffffff}
 .bigDisabled, .bigDisabled:active, .bigDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 1px #ffffff}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input {color:#999; text-shadow:#fff 0 1px}
@@ -227,9 +223,6 @@ fieldset.hidden legend a {color:#666}
 .c25 .hdr, .p .c25 .hdr, #palette .c25 {background:#e5e2ba} .c25 {border-color:#e5e2ba; background:#e5e2ba2e}
 .c26 .hdr, .p .c26 .hdr, #palette .c26 {background:#e7d0bb} .c26 {border-color:#e7d0bb; background:#e7d0bb2e}
 .c27 .hdr, .p .c27 .hdr, #palette .c27 {background:#cdc5bd} .c27 {border-color:#cdc5bd; background:#cdc5bd2e}
-  
-/* Special properties */
-input.text, textarea, .pg {box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
 
 /* Mobile properties */
 @media only screen and (max-width:1000px) {

@@ -56,6 +56,7 @@ $defaultConfig = array(
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
 "https" => false, // Whether or not to force HTTPS.
 "showForumDescription" => true, // Whether or not to display the forum description on the homepage.
+"useForumDescription" => false, // Whether or not to use the forum description instead of the forumDescription language string in meta tags.
 
 // Skins and plugins.
 "skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)

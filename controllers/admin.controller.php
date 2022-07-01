@@ -38,19 +38,17 @@ function init()
 
 	// Add the default sections to the menu if the user is an administrator.
 	if ($this->eso->user["admin"]) {
- 		$this->defaultSections = array("dashboard", "settings", "languages", "members", "plugins", "skins");
- 		$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
- 		$this->addSection("settings", $language["Forum settings"], array($this, "settingsInit"));
+		$this->defaultSections = array("dashboard", "settings", "languages", "members", "plugins", "skins");
+		$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
+		$this->addSection("settings", $language["Forum settings"], array($this, "settingsInit"));
 		$this->addSection("languages", $language["Languages"], array($this, "languagesInit"));
 		$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
- 		$this->addSection("plugins", $language["Plugins"], array($this, "pluginsInit"));
- 		$this->addSection("skins", $language["Skins"], array($this, "skinsInit"));
-	}
-	
-	// Add a limited array of the default sections to the menu if the user is an moderator.
-	if ($this->eso->user["moderator"]) {
- 		$this->defaultSections = array("dashboard", "members");
- 		$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
+		$this->addSection("plugins", $language["Plugins"], array($this, "pluginsInit"));
+		$this->addSection("skins", $language["Skins"], array($this, "skinsInit"));
+	// If the user is a moderator, add a limited array of sections to the menu.
+	} elseif ($this->eso->user["moderator"]) {
+		$this->defaultSections = array("dashboard", "members");
+		$this->addSection("dashboard", $language["Dashboard"], array($this, "dashboardInit"), array($this, "dashboardAjax"));
 		$this->addSection("members", $language["Member-plural"], array($this, "membersInit"));
 	}
 	
@@ -698,6 +696,7 @@ function membersInit(&$adminController)
 
 	// Save the settings?
 	if (isset($_POST["saveMembersSettings"])
+		and $this->eso->user["admin"]
 	 	and $this->eso->validateToken(@$_POST["token"])
 		and $this->saveMembersSettings()) {
 			$this->eso->message("changesSaved");
