@@ -25,9 +25,6 @@ define("IN_ESO", 1);
  * displays it.
  */
 
-// Make sure a default timezone is set... silly PHP 5.
-if (ini_get("date.timezone") == "") date_default_timezone_set("GMT");
-
 // Define directory constants.
 if (!defined("PATH_ROOT")) define("PATH_ROOT", dirname(__FILE__));
 if (!defined("PATH_CONFIG")) define("PATH_CONFIG", PATH_ROOT."/config");

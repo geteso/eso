@@ -52,7 +52,6 @@ $defaultConfig = array(
 "manifestDisplay" => "browser", // The preferred way to display your forum in or outside of a browser.  Fullscreen, standalone, minimal-ui, or browser.
 // see https://www.w3.org/TR/mediaqueries-5/#display-mode for an explanation
 "verboseFatalErrors" => false, // Dumps SQL information in fatal errors.  Don't keep this enabled for production.
-"basePath" => "", // The base path to use when including or writing to any files.
 "gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
 "https" => false, // Whether or not to force HTTPS.
 "showForumDescription" => true, // Whether or not to display the forum description on the homepage.
@@ -68,7 +67,7 @@ $defaultConfig = array(
 // Login and registration settings.
 "changeUsername" => true, // Whether or not accounts can change their usernames.
 "loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.
-"registrationOpen" => "true", // Whether or not new accounts can be made on your forum.
+"registrationOpen" => true, // Whether or not new accounts can be made on your forum.
 "registrationRequireEmail" => true, // Requires email verification to register on your forum.
 "registrationRequireApproval" => false, // Requires manual approval...
 "reservedNames" => array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself"), // Reserved user names which cannot be used.

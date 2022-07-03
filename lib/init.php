@@ -29,6 +29,13 @@ if (!defined("IN_ESO")) exit;
 // Start a page load timer. We don't make use of it by default, but a plugin can if it needs to.
 define("PAGE_START_TIME", microtime(true));
 
+// By default, only display important errors (no warnings or notices.)
+ini_set("display_errors", "On");
+error_reporting(E_ERROR | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR);
+
+// Make sure a default timezone is set... silly PHP 5.
+if (ini_get("date.timezone") == "") date_default_timezone_set("GMT");
+
 // Include our config files.
 require "config.default.php";
 @include "config/config.php";
@@ -42,7 +49,7 @@ $config = array_merge($defaultConfig, $config);
 
 // Compare the hardcoded version of eso (ESO_VERSION) to the installed one ($versions["eso"]).
 // If they're out-of-date, redirect to the upgrader.
-require "config/versions.php";
+require PATH_CONFIG."/versions.php";
 if ($versions["eso"] != ESO_VERSION) {
 	if (!defined("AJAX_REQUEST")) header("Location: {$config["baseURL"]}upgrade/index.php");
 	exit;
@@ -106,7 +113,7 @@ $_GET = sanitize($_GET);
 $_COOKIE = sanitize($_COOKIE);
 
 // Include and set up the main controller.
-require "controllers/eso.controller.php";
+require PATH_CONTROLLERS."/eso.controller.php";
 $eso = new eso();
 $eso->eso =& $eso;
 

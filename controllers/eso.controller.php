@@ -99,13 +99,13 @@ function init()
 	if (!defined("AJAX_REQUEST")) {
 
 		// Check for updates, but only for the root admin.
-		if ($this->user["memberId"] == $config["rootAdmin"]) {
+//		if ($this->user["memberId"] == $config["rootAdmin"]) {
 			// How long ago was the last update check? If it was any more than 1 day ago, check again now.
-			if (file_exists("config/lastUpdateCheck.php")) include "config/lastUpdateCheck.php";
-			if (!isset($lastUpdateCheck) or time() - $lastUpdateCheck >= 86400) {
-				if ($latestVersion = $this->checkForUpdates()) $this->message("updatesAvailable", false, $latestVersion);
-			}
-		}
+//			if (file_exists("config/lastUpdateCheck.php")) include "config/lastUpdateCheck.php";
+//			if (!isset($lastUpdateCheck) or time() - $lastUpdateCheck >= 86400) {
+//				if ($latestVersion = $this->checkForUpdates()) $this->message("updatesAvailable", false, $latestVersion);
+//			}
+//		}
 
 		// If the user IS NOT logged in, add the login form and 'Join us' link to the bar.
 		if (!$this->user) {

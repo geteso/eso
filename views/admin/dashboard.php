@@ -40,7 +40,7 @@ Ajax.request({
 // ]]>
 </script>
 
-<?php if (file_exists("install/")) echo $this->eso->htmlMessage("removeDirectoryWarning", "install/"); ?>
+<?php if (file_exists("install/") and $this->eso->user["memberId"] == $config["rootAdmin"]) echo $this->eso->htmlMessage("removeDirectoryWarning", "install/"); ?>
 
 <fieldset>
 <legend><?php echo $language["Forum statistics"];?></legend>

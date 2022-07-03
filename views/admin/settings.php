@@ -45,6 +45,9 @@ if (!defined("IN_ESO")) exit;
 <li><label class='checkbox'><?php echo $language["Show forum description"]; ?></label>
 <div class='parentBox'><input type='checkbox' class='checkbox' name='showForumDescription' value='1'<?php echo !empty($config["showForumDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
 
+<li><label class='checkbox'><?php echo $language["Use forum description"]; ?></label>
+<div class='parentBox'><input type='checkbox' class='checkbox' name='useForumDescription' value='1'<?php echo !empty($config["useForumDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
+
 <li><label></label> <span class='button'><input type='submit' name='saveSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>
 
 </ul>
@@ -62,7 +65,7 @@ if ($this->eso->user["memberId"] == $config["rootAdmin"]): ?>
 
 <ul class='form settingsForm advanced'>
 
-<li><label class='checkbox'><?php echo $language["gzipOutput"]; ?><br/><small><?php echo $language["gzipOutputInfo"]; ?></small></label>
+<li><label class='checkbox'><?php echo $language["gzipOutput"]; ?><!-- <br/><small><?php echo $language["gzipOutputInfo"]; ?> --></small></label>
 <div class='parentBox'><input type='checkbox' class='checkbox' name='gzipOutput' value='1'<?php echo !empty($config["gzipOutput"]) ? " checked='checked'" : ""; ?>/></div></li>
 
 <li><label class='checkbox'><?php echo $language["httpsSetting"]; ?><br/><small><?php echo $language["httpsInfo"]; ?></small></label>
@@ -71,8 +74,13 @@ if ($this->eso->user["memberId"] == $config["rootAdmin"]): ?>
 <li><label class='checkbox'><?php echo $language["uploadPackages"]; ?><br/><small><?php echo $language["uploadPackagesInfo"]; ?></small></label>
 <div class='parentBox'><input type='checkbox' class='checkbox' name='uploadPackages' value='1'<?php echo !empty($config["uploadPackages"]) ? " checked='checked'" : ""; ?>/></div></li>
 
+<hr/>
+
 <li><label class='checkbox'><?php echo $language["changeUsername"]; ?><br/><small><?php echo $language["changeUsernameInfo"]; ?></small></label>
 <div class='parentBox'><input type='checkbox' class='checkbox' name='changeUsername' value='1'<?php echo !empty($config["changeUsername"]) ? " checked='checked'" : ""; ?>/></div></li>
+
+<li><label class='checkbox'><?php echo $language["nonAsciiCharacters"]; ?><br/><small><?php echo $language["nonAsciiInfo"]; ?></small></label>
+<div class='parentBox'><input type='checkbox' class='checkbox' name='nonAsciiCharacters' value='1'<?php echo !empty($config["nonAsciiCharacters"]) ? " checked='checked'" : ""; ?>/></div></li>
 
 <li><label><?php echo $language["loginsPerMinute"]; ?></label>
 <div><input type='text' class='text' name='loginsPerMinute' value='<?php echo $config["loginsPerMinute"]; ?>'/>
@@ -81,8 +89,15 @@ if ($this->eso->user["memberId"] == $config["rootAdmin"]): ?>
 <li><label><?php echo $language["minPasswordLength"]; ?></label>
 <div><input type='text' class='text' name='minPasswordLength' value='<?php echo $config["minPasswordLength"]; ?>'/></div></li>
 
-<li><label class='checkbox'><?php echo $language["nonAsciiCharacters"]; ?><br/><small><?php echo $language["nonAsciiInfo"]; ?></small></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='nonAsciiCharacters' value='1'<?php echo !empty($config["nonAsciiCharacters"]) ? " checked='checked'" : ""; ?>/></div></li>
+<hr/>
+
+<li><label><?php echo $language["userOnlineExpire"]; ?></label>
+<div><input type='text' class='text' name='userOnlineExpire' value='<?php echo $config["userOnlineExpire"]; ?>'/>
+<br/><small><?php echo $language["userOnlineExpireInfo"]; ?></small></div></li>
+
+<li><label><?php echo $language["messageDisplayTime"]; ?></label>
+<div><input type='text' class='text' name='messageDisplayTime' value='<?php echo $config["messageDisplayTime"]; ?>'/>
+<br/><small><?php echo $language["messageDisplayTimeInfo"]; ?></small></div></li>
 
 <li><label><?php echo $language["numberResults"]; ?></label>
 <div><input type='text' class='text' name='results' value='<?php echo $config["results"]; ?>'/>
