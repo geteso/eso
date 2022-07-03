@@ -25,19 +25,8 @@ define("IN_ESO", 1);
  * displays it.
  */
 
-// Define directory constants.
-if (!defined("PATH_ROOT")) define("PATH_ROOT", dirname(__FILE__));
-if (!defined("PATH_CONFIG")) define("PATH_CONFIG", PATH_ROOT."/config");
-if (!defined("PATH_CONTROLLERS")) define("PATH_CONTROLLERS", PATH_ROOT."/controllers");
-if (!defined("PATH_LANGUAGES")) define("PATH_LANGUAGES", PATH_ROOT."/languages");
-if (!defined("PATH_LIBRARY")) define("PATH_LIBRARY", PATH_ROOT."/lib");
-if (!defined("PATH_PLUGINS")) define("PATH_PLUGINS", PATH_ROOT."/plugins");
-if (!defined("PATH_SKINS")) define("PATH_SKINS", PATH_ROOT."/skins");
-if (!defined("PATH_UPLOADS")) define("PATH_UPLOADS", PATH_ROOT."/uploads");
-if (!defined("PATH_VIEWS")) define("PATH_VIEWS", PATH_ROOT."/views");
-
 // Basic page initialization.
-require PATH_LIBRARY."/init.php";
+require "lib/init.php";
 
 // Set up the action controller.
 $q1 = strtolower(@$_GET["q1"]);

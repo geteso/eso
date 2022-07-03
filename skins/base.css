@@ -357,7 +357,7 @@ fieldset > .warning:last-child {margin:0}
 .big {height:25px}
 .big input {font-size:140%; height:26px}
 .buttonSmall {line-height:1.5; width:fit-content}
-a.buttonSmall {padding:0 5px; text-decoration:none}
+a.buttonSmall {padding:0 5px; margin:0 0 10px; text-decoration:none}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
 

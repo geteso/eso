@@ -27,10 +27,21 @@ define("IN_ESO", 1);
 // Unset the page execution time limit.
 @set_time_limit(0);
 
+// Define directory constants.
+if (!defined("PATH_ROOT")) define("PATH_ROOT", realpath(__DIR__ . "/.."));
+if (!defined("PATH_CONFIG")) define("PATH_CONFIG", PATH_ROOT."/config");
+if (!defined("PATH_CONTROLLERS")) define("PATH_CONTROLLERS", PATH_ROOT."/controllers");
+if (!defined("PATH_LANGUAGES")) define("PATH_LANGUAGES", PATH_ROOT."/languages");
+if (!defined("PATH_LIBRARY")) define("PATH_LIBRARY", PATH_ROOT."/lib");
+if (!defined("PATH_PLUGINS")) define("PATH_PLUGINS", PATH_ROOT."/plugins");
+if (!defined("PATH_SKINS")) define("PATH_SKINS", PATH_ROOT."/skins");
+if (!defined("PATH_UPLOADS")) define("PATH_UPLOADS", PATH_ROOT."/uploads");
+if (!defined("PATH_VIEWS")) define("PATH_VIEWS", PATH_ROOT."/views");
+
 // Require essential files.
-require "../lib/functions.php";
-require "../lib/classes.php";
-require "../lib/database.php";
+require PATH_LIBRARY."/functions.php";
+require PATH_LIBRARY."/classes.php";
+require PATH_LIBRARY."/database.php";
 
 // Start a session if one does not already exist.
 if (!session_id()) session_start();
