@@ -183,6 +183,9 @@ if (!empty($config["changeUsername"])): ?>
 <li><label id='lbl-pass'></label> <?php echo $this->eso->skin->button(array("value"=>$language["Save changes"],"name"=>"settingsUsername[submit]"));?></li>
 
 </ul></fieldset>
+
+<?php $this->callHook("settingsPageEnd");?>
+
 <?php if(!count($this->messages)):?><script type='text/javascript'>Settings.hideFieldset("settingsUser")</script><?php endif;?>
 </form>
 <?php endif;?>

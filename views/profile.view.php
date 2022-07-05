@@ -82,7 +82,7 @@ foreach($this->sections as $section):?>
 <?php endforeach;?>
 
 </div>
-<div class='avatar'><img src='<?php echo $this->eso->getAvatar($this->member["memberId"],$this->member["avatarFormat"],"l");?>' alt=''/></div>
+<div class='avatar'><img src='<?php echo $this->eso->getAvatar($this->member["memberId"],$this->member["avatarFormat"],"l");?>' alt=''/><?php $this->callHook("profileInfo"); ?></div>
 <div class='clear'></div>
 </div>
 
