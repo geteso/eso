@@ -45,7 +45,7 @@ var $allowedModes = array(
 	
 );
 
-function Formatter()
+function __construct()
 {
 	// Set up the lexer.
 	$this->lexer = new SimpleLexer($this, "text", false);
@@ -156,7 +156,7 @@ class Formatter_Whitespace {
 var $formatter;
 var $revert = array("<br/>" => "\n", "<p>" => "", "</p>" => "\n\n");
 
-function Formatter_Whitespace(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -207,7 +207,7 @@ class Formatter_Bold {
 var $modes = array("bold_tag_b", "bold_tag_strong", "bold_bbcode", "bold_wiki");
 var $revert = array("<b>" => "&lt;b&gt;", "</b>" => "&lt;/b&gt;");
 
-function Formatter_Bold(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -255,7 +255,7 @@ var $formatter;
 var $modes = array("italic_tag_i", "italic_tag_em", "italic_bbcode", "italic_wiki");
 var $revert = array("<i>" => "&lt;i&gt;", "</i>" => "&lt;/i&gt;");
 
-function Formatter_Italic(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -303,7 +303,7 @@ var $formatter;
 var $modes = array("strike_html", "strike_bbcode", "strike_wiki");
 var $revert = array("<del>" => "&lt;s&gt;", "</del>" => "&lt;/s&gt;");
 
-function Formatter_Strikethrough(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -349,7 +349,7 @@ var $formatter;
 var $modes = array("superscript", "subscript");
 var $revert = array("<sup>" => "&lt;sup&gt;", "</sup>" => "&lt;/sup&gt;", "<sub>" => "&lt;sub&gt;", "</sub>" => "&lt;/sub&gt;");
 
-function Formatter_Superscript(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -401,7 +401,7 @@ var $formatter;
 var $modes = array("heading_html", "heading_bbcode", "heading_wiki");
 var $revert = array("<h3>" => "&lt;h1&gt;", "</h3>" => "&lt;/h1&gt;\n\n");
 
-function Formatter_Heading(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -453,7 +453,7 @@ var $revert = array(
 	"</cite></p>" => "&lt;/cite&gt;\n",
 );
 
-function Formatter_Quote(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -511,7 +511,7 @@ var $formatter;
 var $modes = array("pre_html_block", "code_html_block", "code_bbcode_block");
 var $revert = array("<pre>" => "&lt;pre&gt;", "</pre>" => "&lt;/pre&gt;\n\n");
 
-function Formatter_Fixed_Block(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -556,7 +556,7 @@ var $formatter;
 var $modes = array("pre_html_inline", "code_html_inline", "code_bbcode_inline");
 var $revert = array("<code>" => "&lt;pre&gt;", "</code>" => "&lt;/pre&gt;");
 
-function Formatter_Fixed_Inline(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -600,7 +600,7 @@ class Formatter_Link {
 var $formatter;
 var $modes = array("link_html", "link_bbcode", "link_wiki", "postLink", "conversationLink");
 
-function Formatter_Link(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -738,7 +738,7 @@ class Formatter_Image {
 var $formatter;
 var $modes = array("image_html", "image_bbcode1", "image_bbcode2");
 
-function Formatter_Image(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -813,7 +813,7 @@ class Formatter_Video {
 var $formatter;
 var $modes = array("video_html");
 	
-function Formatter_Video(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -868,7 +868,7 @@ class Formatter_Audio {
 var $formatter;
 var $modes = array("audio_html");
 	
-function Formatter_Audio(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -926,7 +926,7 @@ var $modes = array("blockList");
 var $listStack = array();
 var $initialDepth = 0;
 
-function Formatter_List(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -1142,7 +1142,7 @@ class Formatter_Horizontal_Rule {
 var $formatter;
 var $revert = array("<hr/>" => "-----");
 
-function Formatter_Horizontal_Rule(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 }
@@ -1188,7 +1188,7 @@ var $characters = array(
 	"..." => "…"
 );
 
-function Formatter_Special_Characters(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter =& $formatter;
 	$this->revert = array_flip($this->characters);

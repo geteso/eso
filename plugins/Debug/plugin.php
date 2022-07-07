@@ -37,7 +37,7 @@ var $start;
 var $queryTimer;
 var $log = "";
 
-function Debug()
+function __construct()
 {
 	// Set verboseFatalErrors to true.
 	global $config;
@@ -47,7 +47,7 @@ function Debug()
 	$this->start = $this->microtimeFloat();
 	if (empty($_SESSION["queries"]) or !is_array($_SESSION["queries"])) $_SESSION["queries"] = array();
 	
-	parent::Plugin();
+	parent::__construct();
 }
 
 function init()

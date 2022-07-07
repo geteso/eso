@@ -47,7 +47,7 @@ var $results = array();
 var $resultsTable = array();
 var $numberOfConversations = 0;
 
-function Search()
+function __construct()
 {
 	if (isset($_POST["search"])) redirect("search", "?q2=" . urlencode(desanitize($_POST["search"])));
 }

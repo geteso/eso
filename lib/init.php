@@ -95,13 +95,6 @@ if (md5($_SERVER["HTTP_USER_AGENT"]) != $_SESSION["userAgent"]) session_destroy(
 // Undo register_globals.
 undoRegisterGlobals();
 
-// If magic quotes is on, strip the slashes that it added.
-if (get_magic_quotes_gpc()) {
-	$_GET = array_map("undoMagicQuotes", $_GET);
-	$_POST = array_map("undoMagicQuotes", $_POST);
-	$_COOKIE = array_map("undoMagicQuotes", $_COOKIE);
-}
-
 // Do we want to force HTTPS?
 if (!empty($config["https"]) and $_SERVER["HTTPS"] != "on") {
     header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);

@@ -46,13 +46,6 @@ require "upgrade.controller.php";
 // Undo register_globals.
 undoRegisterGlobals();
 
-// If magic quotes is on, strip the slashes that it added.
-if (get_magic_quotes_gpc()) {
-	$_GET = array_map("undoMagicQuotes", $_GET);
-	$_POST = array_map("undoMagicQuotes", $_POST);
-	$_COOKIE = array_map("undoMagicQuotes", $_COOKIE);
-}
-
 // Sanitize the request data using sanitize().
 $_POST = sanitize($_POST);
 $_GET = sanitize($_GET);

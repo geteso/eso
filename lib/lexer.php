@@ -38,7 +38,7 @@ class ParallelRegex {
      *                            for insensitive.
      *    @access public
      */
-    function ParallelRegex($case) {
+    function __construct($case) {
         $this->_case = $case;
         $this->_patterns = array();
         $this->_labels = array();
@@ -130,7 +130,7 @@ class SimpleStateStack {
      *    @param string $start        Starting state name.
      *    @access public
      */
-    function SimpleStateStack($start) {
+    function __construct($start) {
         $this->_stack = array($start);
     }
     
@@ -195,7 +195,7 @@ class SimpleLexer {
      *    @param boolean $case            True for case sensitive.
      *    @access public
      */
-    function SimpleLexer(&$parser, $start = "accept", $case = false) {
+    function __construct(&$parser, $start = "accept", $case = false) {
         $this->_case = $case;
         $this->_regexes = array();
         $this->_parser = &$parser;

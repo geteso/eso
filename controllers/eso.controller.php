@@ -50,7 +50,7 @@ var $bar = array("left" => array(), "right" => array());
 var $plugins = array();
 
 // Class constructor: connect to the database and perform other initializations.
-function eso()
+function __construct()
 {	
 	global $config;
 
