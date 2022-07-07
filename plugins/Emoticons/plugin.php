@@ -100,7 +100,7 @@ class Formatter_Emoticons {
 var $formatter;
 var $emoticons = array();
 	
-function Formatter_Emoticons(&$formatter)
+function __construct(&$formatter)
 {
 	$this->formatter = &$formatter;
 	

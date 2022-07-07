@@ -202,7 +202,7 @@ function json($array)
 		$json[] = $noKeys ? $value : "$key:$value";
 	}
 	// Return a JavaScript array string or a JSON string (depending if we're using keys or not.)
-	return $noKeys ? "[" . implode($json, ",") . "]" : "{" . implode($json, ",") . "}";
+	return $noKeys ? "[" . implode(",", $json) . "]" : "{" . implode(",", $json) . "}";
 }
 
 // Function to quickly translate a string by using the $language variable.

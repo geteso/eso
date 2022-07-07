@@ -88,7 +88,7 @@ var $author;
 var $description;
 
 // Constructor: include the config file or write the default config if it doesn't exist.
-function Plugin()
+function __construct()
 {
 	if (!empty($this->defaultConfig)) {
 		global $config;

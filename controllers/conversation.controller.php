@@ -186,7 +186,7 @@ function init()
 		if (isset($_GET["quotePost"])) {
 			$postId = (int)$_GET["quotePost"];
 			$result = $this->eso->db->query("SELECT name, content FROM {$config["tablePrefix"]}posts INNER JOIN {$config["tablePrefix"]}members USING (memberId) WHERE postId=$postId AND conversationId={$this->conversation["id"]}");
-			if (!$this->eso->db->numRows($result)) break;
+			if (!$this->eso->db->numRows($result)) return false;
 			list($member, $content) = $this->eso->db->fetchRow($result);
 			$this->conversation["draft"] = "<blockquote><cite>$member - [post:$postId]</cite>" . desanitize($this->formatForEditing($this->removeQuotes($content))) . "</blockquote>";
 		}
