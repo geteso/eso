@@ -321,11 +321,11 @@ function format()
 	foreach ($allowedModes as $mode) {
 		$this->formatter->lexer->addEntryPattern('&lt;s&gt;(?=.*&lt;\/s&gt;)', $mode, "strike_html");
 		$this->formatter->lexer->addEntryPattern('\[s](?=.*\[\/s])', $mode, "strike_bbcode");
-		$this->formatter->lexer->addEntryPattern('-{3,}(?=.*---)', $mode, "strike_wiki");
+		$this->formatter->lexer->addEntryPattern('\-{3,}(?=.*\-\-\-)', $mode, "strike_wiki");
 	}
 	$this->formatter->lexer->addExitPattern('&lt;\/s&gt;', "strike_html");
 	$this->formatter->lexer->addExitPattern('\[\/s]', "strike_bbcode");
-	$this->formatter->lexer->addExitPattern('-{3,}', "strike_wiki");
+	$this->formatter->lexer->addExitPattern('\-{3,}', "strike_wiki");
 }
 
 // Add HTML strikethrough (del) tags to the output.
@@ -626,7 +626,7 @@ function format()
 		$this->formatter->lexer->addEntryPattern('\[(?:(?:https?|ftp|feed):\/\/|mailto:)\S+\s+(?=.*])', $mode, "link_wiki");
 		$this->formatter->lexer->addEntryPattern('\[post:\d+\s*(?=.*])', $mode, "postLink");
 		$this->formatter->lexer->addEntryPattern('\[conversation:\d+\s+(?=.*])', $mode, "conversationLink");
-		$this->formatter->lexer->addSpecialPattern('(?<=[\s>(]|^)[\w-\.]+@(?:[\w-]+\.)+[\w-]{2,4}', $mode, "email");
+		$this->formatter->lexer->addSpecialPattern('(?<=[\s>(]|^)[\w\-\.]+@(?:[\w\-]+\.)+[\w\-]{2,4}', $mode, "email");
 	}
 	$this->formatter->lexer->addExitPattern('&lt;\/a&gt;', "link_html");
 	$this->formatter->lexer->addExitPattern('\[\/url]', "link_bbcode");
@@ -722,7 +722,8 @@ function link($match, $state)
 function revert($string)
 {
 	$string = preg_replace("/<a href='mailto:(.*?)'>\\1<\/a>/", "$1", $string);
-	$string = preg_replace("`<a href='" . str_replace("?", "\?", makeLink("post", "(\d+)")) . "'[^>]*>(.*?)<\/a>`e", "'[post:$1' . ('$2' ? ' $2' : '') . ']'", $string);
+	// Unfortunately, this line must be commented out otherwise the formatter will break on PHP 7. It doesn't seem to impact link functionality to remove this line though.
+	//$string = preg_replace("`<a href='" . str_replace("?", "\?", makeLink("post", "(\d+)")) . "'[^>]*>(.*?)<\/a>`e", "'[post:$1' . ('$2' ? ' $2' : '') . ']'", $string);
 	$string = preg_replace("`<a href='" . str_replace("?", "\?", makeLink("(\d+)")) . "'[^>]*>(.*?)<\/a>`", "[conversation:$1 $2]", $string);
 	$string = preg_replace("/<a href='(?:\w+:\/\/)?(.*?)'>\\1<\/a>/", "$1", $string);
 	$string = preg_replace("/<a(.*?)>(.*?)<\/a>/", "&lt;a$1&gt;$2&lt;/a&gt;", $string);
