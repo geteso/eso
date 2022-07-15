@@ -57,7 +57,7 @@ function init()
 			// Validate the passwords they entered.
 			$password = @$_POST["password"];
 			$confirm = @$_POST["confirm"];
-			if ($error = validatePassword(@$_POST["password"])) $this->errors["password"] = $error;
+			if ($error = validatePassword($password)) $this->errors["password"] = $error;
 			if ($password != $confirm) $this->errors["confirm"] = "passwordsDontMatch";
 			
 			// If it's all good, update the password in the database, show a success message, and redirect.
