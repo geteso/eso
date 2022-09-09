@@ -27,11 +27,11 @@ foreach (array('LEXER_ENTER', 'LEXER_MATCHED',
  *    @subpackage WebTester
  */
 class ParallelRegex {
-    var $_patterns;
-    var $_labels;
-    var $_regex;
-    var $_case;
-    
+    private $patterns;
+    private $labels;
+    private $regex;
+    private $case;
+
     /**
      *    Constructor. Starts with no patterns.
      *    @param boolean $case    True for case sensitive, false
@@ -39,12 +39,12 @@ class ParallelRegex {
      *    @access public
      */
     function __construct($case) {
-        $this->_case = $case;
-        $this->_patterns = array();
-        $this->_labels = array();
-        $this->_regex = null;
+        $this->case = $case;
+        $this->patterns = array();
+        $this->labels = array();
+        $this->regex = null;
     }
-    
+
     /**
      *    Adds a pattern with an optional label.
      *    @param string $pattern      Perl style regex, but ( and )
@@ -54,12 +54,12 @@ class ParallelRegex {
      *    @access public
      */
     function addPattern($pattern, $label = true) {
-        $count = count($this->_patterns);
-        $this->_patterns[$count] = $pattern;
-        $this->_labels[$count] = $label;
-        $this->_regex = null;
+        $count = count($this->patterns);
+        $this->patterns[$count] = $pattern;
+        $this->labels[$count] = $label;
+        $this->regex = null;
     }
-    
+
     /**
      *    Attempts to match all patterns at once against
      *    a string.
@@ -70,22 +70,22 @@ class ParallelRegex {
      *    @access public
      */
     function match($subject, &$match) {
-        if (count($this->_patterns) == 0) {
+        if (count($this->patterns) == 0) {
             return false;
         }
-        if (! preg_match($this->_getCompoundedRegex(), $subject, $matches)) {
+        if (! preg_match($this->getCompoundedRegex(), $subject, $matches)) {
             $match = '';
             return false;
         }
         $match = $matches[0];
         for ($i = 1; $i < count($matches); $i++) {
             if ($matches[$i]) {
-                return $this->_labels[$i - 1];
+                return $this->labels[$i - 1];
             }
         }
         return true;
     }
-    
+
     /**
      *    Compounds the patterns into a single
      *    regular expression separated with the
@@ -94,26 +94,26 @@ class ParallelRegex {
      *    @param array $patterns    List of patterns in order.
      *    @access private
      */
-    function _getCompoundedRegex() {
-        if ($this->_regex == null) {
-            for ($i = 0, $count = count($this->_patterns); $i < $count; $i++) {
-                $this->_patterns[$i] = '(' . str_replace(
+    protected function getCompoundedRegex() {
+        if ($this->regex == null) {
+            for ($i = 0, $count = count($this->patterns); $i < $count; $i++) {
+                $this->patterns[$i] = '(' . str_replace(
                         array('/', '(', ')'),
-                        array('/', '(', ')'),
-                        $this->_patterns[$i]) . ')';
+                        array('\/', '\(', '\)'),
+                        $this->patterns[$i]) . ')';
             }
-            $this->_regex = "/" . implode("|", $this->_patterns) . "/" . $this->_getPerlMatchingFlags();
+            $this->regex = "/" . implode("|", $this->patterns) . "/" . $this->getPerlMatchingFlags();
         }
-        return $this->_regex;
+        return $this->regex;
     }
-    
+
     /**
      *    Accessor for perl regex mode flags to use.
      *    @return string       Perl regex flags.
      *    @access private
      */
-    function _getPerlMatchingFlags() {
-        return ($this->_case ? "msS" : "msSi");
+    protected function getPerlMatchingFlags() {
+        return ($this->case ? "msS" : "msSi");
     }
 }
 
@@ -123,26 +123,26 @@ class ParallelRegex {
  *    @subpackage WebTester
  */
 class SimpleStateStack {
-    var $_stack;
-    
+    private $stack;
+
     /**
      *    Constructor. Starts in named state.
      *    @param string $start        Starting state name.
      *    @access public
      */
     function __construct($start) {
-        $this->_stack = array($start);
+        $this->stack = array($start);
     }
-    
+
     /**
      *    Accessor for current state.
      *    @return string       State.
      *    @access public
      */
     function getCurrent() {
-        return $this->_stack[count($this->_stack) - 1];
+        return $this->stack[count($this->stack) - 1];
     }
-    
+
     /**
      *    Adds a state to the stack and sets it
      *    to be the current state.
@@ -150,9 +150,9 @@ class SimpleStateStack {
      *    @access public
      */
     function enter($state) {
-        array_push($this->_stack, $state);
+        array_push($this->stack, $state);
     }
-    
+
     /**
      *    Leaves the current state and reverts
      *    to the previous one.
@@ -161,10 +161,10 @@ class SimpleStateStack {
      *    @access public
      */
     function leave() {
-        if (count($this->_stack) == 1) {
+        if (count($this->stack) == 1) {
             return false;
         }
-        array_pop($this->_stack);
+        array_pop($this->stack);
         return true;
     }
 }
@@ -179,13 +179,12 @@ class SimpleStateStack {
  *    @subpackage WebTester
  */
 class SimpleLexer {
-    var $_regexes;
-    var $_parser;
-    var $_mode;
-    var $_mode_handlers;
-    var $_mode_functions;
-    var $_case;
-    
+    private $regexes;
+    private $parser;
+    private $mode;
+    private $mode_handlers;
+    private $case;
+
     /**
      *    Sets up the lexer in case insensitive matching
      *    by default.
@@ -195,15 +194,15 @@ class SimpleLexer {
      *    @param boolean $case            True for case sensitive.
      *    @access public
      */
-    function __construct(&$parser, $start = "accept", $case = false) {
-        $this->_case = $case;
-        $this->_regexes = array();
-        $this->_parser = &$parser;
-        $this->_mode = new SimpleStateStack($start);
-        $this->_mode_handlers = array($start => $start);
-        $this->_mode_functions = array();
+    function __construct($parser, $start = "accept", $case = false) {
+        $this->case = $case;
+        $this->regexes = array();
+        $this->parser = $parser;
+        $this->mode = new SimpleStateStack($start);
+        $this->mode_handlers = array($start => $start);
+		$this->mode_functions = array();
     }
-    
+
     /**
      *    Adds a token search pattern for a particular
      *    parsing mode. The pattern does not change the
@@ -216,15 +215,15 @@ class SimpleLexer {
      *    @access public
      */
     function addPattern($pattern, $mode = "accept") {
-        if (! isset($this->_regexes[$mode])) {
-            $this->_regexes[$mode] = new ParallelRegex($this->_case);
+        if (! isset($this->regexes[$mode])) {
+            $this->regexes[$mode] = new ParallelRegex($this->case);
         }
-        $this->_regexes[$mode]->addPattern($pattern);
-        if (! isset($this->_mode_handlers[$mode])) {
-            $this->_mode_handlers[$mode] = $mode;
+        $this->regexes[$mode]->addPattern($pattern);
+        if (! isset($this->mode_handlers[$mode])) {
+            $this->mode_handlers[$mode] = $mode;
         }
     }
-    
+
     /**
      *    Adds a pattern that will enter a new parsing
      *    mode. Useful for entering parenthesis, strings,
@@ -239,15 +238,15 @@ class SimpleLexer {
      *    @access public
      */
     function addEntryPattern($pattern, $mode, $new_mode) {
-        if (! isset($this->_regexes[$mode])) {
-            $this->_regexes[$mode] = new ParallelRegex($this->_case);
+        if (! isset($this->regexes[$mode])) {
+            $this->regexes[$mode] = new ParallelRegex($this->case);
         }
-        $this->_regexes[$mode]->addPattern($pattern, $new_mode);
-        if (! isset($this->_mode_handlers[$new_mode])) {
-            $this->_mode_handlers[$new_mode] = $new_mode;
+        $this->regexes[$mode]->addPattern($pattern, $new_mode);
+        if (! isset($this->mode_handlers[$new_mode])) {
+            $this->mode_handlers[$new_mode] = $new_mode;
         }
     }
-    
+
     /**
      *    Adds a pattern that will exit the current mode
      *    and re-enter the previous one.
@@ -257,15 +256,15 @@ class SimpleLexer {
      *    @access public
      */
     function addExitPattern($pattern, $mode) {
-        if (! isset($this->_regexes[$mode])) {
-            $this->_regexes[$mode] = new ParallelRegex($this->_case);
+        if (! isset($this->regexes[$mode])) {
+            $this->regexes[$mode] = new ParallelRegex($this->case);
         }
-        $this->_regexes[$mode]->addPattern($pattern, "__exit");
-        if (! isset($this->_mode_handlers[$mode])) {
-            $this->_mode_handlers[$mode] = $mode;
+        $this->regexes[$mode]->addPattern($pattern, "__exit");
+        if (! isset($this->mode_handlers[$mode])) {
+            $this->mode_handlers[$mode] = $mode;
         }
     }
-    
+
     /**
      *    Adds a pattern that has a special mode. Acts as an entry
      *    and exit pattern in one go, effectively calling a special
@@ -279,15 +278,15 @@ class SimpleLexer {
      *    @access public
      */
     function addSpecialPattern($pattern, $mode, $special) {
-        if (! isset($this->_regexes[$mode])) {
-            $this->_regexes[$mode] = new ParallelRegex($this->_case);
+        if (! isset($this->regexes[$mode])) {
+            $this->regexes[$mode] = new ParallelRegex($this->case);
         }
-        $this->_regexes[$mode]->addPattern($pattern, "_$special");
-        if (! isset($this->_mode_handlers[$special])) {
-            $this->_mode_handlers[$special] = $special;
+        $this->regexes[$mode]->addPattern($pattern, "_$special");
+        if (! isset($this->mode_handlers[$special])) {
+            $this->mode_handlers[$special] = $special;
         }
     }
-    
+
     /**
      *    Adds a mapping from a mode to another handler.
      *    @param string $mode        Mode to be remapped.
@@ -295,13 +294,13 @@ class SimpleLexer {
      *    @access public
      */
     function mapHandler($mode, $handler) {
-        $this->_mode_handlers[$mode] = $handler;
+        $this->mode_handlers[$mode] = $handler;
     }
 
 	function mapFunction($mode, $function) {
-        $this->_mode_functions[$mode] = $function;
+		$this->mode_functions[$mode] = $function;
     }
-    
+
     /**
      *    Splits the page text into tokens. Will fail
      *    if the handlers report an error or if no
@@ -313,13 +312,13 @@ class SimpleLexer {
      *    @access public
      */
     function parse($raw) {
-        if (! isset($this->_parser)) {
+        if (! isset($this->parser)) {
             return false;
         }
         $length = strlen($raw);
-        while (is_array($parsed = $this->_reduce($raw))) {
+        while (is_array($parsed = $this->reduce($raw))) {
             list($raw, $unmatched, $matched, $mode) = $parsed;
-            if (! $this->_dispatchTokens($unmatched, $matched, $mode)) {
+            if (! $this->dispatchTokens($unmatched, $matched, $mode)) {
                 return false;
             }
             if ($raw === '') {
@@ -333,9 +332,9 @@ class SimpleLexer {
         if (! $parsed) {
             return false;
         }
-        return $this->_invokeParser($raw, LEXER_UNMATCHED);
+        return $this->invokeParser($raw, LEXER_UNMATCHED);
     }
-    
+
     /**
      *    Sends the matched token and any leading unmatched
      *    text to the parser changing the lexer to a new
@@ -348,30 +347,30 @@ class SimpleLexer {
      *                                from the parser.
      *    @access private
      */
-    function _dispatchTokens($unmatched, $matched, $mode = false) {
-        if (! $this->_invokeParser($unmatched, LEXER_UNMATCHED)) {
+    protected function dispatchTokens($unmatched, $matched, $mode = false) {
+        if (! $this->invokeParser($unmatched, LEXER_UNMATCHED)) {
             return false;
         }
         if (is_bool($mode)) {
-            return $this->_invokeParser($matched, LEXER_MATCHED);
+            return $this->invokeParser($matched, LEXER_MATCHED);
         }
-        if ($this->_isModeEnd($mode)) {
-            if (! $this->_invokeParser($matched, LEXER_EXIT)) {
+        if ($this->isModeEnd($mode)) {
+            if (! $this->invokeParser($matched, LEXER_EXIT)) {
                 return false;
             }
-            return $this->_mode->leave();
+            return $this->mode->leave();
         }
-        if ($this->_isSpecialMode($mode)) {
-            $this->_mode->enter($this->_decodeSpecial($mode));
-            if (! $this->_invokeParser($matched, LEXER_SPECIAL)) {
+        if ($this->isSpecialMode($mode)) {
+            $this->mode->enter($this->decodeSpecial($mode));
+            if (! $this->invokeParser($matched, LEXER_SPECIAL)) {
                 return false;
             }
-            return $this->_mode->leave();
+            return $this->mode->leave();
         }
-        $this->_mode->enter($mode);
-        return $this->_invokeParser($matched, LEXER_ENTER);
+        $this->mode->enter($mode);
+        return $this->invokeParser($matched, LEXER_ENTER);
     }
-    
+
     /**
      *    Tests to see if the new mode is actually to leave
      *    the current mode and pop an item from the matching
@@ -380,10 +379,10 @@ class SimpleLexer {
      *    @return boolean        True if this is the exit mode.
      *    @access private
      */
-    function _isModeEnd($mode) {
+    protected function isModeEnd($mode) {
         return ($mode === "__exit");
     }
-    
+
     /**
      *    Test to see if the mode is one where this mode
      *    is entered for this token only and automatically
@@ -392,10 +391,10 @@ class SimpleLexer {
      *    @return boolean        True if this is the exit mode.
      *    @access private
      */
-    function _isSpecialMode($mode) {
+    protected function isSpecialMode($mode) {
         return (strncmp($mode, "_", 1) == 0);
     }
-    
+
     /**
      *    Strips the magic underscore marking single token
      *    modes.
@@ -403,10 +402,10 @@ class SimpleLexer {
      *    @return string         Underlying mode name.
      *    @access private
      */
-    function _decodeSpecial($mode) {
+    protected function decodeSpecial($mode) {
         return substr($mode, 1);
     }
-    
+
     /**
      *    Calls the parser method named after the current
      *    mode. Empty content will be ignored. The lexer
@@ -416,17 +415,17 @@ class SimpleLexer {
      *                                  than unparsed data.
      *    @access private
      */
-    function _invokeParser($content, $is_match) {
+    protected function invokeParser($content, $is_match) {
         if (($content === '') || ($content === false)) {
             return true;
         }
-        $handler = $this->_mode_handlers[$this->_mode->getCurrent()];
-		if (isset($this->_mode_functions[$handler])) {
-			return call_user_func($this->_mode_functions[$handler], $content, $is_match);
+        $handler = $this->mode_handlers[$this->mode->getCurrent()];
+		if (isset($this->mode_functions[$handler])) {
+			return call_user_func($this->mode_functions[$handler], $content, $is_match);
 		}
-        return $this->_parser->$handler($content, $is_match);
+        return $this->parser->$handler($content, $is_match);
     }
-    
+
     /**
      *    Tries to match a chunk of text and if successful
      *    removes the recognised chunk and any leading
@@ -441,8 +440,8 @@ class SimpleLexer {
      *                               is a parsing error.
      *    @access private
      */
-    function _reduce($raw) {
-        if ($action = $this->_regexes[$this->_mode->getCurrent()]->match($raw, $match)) {
+    protected function reduce($raw) {
+        if ($action = $this->regexes[$this->mode->getCurrent()]->match($raw, $match)) {
             $unparsed_character_count = strpos($raw, $match);
             $unparsed = substr($raw, 0, $unparsed_character_count);
             $raw = substr($raw, $unparsed_character_count + strlen($match));
@@ -451,4 +450,3 @@ class SimpleLexer {
         return true;
     }
 }
-?>

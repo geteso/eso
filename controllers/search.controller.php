@@ -172,9 +172,13 @@ function init()
 		}
 		
 		// Add meta tags to the header, the "Mark all conversations as read" link to the footer, and a "Start a conversation" link for mobile support.
-		$this->eso->addToHead("<meta name='keywords' content='" . implode(",", $tags) . "'/>");
+		if (!empty($config["metaKeywords"])) {
+			$this->eso->addToHead("<meta name='keywords' content='" . implode(",", $config["metaKeywords"]) . "'/>");
+		} else {
+			$this->eso->addToHead("<meta name='keywords' content='" . implode(",", $tags) . "'/>");
+		}
 		list($lastTag) = array_splice($tags, count($tags) - 1, 1);
-		if (!empty($config["useForumDescription"])) {
+		if (!empty($config["metaDescription"])) {
 			$this->eso->addToHead("<meta name='description' content='" . sanitizeHTML($config["forumDescription"]) . "'/>");
 			$this->eso->addToHead("<meta property='og:description' content='" . sanitizeHTML($config["forumDescription"]) . "'/>");
 			$this->eso->addToHead("<meta name='twitter:description' content='" . sanitizeHTML($config["forumDescription"]) . "'/>");

@@ -43,10 +43,10 @@ if (!defined("IN_ESO")) exit;
 <div class='parentBox'><input type='checkbox' class='checkbox' name='useFriendlyURLs' value='1'<?php echo !empty($config["useFriendlyURLs"]) ? " checked='checked'" : ""; ?>/></div></li>
 
 <li><label class='checkbox'><?php echo $language["Show forum description"]; ?></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='showForumDescription' value='1'<?php echo !empty($config["showForumDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
+<div class='parentBox'><input type='checkbox' class='checkbox' name='showDescription' value='1'<?php echo !empty($config["showDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
 
 <li><label class='checkbox'><?php echo $language["Use forum description"]; ?></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='useForumDescription' value='1'<?php echo !empty($config["useForumDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
+<div class='parentBox'><input type='checkbox' class='checkbox' name='metaDescription' value='1'<?php echo !empty($config["metaDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
 
 <li><label></label> <span class='button'><input type='submit' name='saveSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>
 

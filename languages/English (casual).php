@@ -150,7 +150,7 @@ $language = array(
 "httpsInfo" => "This will not substitute a web certificate.",
 "httpsSetting" => "Enforce HTTPS",
 
-"iconInfo" => "Your forum icon appears next to links and web clips in order to represent your forum. Your logo will be automatically refitted to be 256 pixels by 256 pixels.",
+"iconInfo" => "Your forum icon appears next to links and web clips in order to represent your forum. Your icon will be automatically resized to be 256 pixels high.",
 "Image" => "Image",
 "Installed language packs" => "Installed languages",
 "Installed plugins" => "Installed plugins",

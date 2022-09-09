@@ -34,28 +34,46 @@ $defaultConfig = array(
 "mysqlPass" => "",
 "mysqlDB" => "",
 "tablePrefix" => "",
+"characterEncoding" => "utf8",
+"connectionOptions" => "",
+
+// Basic forum details.
 "forumTitle" => "",
 "forumDescription" => "",
 "language" => "English (casual)",
 "baseURL" => "",
-"rootAdmin" => 1,
-"emailFrom" => "",
-"cookieName" => "",
+"resourceURL" => "",
+"rootAdmin" => 1, // The member ID of the root administrator.
+"emailFrom" => "", // The email address to send forum emails (notifications etc.) from.
+"gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
+"https" => false, // Whether or not to force HTTPS.
 
 // This following block may be filled out manually.
 // Be careful when editing this.  You could break your forum.
 "forumLogo" => false, // Path to an image file to replace the logo.  False for skin default.
 "forumIcon" => false, // Same thing as before, but for the icon.
-"sendEmail" => true, // Whether or not to send emails using the PHP mail() function.
+"showDescription" => true, // Whether or not to display the forum description on the homepage.
 "sitemapCacheTime" => 3600, // Amount of time by which sitemaps are kept in cache.  (3600 seconds = 1 hour.)
 "manifestCacheTime" => 3600, // Same thing as before, but for the web app manifest.
 "manifestDisplay" => "browser", // The preferred way to display your forum in or outside of a browser.  Fullscreen, standalone, minimal-ui, or browser.
 // see https://www.w3.org/TR/mediaqueries-5/#display-mode for an explanation
 "verboseFatalErrors" => false, // Dumps SQL information in fatal errors.  Don't keep this enabled for production.
-"gzipOutput" => true, // Whether or not to compress the page output.  Saves bandwith.
-"https" => false, // Whether or not to force HTTPS.
-"showForumDescription" => true, // Whether or not to display the forum description on the homepage.
-"useForumDescription" => false, // Whether or not to use the forum description instead of the forumDescription language string in meta tags.
+
+// Meta information.
+"metaDescription" => false, // Whether or not to use the forum description instead of the forumDescription language string in meta tags.
+"metaKeywords" => false, // Meta keywords to be used by search engines.  False for tags to be used as keywords.
+// ex. "metaKeywords" => array("esotalk", "faq", "howto", "tutorial"),
+
+// Email settings.
+// WARNING: Email sending is disabled by default and should be configured first!
+// Read the guide on setting up email:
+"sendEmail" => false, // true = use PHP (internal) email | false | "smtp" = use SMTP email
+// The following isn't necessary unless you're planning to use SMTP email.
+"smtpAuth" => false, // false | "ssl" | "tls"
+"smtpHost" => "",
+"smtpPort" => "",
+"smtpUser" => "",
+"smtpPass" => "",
 
 // Skins and plugins.
 "skin" => "Plastic", // The default skin.  (This is overridden by config/skin.php.)
@@ -67,44 +85,56 @@ $defaultConfig = array(
 // Login and registration settings.
 "changeUsername" => true, // Whether or not accounts can change their usernames.
 "loginsPerMinute" => "10", // Amount of login attempts a user is limited to per minute.
+"minPasswordLength" => 6,
+"nonAsciiCharacters" => true, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
 "registrationOpen" => true, // Whether or not new accounts can be made on your forum.
-"registrationRequireEmail" => true, // Requires email verification to register on your forum.
-"registrationRequireApproval" => false, // Requires manual approval...
+"registrationRequireApproval" => "manual", // false | "email" = require email approval | "manual" = approval by mod/admin
 "reservedNames" => array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself"), // Reserved user names which cannot be used.
 
+// Cookie settings.
+"cookieName" => "",
+"cookieDomain" => "", // Sets a custom cookie domain. Set it to .yourdomain.com to have the cookie set across all subdomains. Keep blank to use baseURL.
+"cookieExpire" => 2592000, // Amount of time by which cookies are kept. (2592000 seconds = 30 days.)
+
+// URL settings.
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
 "usePrettyURLs" => false, // ex. example.com/conversation/1-welcome-to-simon-s-test-forum
 "useModRewrite" => true, // ex. example.com/conversation/1 (requires mod_rewrite and a .htaccess file!)
-"minPasswordLength" => 6,
-"cookieExpire" => 2592000, // Amount of time by which cookies are kept.  (2592000 seconds = 30 days.)
-"cookieDomain" => "", // Sets a custom cookie domain.  Set it to .yourdomain.com to have the cookie set across all subdomains.  Keep blank to use baseURL.
-"nonAsciiCharacters" => true, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
-"userOnlineExpire" => 4500, // Amount of time by which a user's last seen time is before the user goes offline.  (300 seconds = 5 minutes.)
-"messageDisplayTime" => 20, // Amount of time by which most messages floating above the navigation bar disappear.  (20 seconds = 20 seconds.  lol.)
 
+// Search view settings.
 "results" => 20, // Number of conversations to list for a normal search.
+"messageDisplayTime" => 20, // Amount of time by which most messages floating above the navigation bar disappear. (20 seconds = 20 seconds. lol.)
 "moreResults" => 100, // Total number of conversations to list per every request for more results.
 "numberOfTagsInTagCloud" => 40, // Number of tags to show in the tag cloud.
-"showAvatarThumbnails" => true, // Whether or not to show avatar thumbnails next to each conversation.
-"updateCurrentResultsInterval" => 30, // Amount of time by which conversations are updated (post information) in an existing search.  (30 seconds.)
-"checkForNewResultsInterval" => 60, // Amount of time by which new conversations are checked for in an existing search.  (60 seconds.)
+"updateCurrentResultsInterval" => 30, // Amount of time by which conversations are updated (post information) in an existing search. (30 seconds.)
+"checkForNewResultsInterval" => 60, // Amount of time by which new conversations are checked for in an existing search. (60 seconds.)
 "searchesPerMinute" => 10, // Amount of searches a user is limited to per minute.
 
+// Conversation view settings.
 "postsPerPage" => 20, // Maximum number of posts to display on each page of a conversation.
 "timeBetweenPosts" => 10, // Minimum number of seconds between a user's post.
 "maxCharsPerPost" => 50000, // Maximum number of characters per post.
 "autoReloadIntervalStart" => 4, // Initial number of seconds before checking for new posts on the conversation view.
 "autoReloadIntervalMultiplier" => 1.5, // Each time we check for new posts and there are none, multiply the number of seconds by this.
-// ex. after 4 seconds, check for new posts.  If there are none: after 4*1.5 = 6 seconds check for new posts.  If there are none: after 6*1.5 = 9 seconds check for new posts.
+// ex. after 4 seconds, check for new posts.  If there are none: after 4*1.5 = 6 seconds check for new posts. If there are none: after 6*1.5 = 9 seconds check for new posts.
 "autoReloadIntervalLimit" => 512, // Maximum number of seconds between checking for new posts. 
+
+// Online settings.
+"onlineMembers" => true, // Whether or not to show a list of online members.
+"userOnlineExpire" => 4500, // Amount of time by which a user's last seen time is before the user goes offline. (300 seconds = 5 minutes.)
+
+// Default user preferences.
+"avatarAlignment" => "alternate", // Default alignment preference for avatars. Alternate, left, right, or none. Individual users can override this.
+"showAvatarThumbnails" => true, // Whether or not to show avatar thumbnails next to each conversation.
+"emailPrivateAdd" => true, // Email when added to a private conversation?
+"emailStarReply" => true, // Email when someone posts in a private conversation that's starred?
 
 // Avatar dimensions in pixels.
 "avatarMaxWidth" => 200,
 "avatarMaxHeight" => 200,
 "avatarThumbWidth" => 64,
 "avatarThumbHeight" => 64,
-"avatarAlignment" => "alternate", // Default alignment preference for avatars.  Alternate, left, right, or none.  Individual users can override this.
-"changeAvatar" => true, // Whether or not to let users change their avatar.  Useful if your forum is tight on space or can't host images.
+"changeAvatar" => true, // Whether or not to let users change their avatar. Useful if your forum is tight on space or can't host images.
 );
 
 ?>

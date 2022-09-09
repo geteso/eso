@@ -155,9 +155,9 @@ function saveSettings()
 	
 	$newConfig["useFriendlyURLs"] = (bool)!empty($_POST["useFriendlyURLs"]);
 
-	$newConfig["showForumDescription"] = (bool)!empty($_POST["showForumDescription"]);
+	$newConfig["showDescription"] = (bool)!empty($_POST["showDescription"]);
 
-	$newConfig["useForumDescription"] = (bool)!empty($_POST["useForumDescription"]);
+	$newConfig["metaDescription"] = (bool)!empty($_POST["metaDescription"]);
 	
 	if (count($newConfig)) $this->writeSettingsConfig($newConfig);
 
@@ -703,7 +703,11 @@ function membersInit(&$adminController)
 {
 	global $language, $config;
 	$this->subView = "admin/members.php";
-	$this->registrationSettings = array("email", "approval", "false");
+	$this->registrationSettings = array(
+		"email" => $language["with email address"],
+		"approval" => $language["with manual approval"],
+		"false" => $language["with nothing at all"]
+	);
 
 	// Save the settings?
 	if (isset($_POST["saveMembersSettings"])
@@ -722,14 +726,9 @@ function membersInit(&$adminController)
 function saveMembersSettings()
 {
 	$newConfig = array();
-	
-//	if (in_array(@$_POST["requireVerification"], $this->registrationSettings)) $newConfig["registrationRequireVerification"] = $_POST["requireVerification"];
-	
+
 	$newConfig["registrationOpen"] = (bool)!empty($_POST["registrationOpen"]);
-
-	$newConfig["registrationRequireEmail"] = (bool)!empty($_POST["registrationRequireEmail"]);
-
-	$newConfig["registrationRequireApproval"] = (bool)!empty($_POST["registrationRequireApproval"]);
+	if (in_array(@$_POST["registrationRequireApproval"], $this->registrationSettings)) $newConfig["registrationRequireApproval"] = $_POST["registrationRequireApproval"];
 	
 	if (count($newConfig)) $this->writeSettingsConfig($newConfig);
 

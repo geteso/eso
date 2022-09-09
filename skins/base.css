@@ -273,7 +273,9 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .stats div {float:none; font-size:115%; margin-left:35%}
 #admin .stats li {padding-left:10px}
 #admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
+#admin .settingsForm hr {display:block}
 #admin .settingsForm.advanced input.text, #admin .settingsForm.advanced select {font-size:100%}
+#admin .settingsForm.advanced div > small {max-width:20rem; display:block; padding:3px 0 0}
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
 #admin input.checkbox {margin:3px 5px 5px 0}
 #admin .clear {display:none}
@@ -400,11 +402,11 @@ hr {display:block}
 
 /* Mobile properties */
 @media only screen and (max-width:1000px) {
-#editedBy, span.star0 {display:none}
-#bar #user, #bar #startConversation {display:none}
-#displayAvatars {visibility:hidden}
-#bar #profile {display:inherit}
+#displayAvatars, #editedBy, span.star0 {display:none}
 #bar {height:18px}
+#bar #user, #bar #startConversation {display:none}
+#bar #profile {display:inherit}
+#bar .fr li:last-child {margin-right:-3px}
 ul.fl, ul.fr {position:absolute}
 ul.fl {z-index:1}
 ul.fr {z-index:0; right:25px}

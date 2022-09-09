@@ -377,12 +377,39 @@ function relativeTime($then)
 function sendEmail($to, $subject, $body)
 {
 	global $config, $language, $eso;
+	if (!isset($config["sendEmail"])) return false;
 	if (!preg_match("/^[A-Z0-9._%-+]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i", $to)) return false;
-	
-	if (isset($eso) and ($return = $eso->callHook("sendEmail", array(&$to, &$subject, &$body), true)) !== null)
-		return $return;
-	
-	return mail(sanitizeForHTTP($to), sanitizeForHTTP(desanitize($subject)), desanitize($body), "From: " . sanitizeForHTTP(desanitize($config["forumTitle"]) . " <{$config["emailFrom"]}>") . "\nContent-Type: text/plain; charset={$language["charset"]}; format=flowed");
+
+	try {
+		$phpmailer = PATH_LIBRARY.'/vendor/class.phpmailer.php';
+		require_once($phpmailer);
+		$mail = new PHPMailer(true);
+
+		if (isset($eso) and ($return = $eso->callHook("sendEmail", array(&$to, &$subject, &$body), true)) !== null)
+			return $return;
+
+		if ($config["sendEmail"] = "smtp") {
+			$mail->IsSMTP();
+			$mail->SMTPAuth = true;
+			if ($config["smtpAuth"]) $mail->SMTPSecure = $config["SMTP"]["auth"];
+			$mail->Host = $config["smtpHost"];
+			$mail->Port = $config["smtpPort"];
+			$mail->Username = $config["smtpUser"];
+			$mail->Password = $config["smtpPass"];
+		}
+		$mail->CharSet = 'UTF-8';
+		$mail->IsHTML(true);
+		$mail->AddAddress($to);
+		$mail->SetFrom($config["emailFrom"], sanitizeForHTTP($config["forumTitle"]));
+		$mail->Subject = sanitizeForHTTP(desanitize($subject));
+		$mail->AltBody = strip_tags($body);
+		$mail->Body = $body;
+		$mail->Encoding = 'quoted-printable';
+
+		return $mail->Send();
+	} catch (Exception $e) {
+		return false;
+	}
 }
 
 // Return a list of files and their contents from a zip file.

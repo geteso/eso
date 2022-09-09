@@ -86,7 +86,7 @@ if(!defined("IN_ESO"))exit;
 <div id='header'>
 <div id='hdr'>
 
-<?php if (($config["showForumDescription"] == "true") && ($this->action == "search")): ?>
+<?php if (($config["showDescription"] == "true") && ($this->action == "search")): ?>
 <h1 id="hasForumDescription">
 <?php else: ?>
 <h1>
@@ -94,7 +94,7 @@ if(!defined("IN_ESO"))exit;
 
 <a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo();?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
 <span id='forumTitle'><?php echo $config["forumTitle"];?>
-<?php if (($config["showForumDescription"] == "true") && ($this->action == "search")): ?>
+<?php if (($config["showDescription"] == "true") && ($this->action == "search")): ?>
 <small id='forumDescription'><?php echo $config["forumDescription"];?></small>
 <?php endif; ?>
 </span>
