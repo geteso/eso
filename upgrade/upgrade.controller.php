@@ -32,7 +32,7 @@ function init()
 	
 	// Connect to the database.
 	global $config;
-	if (!$this->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]))
+	if (!$this->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"], $config["characterEncoding"]))
 		$this->fatalError($this->error());
 	
 	// Perform the upgrade, depending on what version the user is currently at.

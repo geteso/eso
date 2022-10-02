@@ -373,11 +373,18 @@ function relativeTime($then)
 	}
 }
 
+// Minify a JavaScript string using JSMin.
+function minifyJS($js)
+{
+	require_once PATH_LIBRARY."/vendor/jsmin.php";
+	return JSMin::minify($js);
+}
+
 // Send an email with proper headers.
 function sendEmail($to, $subject, $body)
 {
 	global $config, $language, $eso;
-	if (!isset($config["sendEmail"])) return false;
+	if (empty($config["sendEmail"])) return false;
 	if (!preg_match("/^[A-Z0-9._%-+]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i", $to)) return false;
 
 	try {
@@ -388,15 +395,14 @@ function sendEmail($to, $subject, $body)
 		if (isset($eso) and ($return = $eso->callHook("sendEmail", array(&$to, &$subject, &$body), true)) !== null)
 			return $return;
 
-		if ($config["sendEmail"] = "smtp") {
+		if ($config["smtpAuth"])
 			$mail->IsSMTP();
 			$mail->SMTPAuth = true;
-			if ($config["smtpAuth"]) $mail->SMTPSecure = $config["SMTP"]["auth"];
-			$mail->Host = $config["smtpHost"];
-			$mail->Port = $config["smtpPort"];
-			$mail->Username = $config["smtpUser"];
-			$mail->Password = $config["smtpPass"];
-		}
+			$mail->SMTPSecure = $config["SMTP"]["auth"];
+			if ($config["smtpHost"]) $mail->Host = $config["smtpHost"];
+			if ($config["smtpPort"]) $mail->Port = $config["smtpPort"];
+			if ($config["smtpUser"]) $mail->Username = $config["smtpUser"];
+			if ($config["smtpPass"]) $mail->Password = $config["smtpPass"];
 		$mail->CharSet = 'UTF-8';
 		$mail->IsHTML(true);
 		$mail->AddAddress($to);

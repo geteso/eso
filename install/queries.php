@@ -47,7 +47,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}conversations (
 	KEY conversations_lastPostTime (lastPostTime),
 	KEY conversations_posts (posts),
 	KEY conversations_sticky (sticky, lastPostTime)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE=MyISAM DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the posts table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}posts";
@@ -66,7 +66,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}posts (
 	KEY posts_conversationId (conversationId),
 	KEY posts_time (time),
 	FULLTEXT KEY posts_fulltext (title, content)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE=MyISAM DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the status table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}status";
@@ -78,7 +78,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}status (
 	lastRead smallint unsigned NOT NULL default '0',
 	draft text,
 	PRIMARY KEY  (conversationId, memberId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the members table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}members";
@@ -98,7 +98,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	disableJSEffects tinyint(1) NOT NULL default '0',
 	markedAsRead int unsigned default NULL,
 	lastSeen int unsigned default NULL,
-	lastAction varchar(255) default NULL,
+	lastAction varchar(191) default NULL,
 	resetPassword char(32) default NULL,
 	cookieIP int unsigned default NULL,
 	PRIMARY KEY  (memberId),
@@ -106,7 +106,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	UNIQUE KEY members_email (email),
 	KEY members_password (password),
 	KEY members_salt (salt)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the tags table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}tags";
@@ -114,21 +114,21 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}tags (
 	tag varchar(31) NOT NULL,
 	conversationId int unsigned NOT NULL,
 	PRIMARY KEY  (conversationId, tag)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the searches table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}searches";
 $queries[] = "CREATE TABLE {$config["tablePrefix"]}searches (
 	ip int unsigned NOT NULL,
 	searchTime int unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the logins table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}logins";
 $queries[] = "CREATE TABLE {$config["tablePrefix"]}logins (
 	ip int unsigned NOT NULL,
 	loginTime int unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the account for the administrator.
 $salt = generateRandomString(32);

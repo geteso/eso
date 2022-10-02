@@ -34,8 +34,9 @@ $defaultConfig = array(
 "mysqlPass" => "",
 "mysqlDB" => "",
 "tablePrefix" => "",
-"characterEncoding" => "utf8",
+"characterEncoding" => "utf8mb4",
 "connectionOptions" => "",
+"storageEngine" => "MyISAM",
 
 // Basic forum details.
 "forumTitle" => "",
@@ -67,7 +68,7 @@ $defaultConfig = array(
 // Email settings.
 // WARNING: Email sending is disabled by default and should be configured first!
 // Read the guide on setting up email:
-"sendEmail" => false, // true = use PHP (internal) email | false | "smtp" = use SMTP email
+"sendEmail" => false,
 // The following isn't necessary unless you're planning to use SMTP email.
 "smtpAuth" => false, // false | "ssl" | "tls"
 "smtpHost" => "",

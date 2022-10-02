@@ -62,6 +62,17 @@ function init()
 					}
 				}
 			}
+			// Prepare a list of SMTP email authentication options.
+			$this->smtpOptions = array(
+				"false" => "None at all (internal email)",
+				"ssl" => "SSL",
+				"tls" => "TLS"
+			);
+			// Prepare a list of MySQL storage engines.
+			$this->storageEngines = array(
+				"InnoDB" => "InnoDB (recommended)",
+				"MyISAM" => "MyISAM"
+			);
 			
 			// If the form has been submitted...
 			if (isset($_POST["forumTitle"])) {
@@ -74,15 +85,27 @@ function init()
 					"forumTitle" => $_POST["forumTitle"],
 					"forumDescription" => $_POST["forumDescription"],
 					"language" => $_POST["language"],
+					// DB settings
 					"mysqlHost" => $_POST["mysqlHost"],
 					"mysqlUser" => $_POST["mysqlUser"],
 					"mysqlPass" => $_POST["mysqlPass"],
 					"mysqlDB" => $_POST["mysqlDB"],
+					// SMTP settings
+					"sendEmail" => $_POST["sendEmail"],
+					"smtpAuth" => $_POST["smtpAuth"],
+					"smtpHost" => $_POST["smtpHost"],
+					"smtpPort" => $_POST["smtpPort"],
+					"smtpUser" => $_POST["smtpUser"],
+					"smtpPass" => $_POST["smtpPass"],
+					// Root user settings
 					"adminUser" => $_POST["adminUser"],
 					"adminEmail" => $_POST["adminEmail"],
 					"adminPass" => $_POST["adminPass"],
 					"adminConfirm" => $_POST["adminConfirm"],
+					// Advanced settings
 					"tablePrefix" => $_POST["tablePrefix"],
+					"characterEncoding" => $_POST["characterEncoding"],
+					"storageEngine" => $_POST["storageEngine"],
 					"baseURL" => $_POST["baseURL"],
 					"friendlyURLs" => $_POST["friendlyURLs"]
 				);
@@ -177,23 +200,37 @@ function doInstall()
 	
 	// Prepare the $config variable with the installation settings.
 	$config = array(
+		"forumTitle" => $_SESSION["install"]["forumTitle"],
+		"forumDescription" => $_SESSION["install"]["forumDescription"],
+		"language" => $_SESSION["install"]["language"],
+		// DB settings
 		"mysqlHost" => desanitize($_SESSION["install"]["mysqlHost"]),
 		"mysqlUser" => desanitize($_SESSION["install"]["mysqlUser"]),
 		"mysqlPass" => desanitize($_SESSION["install"]["mysqlPass"]),
 		"mysqlDB" => desanitize($_SESSION["install"]["mysqlDB"]),
-		"tablePrefix" => desanitize($_SESSION["install"]["tablePrefix"]),
-		"forumTitle" => $_SESSION["install"]["forumTitle"],
-		"forumDescription" => $_SESSION["install"]["forumDescription"],
-		"language" => $_SESSION["install"]["language"],
-		"baseURL" => $_SESSION["install"]["baseURL"],
+		// SMTP settings
 		"emailFrom" => "do_not_reply@{$_SERVER["HTTP_HOST"]}",
+		"sendEmail" => !empty($_SESSION["install"]["sendEmail"]),
+		// Advanced settings
+		"tablePrefix" => desanitize($_SESSION["install"]["tablePrefix"]),
+		"characterEncoding" => desanitize($_SESSION["install"]["characterEncoding"]),
+		"storageEngine" => desanitize($_SESSION["install"]["storageEngine"]),
+		"baseURL" => $_SESSION["install"]["baseURL"],
 		"cookieName" => preg_replace(array("/\s+/", "/[^\w]/"), array("_", ""), desanitize($_SESSION["install"]["forumTitle"])),
 		"useFriendlyURLs" => !empty($_SESSION["install"]["friendlyURLs"]),
 		"useModRewrite" => !empty($_SESSION["install"]["friendlyURLs"]) and function_exists("apache_get_modules") and in_array("mod_rewrite", apache_get_modules())
 	);
+	$smtpConfig = array(
+		"smtpAuth" => $_SESSION["install"]["smtpAuth"],
+		"smtpHost" => desanitize($_SESSION["install"]["smtpHost"]),
+		"smtpPort" => desanitize($_SESSION["install"]["smtpPort"]),
+		"smtpUser" => desanitize($_SESSION["install"]["smtpUser"]),
+		"smtpPass" => desanitize($_SESSION["install"]["smtpPass"]),
+	);
+	if (!empty($_SESSION["install"]["smtpAuth"])) $config = array_merge($config, $smtpConfig);
 	
 	// Connect to the MySQL database.
-	$this->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
+	$this->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"], $config["characterEncoding"]);
 	
 	// Run the queries one by one and halt if there's an error!
 	include "queries.php";
@@ -289,7 +326,7 @@ function validateInfo()
 	if ($_POST["adminPass"] != $_POST["adminConfirm"]) $errors["adminConfirm"] = "Your passwords do not match";
 	
 	// Try and connect to the database.
-	if (!$this->connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"])) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . $this->error();
+	if (!$this->connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"], $_POST["characterEncoding"])) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . $this->error();
 	
 	// Check to see if there are any conflicting tables already in the database.
 	// If there are, show an error with a hidden input. If the form is submitted again with this hidden input,

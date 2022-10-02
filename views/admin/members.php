@@ -42,7 +42,7 @@ if ($this->eso->user["admin"]):?>
 <li><label><?php echo $language["Require approval"]; ?><br/></label>
 <div><select name='registrationRequireApproval'><?php
 foreach ($this->registrationSettings as $k => $v)
-echo "<option value='$v'" . ($config["registrationRequireApproval"] == $v ? " selected='selected'" : "") . ">$v</option>";	
+echo "<option value='$k'" . ($config["registrationRequireApproval"] == $k ? " selected='selected'" : "") . ">$v</option>";	
 ?></select></div></li>
 
 <li><label></label> <span class='button'><input type='submit' name='saveMembersSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>

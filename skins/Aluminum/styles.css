@@ -29,9 +29,12 @@ small a, dt a {color:#55f}
 #bar {background:linear-gradient(#e4e4e4, #a7a7a7); border-bottom:1px solid gray; border-top:1px solid gray; box-shadow:0 0 5px 0 #ababab; text-shadow:#ddd 0 1px}
 #bar strong a {color:#000}
 #bar input.text, #hdr #reset {border-color:#555; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -webkit-box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -moz-box-shadow:0 1px 1px #c6c6c6}
-#login {border-top:0; border-bottom:0; border-left:0; border-right:1px solid gray}
-#logout {display:block; margin-top:-6px; padding-top:6px; padding-bottom:3px; padding-left:3.5px; border-top:0; border-bottom:0; border-left:1px solid gray; border-right:0}
 #displayAvatars select {border-radius:0; border-color:#555; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -webkit-box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -moz-box-shadow:0 1px 1px #c6c6c6; background:#fff}
+/* Dividers */
+#bar li:not(li:first-child) > .vl {margin-left:4px}
+#bar li:not(li:last-child) > .vr {margin-right:4px}
+#bar li:not(li:first-child) > .vl::after {content:''; height:32px; width:1px; position:absolute; top:-6px; left:-4px; background-color:gray}
+#bar li:not(li:last-child) > .vr::after {content:''; height:32px; width:1px; position:absolute; top:-6px; right:-4px; background-color:gray}
 /* RSS button */
 #bar #rss .button {background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzUgMTc1Ij4KICA8Y2lyY2xlIGN4PSIyNCIgY3k9IjE1MSIgcj0iMjQiIGZpbGw9IiNmZmYiLz4KICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTE2IDE3NUg4MkE4MiA4MiAwIDAgMCAwIDkzVjU5YTExNiAxMTYgMCAwIDEgMTE2IDExNnoiLz4KICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQwIDE3NUExNDAgMTQwIDAgMCAwIDAgMzVWMGExNzUgMTc1IDAgMCAxIDE3NSAxNzV6Ii8+Cjwvc3ZnPgo=') no-repeat center/13px, linear-gradient(#fdc855 25%, #fa9f15 50%, #f87602 50%, #fdb522 100%); width:19px; border:1px solid #db5605; border-radius:5px}
 #bar #rss .button input {visibility:hidden; color:#fff; text-shadow:#db5605 0 -1px}

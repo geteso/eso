@@ -57,6 +57,8 @@ h1#hasForumDescription #forumTitle {font-size:20px}
 #displayAvatars select {height:20px; margin-left:3px}
 #bar strong#user {margin-right:5px}
 #bar #profile, #bar #profile span {display:none}
+/* Dividers */
+#bar li > .vl, #bar li > .vr {display:block; position:relative}
 
 /* Header and bar */
 #header {top:0; z-index:100; position:relative}
@@ -162,7 +164,7 @@ small.tags:empty {margin:0}
 .pg li.right {margin-left:-1px; margin-right:-10em; width:10em}
 .pg li.middle {cursor:pointer; margin:0 -1px; width:100%}
 .pg .viewing {bottom:-1px; cursor:E-resize; cursor:col-resize; margin-top:-2px; position:relative; white-space:nowrap}
-.pg .viewing div {overflow:hidden; padding:0 2px}
+.pg .viewing div {overflow:hidden; padding:0 2px; line-height:20px}
 .pg .unread {display:block; margin-top:-20px; overflow:hidden; white-space:nowrap}
 .pg li.left a, .pg li.right a {cursor:pointer; display:block; float:left; overflow:hidden; text-align:center; width:6em; white-space:nowrap}
 .pg li.left a.first, .pg li.right a.last {width:4em}
@@ -359,7 +361,7 @@ fieldset > .warning:last-child {margin:0}
 .big {height:25px}
 .big input {font-size:140%; height:26px}
 .buttonSmall {line-height:1.5; width:fit-content}
-a.buttonSmall {padding:0 5px; margin:0 0 10px; text-decoration:none}
+a.buttonSmall {padding:0 5px; margin:0 0 10px; line-height:18px; text-decoration:none}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
 

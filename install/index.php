@@ -146,35 +146,60 @@ case "info": ?>
 </ul>
 
 <hr/>
+<p>The software needs a mail server to send emails to members, but your forum will work with email sending disabled. If you haven't configured server-side email sending or are unsure of whether you can send emails, leave this disabled and change it later.</p>
+
+<ul class='form'>
+<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='7' class='checkbox' value='1'/></li>
+
+<li><label>SMTP authentication</label><div><select id='smtpAuth' name='smtpAuth' tabindex='8'>
+<?php foreach ($smtpOptions as $k => $v) echo "<option value='$k'" . ((!empty($_POST["smtpAuth"]) ? $_POST["smtpAuth"] : "") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
+</select></div></li>
+
+<li><label>SMTP host address</label> <input id='smtpHost' name='smtpHost' tabindex='9' type='text' class='text' autocomplete='off' value='<?php echo @$_POST["smtpHost"]; ?>'/></li>
+
+<li><label>SMTP host port</label> <input id='smtpPort' name='smtpPort' tabindex='10' type='text' class='text' placeholder='25' autocomplete='off' value='<?php echo @$_POST["smtpPort"]; ?>'/></li>
+
+<li><label>SMTP username</label> <input id='smtpUser' name='smtpUser' tabindex='11' type='text' class='text' placeholder='simon@example.com' autocomplete='off' value='<?php echo @$_POST["smtpUser"]; ?>'/></li>
+
+<li><label>SMTP password</label> <input id='smtpPass' name='smtpPass' tabindex='12' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["smtpPass"]; ?>'/></li>
+</ul>
+
+<hr/>
 <p>The software will use the following information to set up your administrator account on your forum.</p>
 
 <ul class='form'>
-<li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='7' type='text' class='text' placeholder='Simon' autocomplete='username' value='<?php echo @$_POST["adminUser"]; ?>'/>
+<li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='13' type='text' class='text' placeholder='Simon' autocomplete='username' value='<?php echo @$_POST["adminUser"]; ?>'/>
 <?php if (isset($install->errors["adminUser"])): ?><div class='warning msg'><?php echo $install->errors["adminUser"]; ?></div><?php endif; ?></li>
 	
-<li><label>Administrator email</label> <input id='adminEmail' name='adminEmail' tabindex='8' type='text' class='text' placeholder='simon@example.com' autocomplete='email' value='<?php echo @$_POST["adminEmail"]; ?>'/>
+<li><label>Administrator email</label> <input id='adminEmail' name='adminEmail' tabindex='14' type='text' class='text' placeholder='simon@example.com' autocomplete='email' value='<?php echo @$_POST["adminEmail"]; ?>'/>
 <?php if (isset($install->errors["adminEmail"])): ?><span class='warning msg'><?php echo $install->errors["adminEmail"]; ?></span><?php endif; ?></li>
 	
-<li><label>Administrator password</label> <input id='adminPass' name='adminPass' tabindex='9' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminPass"]; ?>'/>
+<li><label>Administrator password</label> <input id='adminPass' name='adminPass' tabindex='15' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminPass"]; ?>'/>
 <?php if (isset($install->errors["adminPass"])): ?><span class='warning msg'><?php echo $install->errors["adminPass"]; ?></span><?php endif; ?></li>
 	
-<li><label>Confirm password</label> <input id='adminConfirm' name='adminConfirm' tabindex='10' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminConfirm"]; ?>'/>
+<li><label>Confirm password</label> <input id='adminConfirm' name='adminConfirm' tabindex='16' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminConfirm"]; ?>'/>
 <?php if (isset($install->errors["adminConfirm"])): ?><span class='warning msg'><?php echo $install->errors["adminConfirm"]; ?></span><?php endif; ?></li>
 </ul>
 
 <br/>
-<a href='#advanced' onclick='toggleAdvanced();return false' title='What, you&#39;re too cool for the normal settings?' tabindex='11'>Advanced options</a>
+<a href='#advanced' onclick='toggleAdvanced();return false' title='What, you&#39;re too cool for the normal settings?' tabindex='17'>Advanced options</a>
 <hr class='aboveToggle'/>
 <div id='advanced'>
 
 <?php if (isset($install->errors["tablePrefix"])): ?><p class='warning msg'><?php echo $install->errors["tablePrefix"]; ?></p><?php endif; ?>
 
 <ul class='form'>
-<li><label>MySQL table prefix</label> <input name='tablePrefix' id='tablePrefix' tabindex='12' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["tablePrefix"]) ? $_POST["tablePrefix"] : "et_"; ?>'/></li>
+<li><label>MySQL table prefix</label> <input name='tablePrefix' id='tablePrefix' tabindex='18' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["tablePrefix"]) ? $_POST["tablePrefix"] : "et_"; ?>'/></li>
 
-<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='13' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+<li><label>MySQL character set</label> <input name='characterEncoding' id='characterEncoding' tabindex='19' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["characterEncoding"]) ? $_POST["characterEncoding"] : "utf8mb4"; ?>'/></li>
 
-<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='14' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
+<li><label>MySQL storage engine</label><div><select id='storageEngine' name='storageEngine' tabindex='20'>
+<?php foreach ($storageEngines as $k => $v) echo "<option value='$k'" . ((!empty($_POST["storageEngine"]) ? $_POST["storageEngine"] : "") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
+</select></div></li>
+
+<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='21' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+
+<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='22' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
 </ul>
 
 <input type='hidden' name='showAdvanced' id='showAdvanced' value='<?php echo $_POST["showAdvanced"]; ?>'/>

@@ -30,7 +30,7 @@ var $eso;
 var $link;
 
 // Connect to a MySQL server and database.
-function connect($host, $user, $password, $db, $encoding = "utf8")
+function connect($host, $user, $password, $db, $encoding = "utf8mb4")
 {
 	if (!($this->link = @mysql_connect($host, $user, $password)) or !@mysql_select_db($db, $this->link)) return false;
 	$this->query("SET NAMES '$encoding'");

@@ -57,7 +57,7 @@ function __construct()
 	// Connect to the database by setting up the database class.
 	$this->db = new Database();
 	$this->db->eso =& $this;
-	if (!$this->db->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]))
+	if (!$this->db->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"], $config["characterEncoding"]))
 		$this->fatalError($config["verboseFatalErrors"] ? $this->db->error() : "", "mysql");
 	
 	// Clear messages in the SESSION messages variable.
@@ -109,7 +109,7 @@ function init()
 
 		// If the user IS NOT logged in, add the login form and 'Join us' link to the bar.
 		if (!$this->user) {
-			$this->addToBar("left", "<form action='" . curLink() . "' method='post' id='login'><div>
+			$this->addToBar("left", "<form action='" . curLink() . "' method='post' id='login' class='vr'><div>
  <input id='loginName' name='login[name]' type='text' class='text' autocomplete='username' placeholder='" . (!empty($_POST["login"]["name"]) ? $_POST["login"]["name"] : $language["Username"]) . "'/>
  <input id='loginPassword' name='login[password]' type='password' class='text' autocomplete='current-password' placeholder='{$language["Password"]}'/>
  " . $this->skin->button(array("value" => $language["Log in"], "class" => "buttonSmall")) . "
@@ -125,7 +125,7 @@ function init()
 						$this->addToBar("left", "<a href='" . makeLink("profile") . "' id='profile'><span class='button buttonSmall'><input type='submit' value='{$language["My profile"]}'></span></a>", 300);
 						$this->addToBar("left", "<a href='" . makeLink("settings") . "'><span class='button buttonSmall'><input type='submit' value='{$language["My settings"]}'></span></a>", 400);
 						$this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='startConversation'><span class='button buttonSmall'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
-						$this->addToBar("left", "<a href='" . makeLink("logout") . "' id='logout'><span class='button buttonSmall'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
+						$this->addToBar("left", "<a href='" . makeLink("logout") . "' id='logout' class='vl'><span class='button buttonSmall'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
 						if ($this->user["moderator"]) $this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button buttonSmall'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
 		
@@ -192,9 +192,8 @@ function login($name = false, $password = false, $hash = false)
 		
 		// Get the user's IP address, and validate it against the cookie IP address if they're logging in via cookie.
 		// Do some back-and-forth conversion so we only use the first three parts of the IP (the last will be 0.)
-//		$ip = long2ip(ip2long($_SESSION["ip"]));
 		$ip = (int)ip2long($_SESSION["ip"]);
-		$ip = sprintf("%u", ip2long(substr($ip, 0, strrpos($ip, ".")) . ".0"));
+//		$ip = sprintf("%u", ip2long(substr($ip, 0, strrpos($ip, ".")) . ".0"));
 		if (isset($cookie)) $components["where"][] = "cookieIP=" . ($ip ? $ip : "0");
 		
 		$this->callHook("beforeLogin", array(&$components));

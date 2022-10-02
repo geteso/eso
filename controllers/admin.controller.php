@@ -704,9 +704,9 @@ function membersInit(&$adminController)
 	global $language, $config;
 	$this->subView = "admin/members.php";
 	$this->registrationSettings = array(
-		"email" => $language["with email address"],
-		"approval" => $language["with manual approval"],
-		"false" => $language["with nothing at all"]
+		"email" => $language["registrationEmail"],
+		"approval" => $language["registrationManual"],
+		"false" => $language["registrationAuto"]
 	);
 
 	// Save the settings?

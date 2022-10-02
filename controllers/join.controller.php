@@ -111,16 +111,16 @@ function init()
 	
 	// If the form has been submitted, validate it and add the member into the database.
 	if (isset($_POST["join"]) and $this->addMember()) {
-		if ($config["registrationRequireApproval"] == "email") {
+		if (!empty($config["sendEmail"]) && $config["registrationRequireApproval"] == "email") {
 			$this->eso->message("verifyEmail", false);
-			redirect("");
-		} elseif ($config["registrationRequireApproval"] == true) {
-			$this->eso->message("waitForApproval", false);
 			redirect("");
 		} elseif ($config["registrationRequireApproval"] == false) {
 			$this->eso->login($_POST["join"]["name"], $_POST["join"]["password"], false);
 			redirect("");
-		} else return false;
+		} else {
+			$this->eso->message("waitForApproval", false);
+			redirect("");
+		}
 	}
 }
 
@@ -211,7 +211,7 @@ function addMember()
 	$this->callHook("afterAddMember", array($memberId));
 	
 	// Email the member with a verification link so that they can verify their account.
-	if ($config["registrationRequireApproval"] == "email") {
+	if (!empty($config["sendEmail"]) && $config["registrationRequireApproval"] == "email") {
 		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($salt . $_POST["join"]["password"]));
 	}
 	
