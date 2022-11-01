@@ -73,7 +73,7 @@ class ParallelRegex {
         if (count($this->patterns) == 0) {
             return false;
         }
-        if (! preg_match($this->getCompoundedRegex(), $subject, $matches)) {
+        if (!preg_match($this->getCompoundedRegex(), $subject, $matches)) {
             $match = '';
             return false;
         }
@@ -97,12 +97,13 @@ class ParallelRegex {
     protected function getCompoundedRegex() {
         if ($this->regex == null) {
             for ($i = 0, $count = count($this->patterns); $i < $count; $i++) {
-                $this->patterns[$i] = '(' . str_replace(
-                        array('/', '(', ')'),
-                        array('\/', '\(', '\)'),
-                        $this->patterns[$i]) . ')';
+				$this->patterns[$i] = '('.str_replace(
+						['/', '(', ')'],
+						['/', '(', ')'],
+						$this->patterns[$i]
+				).')';
             }
-            $this->regex = "/" . implode("|", $this->patterns) . "/" . $this->getPerlMatchingFlags();
+			$this->regex = '/'.implode('|', $this->patterns).'/'.$this->getPerlMatchingFlags();
         }
         return $this->regex;
     }
@@ -183,6 +184,7 @@ class SimpleLexer {
     private $parser;
     private $mode;
     private $mode_handlers;
+    private $mode_functions;
     private $case;
 
     /**
@@ -450,3 +452,4 @@ class SimpleLexer {
         return true;
     }
 }
+?>

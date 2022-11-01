@@ -92,6 +92,7 @@ $language = array(
 "Debug information" => "Debug information",
 "Default forum language" => "Default forum language",
 "delete" => "delete",
+"delete forever" => "delete forever",
 "Delete conversation" => "Delete conversation",
 "deleted by" => "deleted by %s",
 "Disable" => "Disable",
@@ -346,6 +347,7 @@ $language = array(
 "confirmLeave" => "Woah, you haven't saved the stuff you are editing! If you leave this page, you'll lose any changes you've made. Is this ok?",
 "confirmDiscard" => "You have not saved your reply as a draft. Do you wish to discard it?",
 "confirmDeleteConversation" => "Are you sure you want to delete this conversation? Seriously, you won't be able to get it back.",
+"confirmDeletePost" => "Are you sure you want to delete this post? Seriously, you won't be able to get it back.",
 "ajaxRequestPending" => "Hey! We're still processing some of your stuff! If you navigate away from this page you might lose any recent changes you've made, so wait a few seconds, ok?",
 "ajaxDisconnected" => "Unable to communicate with the server. Wait a few seconds and <a href='javascript:Ajax.resumeAfterDisconnection()'>try again</a>, or <a href='' onclick='window.location.reload();return false'>refresh the page</a>.",
 );

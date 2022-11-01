@@ -53,7 +53,6 @@ h1#hasForumDescription #forumTitle {font-size:20px}
 #bar input.text {height:14px; border-radius:0; -webkit-appearance:none}
 #bar img {vertical-align:-4px}
 #bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
-#login {margin-top:-6.5px!important; padding-top:5.5px; padding-bottom:5.5px; padding-right:3px}
 #displayAvatars select {height:20px; margin-left:3px}
 #bar strong#user {margin-right:5px}
 #bar #profile, #bar #profile span {display:none}
@@ -184,7 +183,7 @@ hr {display:none}
 .p .hdr .pInfo .thumb {margin:0 8px 0 -10px; display:none}
 .p .hdr .pInfo .thumb img {border-top-color:transparent; border-top-style:solid; border-top-width:3px; box-sizing:border-box}
 .p .hdr .controls {float:right; padding-top:1px}
-.p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; width:3.5em; text-align:center; display:inline-block}
+.p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; padding:0 5px; text-align:center; display:inline-block}
 .p .hdr .controls span {font-size:100%}
 .p .hdr a.button {padding:1px 4px}
 .p .body {line-height:1.3; overflow:auto; padding:5px 10px 0}
@@ -275,7 +274,7 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .stats div {float:none; font-size:115%; margin-left:35%}
 #admin .stats li {padding-left:10px}
 #admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
-#admin .settingsForm hr {display:block}
+#admin .settingsForm hr {display:block; margin:10px -15px}
 #admin .settingsForm.advanced input.text, #admin .settingsForm.advanced select {font-size:100%}
 #admin .settingsForm.advanced div > small {max-width:20rem; display:block; padding:3px 0 0}
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
@@ -404,11 +403,10 @@ hr {display:block}
 
 /* Mobile properties */
 @media only screen and (max-width:1000px) {
-#displayAvatars, #editedBy, span.star0 {display:none}
+#editedBy, span.star0 {display:none}
 #bar {height:18px}
 #bar #user, #bar #startConversation {display:none}
 #bar #profile {display:inherit}
-#bar .fr li:last-child {margin-right:-3px}
 ul.fl, ul.fr {position:absolute}
 ul.fl {z-index:1}
 ul.fr {z-index:0; right:25px}
@@ -460,6 +458,7 @@ td.author, td.lastPost {display:none}
 @media only screen and (max-width:710px) {
 div#copyright {margin-top:0}
 ul.fl, ul.fr {white-space:nowrap}
+#bar .fr {display:none}
 #accountInformation .form div:not(.msg) {padding-left:0; width:calc(100% - 5px)}
 #accountInformation .msg {margin-left:0}
 #accountInformation .form label {text-align:left}
@@ -474,7 +473,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #wrapper.small #search {display:none}
 #search.withStartConversation {padding-right:7.15em}
 #search .fr {margin-right:-7.15em; width:7.15em}
-#bar .fr, #new {display:none}
+.button.big#new {display:none}
 #ftr-content #startConversation {display:inline-block}
 #admin {margin-top:0; border-left:0; border-image:none; background:unset}
 #admin .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available}

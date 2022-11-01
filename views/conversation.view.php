@@ -156,7 +156,16 @@ echo $paginationHtml;
 // <![CDATA[
 <?php
 // Make lots of link templates that can be used by JavaScript (functions below), and when rendering the posts in PHP (further below).
-$memberLink="<a href='".makeLink("profile","%d")."'>%s</a>";$editedBy="({$language["edited by"]} %s %s)";$deletedBy="({$language["deleted by"]})";$quoteLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?quotePost=%s",$this->startFrom?"&start=$this->startFrom":"","#reply")."' onclick='Conversation.quotePost(%s);return false'>{$language["quote"]}</a>";$editLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?editPost=%s",$this->startFrom?"&start=$this->startFrom":"","#p%s")."' onclick='Conversation.editPost(%s);return false'>{$language["edit"]}</a>";$deleteLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?deletePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.deletePost(%s);return false'>{$language["delete"]}</a>";$restoreLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?restorePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.restorePost(%s);return false'>{$language["restore"]}</a>";$showDeletedLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?showDeletedPost=%s",$this->startFrom?"&start=$this->startFrom":"")."' onclick='Conversation.showDeletedPost(%s);return false'>{$language["show"]}</a>";$hideDeletedLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?start=$this->startFrom")."' onclick='Conversation.hideDeletedPost(%s);return false'>{$language["hide"]}</a>";$lastAction="(<abbr title='%s'>{$language["online"]}</abbr>)";$permalink=makeLink("post","%s");?>
+$memberLink="<a href='".makeLink("profile","%d")."'>%s</a>";
+$editedBy="({$language["edited by"]} %s %s)";
+$deletedBy="({$language["deleted by"]})";
+$quoteLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?quotePost=%s",$this->startFrom?"&start=$this->startFrom":"","#reply")."' onclick='Conversation.quotePost(%s);return false'>{$language["quote"]}</a>";
+$editLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?editPost=%s",$this->startFrom?"&start=$this->startFrom":"","#p%s")."' onclick='Conversation.editPost(%s);return false'>{$language["edit"]}</a>";
+$deleteLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?deletePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.deletePost(%s);return false'>{$language["delete"]}</a>";
+$restoreLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?restorePost=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.restorePost(%s);return false'>{$language["restore"]}</a>";
+$showDeletedLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?showDeletedPost=%s",$this->startFrom?"&start=$this->startFrom":"")."' onclick='Conversation.showDeletedPost(%s);return false'>{$language["show"]}</a>";
+$hideDeletedLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?start=$this->startFrom")."' onclick='Conversation.hideDeletedPost(%s);return false'>{$language["hide"]}</a>";$lastAction="(<abbr title='%s'>{$language["online"]}</abbr>)";$permalink=makeLink("post","%s");
+$deleteForeverLink="<a href='".makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]),"?deletePostForever=%s",$this->startFrom?"&start=$this->startFrom":"","&token=%t")."' onclick='Conversation.deletePostForever(%s);return false'>{$language["delete forever"]}</a>";?>
 function makeMemberLink(memberId, member) {return "<?php echo $memberLink;?>".replace("%d", memberId).replace("%s", member);}
 function makeEditedBy(member, time) {return "<?php echo $editedBy;?>".replace("%s", member).replace("%s", time);}
 function makeDeletedBy(member) {return "<?php echo $deletedBy;?>".replace("%s", member);}
@@ -166,6 +175,7 @@ function makeDeleteLink(postId) {return "<?php echo $deleteLink;?>".replace(/%s/
 function makeRestoreLink(postId) {return "<?php echo $restoreLink;?>".replace(/%s/g, postId);}
 function makeShowDeletedLink(postId) {return "<?php echo $showDeletedLink;?>".replace(/%s/g, postId);}
 function makeHideDeletedLink(postId) {return "<?php echo $hideDeletedLink;?>".replace(/%s/g, postId);}
+function makeDeleteForeverLink(postId) {return "<?php echo $deleteForeverLink;?>".replace(/%s/g, postId);}
 function makeLastAction(lastAction) {return "<?php echo $lastAction;?>".replace("%s", lastAction);}
 function makePermalink(postId) {return "<?php echo $permalink;?>".replace("%s", postId);}
 // ]]>
@@ -194,7 +204,8 @@ if(!empty($post["deleteMember"])):?>
 <span><?php printf($deletedBy,$post["deleteMember"]);?></span>
 </div>
 <div class='controls'>
-<?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span><?php endif;?>
+<?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span> <?php endif;?>
+<?php if($post["canDelete"]):?><span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$deleteForeverLink);?></span><?php endif;?>
 </div>
 </div>
 <?php if($this->showingDeletedPost==$post["id"]):?><div class='body'><?php echo $post["body"];?></div><?php endif;?>

@@ -25,10 +25,15 @@ if(!defined("IN_ESO"))exit;
 ?>
 
 <?php
-// If the user can't sign up, inform them with an error message.
-if(($error=$this->canJoin())!==true):
-echo $this->eso->htmlMessage($error);
+// If the user can't sign up, inform them with an error message wrapped
+// in a fieldset.
+if(($error=$this->canJoin())!==true):?>
+<fieldset id='join'>
+<legend><?php echo $language["Join this forum"];?></legend>
+<?php echo $this->eso->htmlMessage($error);?>
+</fieldset>
 
+<?php
 // If they can, show the form.
 else:
 ?>

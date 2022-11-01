@@ -26,21 +26,16 @@
 if(!defined("IN_ESO"))exit;
 ?>
 
-<?php
-// If email sending is disabled, show an error message.
-if (empty($config["sendEmail"])):
-echo $this->eso->htmlMessage("sendEmailDisabled");
-
-// Otherwise, show the form.
-else:
-?>
-
 <fieldset id='forgot-pass'>
 <legend><?php echo $language["Forgot your password"];?></legend>
 <?php
 
+// If email sending is disabled, show an error message.
+if (empty($config["sendEmail"])):
+echo $this->eso->htmlMessage("sendEmailDisabled");
+
 // Display a form with an email field.
-if(!$this->setPassword):
+elseif(!$this->setPassword):
 echo $this->eso->htmlMessage("forgotPassword");?>
 
 <form id='forgot-password' action='<?php echo makeLink("forgot-password");?>' method='post'>

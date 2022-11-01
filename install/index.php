@@ -113,113 +113,124 @@ case "warningChecks": ?>
 // Specify setup information.
 case "info": ?>
 <h1><img src='logo.svg' alt=''/>Specify setup information</h1>
-<hr/>
-<p>Welcome to the installer.  We need a few details from you so we can get your forum set up and ready to go.</p>
-<p>If you have any trouble, get help on <a href='https://geteso.org'>geteso.org</a>.</p>
+<p class='lead'>Welcome to the installer.  We need a few details from you so we can get your forum set up and ready to go.
+<br/>If you have any trouble, get help on <a href='https://geteso.org'>geteso.org</a>.</p>
 
+<fieldset id='basicDetails'><legend>Specify basic details</legend>
 <ul class='form'>
 <li><label>Forum title</label> <input id='forumTitle' name='forumTitle' tabindex='1' type='text' class='text' placeholder="e.g. Simon's Krav Maga Forum" value='<?php echo @$_POST["forumTitle"]; ?>'/>
 <?php if (isset($install->errors["forumTitle"])): ?><div class='warning msg'><?php echo $install->errors["forumTitle"]; ?></div><?php endif; ?></li>
 
-<li><label>Forum description</label> <input id='forumDescription' name='forumDescription' tabindex='1' type='text' class='text' placeholder="e.g. Learn about Krav Maga." value='<?php echo @$_POST["forumDescription"]; ?>'/>
+<li><label>Forum description</label> <input id='forumDescription' name='forumDescription' tabindex='2' type='text' class='text' placeholder="e.g. Learn about Krav Maga." value='<?php echo @$_POST["forumDescription"]; ?>'/>
 <?php if (isset($install->errors["forumDescription"])): ?><div class='warning msg'><?php echo $install->errors["forumDescription"]; ?></div><?php endif; ?></li>
 
-<li><label>Default language</label> <div><select id='language' name='language' tabindex='2'>
+<li><label>Default language</label> <div><select id='language' name='language' tabindex='3'>
 <?php foreach ($install->languages as $language) echo "<option value='$language'" . ((!empty($_POST["language"]) ? $_POST["language"] : "English (casual)") == $language ? " selected='selected'" : "") . ">$language</option>"; ?>
 </select><br/>
 <small>More language packs are <a href='https://geteso.org/languages'>available for download</a>.</small></div></li>
 </ul>
+</fieldset>
 
-<hr/>
+<fieldset id='mysqlConfig'><legend>Configure the database</legend>
 <p>The software needs a database to store all your forum's data in, such as conversations and posts. If you're unsure of any of these details, you may need to ask your hosting provider.</p>
 
 <?php if (isset($install->errors["mysql"])): ?><div class='warning msg'><?php echo $install->errors["mysql"]; ?></div><?php endif; ?>
 
 <ul class='form'>
-<li><label>MySQL host address</label> <input id='mysqlHost' name='mysqlHost' tabindex='3' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["mysqlHost"]) ? $_POST["mysqlHost"] : "localhost"; ?>'/></li>
+<li><label>MySQL host address</label> <input id='mysqlHost' name='mysqlHost' tabindex='4' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["mysqlHost"]) ? $_POST["mysqlHost"] : "localhost"; ?>'/></li>
 
-<li><label>MySQL username</label> <input id='mysqlUser' name='mysqlUser' tabindex='4' type='text' class='text' placeholder='esoman' autocomplete='off' value='<?php echo @$_POST["mysqlUser"]; ?>'/></li>
+<li><label>MySQL username</label> <input id='mysqlUser' name='mysqlUser' tabindex='5' type='text' class='text' placeholder='esoman' autocomplete='off' value='<?php echo @$_POST["mysqlUser"]; ?>'/></li>
 
-<li><label>MySQL password</label> <input id='mysqlPass' name='mysqlPass' tabindex='5' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["mysqlPass"]; ?>'/></li>
+<li><label>MySQL password</label> <input id='mysqlPass' name='mysqlPass' tabindex='6' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["mysqlPass"]; ?>'/></li>
 
-<li><label>MySQL database</label> <input id='mysqlDB' name='mysqlDB' tabindex='6' type='text' class='text' placeholder='esodb' autocomplete='off' value='<?php echo @$_POST["mysqlDB"]; ?>'/></li>
+<li><label>MySQL database</label> <input id='mysqlDB' name='mysqlDB' tabindex='7' type='text' class='text' placeholder='esodb' autocomplete='off' value='<?php echo @$_POST["mysqlDB"]; ?>'/></li>
 </ul>
+</fieldset>
 
-<hr/>
+<fieldset id='emailConfig'><legend>Outgoing mail server</legend>
 <p>The software needs a mail server to send emails to members, but your forum will work with email sending disabled. If you haven't configured server-side email sending or are unsure of whether you can send emails, leave this disabled and change it later.</p>
 
 <ul class='form'>
-<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='7' class='checkbox' value='1'/></li>
-
-<li><label>SMTP authentication</label><div><select id='smtpAuth' name='smtpAuth' tabindex='8'>
-<?php foreach ($smtpOptions as $k => $v) echo "<option value='$k'" . ((!empty($_POST["smtpAuth"]) ? $_POST["smtpAuth"] : "") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
-</select></div></li>
-
-<li><label>SMTP host address</label> <input id='smtpHost' name='smtpHost' tabindex='9' type='text' class='text' autocomplete='off' value='<?php echo @$_POST["smtpHost"]; ?>'/></li>
-
-<li><label>SMTP host port</label> <input id='smtpPort' name='smtpPort' tabindex='10' type='text' class='text' placeholder='25' autocomplete='off' value='<?php echo @$_POST["smtpPort"]; ?>'/></li>
-
-<li><label>SMTP username</label> <input id='smtpUser' name='smtpUser' tabindex='11' type='text' class='text' placeholder='simon@example.com' autocomplete='off' value='<?php echo @$_POST["smtpUser"]; ?>'/></li>
-
-<li><label>SMTP password</label> <input id='smtpPass' name='smtpPass' tabindex='12' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["smtpPass"]; ?>'/></li>
+<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='8' class='checkbox' value='1'/>
+<!-- <small>If you leave this disabled, the SMTP configuration will be ignored.</small> -->
+</li>
 </ul>
 
-<hr/>
-<p>The software will use the following information to set up your administrator account on your forum.</p>
+<a href='#smtpConfig' onclick='toggleSmtpConfig();return false' title='What, you&#39;re too cool for the normal settings?' tabindex='9'>SMTP mail server (optional)</a>
+<div id='smtpConfig'>
 
 <ul class='form'>
-<li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='13' type='text' class='text' placeholder='Simon' autocomplete='username' value='<?php echo @$_POST["adminUser"]; ?>'/>
-<?php if (isset($install->errors["adminUser"])): ?><div class='warning msg'><?php echo $install->errors["adminUser"]; ?></div><?php endif; ?></li>
-	
-<li><label>Administrator email</label> <input id='adminEmail' name='adminEmail' tabindex='14' type='text' class='text' placeholder='simon@example.com' autocomplete='email' value='<?php echo @$_POST["adminEmail"]; ?>'/>
-<?php if (isset($install->errors["adminEmail"])): ?><span class='warning msg'><?php echo $install->errors["adminEmail"]; ?></span><?php endif; ?></li>
-	
-<li><label>Administrator password</label> <input id='adminPass' name='adminPass' tabindex='15' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminPass"]; ?>'/>
-<?php if (isset($install->errors["adminPass"])): ?><span class='warning msg'><?php echo $install->errors["adminPass"]; ?></span><?php endif; ?></li>
-	
-<li><label>Confirm password</label> <input id='adminConfirm' name='adminConfirm' tabindex='16' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminConfirm"]; ?>'/>
-<?php if (isset($install->errors["adminConfirm"])): ?><span class='warning msg'><?php echo $install->errors["adminConfirm"]; ?></span><?php endif; ?></li>
-</ul>
-
-<br/>
-<a href='#advanced' onclick='toggleAdvanced();return false' title='What, you&#39;re too cool for the normal settings?' tabindex='17'>Advanced options</a>
-<hr class='aboveToggle'/>
-<div id='advanced'>
-
-<?php if (isset($install->errors["tablePrefix"])): ?><p class='warning msg'><?php echo $install->errors["tablePrefix"]; ?></p><?php endif; ?>
-
-<ul class='form'>
-<li><label>MySQL table prefix</label> <input name='tablePrefix' id='tablePrefix' tabindex='18' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["tablePrefix"]) ? $_POST["tablePrefix"] : "et_"; ?>'/></li>
-
-<li><label>MySQL character set</label> <input name='characterEncoding' id='characterEncoding' tabindex='19' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["characterEncoding"]) ? $_POST["characterEncoding"] : "utf8mb4"; ?>'/></li>
-
-<li><label>MySQL storage engine</label><div><select id='storageEngine' name='storageEngine' tabindex='20'>
-<?php foreach ($storageEngines as $k => $v) echo "<option value='$k'" . ((!empty($_POST["storageEngine"]) ? $_POST["storageEngine"] : "") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
+<li><label>SMTP authentication</label><div><select id='smtpAuth' name='smtpAuth' tabindex='10'>
+<?php foreach ($install->smtpOptions as $k => $v) echo "<option value='$k'" . ((!empty($_POST["smtpAuth"]) ? $_POST["smtpAuth"] : "false") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
 </select></div></li>
 
-<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='21' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+<li><label>SMTP host address</label> <input id='smtpHost' name='smtpHost' tabindex='11' type='text' class='text' autocomplete='off' value='<?php echo @$_POST["smtpHost"]; ?>'/></li>
 
-<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='22' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
+<li><label>SMTP host port</label> <input id='smtpPort' name='smtpPort' tabindex='12' type='text' class='text' placeholder='25' autocomplete='off' value='<?php echo @$_POST["smtpPort"]; ?>'/></li>
+
+<li><label>SMTP username</label> <input id='smtpUser' name='smtpUser' tabindex='13' type='text' class='text' placeholder='simon@example.com' autocomplete='off' value='<?php echo @$_POST["smtpUser"]; ?>'/></li>
+
+<li><label>SMTP password</label> <input id='smtpPass' name='smtpPass' tabindex='14' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["smtpPass"]; ?>'/></li>
 </ul>
 
-<input type='hidden' name='showAdvanced' id='showAdvanced' value='<?php echo $_POST["showAdvanced"]; ?>'/>
+<input type='hidden' name='showSmtpConfig' id='showSmtpConfig' value='<?php echo $_POST["showSmtpConfig"]; ?>'/>
 <script type='text/javascript'>
 // <![CDATA[
-function toggleAdvanced() {
-	toggle(document.getElementById("advanced"), {animation: "verticalSlide"});
-	document.getElementById("showAdvanced").value = document.getElementById("advanced").showing ? "1" : "";
-	if (document.getElementById("advanced").showing) {
-		animateScroll(document.getElementById("advanced").offsetTop + document.getElementById("advanced").offsetHeight + getClientDimensions()[1]);
-		document.getElementById("tablePrefix").focus();
+function toggleSmtpConfig() {
+	toggle(document.getElementById("smtpConfig"), {animation: "verticalSlide"});
+	document.getElementById("showSmtpConfig").value = document.getElementById("smtpConfig").showing ? "1" : "";
+	if (document.getElementById("smtpConfig").showing) {
+		animateScroll(document.getElementById("smtpConfig").offsetTop + document.getElementById("smtpConfig").offsetHeight + getClientDimensions()[1]);
+//		document.getElementById("smtpAuth").focus();
 	}
 }
-<?php if (empty($_POST["showAdvanced"])): ?>hide(document.getElementById("advanced"));<?php endif; ?>
+<?php if (empty($_POST["showSmtpConfig"])): ?>hide(document.getElementById("smtpConfig"));<?php endif; ?>
 // ]]>
 </script>
 </div>
+</fieldset>
 
-<p id='footer' style='margin:0'><input type='submit' tabindex='15' value='Next step &#155;' class='button'/></p>
-<hr/>
+<fieldset id='adminConfig'><legend>Administrator account</legend>
+<p>The software will use the following information to set up your administrator account on your forum.</p>
+
+<ul class='form'>
+<li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='15' type='text' class='text' placeholder='Simon' autocomplete='username' value='<?php echo @$_POST["adminUser"]; ?>'/>
+<?php if (isset($install->errors["adminUser"])): ?><div class='warning msg'><?php echo $install->errors["adminUser"]; ?></div><?php endif; ?></li>
+	
+<li><label>Administrator email</label> <input id='adminEmail' name='adminEmail' tabindex='16' type='text' class='text' placeholder='simon@example.com' autocomplete='email' value='<?php echo @$_POST["adminEmail"]; ?>'/>
+<?php if (isset($install->errors["adminEmail"])): ?><span class='warning msg'><?php echo $install->errors["adminEmail"]; ?></span><?php endif; ?></li>
+	
+<li><label>Administrator password</label> <input id='adminPass' name='adminPass' tabindex='17' type='password' class='text' autocomplete='new-password' value='<?php echo @$_POST["adminPass"]; ?>'/>
+<?php if (isset($install->errors["adminPass"])): ?><span class='warning msg'><?php echo $install->errors["adminPass"]; ?></span><?php endif; ?></li>
+	
+<li><label>Confirm password</label> <input id='adminConfirm' name='adminConfirm' tabindex='18' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["adminConfirm"]; ?>'/>
+<?php if (isset($install->errors["adminConfirm"])): ?><span class='warning msg'><?php echo $install->errors["adminConfirm"]; ?></span><?php endif; ?></li>
+</ul>
+</fieldset>
+
+<fieldset id='advancedOptions'>
+<legend><a href='#' onclick='Settings.toggleFieldset("advancedOptions");return false' title='What, you&#39;re too cool for the normal settings?' tabindex='19'>Advanced options</a></legend>
+
+<?php if (isset($install->errors["tablePrefix"])): ?><p class='warning msg'><?php echo $install->errors["tablePrefix"]; ?></p><?php endif; ?>
+
+<ul class='form' id='advancedOptionsForm'>
+<li><label>MySQL table prefix</label> <input name='tablePrefix' id='tablePrefix' tabindex='20' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["tablePrefix"]) ? $_POST["tablePrefix"] : "et_"; ?>'/></li>
+
+<li><label>MySQL character set</label> <input name='characterEncoding' id='characterEncoding' tabindex='21' type='text' class='text' autocomplete='off' value='<?php echo isset($_POST["characterEncoding"]) ? $_POST["characterEncoding"] : "utf8mb4"; ?>'/></li>
+
+<li><label>MySQL storage engine</label><div><select id='storageEngine' name='storageEngine' tabindex='22'>
+<?php foreach ($install->storageEngines as $k => $v) echo "<option value='$k'" . ((!empty($_POST["storageEngine"]) ? $_POST["storageEngine"] : "InnoDB") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
+</select></div></li>
+
+<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='23' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+
+<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='24' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
+</ul>
+</fieldset>
+<script type='text/javascript'>Settings.hideFieldset("advancedOptions")</script>
+
+<p id='footer' style='margin:0'><input type='submit' tabindex='25' value='Next step &#155;' class='button'/></p>
+<hr class='separator'/>
 <p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 
@@ -227,7 +238,7 @@ function toggleAdvanced() {
 // Show an installation error.
 case "install": ?>
 <h1><img src='logo.svg' alt=''/>Uh oh! It's a fatal error...</h1>
-<hr/>
+<hr class='separator'/>
 <p class='warning msg'>The forum installer encountered an error.</p>
 <p>The installer has encountered a nasty error which is making it impossible to install a forum on your server. But don't feel down, <strong>here are a few things you can try</strong>:</p>
 <ul>
@@ -261,7 +272,7 @@ hide(document.getElementById("error"));
 // Finish!
 case "finish": ?>
 <h1><img src='logo.svg' alt=''/>Congratulations!</h1>
-<hr/>
+<hr class='separator'/>
 <p>Your forum has been installed, and it should be ready to go.</p>
 <p>It's highly recommended that you <strong>remove the <code>install</code> folder</strong> to secure your forum.</p>
 
@@ -283,7 +294,7 @@ hide(document.getElementById("advanced"));
 // ]]>
 </script>
 <p style='text-align:center' id='footer'><input type='submit' class='button' value='Take me to my forum!' name='finish'/></p>
-<hr/>
+<hr class='separator'/>
 <p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;
 

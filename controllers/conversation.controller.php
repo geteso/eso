@@ -52,7 +52,7 @@ function init()
 	$this->conversation["membersAllowed"] =& $this->getMembersAllowed();
 
 	// Add essential variables and language definitions to be accessible through JavaScript. 
-	$this->eso->addLanguageToJS("Starred", "Unstarred", "Lock", "Unlock", "Sticky", "Unsticky", "Moderator", "Moderator-plural", "Administrator", "Administrator-plural", "Member", "Member-plural", "Suspended", "Unvalidated", "confirmLeave", "confirmDiscard", "confirmDeleteConversation", "Never", "Just now", "year ago", "years ago", "month ago", "months ago", "week ago", "weeks ago", "day ago", "days ago", "hour ago", "hours ago", "minute ago", "minutes ago", "second ago", "seconds ago");
+	$this->eso->addLanguageToJS("Starred", "Unstarred", "Lock", "Unlock", "Sticky", "Unsticky", "Moderator", "Moderator-plural", "Administrator", "Administrator-plural", "Member", "Member-plural", "Suspended", "Unvalidated", "confirmLeave", "confirmDiscard", "confirmDeleteConversation", "confirmDeletePost", "Never", "Just now", "year ago", "years ago", "month ago", "months ago", "week ago", "weeks ago", "day ago", "days ago", "hour ago", "hours ago", "minute ago", "minutes ago", "second ago", "seconds ago");
 	$this->eso->addVarToJS("postsPerPage", $config["postsPerPage"]);
 	$this->eso->addVarToJS("autoReloadIntervalStart", $config["autoReloadIntervalStart"]);
 	$this->eso->addVarToJS("autoReloadIntervalMultiplier", $config["autoReloadIntervalMultiplier"]);	
@@ -213,6 +213,12 @@ function init()
 		
 		// Show a deleted post: set the $this->showingDeletedPost variable so that the post body is outputted later on.
 		if (isset($_GET["showDeletedPost"])) $this->showingDeletedPost = (int)$_GET["showDeletedPost"];
+
+		// Permanently delete a post.
+		if (isset($_GET["deletePostForever"]) and $this->eso->validateToken(@$_GET["token"])) {
+			$this->deletePostForever((int)$_GET["deletePostForever"]);
+			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+		}
 
 		// Toggle sticky.
 		if (isset($_GET["toggleSticky"]) and $this->eso->validateToken(@$_GET["token"])) {
@@ -449,6 +455,19 @@ function ajax()
 			
 			// After restoring the post, return its details from the database.
 			if ($this->restorePost($postId)) return $this->getPosts(array("postIds" => $postId));
+			break;
+
+		// Permanently delete a post.
+		case "deletePostForever":
+			if (!$this->eso->validateToken(@$_POST["token"])) return;
+			$postId = (int)@$_POST["postId"];
+			if (!$this->conversation = $this->getConversation("(SELECT conversationId FROM {$config["tablePrefix"]}posts WHERE postId=$postId)")) return;
+
+			// Get the post details from the database so we can check if the user has permission to delete it.
+			list($memberId, $account, $deleteMember) = $this->eso->db->fetchRow("SELECT p.memberId, account, deleteMember FROM {$config["tablePrefix"]}posts p INNER JOIN {$config["tablePrefix"]}members USING (memberId) WHERE postId=$postId");
+			if (($error = $this->canDeletePost($postId, $memberId, $account, $deleteMember)) !== true) $this->eso->message($error);
+
+			else $this->deletePostForever($postId);
 			break;
 
 		// Edit a post.
@@ -739,7 +758,8 @@ function getPosts($criteria = array(), $display = false)
 			"date" => date($language["dateFormat"], $post["time"]),
 			"time" => $post["time"],
 			"editTime" => $post["editTime"],
-			"canEdit" => $this->canEditPost($post["id"], $post["memberId"], $post["account"], $post["deleteMember"]) === true,
+			"canEdit" => $this->canEditPost($post["id"], $post["memberId"], $post["account"]) === true,
+			"canDelete" => $this->canDeletePost($post["id"], $post["memberId"], $post["account"]) === true,
 			"info" => array(),
 			"controls" => array()
 		) + (!$post["deleteMember"]
@@ -1040,13 +1060,13 @@ function deletePost($postId)
 		SET p.deleteMember={$this->eso->user["memberId"]}, p.editTime=$time, c.lastActionTime=$time
 		WHERE postId=$postId AND c.conversationId=p.conversationId" . ($this->eso->user["moderator"] ? "" : " AND p.memberId={$this->eso->user["memberId"]}");	
 	$this->eso->db->query($query);
-	
+
 	// If the query didn't affect any rows, either we didn't have permission or the post didn't exist...
 	if (!$this->eso->db->affectedRows()) {
 		$this->eso->message("noPermission");
 		return false;
 	}
-	
+
 	$this->callHook("deletePost", array($postId));
 	
 	return true;
@@ -1081,6 +1101,61 @@ function restorePost($postId)
 	}
 	
 	$this->callHook("restorePost", array($postId));
+	
+	return true;
+}
+
+// Permanently delete a post.
+function deletePostForever($postId)
+{
+	global $config;
+	$postId = (int)$postId;
+
+	// Don't even bother trying if they're not logged in.
+	if (!$this->eso->user or $this->eso->isUnvalidated()) {
+		$this->eso->message("noPermission");
+		return false;
+	}
+	// Does the user have permission?
+	if (($error = $this->canDeletePost($postId)) !== true) {
+		$this->eso->message($error);
+		return false;
+	}
+
+	// Is the post being deleted also the last post of this conversaton?
+	$lastPost = $this->eso->db->result("SELECT postId FROM {$config["tablePrefix"]}posts
+		WHERE conversationId={$this->conversation["id"]} ORDER BY time DESC LIMIT 1");
+	if ($lastPost == $postId) {
+		// Change the last post member and time to that of the previous post.
+		$lastPostMember = $this->eso->db->result("SELECT memberId FROM {$config["tablePrefix"]}posts WHERE conversationId={$this->conversation["id"]} AND postId!=$postId ORDER BY time DESC LIMIT 1");
+		$lastPostTime = $this->eso->db->result("SELECT time FROM {$config["tablePrefix"]}posts WHERE conversationId={$this->conversation["id"]} AND postId!=$postId ORDER BY time DESC LIMIT 1");
+		$query = "UPDATE {$config["tablePrefix"]}conversations
+			SET lastPostMember=$lastPostMember, lastPostTime=$lastPostTime
+			WHERE conversationId={$this->conversation["id"]}";
+		if (!empty($lastPostMember)) $this->eso->db->query($query);
+	}
+
+	// Exclude the post from the post count. (For some reason, subtracting 1 from an unsigned integer doesn't work.)
+	$posts = $this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}posts
+	WHERE conversationId={$this->conversation["id"]} AND postId!=$postId ORDER BY time");
+	if ($posts > 0) {
+		$query = "UPDATE {$config["tablePrefix"]}conversations SET posts=$posts WHERE conversationId={$this->conversation["id"]}";
+		$this->eso->db->query($query);
+	}
+
+	// Delete the post (actually delete it.)
+	$query = "DELETE p FROM {$config["tablePrefix"]}posts p
+		LEFT JOIN {$config["tablePrefix"]}conversations c ON (p.conversationId=c.conversationId)
+		WHERE p.postId=$postId";
+	$this->eso->db->query($query);
+
+	// If the query didn't affect any rows, either we didn't have permission or the post didn't exist...
+	if (!$this->eso->db->affectedRows()) {
+		$this->eso->message("noPermission");
+		return false;
+	}
+
+	$this->callHook("permanentDeletePost", array($postId));
 	
 	return true;
 }
@@ -1564,6 +1639,21 @@ function canEditPost($postId, $memberId = false, $account = false, $deleteMember
 	if (!$memberId or !$account or $deleteMember === -1) list($memberId, $account, $deleteMember) = $this->eso->db->fetchRow("SELECT p.memberId, account, deleteMember FROM {$config["tablePrefix"]}posts p INNER JOIN {$config["tablePrefix"]}members USING (memberId) WHERE postId=$postId");
 	
 	if (!$this->eso->user or (!$this->eso->user["moderator"] and ($memberId != $this->eso->user["memberId"] or ($deleteMember and $deleteMember != $this->eso->user["memberId"]))) or ($account == "Administrator" and !$this->eso->user["admin"])) return "noPermission";
+	if ($this->conversation["locked"] and !$this->eso->user["moderator"]) return "locked";
+	if ($this->eso->isSuspended()) return "suspended";
+	return true;
+}
+
+// To permanently delete a post, user must be: administrator or (post author and post not deleted by another member)
+// Provide the post id or the post member, account, and deleteMember.
+function canDeletePost($postId, $memberId = false, $account = false, $deleteMember = -1)
+{
+	global $config;
+	$postId = (int)$postId;
+	if ($this->conversation["postCount"] < 2) return false;
+	if (!$memberId or !$account or $deleteMember === -1) list($memberId, $account, $deleteMember) = $this->eso->db->fetchRow("SELECT p.memberId, account, deleteMember FROM {$config["tablePrefix"]}posts p INNER JOIN {$config["tablePrefix"]}members USING (memberId) WHERE postId=$postId");
+	
+	if (!$this->eso->user or (!$this->eso->user["admin"] and ($memberId != $this->eso->user["memberId"] or ($deleteMember and $deleteMember != $this->eso->user["memberId"]))) or ($account == "Administrator" and !$this->eso->user["admin"])) return "noPermission";
 	if ($this->conversation["locked"] and !$this->eso->user["moderator"]) return "locked";
 	if ($this->eso->isSuspended()) return "suspended";
 	return true;

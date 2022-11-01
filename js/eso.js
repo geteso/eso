@@ -1014,6 +1014,7 @@ displayPosts: function(scrollTo) {
 				"</div>",
 				"<div class='controls'>");
 			if (post.canEdit) html.push("<span>", window[!post.body ? "makeShowDeletedLink" : "makeHideDeletedLink"](post.id), "</span> <span>", makeRestoreLink(post.id), "</span> ");
+			if (post.canDelete) html.push("<span>", makeDeleteForeverLink(post.id), "</span> ");
 			html.push("</div></div>");
 			if (post.body) html.push("<div class='body'>", post.body, "</div>");
 			html.push("</div>");
@@ -1604,6 +1605,38 @@ hideDeletedPost: function(postId) {
 			break;
 		}
 	}
+},
+
+// Delete a post forever.
+deletePostForever: function(postId) {
+	
+	// Check if we're editing any posts - if we are, confirm it with the user.
+	if (Conversation.editingPosts > 0 && !confirm(Conversation.beforeUnload())) return false;
+	else if (!confirm(eso.language["confirmDeletePost"])) return false;
+	else Conversation.editingPosts = 0;
+
+	// Reload the posts on this page so we can redisplay them when needed.
+	Conversation.reloadPosts(Conversation.startFrom, null, true);
+	
+	// Make the ajax request.
+	Ajax.request({
+		"url": eso.baseURL + "ajax.php?controller=conversation",
+		"post": "action=deletePostForever&postId=" + postId,
+		"success": function() {
+			if (this.messages) return;
+			
+			// Find the post we just deleted and change its deleteMember to the current user, then redisplay the posts.
+			for (var i in Conversation.posts) {
+				if (Conversation.posts[i].id == postId) {
+					var oldHeight = getById("p" + postId).offsetHeight;
+					getById("p" + postId).style.height = "0px";
+//					Conversation.displayPosts();
+					Conversation.animateDeletePost(getById("p" + postId), oldHeight);
+					break;
+				}
+			}
+		}
+	});
 },
 
 // Edit a post - make the post area into a textarea.
