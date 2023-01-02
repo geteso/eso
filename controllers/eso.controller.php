@@ -168,8 +168,11 @@ function login($name = false, $password = false, $hash = false)
 	if (isset($_SESSION["user"])) return true;
 
 	// If a raw password was passed, convert it into a hash.
-	if ($name and $password) {
-		$salt = $this->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name='$name'", 0);
+	$dbPassword = $this->db->result("SELECT password FROM {$config["tablePrefix"]}members WHERE name='$name'", 0);
+	if ($name and $password and $config["hashingMethod"] == "bcrypt" and password_verify($password, $dbPassword)) {
+		$hash = $dbPassword;
+	} elseif ($name and $password) {
+		$salt = $this->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name='" . $this->db->escape($name) . "'", 0);
 		$hash = md5($salt . $password);
 	}
 	
@@ -192,9 +195,13 @@ function login($name = false, $password = false, $hash = false)
 		
 		// Get the user's IP address, and validate it against the cookie IP address if they're logging in via cookie.
 		// Do some back-and-forth conversion so we only use the first three parts of the IP (the last will be 0.)
-		$ip = (int)ip2long($_SESSION["ip"]);
-//		$ip = sprintf("%u", ip2long(substr($ip, 0, strrpos($ip, ".")) . ".0"));
-		if (isset($cookie)) $components["where"][] = "cookieIP=" . ($ip ? $ip : "0");
+		$ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+		if ($config["hashingMethod"] == "bcrypt") {
+			$ipHash = hash("sha512", $ip);
+		} else {
+			$ipHash = md5($ip);
+		}
+		if (isset($cookie)) $components["where"][] = "cookieIP=" . ($ipHash ? $ipHash : "0");
 		
 		$this->callHook("beforeLogin", array(&$components));
 
@@ -220,12 +227,12 @@ function login($name = false, $password = false, $hash = false)
 				// Get the user's IP address.
 //				$ip = (int)ip2long($_SESSION["ip"]);
 				// Have they performed >= $config["loginsPerMinute"] logins in the last minute?
-				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip=$ip AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
+				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip=$ipHash AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
 					$this->eso->message("waitToLogin", true, 60);
 					return;
 				}
 				// Log this attempt in the logins table.
-				$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ($ip, UNIX_TIMESTAMP())");
+				$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ($ipHash, UNIX_TIMESTAMP())");
 				// Proactively clean the logins table of logins older than 60 seconds.
 				$this->eso->db->query("DELETE FROM {$config["tablePrefix"]}logins WHERE loginTime<UNIX_TIMESTAMP()-60");
 			}
@@ -238,7 +245,7 @@ function login($name = false, $password = false, $hash = false)
 		// Run the query and get the data if there is a matching user.
 		$result = $this->db->query($this->db->constructSelectQuery($components));
 		if ($data = $this->db->fetchAssoc($result)) {
-			
+
 			$this->callHook("afterLogin", array(&$data));
 
 			// If their account is unvalidated and we're using email verification, show a message with a link to resend a verification email.
@@ -263,7 +270,7 @@ function login($name = false, $password = false, $hash = false)
 			// If the "remember me" box was checked, set a cookie, and set the cookieIP field in the database.
 //			if (@$_POST["login"]["rememberMe"]) {
 			if (@$_POST["login"]) {
-				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP=$ip WHERE memberId={$_SESSION["user"]["memberId"]}");
+				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP='$ipHash' WHERE memberId={$_SESSION["user"]["memberId"]}");
 				setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
 			}
 			

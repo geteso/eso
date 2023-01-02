@@ -1036,12 +1036,12 @@ displayPosts: function(scrollTo) {
 
 		// Regardless of post 'groups', output this individual post.
 		html.push("<div", (!singlePost ? " id='p" + post.id + "'" : ""), ">",
-			"<div class='hdr'>",
-			"<div class='pInfo'>");
+			"<div class='hdr'>");
 		if (side) html.push("<div class='thumb'>", makeMemberLink(post.memberId, "<img src='" + (post.thumb || ("skins/" + eso.skin + "/avatarThumb.svg")) + "' alt=''/>"), "</div>");
+		html.push("<div class='pInfo'>");
 		html.push("<h3>", makeMemberLink(post.memberId, post.name), "</h3> ",
 			"<span title='", post.date, "'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ");
-		if (post.editTime) html.push("<span>", makeEditedBy(post.editMember, relativeTime(post.editTime)), "</span> ");
+		if (post.editTime) html.push("<span id='editedBy'>", makeEditedBy(post.editMember, relativeTime(post.editTime)), "</span> ");
 		// Output the member's account.
 		if (post.accounts.length > 0) {
 			html.push("<span><select onchange='Conversation.changeMemberGroup(", post.memberId, ",this.value)' name='group'>");

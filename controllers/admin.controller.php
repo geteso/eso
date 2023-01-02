@@ -705,7 +705,7 @@ function membersInit(&$adminController)
 	$this->subView = "admin/members.php";
 	$this->registrationSettings = array(
 		"email" => $language["registrationEmail"],
-		"approval" => $language["registrationManual"],
+		"manual" => $language["registrationManual"],
 		"false" => $language["registrationAuto"]
 	);
 

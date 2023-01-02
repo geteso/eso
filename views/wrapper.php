@@ -125,10 +125,12 @@ if(!defined("IN_ESO"))exit;
 <?php $this->callHook("footer"); ?>
 <div id='ftr'>
 <div id='ftr-content'>
-<?php if (count($this->footer)): ?><ul><?php
-ksort($this->footer);
-foreach ($this->footer as $v) echo "<li>$v</li>";
-?></ul><?php endif; ?>
+<?php if (count($this->footer)): ?>
+	<ul><?php ksort($this->footer);foreach ($this->footer as $v) echo "<li>$v</li>";?></ul>
+<?php endif; ?>
+<?php if (count($this->bar["right"])): ?>
+	<ul><?php ksort($this->bar["right"]);foreach ($this->bar["right"] as $v) echo "<li>$v</li>";?></ul>
+<?php endif; ?>
 </div>
 </div>
 <?php $this->callHook("pageEnd");?>

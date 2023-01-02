@@ -131,10 +131,11 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}logins (
 ) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the account for the administrator.
+$password = $config["hashingMethod"] == "bcrypt" ? password_hash($SESSION["install"]["adminPass"], PASSWORD_DEFAULT) : md5($salt . $_SESSION["install"]["adminPass"]);
 $salt = generateRandomString(32);
 $color = rand(1, 27);
 $queries[] = "INSERT INTO {$config["tablePrefix"]}members (memberId, name, email, password, salt, color, account) VALUES 
-(1, '{$_SESSION["install"]["adminUser"]}', '{$_SESSION["install"]["adminEmail"]}', '" . md5($salt . $_SESSION["install"]["adminPass"]) . "', '$salt', $color, 'Administrator')";
+(1, '{$_SESSION["install"]["adminUser"]}', '{$_SESSION["install"]["adminEmail"]}', '$password', '$salt', $color, 'Administrator')";
 
 // Create default conversations.
 $time = time();

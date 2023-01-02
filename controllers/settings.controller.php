@@ -195,6 +195,7 @@ function changeUsername()
 	global $config;
 	$updateData = array();
 	$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
+	$password = $this->eso->db->result("SELECT password FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
 
 	// Are we setting a new username?
 	if (!empty($_POST["settingsUsername"]["name"])) {
@@ -207,7 +208,8 @@ function changeUsername()
 	}
 
 	// Check if the user entered their old password correctly.
-	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($salt . $_POST["settingsUsername"]["password"]) . "'", 0)) $this->messages["password"] = "incorrectPassword";
+	$hash = md5($salt . $_POST["settingsUsername"]["password"]);
+	if (($config["hashingMethod"] == "bcrypt" and password_verify($_POST["settingsUsername"]["password"], $password)) or !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0)) $this->messages["password"] = "incorrectPassword";
 
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {
@@ -227,13 +229,18 @@ function changePasswordEmail()
 	$updateData = array();
 	$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
 	$newSalt = generateRandomString(32);
+	$password = $this->eso->db->result("SELECT password FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
 	
 	// Are we setting a new password?
 	if (!empty($_POST["settingsPasswordEmail"]["new"])) {
 		
 		// Make a copy of the raw password and format it into a hash.
 		$password = $_POST["settingsPasswordEmail"]["new"];
-		$hash = md5($newSalt . $password);
+		if ($config["hashingMethod"] == "bcrypt") {
+			$hash = password_hash($_POST["settingsPasswordEmail"]["new"], PASSWORD_DEFAULT);
+		} else {
+			$hash = md5($newSalt . $password);
+		}
 		if ($error = validatePassword($password)) $this->messages["new"] = $error;
 		
 		// Do both of the passwords entered match?
@@ -260,8 +267,9 @@ function changePasswordEmail()
 	}
 	
 	// Check if the user entered their old password correctly.
-	if (!$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . md5($salt . $_POST["settingsPasswordEmail"]["current"]) . "'", 0)) $this->messages["current"] = "incorrectPassword";
-	
+	$hash = md5($salt . $_POST["settingsPasswordEmail"]["current"]);
+	if (($config["hashingMethod"] == "bcrypt" and password_verify($_POST["settingsUsername"]["password"], $password)) or !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0)) $this->messages["current"] = "incorrectPassword";
+
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {
 		$query = $this->eso->db->constructUpdateQuery("members", $updateData, array("memberId" => $this->eso->user["memberId"]));

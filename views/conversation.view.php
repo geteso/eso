@@ -223,8 +223,8 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 // Regardless of post 'groups', output this individual post. ?>
 <div<?php if(!$singlePost):?> id='p<?php echo $post["id"];?>'<?php endif;?>>
 <div class='hdr'>
-<div class='pInfo'>
 <?php if($side):?><div class='thumb'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='".($post["thumb"]?$post["thumb"]:("skins/{$config["skin"]}/avatarThumb.svg"))."' alt=''/>"),$memberLink);?></div><?php endif;?>
+<div class='pInfo'>
 <h3><?php echo str_replace(array("%d","%s"),array($post["memberId"],$post["name"]),$memberLink);?></h3>
 <span title='<?php echo $post["date"];?>'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
 <?php if($post["editTime"]):?><span id='editedBy'><?php printf($editedBy,$post["editMember"],relativeTime($post["editTime"]));?></span>

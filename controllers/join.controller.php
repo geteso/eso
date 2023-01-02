@@ -188,7 +188,11 @@ function addMember()
 
 	// We also need to generate a hash and salt and add them to the query.
 	$salt = generateRandomString(32);
-	$hash = md5($salt . $_POST["join"]["password"]);
+	if ($config["hashingMethod"] == "bcrypt") {
+		$hash = password_hash($_POST["join"]["password"], PASSWORD_DEFAULT);
+	} else {
+		$hash = md5($salt . $_POST["join"]["password"]);
+	}
 	$insertData["password"] = "'$hash'";
 	$insertData["salt"] = "'$salt'";
 
@@ -212,7 +216,10 @@ function addMember()
 	
 	// Email the member with a verification link so that they can verify their account.
 	if (!empty($config["sendEmail"]) && $config["registrationRequireApproval"] == "email") {
-		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . md5($salt . $_POST["join"]["password"]));
+		// Update their record in the database with a special password reset hash.
+		$rand = md5(rand());
+		$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword='$rand' WHERE memberId=$memberId");
+		$this->sendVerificationEmail($_POST["join"]["email"], $_POST["join"]["name"], $memberId . $rand);
 	}
 	
 	return true;

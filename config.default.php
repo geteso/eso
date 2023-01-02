@@ -37,6 +37,7 @@ $defaultConfig = array(
 "characterEncoding" => "utf8mb4",
 "connectionOptions" => "",
 "storageEngine" => "MyISAM",
+"hashingMethod" => "bcrypt",
 
 // Basic forum details.
 "forumTitle" => "",
@@ -90,6 +91,7 @@ $defaultConfig = array(
 "nonAsciiCharacters" => true, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
 "registrationOpen" => true, // Whether or not new accounts can be made on your forum.
 "registrationRequireApproval" => "manual", // false | "email" = require email approval | "manual" = approval by mod/admin
+"registrationsPerMinute" => "5", // Amount of registration attempts a user is limited to per minute.
 "reservedNames" => array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself"), // Reserved user names which cannot be used.
 
 // Cookie settings.
