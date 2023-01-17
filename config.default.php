@@ -37,7 +37,7 @@ $defaultConfig = array(
 "characterEncoding" => "utf8mb4",
 "connectionOptions" => "",
 "storageEngine" => "MyISAM",
-"hashingMethod" => "bcrypt",
+"hashingMethod" => "md5",
 
 // Basic forum details.
 "forumTitle" => "",
@@ -123,7 +123,7 @@ $defaultConfig = array(
 "autoReloadIntervalLimit" => 512, // Maximum number of seconds between checking for new posts. 
 
 // Online settings.
-"onlineMembers" => true, // Whether or not to show a list of online members.
+"onlineMembers" => true, // Whether or not to show a list of online members.  true | false | "login" = users only
 "userOnlineExpire" => 4500, // Amount of time by which a user's last seen time is before the user goes offline. (300 seconds = 5 minutes.)
 
 // Default user preferences.

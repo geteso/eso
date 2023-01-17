@@ -417,7 +417,7 @@ function doSearch($search = "")
 		// However, if we don't have a record in the session, use the MySQL searches table.
 		else {
 			// Get the user's IP address.
-			$ip = (int)ip2long($_SESSION["ip"]);
+			$ip = cookieIp();
 			// Have they performed >= $config["searchesPerMinute"] searches in the last minute?
 			if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}searches WHERE ip=$ip AND searchTime>UNIX_TIMESTAMP()-60", 0) >= $config["searchesPerMinute"]) {
 				$this->eso->message("waitToSearch", true, 60);
@@ -545,7 +545,7 @@ function ajax()
 					if (count($_SESSION["searches"]) >= $config["searchesPerMinute"]) return array("newActivity" => false);
 				// Otherwise, check the database.
 				} else {
-					$ip = (int)ip2long($_SESSION["ip"]);
+					$ip = cookieIp();
 					if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}searches WHERE ip=$ip AND searchTime>UNIX_TIMESTAMP()-60", 0) >= $config["searchesPerMinute"]) return array("newActivity" => false);
 				}
 			}

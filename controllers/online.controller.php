@@ -30,7 +30,9 @@ var $view = "online.view.php";
 function init()
 {
 	global $language, $config;
-	
+
+	if ($config["onlineMembers"] == false) redirect("");
+
 	// Set the title and make sure this page isn't indexed.
 	$this->title = $language["Online members"];
 	$this->eso->addToHead("<meta name='robots' content='noindex, noarchive'/>");

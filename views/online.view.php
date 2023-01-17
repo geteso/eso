@@ -21,13 +21,18 @@
 /**
  * Online view: displays a list of members currently online.
  */
-if(!defined("IN_ESO"))exit;?>
+if(!defined("IN_ESO"))exit;
+?>
+
 <fieldset id="fieldmembers">
 <legend><?php echo $language["Online members"];?></legend>
-
 <?php
+
+if(!$this->eso->user and $config["onlineMembers"] == "login"):
+echo $this->eso->htmlMessage("loginRequired");
+
 // If there are members online, list them.
-if($this->numberOnline):?>
+elseif($this->numberOnline):?>
 
 <div id='membersOnline'>
 <?php while(list($memberId,$name,$avatarFormat,$color,$account,$lastSeen,$lastAction)=$this->eso->db->fetchRow($this->online)):?>

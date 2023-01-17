@@ -247,6 +247,18 @@ function conversationLink($conversationId, $conversationSlug)
 	return $conversationLink;
 }
 
+function cookieIp()
+{
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return hashString($ip);
+}
+
 // Generate a link to the current page. To get a form to submit to the same page: <form action='curLink()'.
 function curLink()
 {
@@ -536,6 +548,17 @@ function addToArrayString(&$array, $key, $value, $position = false)
 	}
 	// Replace the old array with our new one.
 	$array = $newArray;
+}
+
+function hashString($string)
+{
+	global $config;
+	if ($config["hashingMethod"] == "bcrypt") {
+		$hash = hash("sha512", $string);
+	} else {
+		$hash = md5($string);
+	}
+	return $hash;
 }
 
 // Convert a PHP variable to text so it can be outputted to a file and included later.

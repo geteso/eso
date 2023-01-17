@@ -73,6 +73,11 @@ function init()
 				"InnoDB" => "InnoDB (recommended)",
 				"MyISAM" => "MyISAM"
 			);
+			// Prepare a list of hashing algorithms.
+			$this->hashingMethods = array(
+				"bcrypt" => "bcrypt (recommended)",
+				"md5" => "MD5 (less secure, faster)"
+			);
 			
 			// If the form has been submitted...
 			if (isset($_POST["forumTitle"])) {
@@ -106,6 +111,7 @@ function init()
 					"tablePrefix" => $_POST["tablePrefix"],
 					"characterEncoding" => $_POST["characterEncoding"],
 					"storageEngine" => $_POST["storageEngine"],
+					"hashingMethod" => $_POST["hashingMethod"],
 					"baseURL" => $_POST["baseURL"],
 					"friendlyURLs" => $_POST["friendlyURLs"]
 				);
@@ -215,6 +221,7 @@ function doInstall()
 		"tablePrefix" => desanitize($_SESSION["install"]["tablePrefix"]),
 		"characterEncoding" => desanitize($_SESSION["install"]["characterEncoding"]),
 		"storageEngine" => desanitize($_SESSION["install"]["storageEngine"]),
+		"hashingMethod" => desanitize($_SESSION["install"]["hashingMethod"]),
 		"baseURL" => $_SESSION["install"]["baseURL"],
 		"cookieName" => preg_replace(array("/\s+/", "/[^\w]/"), array("_", ""), desanitize($_SESSION["install"]["forumTitle"])),
 		"useFriendlyURLs" => !empty($_SESSION["install"]["friendlyURLs"]),

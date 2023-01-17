@@ -98,7 +98,7 @@ function init()
 			// However, if we don't have a record in the session, use the MySQL logins table.
 			else {
 				// Get the user's IP address.
-				$ip = (int)ip2long($_SESSION["ip"]);
+				$ip = cookieIp();
 				// Have they performed >= $config["loginsPerMinute"] logins in the last minute?
 				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip=$ip AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
 					$this->eso->message("waitToLogin", true, 60);

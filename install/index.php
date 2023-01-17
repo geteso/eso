@@ -222,14 +222,18 @@ function toggleSmtpConfig() {
 <?php foreach ($install->storageEngines as $k => $v) echo "<option value='$k'" . ((!empty($_POST["storageEngine"]) ? $_POST["storageEngine"] : "InnoDB") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
 </select></div></li>
 
-<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='23' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+<li><label>Hashing algorithm</label><div><select id='hashingMethod' name='hashingMethod' tabindex='23'>
+<?php foreach ($install->hashingMethods as $k => $v) echo "<option value='$k'" . ((!empty($_POST["hashingMethod"]) ? $_POST["hashingMethod"] : "bcrypt") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
+</select></div></li>
 
-<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='24' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
+<li><label>Base URL</label> <input name='baseURL' type='text' tabindex='24' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
+
+<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='25' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
 </ul>
 </fieldset>
 <script type='text/javascript'>Settings.hideFieldset("advancedOptions")</script>
 
-<p id='footer' style='margin:0'><input type='submit' tabindex='25' value='Next step &#155;' class='button'/></p>
+<p id='footer' style='margin:0'><input type='submit' tabindex='26' value='Next step &#155;' class='button'/></p>
 <hr class='separator'/>
 <p id='version'>esoBB version <?php echo $install->getVersion(); ?></p>
 <?php break;

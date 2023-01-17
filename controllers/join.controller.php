@@ -170,6 +170,43 @@ function addMember()
 
 	// If registration has been disabled, there's no need to go any further.
 	if (($error = $this->canJoin()) !== true) return false;
+
+	// If we're counting logins per minute, impose some flood control measures.
+	if (!isset($cookie) and $config["loginsPerMinute"] > 0) {
+
+		// If we have a record of their logins in the session, check how many logins they've performed in the last
+		// minute.
+		if (!empty($_SESSION["logins"])) {
+			// Clean anything older than 60 seconds out of the logins array.
+			foreach ($_SESSION["logins"] as $k => $v) {
+				if ($v < time() - 60) unset($_SESSION["logins"][$k]);
+			}
+			// Have they performed >= $config["loginsPerMinute"] logins in the last minute? If so, don't continue.
+			if (count($_SESSION["logins"]) >= $config["loginsPerMinute"]) {
+				$this->eso->message("waitToLogin", true, array(60 - time() + min($_SESSION["logins"])));
+				return;
+			}
+		}
+
+		// However, if we don't have a record in the session, use the MySQL logins table.
+		else {
+			// Get the user's IP address.
+			$ip = cookieIp();
+			// Have they performed >= $config["loginsPerMinute"] logins in the last minute?
+			if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip=$ip AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
+				$this->eso->message("waitToLogin", true, 60);
+				return;
+			}
+			// Log this attempt in the logins table.
+			$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ($ip, UNIX_TIMESTAMP())");
+			// Proactively clean the logins table of logins older than 60 seconds.
+			$this->eso->db->query("DELETE FROM {$config["tablePrefix"]}logins WHERE loginTime<UNIX_TIMESTAMP()-60");
+		}
+
+		// Log this attempt in the session array.
+		if (!isset($_SESSION["logins"]) or !is_array($_SESSION["logins"])) $_SESSION["logins"] = array();
+		$_SESSION["logins"][] = time();
+	}
 	
 	// Construct the query to insert the member into the database.
 	// Loop through the form fields and use their "databaseField" and "input" attributes for the query.

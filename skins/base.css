@@ -20,7 +20,7 @@ small, dt {font-size:90%}
 #loading {font-size:120%; padding:5px 15px; position:fixed; right:25px; top:0; z-index:10000}
 .strike {text-decoration:line-through}
 img.avatar, div.avatar img {width:105px; max-height:151px; object-fit:cover; vertical-align:bottom; image-rendering:auto}
-.disabled {cursor:default}
+.disabled {cursor:default; cursor:not-allowed}
 h2 {font-size:160%; font-weight:normal}
 h3 {font-size:120%; font-weight:bold}
 #appearance #preview {margin-bottom:0}
@@ -104,7 +104,7 @@ a.star1, a.star0 {cursor:pointer}
 .label {font-size:90%; padding:0 5px; white-space:nowrap}
 
 /* Conversations table */
-.c {margin:10px 0 1px; width:100%}
+.c {margin:0 0 1px; width:100%}
 .c th {font-weight:normal; font-size:90%; padding:6px 0; text-align:left}
 .c td {line-height:1.1; padding:5px 0}
 .c .labels {margin-right:3px}
@@ -244,6 +244,7 @@ blockquote p {margin-bottom:.75em}
 /* Join this forum */
 #join input.text {font-size:140%}
 #join .msg {padding:4px 10px}
+#accountInformation input.text {max-width:20em; width:96%; width:-webkit-fill-available; max-width:20em}
 
 /* My settings */
 #settings .post {margin:0}
@@ -330,7 +331,7 @@ form#settingsAvatar {padding-bottom:8px}
 #ftr {font-size:90%; padding:0 25px 20px; overflow:hidden}
 #ftr ul {margin:0; padding:0; list-style-type:none}
 #ftr .bar {display:none}
-#ftr .bar li {display:inline-table; margin:0 4px 5px 0}
+#ftr .bar li {display:inline-block; margin:0 4px 5px 0}
 #ftr .bar li a {margin:0}
 #ftr .footer > li {display:inline}
 #ftr .footer > li a {display:inline-block; margin:0 3px 5px 0}
@@ -367,15 +368,14 @@ fieldset > .warning:last-child {margin:0}
 .big input {font-size:140%; height:26px}
 .buttonSmall {line-height:1.5; width:fit-content}
 a.buttonSmall {padding:0 5px; margin:0 0 10px; line-height:18px; text-decoration:none}
-.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default}
-.buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default}
+.buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover, .bigDisabled, .bigDisabled:active, .bigDisabled:hover {cursor:default; cursor:not-allowed}
+.buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input, .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {cursor:default; cursor:not-allowed}
 
 /* Post colors */
 .c0 .hdr, .p .c0 .hdr, #palette .c0 {background:#ffffff} .c0 {border-color:#ffffff; background:#fff}
 
 /* Special properties */
 #ftr-content #forgotPassword, #ftr-content #startConversation {display:none}
-#accountInformation input {max-width:20em; width:96%}
 #settingsOther {padding:0 15px 12px}
 td.author, td.lastPost {max-width:95px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 #cInfo #saveTitleTags {display:none!important}
