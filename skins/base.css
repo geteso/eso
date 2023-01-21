@@ -30,7 +30,7 @@ h3 {font-size:120%; font-weight:bold}
 #hdr h1 {float:left; font-size:190%; font-weight:normal; margin:0; padding:17px 0}
 #hdr h1 img {height:36px; margin-right:15px}
 #hdr h1 img, #forumTitle {vertical-align:middle}
-#stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
+#hdr p#stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
 .small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
 .small #hdr h1 img {height:32px}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
@@ -57,8 +57,8 @@ h1#hasForumDescription #forumTitle {font-size:20px}
 #bar strong#user {margin-right:5px}
 #bar #profile, #bar #profile span {display:none}
 /* Dividers */
-li > .vl, li > .vr {display:block; position:relative}	
-li:not(li:first-child) > .vl::after, li:not(li:last-child) > .vr::after {content:''; position:absolute; pointer-events:none}
+#bar li > .vl, li > .vr {display:block; position:relative}	
+#bar li:not(li:first-child) > .vl::after, #bar li:not(li:last-child) > .vr::after {content:''; position:absolute; pointer-events:none}
 
 /* Header and bar */
 #header {top:0; z-index:100; position:relative}
@@ -186,6 +186,7 @@ hr {display:none}
 /* .p .hdr .pInfo .thumb {margin:0 8px 0 -10px; display:none}
 .p .hdr .pInfo .thumb img {border-top-color:transparent; border-top-style:solid; border-top-width:3px; box-sizing:border-box} */
 .p .hdr .controls {float:right; padding-top:1px}
+.p .hdr .controls:empty, .p .hdr .controls:blank {display:none}
 .p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; padding:0 5px; text-align:center; display:inline-block}
 .p .hdr .controls span {font-size:100%}
 .p .hdr a.button {padding:1px 4px}
@@ -194,9 +195,9 @@ hr {display:none}
 .p .body video {max-width:100%}
 .p .body video, .p .body audio {margin-bottom:-4px}
 .p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:115px}
-.p.r {border-right-style:solid; border-right-width:115px; border-left-style:solid; border-left-width:1px; border-bottom-style:solid; border-bottom-width:1px}
+.p.r {border-right-style:solid; border-right-width:115px}
 .p.r div.avatar {float:right; margin-right:-115px}
-.p.l {border-left-style:solid; border-left-width:115px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px}
+.p.l {border-left-style:solid; border-left-width:115px}
 .p.l div.avatar {float:left; margin-left:-115px}
 .p .parts {width:100%}
 .p.r .parts {float:left}
@@ -330,12 +331,12 @@ form#settingsAvatar {padding-bottom:8px}
 /* Footer */
 #ftr {font-size:90%; padding:0 25px 20px; overflow:hidden}
 #ftr ul {margin:0; padding:0; list-style-type:none}
+#ftr ul > li {float:left; margin:0 3px 0 0}
 #ftr .bar {display:none}
-#ftr .bar li {display:inline-block; margin:0 4px 5px 0}
-#ftr .bar li a {margin:0}
-#ftr .footer > li {display:inline}
-#ftr .footer > li a {display:inline-block; margin:0 3px 5px 0}
-#ftr #copyright {margin:5px 0 0; padding:10px 0 0}
+#ftr p#copyright, #ftr p#stats {margin:0 0 3px 0}
+#ftr p#copyright {display:inline-block}
+#ftr p#stats {float:right}
+#ftr-content {padding:3px 0 0}
 
 /* Inputs, buttons, and other form elements */
 form {margin:0}
@@ -464,7 +465,7 @@ td.author, td.lastPost {display:none}
 div#copyright {margin-top:0}
 ul.fl, ul.fr {white-space:nowrap}
 #bar .fr {display:none}
-#ftr .bar {display:inline-block}
+#ftr .bar {display:block}
 #accountInformation .form div:not(.msg) {padding-left:0; width:calc(100% - 5px)}
 #accountInformation .msg {margin-left:0}
 #accountInformation .form label {text-align:left}
@@ -515,13 +516,13 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 
 /* Formatting controls */
 #sconvo .hdr {min-height:16px}
-#cPosts .p .hdr .controls {float:none; clear:left; position:relative; overflow:overlay; margin:5px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
+#cPosts .p .hdr .controls:not(:empty) {float:none; clear:left; position:relative; overflow:overlay; margin:5px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
 #cPosts .p .hdr .controls > a:first-child, #cPosts .deleted .hdr .controls span:first-child {margin-left:10px}
 #cPosts .p .hdr .controls .formattingButtons {margin-left:10px; margin-right:10px}
 #cPosts .p .hdr .controls .formattingButtons a:first-child {margin-left:0}
 #reply .controls {float:none; clear:none; overflow:overlay; margin:-1px 0 -3px 0; padding:0; background:inherit; box-shadow:none}
-.p .hdr .pInfo {float:none; overflow-x:scroll}
-.p .hdr .pInfo::-webkit-scrollbar, .p .hdr .controls:empty, .p .hdr .controls:blank {display:none}
+.p .hdr .pInfo {float:none}
+.p .hdr .pInfo::-webkit-scrollbar, #reply .controls::-webkit-scrollbar {display:none}
 #reply .formattingButtons {margin:0}
 .formattingCheckbox {clear:left; float:left; width:-webkit-fill-available; margin-top:3px; margin-bottom:3px; padding-top:3px}
 #cPosts .p .hdr .controls .formattingCheckbox {padding-left:10px}
@@ -569,6 +570,7 @@ label#lbl-fgcf {width:12em; display:none}
 #membersOnline .hdr span {display:none}
 #basicSettings .form.settingsForm li:nth-child(-n+3) div {width:100%}
 #admin .settingsForm input.text, #admin .settingsForm select {width:-webkit-fill-available}
+#ftr p#stats {float:none}
 }
   
 @media only screen and (max-width:340px) {

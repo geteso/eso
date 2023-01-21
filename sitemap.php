@@ -45,8 +45,9 @@ if (!file_exists("sitemap.xml") or filemtime("sitemap.xml") < time() - $config["
 	set_time_limit(0);
 
 	// Connect to the database.
-	$db = (@mysql_connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["characterEncoding"]) and @mysql_select_db($config["mysqlDB"]));
-	
+	$db = @mysqli_connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
+	mysqli_set_charset($db, $config["characterEncoding"]);
+
 	// Does sitemap.general.xml exist?  If not, create it.
 	if (!file_exists("sitemap.general.xml")) {
 		writeFile("sitemap.general.xml", "<?xml version='1.0' encoding='UTF-8'?><urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'><url><loc>{$config["baseURL"]}</loc><changefreq>hourly</changefreq><priority>1.0</priority></url></urlset>");
@@ -64,17 +65,17 @@ if (!file_exists("sitemap.xml") or filemtime("sitemap.xml") < time() - $config["
 		$filename = "sitemap.conversations.$i.xml" . ZLIB;
 
 		// Get the next batch of public conversations from the database.
-		$r = mysql_query("SELECT conversationId, slug, posts / ((UNIX_TIMESTAMP() - startTime) / 86400) AS postsPerDay, IF(lastActionTime, lastActionTime, startTime) AS lastUpdated, posts FROM {$config["tablePrefix"]}conversations WHERE !private LIMIT " . (($i - 1) * URLS_PER_SITEMAP) . "," . URLS_PER_SITEMAP);
+		$r = mysqli_query($db, "SELECT conversationId, slug, posts / ((UNIX_TIMESTAMP() - startTime) / 86400) AS postsPerDay, IF(lastActionTime, lastActionTime, startTime) AS lastUpdated, posts FROM {$config["tablePrefix"]}conversations WHERE !private LIMIT " . (($i - 1) * URLS_PER_SITEMAP) . "," . URLS_PER_SITEMAP);
 
 		// If there are no conversations left, break from the loop.
-		if (!mysql_num_rows($r)) break;
+		if (!mysqli_num_rows($r)) break;
 
 		// Otherwise let's make the sitemap file.
 		else {
 			$urlset = "<?xml version='1.0' encoding='UTF-8'?><urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>";
 
 			// Create a <url> tag for each conversation in the result set.
-			while (list($conversationId, $slug, $postsPerDay, $lastUpdated, $posts) = mysql_fetch_row($r)) {
+			while (list($conversationId, $slug, $postsPerDay, $lastUpdated, $posts) = mysqli_fetch_row($r)) {
 				
 				$urlset .= "<url><loc>{$config["baseURL"]}" . makeLink(conversationLink($conversationId, $slug)) . "</loc><lastmod>" . gmdate("Y-m-d\TH:i:s+00:00", $lastUpdated) . "</lastmod><changefreq>";
 				

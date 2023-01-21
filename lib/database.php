@@ -27,18 +27,22 @@ if (!defined("IN_ESO")) exit;
 class Database {
 
 var $eso;
-var $link;
+protected $link;
+protected $host;
+protected $user;
+protected $password;
+protected $db;
+protected $encoding;
 
 // Connect to a MySQL server and database.
-function connect($host, $user, $password, $db, $encoding = "utf8mb4")
+public function __construct($host, $user, $password, $db, $encoding = "utf8mb4")
 {
-	if (!($this->link = @mysql_connect($host, $user, $password)) or !@mysql_select_db($db, $this->link)) return false;
-	$this->query("SET NAMES '$encoding'");
-	return true;
+	$this->link = @mysqli_connect($host, $user, $password, $db);
+	mysqli_set_charset($this->link, $encoding);
 }
 
 // Run a query. If $fatal is true, then a fatal error will be displayed and page execution will be halted if the query fails.
-function query($query, $fatal = true)
+public function query($query, $fatal = true)
 {
 	global $language, $config;
 	
@@ -48,7 +52,7 @@ function query($query, $fatal = true)
 	$this->eso->callHook("beforeDatabaseQuery", array(&$query));
 
 	// Execute the query. If there is a problem, display a formatted fatal error.
-	$result = mysql_query($query, $this->link);
+	$result = mysqli_query($this->link, $query);
 	if (!$result and $fatal) {
 		$error = $this->error();
 		$this->eso->fatalError($config["verboseFatalErrors"] ? $error . "<p style='font:100% monospace; overflow:auto'>" . $this->highlightQueryErrors($query, $error) . "</p>" : "", "mysql");
@@ -60,7 +64,7 @@ function query($query, $fatal = true)
 }
 
 // Find anything in single quotes in the error and make it red in the query.  Makes debugging a bit easier.
-function highlightQueryErrors($query, $error)
+protected function highlightQueryErrors($query, $error)
 {
 	preg_match("/'(.+?)'/", $error, $matches);
 	if (!empty($matches[1])) $query = str_replace($matches[1], "<span style='color:#f00'>{$matches[1]}</span>", $query);
@@ -68,76 +72,91 @@ function highlightQueryErrors($query, $error)
 }
 
 // Return the number of rows affected by the last query.
-function affectedRows()
+public function affectedRows()
 {
-	return mysql_affected_rows($this->link);
+	return mysqli_affected_rows($this->link);
 }
 
 // Fetch an associative array.  $input can be a string or a MySQL result.
-function fetchAssoc($input)
+public function fetchAssoc($input)
 {
-	if (is_resource($input)) return mysql_fetch_assoc($input);
+	if (is_object($input)) return mysqli_fetch_assoc($input);
 	$result = $this->query($input);
 	if (!$this->numRows($result)) return false;
 	return $this->fetchAssoc($result);
 }
 
 // Fetch a sequential array.  $input can be a string or a MySQL result.
-function fetchRow($input)
+public function fetchRow($input)
 {
-	if (is_resource($input)) return mysql_fetch_row($input);
+	if ($input instanceof \mysqli_result) return mysqli_fetch_row($input);
 	$result = $this->query($input);
 	if (!$this->numRows($result)) return false;
 	return $this->fetchRow($result);
 }
 
 // Fetch an object.  $input can be a string or a MySQL result.
-function fetchObject($input)
+public function fetchObject($input)
 {
-	if (is_resource($input)) return mysql_fetch_object($input);
+	if ($input instanceof \mysqli_result) return mysqli_fetch_object($input);
 	$result = $this->query($input);
 	if (!$this->numRows($result)) return false;
 	return $this->fetchObject($result);
 }
 
-// Get a database result.  $input can be a string or a MySQL result.
-function result($input, $field = 0)
+// Approximated function of mysql_result.
+protected function fetchResult($input, $row, $field = 0)
 {
-	if (is_resource($input)) return mysql_result($input, $field);
+//	$result = $this->query($input);
+    $input->data_seek($row);
+    $datarow = $input->fetch_array();
+    return $datarow[$field];
+}
+
+// Get a database result.  $input can be a string or a MySQL result.
+public function result($input, $row = 0)
+{
+	if ($input instanceof \mysqli_result) return $this->fetchResult($input, $row);
 	$result = $this->query($input);
 	if (!$this->numRows($result)) return false;
 	return $this->result($result);
 }
 
 // Get the last database insert ID.
-function lastInsertId()
+public function lastInsertId()
 {
 	return $this->result($this->query("SELECT LAST_INSERT_ID()"), 0);
 }
 
 // Return the number of rows in the result.  $input can be a string or a MySQL result.
-function numRows($input)
+public function numRows($input)
 {
 	if (!$input) return false;
-	if (is_resource($input)) return mysql_num_rows($input);
+	if ($input instanceof \mysqli_result) return mysqli_num_rows($input);
 	$result = $this->query($input);
 	return $this->numRows($result);
 }
 
-// Return the most recent MySQL error.
-function error()
+// Return the most recent connection error.
+public function connectError()
 {
-	return mysql_error();
+	return mysqli_connect_error($this->link);
+}
+
+// Return the most recent MySQL error.
+public function error()
+{
+	return mysqli_error($this->link);
 }
 
 // Escape a string for use in a database query.
-function escape($string)
+public function escape($string)
 {
-	return mysql_real_escape_string($string);
+	return mysqli_real_escape_string($this->link, $string);
 }
 
 // Construct a select query.  $components is an array.  ex: array("select" => array("foo", "bar"), "from" => "members")
-function constructSelectQuery($components)
+public function constructSelectQuery($components)
 {
 	// Implode the query components.
 	$select = isset($components["select"]) ? (is_array($components["select"]) ? implode(", ", $components["select"]) : $components["select"]) : false;
@@ -153,14 +172,14 @@ function constructSelectQuery($components)
 }
 
 // Construct an insert query with an associative array of data.
-function constructInsertQuery($table, $data)
+public function constructInsertQuery($table, $data)
 {
 	global $config;
 	return "INSERT INTO {$config["tablePrefix"]}$table (" . implode(", ", array_keys($data)) . ") VALUES (" . implode(", ", $data) . ")";
 }
 
 // Construct an update query with associative arrays of data/conditions.
-function constructUpdateQuery($table, $data, $conditions)
+public function constructUpdateQuery($table, $data, $conditions)
 {
 	global $config;
 	

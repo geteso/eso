@@ -32,8 +32,9 @@ function init()
 	
 	// Connect to the database.
 	global $config;
-	if (!$this->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"], $config["characterEncoding"]))
-		$this->fatalError($this->error());
+	$this->db = new Database($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
+	if ($this->connectError())
+		$this->fatalError($this->connectError());
 	
 	// Perform the upgrade, depending on what version the user is currently at.
 	global $versions;
@@ -74,6 +75,7 @@ function init()
 
 	// 1.0.0 delta 1 -> 1.0.0 delta 2
 	if ($versions["eso"] == "1.0.0d1") {
+		$this->upgrade_100d2();
 		$versions["eso"] = "1.0.0d2";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
@@ -135,7 +137,7 @@ function query($query)
 	$_SESSION["queries"][] = $query;
 	
 	// Perform the query and return its result if successful.
-	$result = mysql_query($query, $this->link);
+	$result = mysqli_query($this->link, $query);
 	if ($result) return $result;
 	
 	// Otherwise, show a fatal error.
@@ -167,6 +169,19 @@ function warning($msg)
 {
 	if (!isset($_SESSION["warnings"]) or !is_array($_SESSION["warnings"])) $_SESSION["warnings"] = array();
 	$_SESSION["warnings"][] = $msg;	
+}
+
+// 1.0.0 delta 1 -> 1.0.0 delta 2
+function upgrade_100d2()
+{
+	global $config;
+
+	// Change the default values of a couple columns in the members table.
+	$this->query("ALTER TABLE {$config["tablePrefix"]}members
+		MODIFY COLUMN password char(60) NOT NULL,
+		MODIFY COLUMN cookieIP char(32) NOT NULL");
+	// Change the default value of the IP field in the searches table.
+	$this->query("ALTER TABLE {$config["tablePrefix"]}searches MODIFY COLUMN ip char(32) NOT NULL");	
 }
 
 // 1.0.0 pre 1 -> 1.0.0 delta 1

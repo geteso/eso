@@ -125,17 +125,24 @@ if(!defined("IN_ESO"))exit;
 <?php $this->callHook("footer"); ?>
 <div id='ftr'>
 <div id='ftr-content'>
-<?php if (count($this->footer)): ?>
-	<ul><?php ksort($this->footer);foreach ($this->footer as $v) echo "<li>$v</li>";?></ul>
-<?php endif; ?>
-<?php if (count($this->bar["right"])): ?>
-	<ul><?php ksort($this->bar["right"]);foreach ($this->bar["right"] as $v) echo "<li>$v</li>";?></ul>
-<?php endif; ?>
+<p id='copyright'><!-- The following text constitutes a copyright notification. -->
+<?php echo $language["Powered by"];?> <a href='https://geteso.org/'>esoBB</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --> <?php if ($this->user["admin"]) echo ESO_VERSION; ?>
+<!-- End copyright notification. --></p>
+<?php if ($this->action !== "search"):
+	foreach ($this->getStatistics() as $k=>$v) $stats .= "<span id='statistic-$k'>$v</span> - ";
+	echo "<p id='stats'>".substr($stats,0,-3)."</p>";
+endif; ?>
+<ul class='footer'><?php if (count($this->footer)):
+	ksort($this->footer);
+	foreach ($this->footer as $v) echo "<li>$v</li>";
+endif; ?></ul>
+<ul class='bar'><?php if (count($this->bar["right"])):
+	ksort($this->bar["right"]);foreach ($this->bar["right"] as $v) echo "<li>$v</li>";
+endif; ?></ul>
 </div>
 </div>
+
 <?php $this->callHook("pageEnd");?>
-
 </div>
-
 </body>
 </html>

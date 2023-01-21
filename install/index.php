@@ -151,7 +151,7 @@ case "info": ?>
 <p>The software needs a mail server to send emails to members, but your forum will work with email sending disabled. If you haven't configured server-side email sending or are unsure of whether you can send emails, leave this disabled and change it later.</p>
 
 <ul class='form'>
-<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='8' class='checkbox' value='1'/>
+<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='8' class='checkbox' value='1' checked='<?php echo (!empty($_POST["sendEmail"])) ? "checked" : ""; ?>'/>
 <!-- <small>If you leave this disabled, the SMTP configuration will be ignored.</small> -->
 </li>
 </ul>

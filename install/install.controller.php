@@ -187,7 +187,7 @@ function suggestFriendlyUrls()
 // Perform a MySQL query, and log it.
 function query($query)
 {	
-	$result = mysql_query($query, $this->link);
+	$result = mysqli_query($this->link, $query);
 	$this->queries[] = $query;
 	return $result;
 }
@@ -237,7 +237,7 @@ function doInstall()
 	if (!empty($_SESSION["install"]["smtpAuth"])) $config = array_merge($config, $smtpConfig);
 	
 	// Connect to the MySQL database.
-	$this->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"], $config["characterEncoding"]);
+	$this->db = new Database($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
 	
 	// Run the queries one by one and halt if there's an error!
 	include "queries.php";
@@ -333,7 +333,7 @@ function validateInfo()
 	if ($_POST["adminPass"] != $_POST["adminConfirm"]) $errors["adminConfirm"] = "Your passwords do not match";
 	
 	// Try and connect to the database.
-	if (!$this->connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"], $_POST["characterEncoding"])) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . $this->error();
+	if ($this->connectError()) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . $this->connectError();
 	
 	// Check to see if there are any conflicting tables already in the database.
 	// If there are, show an error with a hidden input. If the form is submitted again with this hidden input,

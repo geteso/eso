@@ -28,7 +28,7 @@ if(!defined("IN_ESO"))exit;
 <legend><?php echo $language["Online members"];?></legend>
 <?php
 
-if(!$this->eso->user and $config["onlineMembers"] == "login"):
+if(!$this->eso->user and $config["onlineMembers"] === "login"):
 echo $this->eso->htmlMessage("loginRequired");
 
 // If there are members online, list them.

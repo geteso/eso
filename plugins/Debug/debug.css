@@ -10,13 +10,14 @@
 #debugPostGetFiles, #debugSessionCookie {padding:10px 25px}
 #debug ul {margin:0; padding:0}
 #debug li {list-style-type:none; border-bottom:1px solid #a6dee0; padding:10px 25px}
-
-@media only screen and (max-width:740px) {
+@media only screen and (max-width:1000px) {
+#debug {margin:0 0; border-width:0 0}
+}
+@media only screen and (max-width:800px) {
 #debugSetting {clear:left; float:none; padding-top:5px}
 #debug h2 small, #debugSetting input {margin-left:0}
 #debugHdr small {margin-left:10px!important}
 }
-
 @media only screen and (max-width:570px) {
 #debug h2, #debug h3 a, #debug li, #debugPostGetFiles, #debugSessionCookie {padding-left:10px}
 }

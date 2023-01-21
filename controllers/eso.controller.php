@@ -55,10 +55,10 @@ function __construct()
 	global $config;
 
 	// Connect to the database by setting up the database class.
-	$this->db = new Database();
+	$this->db = new Database($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
 	$this->db->eso =& $this;
-	if (!$this->db->connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"], $config["characterEncoding"]))
-		$this->fatalError($config["verboseFatalErrors"] ? $this->db->error() : "", "mysql");
+	if ($this->db->connectError())
+		$this->fatalError($config["verboseFatalErrors"] ? $this->db->connectError() : "", "mysql");
 	
 	// Clear messages in the SESSION messages variable.
 	if (!isset($_SESSION["messages"]) or !is_array($_SESSION["messages"])) $_SESSION["messages"] = array();
@@ -128,10 +128,6 @@ function init()
 						$this->addToBar("left", "<a href='" . makeLink("logout") . "' id='logout' class='vl'><span class='button buttonSmall'><input type='submit' value='{$language["Log out"]}'></span></a>", 1100);
 						if ($this->user["moderator"]) $this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button buttonSmall'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
-		
-		// The following text constitutes a copyright notification.
-		$this->addToFooter("<p id='copyright'>{$language["Powered by"]} <a href='https://geteso.org'>eso</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --></p>", 1000);
-		// End copyright notification.
 
 		// Set up some default JavaScript files and language definitions.
 		$this->addScript("js/eso.js", -1);
@@ -196,7 +192,7 @@ function login($name = false, $password = false, $hash = false)
 		// Get the user's IP address, and validate it against the cookie IP address if they're logging in via cookie.
 		// Do some back-and-forth conversion so we only use the first three parts of the IP (the last will be 0.)
 		$ip = cookieIp();
-		if (isset($cookie)) $components["where"][] = "cookieIP=" . ($ip ? $ip : "0");
+		if (isset($cookie)) $components["where"][] = "cookieIP='" . $ip . "'";
 		
 		$this->callHook("beforeLogin", array(&$components));
 
@@ -222,12 +218,12 @@ function login($name = false, $password = false, $hash = false)
 				// Get the user's IP address.
 //				$ip = (int)ip2long($_SESSION["ip"]);
 				// Have they performed >= $config["loginsPerMinute"] logins in the last minute?
-				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip=$ip AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
+				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip='" . $ip . "' AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
 					$this->eso->message("waitToLogin", true, 60);
 					return;
 				}
 				// Log this attempt in the logins table.
-				$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ($ip, UNIX_TIMESTAMP())");
+				$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ('" . $ip . "', UNIX_TIMESTAMP())");
 				// Proactively clean the logins table of logins older than 60 seconds.
 				$this->eso->db->query("DELETE FROM {$config["tablePrefix"]}logins WHERE loginTime<UNIX_TIMESTAMP()-60");
 			}
@@ -265,7 +261,7 @@ function login($name = false, $password = false, $hash = false)
 			// If the "remember me" box was checked, set a cookie, and set the cookieIP field in the database.
 //			if (@$_POST["login"]["rememberMe"]) {
 			if (@$_POST["login"]) {
-				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP=$ip WHERE memberId={$_SESSION["user"]["memberId"]}");
+				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP='" . $ip . "' WHERE memberId={$_SESSION["user"]["memberId"]}");
 				setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
 			}
 			

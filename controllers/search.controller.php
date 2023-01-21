@@ -193,6 +193,7 @@ function init()
 		
 		// If this is not technically the homepage (if it's a search page) the we don't want it to be indexed.
 		if (@$_GET["q1"] == "search") $this->eso->addToHead("<meta name='robots' content='noindex, noarchive'/>");
+		elseif (@$_GET["q1"]) redirect("search", "?q2=" . urlencode(desanitize(@$_GET["q1"])));
 				
 	}
 	
@@ -419,12 +420,12 @@ function doSearch($search = "")
 			// Get the user's IP address.
 			$ip = cookieIp();
 			// Have they performed >= $config["searchesPerMinute"] searches in the last minute?
-			if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}searches WHERE ip=$ip AND searchTime>UNIX_TIMESTAMP()-60", 0) >= $config["searchesPerMinute"]) {
+			if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}searches WHERE ip='" . $ip . "' AND searchTime>UNIX_TIMESTAMP()-60", 0) >= $config["searchesPerMinute"]) {
 				$this->eso->message("waitToSearch", true, 60);
 				return;
 			}
 			// Log this search in the searches table.
-			$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}searches (ip, searchTime) VALUES ($ip, UNIX_TIMESTAMP())");
+			$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}searches (ip, searchTime) VALUES ('" . $ip . "', UNIX_TIMESTAMP())");
 			// Proactively clean the searches table of searches older than 60 seconds.
 			$this->eso->db->query("DELETE FROM {$config["tablePrefix"]}searches WHERE searchTime<UNIX_TIMESTAMP()-60");
 		}
@@ -546,7 +547,7 @@ function ajax()
 				// Otherwise, check the database.
 				} else {
 					$ip = cookieIp();
-					if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}searches WHERE ip=$ip AND searchTime>UNIX_TIMESTAMP()-60", 0) >= $config["searchesPerMinute"]) return array("newActivity" => false);
+					if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}searches WHERE ip='" . $ip . "' AND searchTime>UNIX_TIMESTAMP()-60", 0) >= $config["searchesPerMinute"]) return array("newActivity" => false);
 				}
 			}
 			

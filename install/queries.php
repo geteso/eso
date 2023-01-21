@@ -86,7 +86,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	memberId int unsigned NOT NULL auto_increment,
 	name varchar(31) NOT NULL,
 	email varchar(63) NOT NULL,
-	password char(32) NOT NULL,
+	password char(60) NOT NULL,
 	salt char(32) NOT NULL,
 	color tinyint unsigned NOT NULL default '1',
 	account enum('Administrator','Moderator','Member','Suspended','Unvalidated') NOT NULL default 'Unvalidated',
@@ -100,7 +100,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	lastSeen int unsigned default NULL,
 	lastAction varchar(191) default NULL,
 	resetPassword char(32) default NULL,
-	cookieIP int unsigned default NULL,
+	cookieIP char(32) NOT NULL,
 	PRIMARY KEY  (memberId),
 	UNIQUE KEY members_name (name),
 	UNIQUE KEY members_email (email),
@@ -119,7 +119,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}tags (
 // Create the searches table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}searches";
 $queries[] = "CREATE TABLE {$config["tablePrefix"]}searches (
-	ip int unsigned NOT NULL,
+	ip char(32) NOT NULL,
 	searchTime int unsigned NOT NULL
 ) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
@@ -133,7 +133,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}logins (
 // Create the account for the administrator.
 $salt = generateRandomString(32);
 if ($config["hashingMethod"] == "bcrypt") {
-	$password = password_hash($SESSION["install"]["adminPass"], PASSWORD_DEFAULT);
+	$password = password_hash($_SESSION["install"]["adminPass"], PASSWORD_DEFAULT);
 } else {
 	$password = md5($salt . $_SESSION["install"]["adminPass"]);
 }
