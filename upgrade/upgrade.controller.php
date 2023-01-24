@@ -24,21 +24,24 @@
  */
 class Upgrade extends Database {
 
+function __construct()
+{
+	// Connect to the database.
+	global $config;
+	parent::__construct($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
+	if ($this->connectError())
+		$this->fatalError($this->connectError());
+}
+
 function init()
 {
 	// Make sure the versions file is writable.
 	if (!is_writeable("../config/versions.php"))
 		$this->fatalError("<code>config/versions.php</code> is not writeable. Try <code>chmod</code>ing it to <code>777</code>, or if it doesn't exist, <code>chmod</code> the folder it is contained within.");
 	
-	// Connect to the database.
-	global $config;
-	$this->db = new Database($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
-	if ($this->connectError())
-		$this->fatalError($this->connectError());
-	
 	// Perform the upgrade, depending on what version the user is currently at.
-	global $versions;
-	
+	global $config, $versions;
+
 	// 1.0.0 alpha 5 -> 1.0.0 beta 1
 	if ($versions["eso"] == "1.0.0a5") {
 		$this->upgrade_100b1();
@@ -130,7 +133,7 @@ function init()
 }
 
 // Perform a MySQL query.
-function query($query)
+function query($query, $fatal = true)
 {
 	// Log the query.
 	if (!isset($_SESSION["queries"]) or !is_array($_SESSION["queries"])) $_SESSION["queries"] = array();
@@ -179,9 +182,11 @@ function upgrade_100d2()
 	// Change the default values of a couple columns in the members table.
 	$this->query("ALTER TABLE {$config["tablePrefix"]}members
 		MODIFY COLUMN password char(60) NOT NULL,
-		MODIFY COLUMN cookieIP char(32) NOT NULL");
+		MODIFY COLUMN cookieIP char(32) default NULL");
 	// Change the default value of the IP field in the searches table.
-	$this->query("ALTER TABLE {$config["tablePrefix"]}searches MODIFY COLUMN ip char(32) NOT NULL");	
+	$this->query("ALTER TABLE {$config["tablePrefix"]}searches MODIFY COLUMN ip char(32) NOT NULL");
+	// ...and the logins table!
+	$this->query("ALTER TABLE {$config["tablePrefix"]}logins MODIFY COLUMN ip char(32) NOT NULL");
 }
 
 // 1.0.0 pre 1 -> 1.0.0 delta 1

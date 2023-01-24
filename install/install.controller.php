@@ -23,7 +23,7 @@ if (!defined("IN_ESO")) exit;
  * Install controller: performs all installation tasks - checks server
  * environment, runs installation queries, creates configuration files...
  */
-class Install extends Database {
+class Install {
 
 var $step;
 var $config;
@@ -71,7 +71,7 @@ function init()
 			// Prepare a list of MySQL storage engines.
 			$this->storageEngines = array(
 				"InnoDB" => "InnoDB (recommended)",
-				"MyISAM" => "MyISAM"
+				"MyISAM" => "MyISAM (less efficient, smaller)"
 			);
 			// Prepare a list of hashing algorithms.
 			$this->hashingMethods = array(
@@ -185,11 +185,29 @@ function suggestFriendlyUrls()
 }
 
 // Perform a MySQL query, and log it.
-function query($query)
+public function query($link, $query)
 {	
-	$result = mysqli_query($this->link, $query);
+	$result = mysqli_query($link, $query);
 	$this->queries[] = $query;
 	return $result;
+}
+
+// Fetch a sequential array.  $input can be a string or a MySQL result.
+public function fetchRow($link, $input)
+{
+	if ($input instanceof \mysqli_result) return mysqli_fetch_row($input);
+	$result = $this->query($link, $input);
+	if (!$this->numRows($link, $result)) return false;
+	return $this->fetchRow($link, $result);
+}
+
+// Return the number of rows in the result.  $input can be a string or a MySQL result.
+public function numRows($link, $input)
+{
+	if (!$input) return false;
+	if ($input instanceof \mysqli_result) return mysqli_num_rows($input);
+	$result = $this->query($link, $input);
+	return $this->numRows($link, $result);
 }
 
 // Perform the installation: run installation queries, and write configuration files.
@@ -203,6 +221,10 @@ function doInstall()
 	// Make sure the language exists.
 	if (!file_exists("../languages/{$_SESSION["install"]["language"]}.php"))
 		$_SESSION["install"]["language"] = "English (casual)";
+
+	// Make sure there is a character set.
+	if (empty($_SESSION["install"]["characterEncoding"]))
+		$_SESSION["install"]["characterEncoding"] = "utf8mb4";
 	
 	// Prepare the $config variable with the installation settings.
 	$config = array(
@@ -237,12 +259,13 @@ function doInstall()
 	if (!empty($_SESSION["install"]["smtpAuth"])) $config = array_merge($config, $smtpConfig);
 	
 	// Connect to the MySQL database.
-	$this->db = new Database($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
+	$db = @mysqli_connect($config["mysqlHost"], $config["mysqlUser"], $config["mysqlPass"], $config["mysqlDB"]);
+	mysqli_set_charset($db, $config["characterEncoding"]);
 	
 	// Run the queries one by one and halt if there's an error!
 	include "queries.php";
 	foreach ($queries as $query) {
-		if (!$this->query($query)) return array(1 => "<code>" . sanitizeHTML($this->error()) . "</code><p><strong>The query that caused this error was</strong></p><pre>" . sanitizeHTML($query) . "</pre>");
+		if (!$this->query($db, $query)) return array(1 => "<code>" . sanitizeHTML(mysqli_error($db)) . "</code><p><strong>The query that caused this error was</strong></p><pre>" . sanitizeHTML($query) . "</pre>");
 	}
 	
 	// Write the $config variable to config.php.
@@ -333,15 +356,16 @@ function validateInfo()
 	if ($_POST["adminPass"] != $_POST["adminConfirm"]) $errors["adminConfirm"] = "Your passwords do not match";
 	
 	// Try and connect to the database.
-	if ($this->connectError()) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . $this->connectError();
+	$db = @mysqli_connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"]);
+	if (mysqli_connect_error($db)) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . mysqli_connect_error($db);
 	
 	// Check to see if there are any conflicting tables already in the database.
 	// If there are, show an error with a hidden input. If the form is submitted again with this hidden input,
 	// proceed to perform the installation regardless.
 	elseif ($_POST["tablePrefix"] != @$_POST["confirmTablePrefix"] and !count($errors)) {
 		$theirTables = array();
-		$result = $this->query("SHOW TABLES");
-		while (list($table) = $this->fetchRow($result)) $theirTables[] = $table;
+		$result = $this->query($db, "SHOW TABLES");
+		while (list($table) = $this->fetchRow($db, $result)) $theirTables[] = $table;
 		$ourTables = array("{$_POST["tablePrefix"]}conversations", "{$_POST["tablePrefix"]}posts", "{$_POST["tablePrefix"]}status", "{$_POST["tablePrefix"]}members", "{$_POST["tablePrefix"]}tags");
 		$conflictingTables = array_intersect($ourTables, $theirTables);
 		if (count($conflictingTables)) {

@@ -318,7 +318,7 @@ function getStatistics()
 	$result = array(
 		"posts" => number_format($posts) . " {$language["posts"]}",
 		"conversations" => number_format($conversations) . " {$language["conversations"]}",
-		"membersOnline" => number_format($membersOnline) . " " . $language[$membersOnline == 1 ? "member online" : "members online"]
+		"membersOnline" => number_format($membersOnline) . " " . !empty($config["onlineMembers"]) ? "<a href='" . makeLink("online") . "'>" . ($language[$membersOnline == 1 ? "member online" : "members online"]) . "</a>" : ($language[$membersOnline == 1 ? "member online" : "members online"])
 	);
 	$this->callHook("getStatistics", array(&$result));
 	

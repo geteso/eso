@@ -47,7 +47,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}conversations (
 	KEY conversations_lastPostTime (lastPostTime),
 	KEY conversations_posts (posts),
 	KEY conversations_sticky (sticky, lastPostTime)
-) ENGINE=MyISAM DEFAULT CHARSET={$config["characterEncoding"]}";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the posts table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}posts";
@@ -66,7 +66,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}posts (
 	KEY posts_conversationId (conversationId),
 	KEY posts_time (time),
 	FULLTEXT KEY posts_fulltext (title, content)
-) ENGINE=MyISAM DEFAULT CHARSET={$config["characterEncoding"]}";
+) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the status table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}status";
@@ -100,7 +100,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	lastSeen int unsigned default NULL,
 	lastAction varchar(191) default NULL,
 	resetPassword char(32) default NULL,
-	cookieIP char(32) NOT NULL,
+	cookieIP char(32) default NULL,
 	PRIMARY KEY  (memberId),
 	UNIQUE KEY members_name (name),
 	UNIQUE KEY members_email (email),
@@ -126,7 +126,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}searches (
 // Create the logins table.
 $queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}logins";
 $queries[] = "CREATE TABLE {$config["tablePrefix"]}logins (
-	ip int unsigned NOT NULL,
+	ip char(32) NOT NULL,
 	loginTime int unsigned NOT NULL
 ) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 

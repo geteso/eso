@@ -2,9 +2,9 @@
 body {background:#5ba3b9 url(splash.jpg) no-repeat center -250px; font-size:75%; min-width:260px}
 body, input, select, textarea, table {font-family:arial, helvetica, sans-serif}
 input, select, textarea {font-size:100%}
-#container {margin:50px auto; width:55em; background:#f5f5ff; background:rgba(245, 245, 255, 0.6); -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); border-radius:5px; padding:20px; line-height:1.4}
+#container {margin:50px auto; width:55em; background:#f5f5ff; background:rgba(245, 245, 255, 0.75); box-shadow:1px 2px #96b3c9; -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); border-radius:5px; padding:20px; line-height:1.4}
 h1 {margin:0 0 10px; font-size:175%; font-weight:normal; color:#32517e}
-h1 img {vertical-align:middle; height:36px; margin:-5px 15px auto auto; -webkit-filter:drop-shadow(0 1px 0 rgb(0 0 0 / 30%)); filter:drop-shadow(0 1px 0 rgb(0 0 0 / 30%))}
+h1 img {vertical-align:middle; height:30px; margin:-5px 15px auto auto; -webkit-filter:drop-shadow(1px 2px 0 #96b3c9); filter:drop-shadow(1px 2px 0 #96b3c9)}
 p.lead {font-size:110%}
 a {text-decoration:none; color:#00f}
 a:hover {text-decoration:underline; color:#000}
@@ -14,8 +14,8 @@ hr.aboveToggle {margin-top:3px; border-style:solid}
 
 /* Inputs and other form elements */
 form, .form {margin:0; padding:0}
-input.text, textarea {border:1px solid #aaa; background:#fff; padding:2px}
-input.text:focus, textarea.text:focus {border-color:#555}
+input.text, textarea {background:#fff; border:1px solid #aaa; box-shadow:inset 0 1px 3px #ccc; padding:2px}
+input.text:focus, textarea.text:focus {border-color:#777}
 input::placeholder {color:#aaa}
 .placeholder {color:#aaa}
 input.checkbox, input.radio {padding:0; margin:0 5px 1px 0; vertical-align:-2px}
@@ -32,11 +32,11 @@ label.checkbox, label.radio {cursor:pointer}
 .form small a {color:#55f}
 
 /* Fieldsets */
-fieldset {margin:5px 0 10px 0; padding:0 15px 15px; border:1px solid #bbf}
+fieldset {margin:10px 0 10px 0; padding:0 15px 15px; border:1px solid #96b3c9; border:1px solid rgba(50,81,126,0.25)}
 fieldset p {margin:0 0 1em}
 legend {font-size:140%; font-weight:bold; padding:5px 10px 10px; color:#000}
 fieldset legend a {color:#000}
-fieldset.hidden {padding:0 16px 0; border-width:1px 0 0}
+fieldset.hidden {margin:10px 0 5px 0; padding:0 16px 0; border-width:1px 0 0}
 fieldset.hidden legend a {color:#32517e}
 fieldset li:last-child {border-bottom:none!important; margin-bottom:0!important}
 fieldset > .warning:last-child {margin:0}
@@ -50,14 +50,14 @@ fieldset > .warning:last-child {margin:0}
 .warning a, .warning a:hover {color:#fff; text-decoration:underline}
 
 /* Footer and buttons */
-hr.separator {color:#bbf; border:dashed #bbf; border-width:1px 0 0; height:1px; margin:15px -20px}
-#version {font-size:90%; font-weight:bold; text-transform:uppercase; color:#32517e; text-shadow:#d6d6ff 0 1px; margin:15px 0 0}
+hr.separator {color:#bbf; border:dashed #96b3c9; border:dashed rgba(50,81,126,0.25); border-width:1px 0 0; height:1px; margin:15px -20px 0 -20px}
+#version {font-size:90%; font-weight:bold; text-transform:uppercase; color:#32517e; margin:5px 0 0}
 #footer .button {font-size:130%; margin-bottom:0}
-#footer input.button, #footer .button del {display:inline-block; margin:2px 0; padding:2px 10px 1px 10px; height:25px}
-#footer input.button {color:#fff; text-shadow:#046b9e 0 -1px; background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 1px rgb(255 255 255 / 50%)}
-#footer input.button:hover {text-decoration:none; box-shadow:inset 0 0 0 2px rgb(255, 255, 255, .5)}
-#footer input.button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, .25)}
-#footer .button del {color:#999; text-decoration:none; text-shadow:#fff 0 1px; background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; border-radius:5px; box-shadow:inset 0 1px 1px #ffffff}
+#footer input.button, #footer .button del {display:inline-block; padding:2px 10px 1px 10px; height:25px}
+#footer input.button {color:#fff; text-shadow:#046b9e 0 -1px; background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 1px #eeeeee,1px 2px 0 #96b3c9}
+#footer input.button:hover {text-decoration:none; box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5),inset 0 1px 1px #eeeeee,1px 2px 0 #96b3c9}
+#footer input.button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25),inset 0 1px 1px #eeeeee,1px 2px 0 #96b3c9}
+#footer .button del {color:#999; text-decoration:none; cursor:not-allowed; text-shadow:#fff 0 1px; background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; border-radius:5px; box-shadow:inset 0 1px 0 #ffffff,1px 2px 0 #96b3c9}
 
 /* Other styles */
 .overflowDiv {margin-top:3px}
@@ -65,8 +65,9 @@ hr.separator {color:#bbf; border:dashed #bbf; border-width:1px 0 0; height:1px; 
 #advanced input.text {font-size:100%; width:22em}
 
 /* Mobile support */
-@media only screen and (max-width:850px) {
-  #container {width:unset; margin:unset}
+@media only screen and (max-width:800px) {
+  body {margin:0; background:#ffffff}
+  #container {width:unset; margin:unset; background:#f5f5ff}
 }
 
 @media only screen and (max-width:650px) {

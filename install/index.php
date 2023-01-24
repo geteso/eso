@@ -113,8 +113,8 @@ case "warningChecks": ?>
 // Specify setup information.
 case "info": ?>
 <h1><img src='logo.svg' alt=''/>Specify setup information</h1>
-<p class='lead'>Welcome to the installer.  We need a few details from you so we can get your forum set up and ready to go.
-<br/>If you have any trouble, get help on <a href='https://geteso.org'>geteso.org</a>.</p>
+<p class='lead'>Welcome to the esoBB installer.  We need a few details from you so we can get your forum ready to go.
+<br/>If you have any trouble, read the <a href='https://geteso.org/docs/setup'>setup guide</a> or get help on the <a href='https://forum.geteso.org'>esoBB support forum</a>.</p>
 
 <fieldset id='basicDetails'><legend>Specify basic details</legend>
 <ul class='form'>
@@ -132,7 +132,7 @@ case "info": ?>
 </fieldset>
 
 <fieldset id='mysqlConfig'><legend>Configure the database</legend>
-<p>The software needs a database to store all your forum's data in, such as conversations and posts. If you're unsure of any of these details, you may need to ask your hosting provider.</p>
+<p>esoBB needs a database to store all your forum's data in, such as conversations and posts. If you're unsure of any of these details, you may need to ask your hosting provider.</p>
 
 <?php if (isset($install->errors["mysql"])): ?><div class='warning msg'><?php echo $install->errors["mysql"]; ?></div><?php endif; ?>
 
@@ -148,10 +148,10 @@ case "info": ?>
 </fieldset>
 
 <fieldset id='emailConfig'><legend>Outgoing mail server</legend>
-<p>The software needs a mail server to send emails to members, but your forum will work with email sending disabled. If you haven't configured server-side email sending or are unsure of whether you can send emails, leave this disabled and change it later.</p>
+<p>esoBB needs a mail server to send emails to members, but your forum will work with email sending disabled. If you haven't configured server-side email sending or are unsure of whether you can send emails, leave this disabled and change it later.</p>
 
 <ul class='form'>
-<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='8' class='checkbox' value='1' checked='<?php echo (!empty($_POST["sendEmail"])) ? "checked" : ""; ?>'/>
+<li><label>Send emails</label> <input name='sendEmail' type='checkbox' tabindex='8' class='checkbox' value='1' <?php echo (!empty($_POST["sendEmail"])) ? "checked" : ""; ?>/>
 <!-- <small>If you leave this disabled, the SMTP configuration will be ignored.</small> -->
 </li>
 </ul>
@@ -173,7 +173,7 @@ case "info": ?>
 <li><label>SMTP password</label> <input id='smtpPass' name='smtpPass' tabindex='14' type='password' class='text' autocomplete='off' value='<?php echo @$_POST["smtpPass"]; ?>'/></li>
 </ul>
 
-<input type='hidden' name='showSmtpConfig' id='showSmtpConfig' value='<?php echo $_POST["showSmtpConfig"]; ?>'/>
+<input type='hidden' name='showSmtpConfig' id='showSmtpConfig' value='<?php echo @$_POST["showSmtpConfig"]; ?>'/>
 <script type='text/javascript'>
 // <![CDATA[
 function toggleSmtpConfig() {
@@ -191,7 +191,7 @@ function toggleSmtpConfig() {
 </fieldset>
 
 <fieldset id='adminConfig'><legend>Administrator account</legend>
-<p>The software will use the following information to set up your administrator account on your forum.</p>
+<p>esoBB will use the following information to set up your administrator account on your forum.</p>
 
 <ul class='form'>
 <li><label>Administrator username</label> <input id='adminUser' name='adminUser' tabindex='15' type='text' class='text' placeholder='Simon' autocomplete='username' value='<?php echo @$_POST["adminUser"]; ?>'/>
@@ -228,7 +228,7 @@ function toggleSmtpConfig() {
 
 <li><label>Base URL</label> <input name='baseURL' type='text' tabindex='24' class='text' autocomplete='off' value='<?php echo isset($_POST["baseURL"]) ? $_POST["baseURL"] : $install->suggestBaseUrl(); ?>'/></li>
 
-<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='25' class='checkbox' value='1' checked='<?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>'/></li>
+<li><label>Use friendly URLs</label> <input name='friendlyURLs' type='checkbox' tabindex='25' class='checkbox' value='1' <?php echo (!empty($_POST["friendlyURLs"]) or $install->suggestFriendlyUrls()) ? "checked" : ""; ?>/></li>
 </ul>
 </fieldset>
 <script type='text/javascript'>Settings.hideFieldset("advancedOptions")</script>
@@ -244,11 +244,11 @@ case "install": ?>
 <h1><img src='logo.svg' alt=''/>Uh oh! It's a fatal error...</h1>
 <hr class='separator'/>
 <p class='warning msg'>The forum installer encountered an error.</p>
-<p>The installer has encountered a nasty error which is making it impossible to install a forum on your server. But don't feel down, <strong>here are a few things you can try</strong>:</p>
+<p>The esoBB installer has encountered a nasty error which is making it impossible to install a forum on your server. But don't feel down, <strong>here are a few things you can try</strong>:</p>
 <ul>
 <li><strong>Try again.</strong> Everyone makes mistakes: maybe the computer made one this time.</li>
 <li><strong>Go back and check your settings.</strong> In particular, make sure your database information is correct.</li>
-<li><strong>Get help.</strong> Go on <a href='https://geteso.org'>geteso.org</a> to see if anyone else is having the same problem as you are. If not, open a new issue, including the error details below.</li>
+<li><strong>Get help.</strong> Go on the <a href='https://forum.geteso.org'>esoBB support forum</a> to see if anyone else is having the same problem as you are. If not, open a new issue, including the error details below.</li>
 </ul>
 
 <a href='#' onclick='toggleError();return false'>Show error information</a>

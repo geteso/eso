@@ -274,7 +274,7 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .menu li {list-style-type:none; margin:0; padding:0; display:block}
 #admin .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%}
 #admin .menu li.active a {margin-right:-1px; font-weight:bold}
-#admin .inner {padding:15px 25px; padding-bottom:2px; margin-bottom:15px}
+#admin .inner {padding:15px 25px 1px 25px; margin-bottom:15px}
 #admin .stats label {font-weight:normal; text-align:left; width:30%}
 #admin .stats div {float:none; font-size:115%; margin-left:35%}
 #admin .stats li {padding-left:10px}
@@ -466,7 +466,7 @@ div#copyright {margin-top:0}
 ul.fl, ul.fr {white-space:nowrap}
 #bar .fr {display:none}
 #ftr .bar {display:block}
-#accountInformation .form div:not(.msg) {padding-left:0; width:calc(100% - 5px)}
+#accountInformation .form div:not(.msg) {padding-left:0}
 #accountInformation .msg {margin-left:0}
 #accountInformation .form label {text-align:left}
 #accountInformation .form input {clear:left}

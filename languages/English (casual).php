@@ -187,10 +187,10 @@ $language = array(
 
 "Mark all conversations as read" => "Mark all conversations as read",
 "Member" => "Member",
-"member online" => "<a href='" . makeLink("online") . "'>member online</a>",
+"member online" => "member online",
 "Member-plural" => "Members",
 "Members allowed to view this conversation" => "Members allowed to view this conversation",
-"members online" => "<a href='" . makeLink("online") . "'>members online</a>",
+"members online" => "members online",
 "messageDisplayTime" => "Message display time",
 "messageDisplayTimeInfo" => "Amount of time by which most messages floating above the navigation bar disappear. (20 seconds = 20 seconds, lol.)",
 "minPasswordLength" => "Minimum password length",

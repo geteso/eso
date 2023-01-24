@@ -32,11 +32,11 @@ if(!defined("IN_ESO"))exit;
 <?php if(!empty($config["baseURL"])):?><base href='<?php echo $config["baseURL"];?>'/><?php endif;?>
 <style type='text/css'>
 body {background:#fff; font-size:75%; font-family:arial,helvetica,sans-serif; margin:0}
-#container {margin:40px auto; margin-bottom:0; max-width:55em; min-width:10em; background:#f5f5ff; padding:20px; padding-bottom:0; font-size:120%; line-height:1.4; border:15px solid #fff}
-h1 {margin:0 0 20px; font-size:150%; font-weight:normal; color:#32517e}
-#container div.info {border:1px dashed #bbf; padding:10px}
-#container li {padding-bottom:10px}
-#container p {padding-bottom:5px}
+#container {margin:40px auto 0 auto; max-width:55em; min-width:10em; background:#f5f5ff; padding:20px; font-size:120%; line-height:1.4; border:15px solid #fff}
+h1 {margin:0 0 10px; font-size:150%; font-weight:normal; color:#32517e}
+#container div.info {border:1px dashed #bbf; margin:5px 0 0; padding:10px}
+#container ul:last-child {margin:0}
+#container li:last-child {padding:0}
 a {color:#00f; text-decoration:none}
 a:hover {color:#000; text-decoration:underline}
 </style>
