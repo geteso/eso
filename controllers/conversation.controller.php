@@ -607,7 +607,7 @@ function getConversation($id = false)
 		$from = array(
 			"{$config["tablePrefix"]}conversations c",
 			"LEFT JOIN {$config["tablePrefix"]}tags t USING (conversationId)",
-			"LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId=c.conversationId AND s.memberId=" . ($this->eso->user["memberId"] ? $this->eso->user["memberId"] : 0) . ")",
+			"LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId=c.conversationId AND s.memberId=" . (isset($this->eso->user) and $this->eso->user["memberId"] ? $this->eso->user["memberId"] : 0) . ")",
 			"INNER JOIN {$config["tablePrefix"]}members sm ON (sm.memberId=c.startMember)"
 		);
 
@@ -1311,7 +1311,7 @@ function addMember($name)
 			// Otherwise, search for it in the database as an actual member name.
 			default:
 				$name = $this->eso->db->escape($name);
-				if (!(list($memberId, $memberName) = @$this->eso->db->fetchRow("SELECT memberId, name FROM {$config["tablePrefix"]}members WHERE (name='$name' OR name LIKE '$name%') AND name NOT IN ('" . implode("','", $this->conversation["membersAllowed"]) . "') ORDER BY name='$name' DESC LIMIT 1"))) {
+				if (!(list($memberId, $memberName) = @$this->eso->db->fetchRow("SELECT memberId, name FROM {$config["tablePrefix"]}members WHERE (name='$name' OR name LIKE '$name%') AND name NOT IN ('" . (isset($this->conversation["membersAllowed"]) and is_array($this->conversation["membersAllowed"]) ? implode("','", $this->conversation["membersAllowed"]) : implode("','", [])) . "') ORDER BY name='$name' DESC LIMIT 1"))) {
 					$this->eso->message("memberDoesntExist");
 					return false;
 				}
@@ -1502,13 +1502,13 @@ function saveTags($tags)
 
 	// Up the count of added tags.
 	if (count($addTags)) {
-		$query = "INSERT INTO {$config["tablePrefix"]}tags VALUES ('" . implode($addTags, "', {$this->conversation["id"]}), ('") . "', {$this->conversation["id"]})";
+		$query = "INSERT INTO {$config["tablePrefix"]}tags VALUES ('" . implode("', {$this->conversation["id"]}), ('", $addTags) . "', {$this->conversation["id"]})";
 		$this->eso->db->query($query);
 	}
 
 	// Lower the count of removed tags.
 	if (count($delTags)) {
-		$query = "DELETE FROM {$config["tablePrefix"]}tags WHERE tag IN ('" . implode($delTags, "', '") . "') AND conversationId={$this->conversation["id"]}";
+		$query = "DELETE FROM {$config["tablePrefix"]}tags WHERE tag IN ('" . implode("', '", $delTags) . "') AND conversationId={$this->conversation["id"]}";
 		$this->eso->db->query($query);
 	}
 

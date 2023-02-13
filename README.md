@@ -22,7 +22,7 @@ Changes are always being made as our users [make suggestions on the support foru
 ### Creating your own forum
 **It's very easy to create your own forum** and requires no command-line experience at all to get started.  **For an extremely novice tutorial, read the [starter's guide](https://geteso.org/docs/install)**.  Otherwise, dependencies are listed below.
 
-1. PHP `>=5.6` with the following extensions: `gd`, `mysql`, and `mbstring`
+1. PHP `>=5.6` with the following extensions: `gd`, `mysqli`, and `mbstring`
 2. MySQL `>=5.7` (latest version recommended) or MariaDB.
 3. A web server of your choice!
 

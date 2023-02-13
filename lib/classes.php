@@ -113,7 +113,7 @@ function init()
 
 function settings() {}
 function saveSettings() {}
-function upgrade() {}
+function upgrade($oldVersion) {}
 function enable() {}
 
 }

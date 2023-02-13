@@ -487,6 +487,7 @@ $messages=array(
 "passwordChanged" => array("class" => "success","message" => "Your password has been changed. You may now log in with your new password."),
 "passwordEmailSent" => array("class" => "success","message" => "You have been sent an email containing a link to reset your password. Please check your spam folder if you don't receive it within the next minute or two."),
 "passwordInfo" => array("class" => "info","message" => "Choose a secure password of at least {$config["minPasswordLength"]} characters"),
+"passwordUpgraded" => array("class" => "success", "message" => "Your password has been upgraded to be more secure. Don't worry, you'll still be able to log in."),
 "passwordsDontMatch" => array("class" => "warning","message" => "Your passwords do not match"),
 "passwordTooShort" => array("class" => "warning","message" => "Your password must be at least {$config["minPasswordLength"]} characters"),
 "pluginAdded" => array("class" => "success","message" => "The plugin was successfully added."),

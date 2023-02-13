@@ -164,12 +164,14 @@ function login($name = false, $password = false, $hash = false)
 	if (isset($_SESSION["user"])) return true;
 
 	// If a raw password was passed, convert it into a hash.
-	$dbPassword = $this->db->result("SELECT password FROM {$config["tablePrefix"]}members WHERE name='$name'", 0);
-	if ($name and $password and $config["hashingMethod"] == "bcrypt" and password_verify($password, $dbPassword)) {
-		$hash = $dbPassword;
-	} elseif ($name and $password) {
-		$salt = $this->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name='" . $this->db->escape($name) . "'", 0);
-		$hash = md5($salt . $password);
+	if ($name and $password) {
+		$salt = $this->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE name='$name'", 0);
+		$dbPassword = $this->db->result("SELECT password FROM {$config["tablePrefix"]}members WHERE name='$name'", 0);
+		if ($config["hashingMethod"] == "bcrypt" and password_verify($password, $dbPassword)) {
+			$hash = $dbPassword;
+		} else {
+			$hash = md5($salt . $password);
+		}
 	}
 	
 	// Otherwise attempt to get the member ID and password hash from a cookie.
@@ -208,7 +210,7 @@ function login($name = false, $password = false, $hash = false)
 				}
 				// Have they performed >= $config["loginsPerMinute"] logins in the last minute? If so, don't continue.
 				if (count($_SESSION["logins"]) >= $config["loginsPerMinute"]) {
-					$this->eso->message("waitToLogin", true, array(60 - time() + min($_SESSION["logins"])));
+					$this->message("waitToLogin", true, array(60 - time() + min($_SESSION["logins"])));
 					return;
 				}
 			}
@@ -218,14 +220,14 @@ function login($name = false, $password = false, $hash = false)
 				// Get the user's IP address.
 //				$ip = (int)ip2long($_SESSION["ip"]);
 				// Have they performed >= $config["loginsPerMinute"] logins in the last minute?
-				if ($this->eso->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip='" . $ip . "' AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
-					$this->eso->message("waitToLogin", true, 60);
+				if ($this->db->result("SELECT COUNT(*) FROM {$config["tablePrefix"]}logins WHERE ip='" . $ip . "' AND loginTime>UNIX_TIMESTAMP()-60", 0) >= $config["loginsPerMinute"]) {
+					$this->message("waitToLogin", true, 60);
 					return;
 				}
 				// Log this attempt in the logins table.
-				$this->eso->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ('" . $ip . "', UNIX_TIMESTAMP())");
+				$this->db->query("INSERT INTO {$config["tablePrefix"]}logins (ip, loginTime) VALUES ('" . $ip . "', UNIX_TIMESTAMP())");
 				// Proactively clean the logins table of logins older than 60 seconds.
-				$this->eso->db->query("DELETE FROM {$config["tablePrefix"]}logins WHERE loginTime<UNIX_TIMESTAMP()-60");
+				$this->db->query("DELETE FROM {$config["tablePrefix"]}logins WHERE loginTime<UNIX_TIMESTAMP()-60");
 			}
 
 			// Log this attempt in the session array.
@@ -238,6 +240,14 @@ function login($name = false, $password = false, $hash = false)
 		if ($data = $this->db->fetchAssoc($result)) {
 
 			$this->callHook("afterLogin", array(&$data));
+
+			// If a raw password was passed, check if it is an md5 hash (only if we are using bcrypt) and update it.
+			if ($password and $config["hashingMethod"] == "bcrypt" and !password_verify($hash, $data["password"]) and $hash == md5($data["salt"] . $password)) {
+				$rand = md5(rand());
+				$newHash = password_hash($password, PASSWORD_DEFAULT);
+				$this->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword='$rand', password='$newHash' WHERE memberId={$data["memberId"]}");
+				$this->message("passwordUgraded", false);
+			}
 
 			// If their account is unvalidated and we're using email verification, show a message with a link to resend a verification email.
 			if ($data["account"] == "Unvalidated" and $config["registrationRequireApproval"] == "email") {
@@ -261,7 +271,7 @@ function login($name = false, $password = false, $hash = false)
 			// If the "remember me" box was checked, set a cookie, and set the cookieIP field in the database.
 //			if (@$_POST["login"]["rememberMe"]) {
 			if (@$_POST["login"]) {
-				$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP='" . $ip . "' WHERE memberId={$_SESSION["user"]["memberId"]}");
+				$this->db->query("UPDATE {$config["tablePrefix"]}members SET cookieIP='" . $ip . "' WHERE memberId={$_SESSION["user"]["memberId"]}");
 				setcookie($config["cookieName"], $_SESSION["user"]["memberId"] . sanitizeForHTTP($hash), time() + $config["cookieExpire"], "/", $config["cookieDomain"]);
 			}
 			
@@ -318,7 +328,7 @@ function getStatistics()
 	$result = array(
 		"posts" => number_format($posts) . " {$language["posts"]}",
 		"conversations" => number_format($conversations) . " {$language["conversations"]}",
-		"membersOnline" => number_format($membersOnline) . " " . !empty($config["onlineMembers"]) ? "<a href='" . makeLink("online") . "'>" . ($language[$membersOnline == 1 ? "member online" : "members online"]) . "</a>" : ($language[$membersOnline == 1 ? "member online" : "members online"])
+		"membersOnline" => number_format($membersOnline) . " " . (!empty($config["onlineMembers"]) ? "<a href='" . makeLink("online") . "'>" . ($language[$membersOnline == 1 ? "member online" : "members online"]) . "</a>" : ($language[$membersOnline == 1 ? "member online" : "members online"]))
 	);
 	$this->callHook("getStatistics", array(&$result));
 	
@@ -514,6 +524,9 @@ function head()
 		// If not, use media as an attribute for the link tag.
 		else $head .= "<link rel='stylesheet' href='{$styleSheet["href"]}' type='text/css'" . (!empty($styleSheet["media"]) ? " media='{$styleSheet["media"]}'" : "") . "/>\n";
 	}
+
+	if (isset($this->skin->favicon))
+		$head .= "<link rel='shortcut icon' type='image/ico' href='" . (!empty($config["shortcutIcon"]) ? $config["shortcutIcon"] : $this->skin->favicon) . "'/>";
 
 	// JavaScript: add the scripts collected in the $this->scripts array (via $this->addScript()).
  	ksort($this->scripts);

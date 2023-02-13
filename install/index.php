@@ -161,7 +161,7 @@ case "info": ?>
 
 <ul class='form'>
 <li><label>SMTP authentication</label><div><select id='smtpAuth' name='smtpAuth' tabindex='10'>
-<?php foreach ($install->smtpOptions as $k => $v) echo "<option value='$k'" . ((!empty($_POST["smtpAuth"]) ? $_POST["smtpAuth"] : "false") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
+<?php foreach ($install->smtpOptions as $k => $v) echo "<option value='$k'" . ((!empty($_POST["smtpAuth"]) ? $_POST["smtpAuth"] : "0") == $k ? " selected='selected'" : "") . ">$v</option>"; ?>
 </select></div></li>
 
 <li><label>SMTP host address</label> <input id='smtpHost' name='smtpHost' tabindex='11' type='text' class='text' autocomplete='off' value='<?php echo @$_POST["smtpHost"]; ?>'/></li>

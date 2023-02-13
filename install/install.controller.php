@@ -64,7 +64,7 @@ function init()
 			}
 			// Prepare a list of SMTP email authentication options.
 			$this->smtpOptions = array(
-				"false" => "None at all (internal email)",
+				false => "None at all (internal email)",
 				"ssl" => "SSL",
 				"tls" => "TLS"
 			);
@@ -250,7 +250,7 @@ function doInstall()
 		"useModRewrite" => !empty($_SESSION["install"]["friendlyURLs"]) and function_exists("apache_get_modules") and in_array("mod_rewrite", apache_get_modules())
 	);
 	$smtpConfig = array(
-		"smtpAuth" => $_SESSION["install"]["smtpAuth"],
+		"smtpAuth" => desanitize($_SESSION["install"]["smtpAuth"]),
 		"smtpHost" => desanitize($_SESSION["install"]["smtpHost"]),
 		"smtpPort" => desanitize($_SESSION["install"]["smtpPort"]),
 		"smtpUser" => desanitize($_SESSION["install"]["smtpUser"]),
@@ -357,7 +357,7 @@ function validateInfo()
 	
 	// Try and connect to the database.
 	$db = @mysqli_connect($_POST["mysqlHost"], $_POST["mysqlUser"], $_POST["mysqlPass"], $_POST["mysqlDB"]);
-	if (mysqli_connect_error($db)) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . mysqli_connect_error($db);
+	if (!$db) $errors["mysql"] = "The installer could not connect to the MySQL server. The error returned was:<br/> " . mysqli_connect_error();
 	
 	// Check to see if there are any conflicting tables already in the database.
 	// If there are, show an error with a hidden input. If the form is submitted again with this hidden input,
@@ -395,8 +395,8 @@ function fatalChecks()
 	// Check the PHP version.
 	if (!version_compare(PHP_VERSION, "4.3.0", ">=")) $errors[] = "Your server must have <strong>PHP 4.3.0 or greater</strong> installed to run your forum.<br/><small>Please upgrade your PHP installation (preferably to version 5) or request that your host or administrator upgrade the server.</small>";
 	
-	// Check for the MySQL extension.
-	if (!extension_loaded("mysql")) $errors[] = "You must have <strong>MySQL 5.7 or greater</strong> installed and the <a href='http://php.net/manual/en/mysql.installation.php' target='_blank'>MySQL extension enabled in PHP</a>.<br/><small>Please install/upgrade both of these requirements or request that your host or administrator install them.</small>";
+	// Check for the MySQLi extension.
+	if (!extension_loaded("mysqli")) $errors[] = "You must have <strong>MySQL 5.7 or greater</strong> installed and the <a href='https://php.net/manual/en/mysqli.installation.php' target='_blank'>MySQLi extension enabled in PHP</a>.<br/><small>Please install/upgrade both of these requirements or request that your host or administrator install them.</small>";
 	
 	// Check file permissions.
 	$fileErrors = array();

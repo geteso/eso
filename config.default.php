@@ -54,6 +54,7 @@ $defaultConfig = array(
 // Be careful when editing this.  You could break your forum.
 "forumLogo" => false, // Path to an image file to replace the logo.  False for skin default.
 "forumIcon" => false, // Same thing as before, but for the icon.
+"shortcutIcon" => false, // Same thing as before, but for the favicon (shortcut icon).
 "showDescription" => true, // Whether or not to display the forum description on the homepage.
 "sitemapCacheTime" => 3600, // Amount of time by which sitemaps are kept in cache.  (3600 seconds = 1 hour.)
 "manifestCacheTime" => 3600, // Same thing as before, but for the web app manifest.

@@ -140,7 +140,7 @@ public function numRows($input)
 // Return the most recent connection error.
 public function connectError()
 {
-	return mysqli_connect_error($this->link);
+	if (!$this->link) return mysqli_connect_error();
 }
 
 // Return the most recent MySQL error.

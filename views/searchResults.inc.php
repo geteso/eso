@@ -101,7 +101,7 @@ function columnLastReply(&$search,$conversation)
 }
 
 // If there are results, loop through the conversations and output a table row for each one.
-if (count($this->results)):
+if (is_countable($this->results) && count($this->results)) :
 foreach ($this->results as $conversation): ?>
 
 <tr id='c<?php echo $conversation["id"]; ?>'<?php if ($conversation["starred"]): ?> class='starred'<?php endif; ?>>

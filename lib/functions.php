@@ -308,7 +308,8 @@ function validateName(&$name)
 	if (in_array(strtolower($name), $reservedNames)) return "nameTaken";
 
 	// Make sure the name is not too small or large.
-	$length = mb_strlen($name, "UTF-8");
+	if (extension_loaded("mbstring")) $length = mb_strlen($name, "UTF-8");
+	else $length = strlen($name);
 	if ($length < 3 or $length > 20) return "nameEmpty";
 
 	// It can't be empty either!
