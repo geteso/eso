@@ -607,7 +607,7 @@ function getConversation($id = false)
 		$from = array(
 			"{$config["tablePrefix"]}conversations c",
 			"LEFT JOIN {$config["tablePrefix"]}tags t USING (conversationId)",
-			"LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId=c.conversationId AND s.memberId=" . (isset($this->eso->user) and $this->eso->user["memberId"] ? $this->eso->user["memberId"] : 0) . ")",
+			"LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId=c.conversationId AND s.memberId=" . ($this->eso->user["memberId"] ? $this->eso->user["memberId"] : 0) . ")",
 			"INNER JOIN {$config["tablePrefix"]}members sm ON (sm.memberId=c.startMember)"
 		);
 

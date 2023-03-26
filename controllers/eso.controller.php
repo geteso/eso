@@ -246,7 +246,7 @@ function login($name = false, $password = false, $hash = false)
 				$rand = md5(rand());
 				$newHash = password_hash($password, PASSWORD_DEFAULT);
 				$this->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword='$rand', password='$newHash' WHERE memberId={$data["memberId"]}");
-				$this->message("passwordUgraded", false);
+				$this->message("passwordUpgraded", false);
 			}
 
 			// If their account is unvalidated and we're using email verification, show a message with a link to resend a verification email.

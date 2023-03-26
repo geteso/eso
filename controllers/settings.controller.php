@@ -202,14 +202,15 @@ function changeUsername()
 
 		// Validate the name, then add the updating part to the query.
 		$name = substr($_POST["settingsUsername"]["name"], 0, 31);
-		if ($error = validateName($name)) $this->messages["username"] = $error;
+		// Prevent duplicates and allow changes to capitalization of the same name.
+		if (!($name !== $this->eso->user["name"] and strtolower($name) == strtolower($this->eso->user["name"])) and $error = validateName($name)) $this->messages["username"] = $error;
 		else $updateData["name"] = "'{$_POST["settingsUsername"]["name"]}'";
 //		$this->messages["current"] = "reenterInformation";
 	}
 
 	// Check if the user entered their old password correctly.
 	$hash = md5($salt . $_POST["settingsUsername"]["password"]);
-	if (($config["hashingMethod"] == "bcrypt" and password_verify($_POST["settingsUsername"]["password"], $password)) or !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0)) $this->messages["password"] = "incorrectPassword";
+	if (($config["hashingMethod"] == "bcrypt" and !password_verify($_POST["settingsUsername"]["password"], $password)) or ($config["hashingMethod"] !== "bcrypt" and !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0))) $this->messages["password"] = "incorrectPassword";
 
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {
@@ -268,7 +269,7 @@ function changePasswordEmail()
 	
 	// Check if the user entered their old password correctly.
 	$hash = md5($salt . $_POST["settingsPasswordEmail"]["current"]);
-	if (($config["hashingMethod"] == "bcrypt" and password_verify($_POST["settingsUsername"]["password"], $password)) or !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0)) $this->messages["current"] = "incorrectPassword";
+	if (($config["hashingMethod"] == "bcrypt" and !password_verify($_POST["settingsUsername"]["password"], $password)) or ($config["hashingMethod"] !== "bcrypt" and !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0))) $this->messages["password"] = "incorrectPassword";
 
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {

@@ -52,7 +52,7 @@ small a, dt a {color:#55f}
 #reset:hover, #searchText:focus ~ #reset:hover {text-decoration:none; color:#000}
 
 /* Messages */
-.msg .close {border:1px solid #fff; color:#fff; text-decoration:none}
+.msg .close {border:1px solid #000; color:#000; text-decoration:none}
 .msg .close:hover {background:#fff; color:#000; text-decoration:none}
 .msg .close:active {background:#aaa}
 .msg {background:#ddd}
@@ -60,6 +60,7 @@ small a, dt a {color:#55f}
 .success {background:#cf0}
 .warning {background:#c00; color:#fff; box-shadow:inset 0 2px 3px rgba(255, 255, 255, 0.5)}
 .warning a, .warning a:hover {color:#fff; text-decoration:underline}
+.warning .close {border-color:#fff; color:#fff}
 
 /* Stars */
 .star0 {color:#ccc}
@@ -97,7 +98,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 #cInfo:not(.text) {border-style:none; border-width:1px}
 #cInfo .editable {border-style:dashed; border-width:1px; border-color:#bbb}
 #cInfo .editable:hover {border-style:dashed; border-width:1px; border-color:#777}
-#cInfo .editable:focus {border-style:solid; border-width:1px; box-shadow:inset 0 5px 10px rgba(0, 0, 0, 0.07)}
+#cInfo .editable:focus {border-style:solid; border-width:1px; border-color:#777; box-shadow:inset 0 1px 3px #ccc}
 #cTags a {background:#e4e4e4; color:#000}
 #cTags a:hover {background-color:#ccc; text-decoration:none}
 #cTags a:active {background-color:#888}
@@ -244,12 +245,11 @@ fieldset.hidden legend a {color:#666}
 #admin .menu {border:1px solid #ccc}
 #admin .menu li a {background-color:#eee; border-top:1px solid #ccc}
 #admin .menu li:not(.active) a:hover {margin:0; padding-left:15px; border-width:1px 0 0}
-#admin .menu li:first-child a {border:none}
-#admin .inner {border-left:0}
+#admin .menu li:first-child a, #admin .menu li:first-child a:hover {border:none}
 }
 
 /* Formatting controls */
 @media only screen and (max-width:570px) {
-#cPosts .p .hdr .controls {background:#ddd; box-shadow:inset 0 5px 10px rgba(255, 255, 255, 0.4)}
+#cPosts .p .hdr .controls {background:#ddd}
 .formattingCheckbox {border-top:1px solid rgba(0,0,0,0.2)}
 }

@@ -10,7 +10,7 @@ a {text-decoration:none; color:#00f}
 a:hover {text-decoration:underline; color:#000}
 pre {overflow:auto; padding-bottom:5px}
 li {margin-bottom:1em}
-hr.aboveToggle {margin-top:3px; border-style:solid}
+hr.aboveToggle {margin-top:3px; border:solid #96b3c9; border:solid rgba(50,81,126,0.25); border-width:1px 0 0}
 
 /* Inputs and other form elements */
 form, .form {margin:0; padding:0}
