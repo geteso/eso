@@ -269,7 +269,7 @@ function changePasswordEmail()
 	
 	// Check if the user entered their old password correctly.
 	$hash = md5($salt . $_POST["settingsPasswordEmail"]["current"]);
-	if (($config["hashingMethod"] == "bcrypt" and !password_verify($_POST["settingsUsername"]["password"], $password)) or ($config["hashingMethod"] !== "bcrypt" and !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0))) $this->messages["password"] = "incorrectPassword";
+	if (($config["hashingMethod"] == "bcrypt" and !password_verify($_POST["settingsUsername"]["password"], $password)) or ($config["hashingMethod"] !== "bcrypt" and !$this->eso->db->result("SELECT 1 FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]} AND password='" . $hash . "'", 0))) $this->messages["current"] = "incorrectPassword";
 
 	// Everything is valid and good to go! Run the query if necessary.
 	elseif (count($updateData)) {
