@@ -31,11 +31,18 @@ var $view = "join.view.php";
 // Initialize: define the form contents, and check to see if form data was submitted.
 function init()
 {
+	global $language, $config;
+	
 	// If we're already logged in, go to 'My settings'.
 	if ($this->eso->user) redirect("settings");
 
+	// If registration is disabled, kick them out.
+	elseif (empty($config["registrationOpen"])) {
+		$this->eso->message("registrationClosed");
+		redirect("");
+	}
+
 	// Set the title.
-	global $language, $config;
 	$this->title = $language["Join this forum"];
 
 	// Only respond to requests for verification emails if we require e-mail verification.

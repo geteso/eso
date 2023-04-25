@@ -206,6 +206,14 @@ function changeUsername()
 		if (!($name !== $this->eso->user["name"] and strtolower($name) == strtolower($this->eso->user["name"])) and $error = validateName($name)) $this->messages["username"] = $error;
 		else $updateData["name"] = "'{$_POST["settingsUsername"]["name"]}'";
 //		$this->messages["current"] = "reenterInformation";
+
+		if ($name !== $this->eso->user["name"]) {
+			if ($name !== $this->eso->user["name"] and strtolower($name) == strtolower($this->eso->user["name"]))
+			if ($error = validateName($name)) $this->messages["username"] = $error;
+			else $updateData["name"] = "'{$_POST["settingsUsername"]["name"]}'";
+		} else {
+
+		}
 	}
 
 	// Check if the user entered their old password correctly.

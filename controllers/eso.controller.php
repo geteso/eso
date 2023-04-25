@@ -114,8 +114,8 @@ function init()
  <input id='loginPassword' name='login[password]' type='password' class='text' autocomplete='current-password' placeholder='{$language["Password"]}'/>
  " . $this->skin->button(array("value" => $language["Log in"], "class" => "buttonSmall")) . "
  </div></form>", 100);
- 			$this->addToBar("left", "<a href='" . makeLink("join") . "' id='joinLink'><span class='button buttonSmall'><input type='submit' value='{$language["Join us"]}'></span></a>", 200);
- 			$this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
+ 			if (!empty($config["registrationOpen"])) $this->addToBar("left", "<a href='" . makeLink("join") . "' id='joinLink'><span class='button buttonSmall'><input type='submit' value='{$language["Join us"]}'></span></a>", 200);
+ 			if (!empty($config["sendMail"])) $this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
 		}
 		
 		// If the user IS logged in, we want to display their name and appropriate links.

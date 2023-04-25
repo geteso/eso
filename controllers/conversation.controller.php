@@ -83,13 +83,13 @@ function init()
 			// post.
 			if (!$id) $this->conversation["draft"] = $_POST["content"];
 			// Otherwise, redirect to the newly-created conversation!
-			else redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]));
+			else redirect($this->conversation["id"], $this->conversation["slug"]);
 		}
 			
 		// Save a draft in an existing conversation.
 		elseif (isset($_POST["saveDraft"])) {
 			$this->saveDraft($_POST["content"]);
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start={$_GET["start"]}", "#reply");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start={$_GET["start"]}", "#reply");
 		}
 			
 		// Add a reply to an existing conversation.
@@ -100,7 +100,7 @@ function init()
 			if (!$id) $this->conversation["draft"] = $_POST["content"];
 			
 			// Otherwise, redirect so that the new reply is visible.
-			else redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=" . max(0, $this->conversation["postCount"] - $config["postsPerPage"]), "#p$id");
+			else redirect($this->conversation["id"], $this->conversation["slug"], "?start=" . max(0, $this->conversation["postCount"] - $config["postsPerPage"]), "#p$id");
 		}
 	}
 
@@ -116,34 +116,22 @@ function init()
 		}
 		// Otherwise, discard the draft and redirect.
 		$this->discardDraft();
-		redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start={$_GET["start"]}", "#reply");
+		redirect($this->conversation["id"], $this->conversation["slug"], "?start={$_GET["start"]}", "#reply");
 	}
 
 	// If the conversation does exist...
 	if ($this->conversation["id"]) {
 	
 		// If we're not using pretty URLs, redirect if there is a slug in the URL.
-		// If we are using pretty URLs, make sure that the slug in the URL is the same as the actual slug using conversationLink().
+		// If we are using pretty URLs, make sure that the slug in the URL is the same as the actual slug.
 		if (empty($config["usePrettyURLs"]) && !empty(@$_GET["q3"])) {
 			header("HTTP/1.1 301 Moved Permanently");
 			redirect($this->conversation["id"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
 		}
-		elseif (!empty($config["usePrettyURLs"]) && @$_GET["q2"] != conversationLink($this->conversation["id"], $this->conversation["slug"])) {
+		elseif (!empty($config["usePrettyURLs"]) && @$_GET["q3"] != $this->conversation["slug"]) {
 			header("HTTP/1.1 301 Moved Permanently");
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
+			redirect($this->conversation["id"], $this->conversation["slug"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
 		}
-		
-		// If the slug in the URL is not the same as the actual slug, redirect.
-//		if (@$_GET["q3"] != $this->conversation["slug"]) {
-//			header("HTTP/1.1 301 Moved Permanently");
-//			redirect($this->conversation["id"], $this->conversation["slug"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
-//		}
-		
-		// If there is a slug in the URL, redirect.
-//		if (!empty(@$_GET["q3"])) {
-//			header("HTTP/1.1 301 Moved Permanently");
-//			redirect($this->conversation["id"], !empty($_GET["start"]) ? "?start={$_GET["start"]}" : "");
-//		}
 		
 		// Work out which post we are starting from.
 		if (!empty($_GET["start"])) {
@@ -154,14 +142,14 @@ function init()
 					$this->startFrom = max(0, min($this->conversation["lastRead"], $this->conversation["postCount"] - $config["postsPerPage"]));
 					$limit = (int)$this->conversation["lastRead"];
 					$postId = $this->eso->db->result($this->eso->db->query("SELECT postId FROM {$config["tablePrefix"]}posts WHERE conversationId={$this->conversation["id"]} ORDER BY time ASC LIMIT $limit, 1"), 0);
-					redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom", "#p$postId");
+					redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom", "#p$postId");
 					break;
 
 				// Last: redirect to the last post in the conversation.
 				case "last":
 					$this->startFrom = max(0, $this->conversation["postCount"] - $config["postsPerPage"]);
 					$postId = $this->eso->db->result($this->eso->db->query("SELECT MAX(postId) FROM {$config["tablePrefix"]}posts WHERE conversationId={$this->conversation["id"]}"), 0);
-					redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom", "#p$postId");
+					redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom", "#p$postId");
 					break;
 
 				// With any luck, we can just use the start number in the URL.
@@ -196,19 +184,19 @@ function init()
 			$this->editingPost = (int)$_GET["editPost"];
 			// If the form was submitted, update the db and go back to the normal view.
 			if ((isset($_POST["save"]) and $this->editPost($this->editingPost, $_POST["content"])) or isset($_POST["cancel"]))
-				redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+				redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 
 		// Delete a post.
 		if (isset($_GET["deletePost"]) and $this->eso->validateToken(@$_GET["token"])) {
 			$this->deletePost((int)$_GET["deletePost"]);
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 
 		// Restore a post.
 		if (isset($_GET["restorePost"]) and $this->eso->validateToken(@$_GET["token"])) {
 			$this->restorePost((int)$_GET["restorePost"]);
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 		
 		// Show a deleted post: set the $this->showingDeletedPost variable so that the post body is outputted later on.
@@ -217,26 +205,26 @@ function init()
 		// Permanently delete a post.
 		if (isset($_GET["deletePostForever"]) and $this->eso->validateToken(@$_GET["token"])) {
 			$this->deletePostForever((int)$_GET["deletePostForever"]);
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 
 		// Toggle sticky.
 		if (isset($_GET["toggleSticky"]) and $this->eso->validateToken(@$_GET["token"])) {
 			$this->toggleSticky();
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 
 		// Toggle locked.
 		if (isset($_GET["toggleLock"]) and $this->eso->validateToken(@$_GET["token"])) {
 			$this->toggleLock();
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 		
 		// Update the conversation title/tags.
 		if (isset($_POST["saveTitleTags"]) and $this->eso->validateToken(@$_POST["token"])) {
 			$this->saveTitle($_POST["cTitle"]);
 			$this->saveTags($_POST["cTags"]);
-			redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+			redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 		}
 		
 		// Change a member's group.
@@ -262,13 +250,13 @@ function init()
 		$this->eso->addToBar("right", "<a href='" . makeLink("feed", "conversation", $this->conversation["id"]) . "' id='rss' class='vl'><span class='button buttonSmall'><input type='submit' value='{$language["RSS"]}'></span></a>", 500);
 		
 		// Add the sticky/unsticky link if the user has permission.
-		if ($this->canSticky() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleSticky", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleSticky();return false'><span class='button buttonSmall'><input type='submit' id='stickyLink' value='" . $language[in_array("sticky", $this->conversation["labels"]) ? "Unsticky" : "Sticky"] . "'></span></a>", 400);
+		if ($this->canSticky() === true) $this->eso->addToBar("right", "<a href='" . makeLink($this->conversation["id"], $this->conversation["slug"], "?toggleSticky", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleSticky();return false'><span class='button buttonSmall'><input type='submit' id='stickyLink' value='" . $language[in_array("sticky", $this->conversation["labels"]) ? "Unsticky" : "Sticky"] . "'></span></a>", 400);
 		
 		// Add the lock/unlock link if the user has permission.
-		if ($this->canLock() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?toggleLock", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleLock();return false'><span class='button buttonSmall'><input type='submit' id='lockLink' value='" . $language[$this->conversation["locked"] ? "Unlock" : "Lock"] . "'></span></a>", 300);
+		if ($this->canLock() === true) $this->eso->addToBar("right", "<a href='" . makeLink($this->conversation["id"], $this->conversation["slug"], "?toggleLock", $this->startFrom ? "&start=$this->startFrom" : "", "&token={$_SESSION["token"]}") . "' onclick='Conversation.toggleLock();return false'><span class='button buttonSmall'><input type='submit' id='lockLink' value='" . $language[$this->conversation["locked"] ? "Unlock" : "Lock"] . "'></span></a>", 300);
 		
 		// Add the delete conversation link if the user has permission.
-		if ($this->canDeleteConversation() === true) $this->eso->addToBar("right", "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?delete", "&token={$_SESSION["token"]}") . "' onclick='return Conversation.deleteConversation()'><span class='button buttonSmall'><input type='submit' value='{$language["Delete conversation"]}'></span></a>", 200);
+		if ($this->canDeleteConversation() === true) $this->eso->addToBar("right", "<a href='" . makeLink($this->conversation["id"], $this->conversation["slug"], "?delete", "&token={$_SESSION["token"]}") . "' onclick='return Conversation.deleteConversation()'><span class='button buttonSmall'><input type='submit' value='{$language["Delete conversation"]}'></span></a>", 200);
 		
 		// Update the user's last action.
 		$this->updateLastAction();
@@ -328,7 +316,7 @@ function init()
 	// Remove a member from the membersAllowed list.
 	if (isset($_GET["removeMember"]) and $this->eso->validateToken(@$_GET["token"])) {
 		$this->removeMember($_GET["removeMember"]);
-		redirect(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?start=$this->startFrom");
+		redirect($this->conversation["id"], $this->conversation["slug"], "?start=$this->startFrom");
 	}
 
 	// If the add member form has been submitted, attempt to add the member.
@@ -422,7 +410,7 @@ function ajax()
 				"draft" => @$_POST["draft"],
 				"content" => @$_POST["content"]
 			))) return;
-			return array("redirect" => $config["baseURL"] . makeLink(conversationLink($conversationId, $this->conversation["slug"])));
+			return array("redirect" => $config["baseURL"] . makeLink($conversationId, $this->conversation["slug"]));
 			break;
 
 		// Save a draft.
@@ -641,6 +629,8 @@ function getConversation($id = false)
 			if ($labels[$i]) $conversation["labels"][] = $k;
 			$i++;
 		}
+
+		if (empty($config["usePrettyURLs"])) $conversation["slug"] = null;
 		
 		$this->callHook("afterGetConversation", array(&$conversation));
 
@@ -860,7 +850,7 @@ function addReply($content, $newConversation = false)
 		global $versions;
 		while (list($name, $email, $language) = $this->eso->db->fetchRow($result)) {
 			include "languages/" . sanitizeFileName(file_exists("languages/$language.php") ? $language : $config["language"]) . ".php";
-			sendEmail($email, vsprintf($language["emails"]["newReply"]["subject"], array($name, $this->conversation["title"])), vsprintf($language["emails"]["newReply"]["body"], array($name, $this->eso->user["name"], $this->conversation["title"], $config["baseURL"] . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "unread"))));
+			sendEmail($email, vsprintf($language["emails"]["newReply"]["subject"], array($name, $this->conversation["title"])), vsprintf($language["emails"]["newReply"]["body"], array($name, $this->eso->user["name"], $this->conversation["title"], $config["baseURL"] . makeLink($this->conversation["id"], $this->conversation["slug"]), "unread")));
 			unset($langauge, $messages);
 		}
 	}
@@ -1213,7 +1203,7 @@ function startConversation($conversation)
 	$this->conversation["startMember"] = $this->eso->user["memberId"];
 	$this->conversation["startMemberName"] = $this->eso->user["name"];
 	$this->conversation["title"] = $conversation["title"];
-	$this->conversation["slug"] = $slug;
+	$this->conversation["slug"] = !empty($config["usePrettyURLs"]) ? $slug : false;
 
 	// Add the first post or save the draft.
 	if (!($conversation["draft"] ? $this->saveDraft($conversation["content"]) : $this->addReply($conversation["content"], true))) {
@@ -1417,7 +1407,7 @@ function emailPrivateAdd($memberIds, $emailAll = false)
 	global $versions;
 	while (list($name, $email, $language) = $this->eso->db->fetchRow($result)) {
 		include "languages/" . sanitizeFileName(file_exists("languages/$language.php") ? $language : $config["language"]) . ".php";
-		$args = array($name, $this->conversation["title"], $config["baseURL"] . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"])));
+		$args = array($name, $this->conversation["title"], $config["baseURL"] . makeLink($this->conversation["id"], $this->conversation["slug"]));
 		sendEmail($email, vsprintf($language["emails"]["privateAdd"]["subject"], $args), vsprintf($language["emails"]["privateAdd"]["body"], $args));
 		unset($language, $messages);
 	}
@@ -1444,7 +1434,7 @@ function htmlMembersAllowedList($membersAllowed)
 			// If the user can edit the list, output a link for this member.
 			// However, if there is more than one member, the conversation starter can't be removed.
 			if ($this->canEditMembersAllowed() and ($count == 1 or $memberId != $this->conversation["startMember"]))
-				$html .= "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"]), "?removeMember=$memberId&token={$_SESSION["token"]}") . "' class='d' onclick='Conversation.removeMember(\"$memberId\");return false'>$name</a>, ";
+				$html .= "<a href='" . makeLink($this->conversation["id"], $this->conversation["slug"], "?removeMember=$memberId&token={$_SESSION["token"]}") . "' class='d' onclick='Conversation.removeMember(\"$memberId\");return false'>$name</a>, ";
 				
 			// Otherwise, plain text will do.
 			else $html .= "$name, ";
@@ -1587,7 +1577,7 @@ function updateLastAction()
 	global $language;
 	$this->eso->updateLastAction("{$language["Viewing"]} " . (($this->conversation["private"] or $this->conversation["postCount"] == 0)
 		? $language["a private conversation"]
-		: "<a href='" . makeLink(conversationLink($this->conversation["id"], $this->conversation["slug"])) . "'>{$this->conversation["title"]}</a>"));
+		: "<a href='" . makeLink($this->conversation["id"], $this->conversation["slug"]) . "'>{$this->conversation["title"]}</a>"));
 }
 
 // To edit tags, user must be: conversation starter or >=moderator

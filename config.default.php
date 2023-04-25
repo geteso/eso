@@ -102,7 +102,7 @@ $defaultConfig = array(
 
 // URL settings.
 "useFriendlyURLs" => true, // ex. example.com/index.php/conversation/1
-"usePrettyURLs" => false, // ex. example.com/conversation/1-welcome-to-simon-s-test-forum
+"usePrettyURLs" => false, // ex. example.com/conversation/1/welcome-to-simon-s-test-forum
 "useModRewrite" => true, // ex. example.com/conversation/1 (requires mod_rewrite and a .htaccess file!)
 
 // Search view settings.

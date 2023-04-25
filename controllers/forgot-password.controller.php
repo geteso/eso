@@ -35,8 +35,14 @@ function init()
 {
 	global $language, $messages, $config;
 
-	// If the user is logged in, kick them out.
-	if ($this->eso->user) redirect("");
+	// If we're already logged in, go to 'My settings'.
+	if ($this->eso->user) redirect("settings");
+	
+	// If email sending is disabled, kick them out.
+	elseif (empty($config["sendMail"])) {
+		$this->eso->message("sendEmailDisabled");
+		redirect("");
+	}
 	
 	// Set the title.
 	$this->title = $language["Forgot your password"];

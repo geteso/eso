@@ -77,7 +77,7 @@ if (!file_exists("sitemap.xml") or filemtime("sitemap.xml") < time() - $config["
 			// Create a <url> tag for each conversation in the result set.
 			while (list($conversationId, $slug, $postsPerDay, $lastUpdated, $posts) = mysqli_fetch_row($r)) {
 				
-				$urlset .= "<url><loc>{$config["baseURL"]}" . makeLink(conversationLink($conversationId, $slug)) . "</loc><lastmod>" . gmdate("Y-m-d\TH:i:s+00:00", $lastUpdated) . "</lastmod><changefreq>";
+				$urlset .= "<url><loc>{$config["baseURL"]}" . makeLink($conversationId, $slug) . "</loc><lastmod>" . gmdate("Y-m-d\TH:i:s+00:00", $lastUpdated) . "</lastmod><changefreq>";
 				
 				// How often should we tell them to check for updates?
 				if ($postsPerDay < 0.006) $urlset .= "yearly";

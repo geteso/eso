@@ -97,8 +97,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 /* Info and title (left part) */
 #cInfo:not(.text) {border-style:none; border-width:1px}
 #cInfo .editable {border-style:dashed; border-width:1px; border-color:#bbb}
-#cInfo .editable:hover {border-style:dashed; border-width:1px; border-color:#777}
-#cInfo .editable:focus {border-style:solid; border-width:1px; border-color:#777; box-shadow:inset 0 1px 3px #ccc}
+#cInfo .editable:focus {background:#fff; border-style:solid; border-width:1px; border-color:#777; box-shadow:inset 0 1px 3px #ccc}
 #cTags a {background:#e4e4e4; color:#000}
 #cTags a:hover {background-color:#ccc; text-decoration:none}
 #cTags a:active {background-color:#888}
@@ -181,7 +180,6 @@ blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
 /* Inputs, buttons, and other form elements */
 input.text, textarea {background:#fff; border:1px solid #bbb; box-shadow:inset 0 1px 3px #ccc}
 input.text:focus, textarea:focus {border-color:#777}
-#cInfo .editable:focus {background:#fff}
 input::placeholder {color:#aaa}
 .placeholder {color:#aaa}
 fieldset {border:1px solid #ccc}

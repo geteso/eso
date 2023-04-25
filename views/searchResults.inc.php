@@ -41,13 +41,16 @@ function columnStar(&$search,$conversation)
 // Returns the HTML for the contents of a cell in the avatar column.
 function columnAvatar(&$search,$conversation)
 {
-    return "<a href='".makeLink(conversationLink($conversation["id"], $conversation["slug"]))."' style='margin:0' data-instant><img src='".$search->eso->getAvatar($conversation["startMemberId"],$conversation["avatarFormat"],"thumb")."' alt='' class='thumb'/></a>";
+	global $config;
+
+	$slug = !empty($config["usePrettyURLs"]) ? $conversation["slug"] : false;
+    return "<a href='".makeLink($conversation["id"], $slug)."' style='margin:0' data-instant><img src='".$search->eso->getAvatar($conversation["startMemberId"],$conversation["avatarFormat"],"thumb")."' alt='' class='thumb'/></a>";
 }
 
 // Returns the HTML for the contents of a cell in the conversation column: labels, title, and tags.
 function columnConversation(&$search,$conversation)
 {
-    global $language;
+    global $language, $config;
     
     // $conversation["labels"] contains comma-separated values corresponding to each label in the $eso->labels array: 0 = label does not apply, 1 = label does apply.  Read this variable and output applied labels.
     $labels=explode(",",$conversation["labels"]);$i=0;$labelsHtml="";$html="";
@@ -56,11 +59,13 @@ function columnConversation(&$search,$conversation)
         $i++;
     }
     if($labelsHtml)$html.="<span class='labels'>$labelsHtml</span>";
+
+	$slug = !empty($config["usePrettyURLs"]) ? $conversation["slug"] : false;
     
     // Output the conversation title.
     $html.="<strong";
-    if($search->eso->user and !$conversation["unread"])$html.=" class='read'";
-    $html.="><a href='".makeLink(conversationLink($conversation["id"], $conversation["slug"]))."' data-instant>".highlight($conversation["title"],$_SESSION["highlight"])."</a></strong><br/>";
+    if ($search->eso->user and !$conversation["unread"]) $html.=" class='read'";
+    $html.="><a href='".makeLink($conversation["id"], $slug)."' data-instant>".highlight($conversation["title"],$_SESSION["highlight"])."</a></strong><br/>";
     
     // If the conversation is unread, show a "jump to unread" link.
     // if ($search->eso->user["name"] and $conversation["unread"]) $html .= "<small id='jumplink'><a href='" . makeLink($conversation["id"], $conversation["slug"], "?start=unread") . "'>{$language["Jump to unread"]}</a></small>";
@@ -69,8 +74,8 @@ function columnConversation(&$search,$conversation)
     $html .= "<small class='tags'>{$conversation["tags"]}</small>";
 	
     // Jump to last/unread link, depending on the user.
-    if ($search->eso->user["name"] and $conversation["unread"]) $html .= "<small id='unreadPost'><a href='" . makeLink(conversationLink($conversation["id"], $conversation["slug"]), "?start=unread") . "'>{$language["Jump to unread"]}</a></small>";
-    else $html .= "<small id='lastPost'><a href='" . makeLink(conversationLink($conversation["id"], $conversation["slug"]), "?start=last") . "'>{$language["Jump to last"]}</a></small>";
+    if ($search->eso->user["name"] and $conversation["unread"]) $html .= "<small id='unreadPost'><a href='" . makeLink($conversation["id"], $conversation["slug"], "?start=unread") . "'>{$language["Jump to unread"]}</a></small>";
+    else $html .= "<small id='lastPost'><a href='" . makeLink($conversation["id"], $slug, "?start=last") . "'>{$language["Jump to last"]}</a></small>";
     
     $search->callHook("getConversationColumn", array(&$html, $conversation));
     
