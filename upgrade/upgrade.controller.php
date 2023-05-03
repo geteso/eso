@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the eso project, a derivative of esoTalk.
+ * This file is part of the esoBB project, a derivative of esoTalk.
  * It has been modified by several contributors.  (contact@geteso.org)
- * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * Copyright (C) 2023 esoTalk, esoBB.  <https://geteso.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -151,7 +151,7 @@ function query($query, $fatal = true)
 function fatalError($message)
 {
 	$messageTitle = "Uh oh! It's a fatal error...";
-	$messageBody = "<p>Your forum has encountered a nasty error which is making it impossible to upgrade your eso installation. But don't feel down - <strong>here are a few things you can try</strong>:</p><ul>
+	$messageBody = "<p>Your forum has encountered a nasty error which is making it impossible to upgrade your esoBB installation. But don't feel down - <strong>here are a few things you can try</strong>:</p><ul>
 	<li><strong><a href=''>Try again</a></strong>. Everyone makes mistakes - maybe the computer made one this time!</li>
 	<li><strong>Get help.</strong> Go on the <a href='https://forum.geteso.org' title='Don&#039;t worry, we won&#039;t bite!'>esoBB support forum</a> and <a href='https://forum.geteso.org/search/tag:upgrade'>search</a> to see if anyone else is having the same problem as you are. If not, start a new conversation about your problem, including the error details below.</li>
 	<li>Try hitting the computer - that sometimes works for me.</li>

@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the eso project, a derivative of esoTalk.
+ * This file is part of the esoBB project, a derivative of esoTalk.
  * It has been modified by several contributors.  (contact@geteso.org)
- * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * Copyright (C) 2023 esoTalk, esoBB.  <https://geteso.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ if ($this->eso->user["admin"]):?>
 <ul class='form membersForm'>
 
 <li><label class='checkbox'><?php echo $language["Allow registration"]; ?></label>
-<div><input type='checkbox' class='checkbox' name='registrationOpen' value='1'<?php echo !empty($config["registrationOpen"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='registrationOpen' value='1'<?php echo !empty($config["registrationOpen"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label><?php echo $language["Require approval"]; ?><br/></label>
 <div><select name='registrationRequireApproval'><?php

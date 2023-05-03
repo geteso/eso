@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the eso project, a derivative of esoTalk.
+ * This file is part of the esoBB project, a derivative of esoTalk.
  * It has been modified by several contributors.  (contact@geteso.org)
- * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * Copyright (C) 2023 esoTalk, esoBB.  <https://geteso.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,11 +58,6 @@ if (!empty($config["changeAvatar"])): ?>
 <input id='upl-ava' name='avatarUpload' type='file' class='text' size='20' onchange='document.getElementById("upload").checked="true"'/>
 </li>
 
-<?php // Otherwise if avatar uploading is disabled, show a message.
-else: ?>
-<?php echo $this->eso->htmlMessage("avatarDisabled"); ?>
-<?php endif; ?>
-
 <?php // Get an avatar from URL.
 if(ini_get("allow_url_fopen")):?>
 <li>
@@ -86,6 +81,11 @@ if(ini_get("allow_url_fopen")):?>
 
 </ul>
 </form>
+
+<?php // Otherwise if avatar uploading is disabled, show a message.
+else: ?>
+<?php echo $this->eso->htmlMessage("avatarDisabled"); ?>
+<?php endif; ?>
 
 </div>
 </div></div>

@@ -2,12 +2,16 @@
 #areYouHuman .form li {margin-bottom:0}
 #areYouHuman input {width:96%}
 #areYouHuman label {width:auto !important}
+@media only screen and (max-width:870px) {
+#areYouHuman .form div {padding-top:5px}
+}
 
 /* Captcha message */
 #captcha-message {display:none}
-
-/* Mobile support */
-@media only screen and (max-width:710px) {
-#areYouHuman .form label {text-align:left}
-#areYouHuman .form div {clear:left; padding-top:5px}
+@media only screen and (max-width:1000px) {
+#captcha-message {clear:left; margin-left:13em}
+#captcha-message .msg {margin:0}
+}
+@media only screen and (max-width:870px) {
+#captcha-message {margin:0}
 }

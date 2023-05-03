@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the eso project, a derivative of esoTalk.
+ * This file is part of the esoBB project, a derivative of esoTalk.
  * It has been modified by several contributors.  (contact@geteso.org)
- * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * Copyright (C) 2023 esoTalk, esoBB.  <https://geteso.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,19 +34,19 @@ if (!defined("IN_ESO")) exit;
 <ul class='form settingsForm'>
 
 <li><label><?php echo $language["Forum title"]; ?></label>
-<div><input type='text' class='text' name='forumTitle' value='<?php echo $config["forumTitle"]; ?>'/></div></li>
+<input type='text' class='text' name='forumTitle' value='<?php echo $config["forumTitle"]; ?>'/></li>
 
 <li><label><?php echo $language["Forum description"]; ?></label>
-<div><input type='text' class='text' name='forumDescription' value='<?php echo $config["forumDescription"]; ?>'/></div></li>
+<input type='text' class='text' name='forumDescription' value='<?php echo $config["forumDescription"]; ?>'/></li>
 
 <li><label class='checkbox'><?php echo $language["Use friendly URLs"]; ?></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='useFriendlyURLs' value='1'<?php echo !empty($config["useFriendlyURLs"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='useFriendlyURLs' value='1'<?php echo !empty($config["useFriendlyURLs"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label class='checkbox'><?php echo $language["Show forum description"]; ?></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='showDescription' value='1'<?php echo !empty($config["showDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='showDescription' value='1'<?php echo !empty($config["showDescription"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label class='checkbox'><?php echo $language["Use forum description"]; ?></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='metaDescription' value='1'<?php echo !empty($config["metaDescription"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='metaDescription' value='1'<?php echo !empty($config["metaDescription"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label></label> <span class='button'><input type='submit' name='saveSettings' value='<?php echo $language["Save changes"]; ?>'/></span></li>
 
@@ -66,28 +66,28 @@ if ($this->eso->user["memberId"] == $config["rootAdmin"]): ?>
 <ul class='form settingsForm advanced'>
 
 <li><label class='checkbox'><?php echo $language["gzipOutput"]; ?><!-- <br/><small><?php echo $language["gzipOutputInfo"]; ?> --></small></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='gzipOutput' value='1'<?php echo !empty($config["gzipOutput"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='gzipOutput' value='1'<?php echo !empty($config["gzipOutput"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label class='checkbox'><?php echo $language["httpsSetting"]; ?><br/><small><?php echo $language["httpsInfo"]; ?></small></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='https' value='1'<?php echo !empty($config["https"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='https' value='1'<?php echo !empty($config["https"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label class='checkbox'><?php echo $language["uploadPackages"]; ?><br/><small><?php echo $language["uploadPackagesInfo"]; ?></small></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='uploadPackages' value='1'<?php echo !empty($config["uploadPackages"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='uploadPackages' value='1'<?php echo !empty($config["uploadPackages"]) ? " checked='checked'" : ""; ?>/></li>
 
 <hr/>
 
 <li><label class='checkbox'><?php echo $language["changeUsername"]; ?><br/><small><?php echo $language["changeUsernameInfo"]; ?></small></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='changeUsername' value='1'<?php echo !empty($config["changeUsername"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='changeUsername' value='1'<?php echo !empty($config["changeUsername"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label class='checkbox'><?php echo $language["nonAsciiCharacters"]; ?><br/><small><?php echo $language["nonAsciiInfo"]; ?></small></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='nonAsciiCharacters' value='1'<?php echo !empty($config["nonAsciiCharacters"]) ? " checked='checked'" : ""; ?>/></div></li>
+<input type='checkbox' class='checkbox' name='nonAsciiCharacters' value='1'<?php echo !empty($config["nonAsciiCharacters"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label><?php echo $language["loginsPerMinute"]; ?></label>
 <div><input type='text' class='text' name='loginsPerMinute' value='<?php echo $config["loginsPerMinute"]; ?>'/>
 <br/><small><?php echo $language["loginsMinuteInfo"]; ?></small></div></li>
 
 <li><label><?php echo $language["minPasswordLength"]; ?></label>
-<div><input type='text' class='text' name='minPasswordLength' value='<?php echo $config["minPasswordLength"]; ?>'/></div></li>
+<input type='text' class='text' name='minPasswordLength' value='<?php echo $config["minPasswordLength"]; ?>'/></li>
 
 <hr/>
 
@@ -108,12 +108,10 @@ if ($this->eso->user["memberId"] == $config["rootAdmin"]): ?>
 <br/><small><?php echo $language["numberMoreResultsInfo"]; ?></small></div></li>
 
 <li><label><?php echo $language["numberTagsInTagCloud"]; ?></label>
-<div><input type='text' class='text' name='numberOfTagsInTagCloud' value='<?php echo $config["numberOfTagsInTagCloud"]; ?>'/>
-</div></li>
+<input type='text' class='text' name='numberOfTagsInTagCloud' value='<?php echo $config["numberOfTagsInTagCloud"]; ?>'/></li>
 
 <li><label class='checkbox'><?php echo $language["showAvatarThumbnails"]; ?></label>
-<div class='parentBox'><input type='checkbox' class='checkbox' name='showAvatarThumbnails' value='1'<?php echo !empty($config["showAvatarThumbnails"]) ? " checked='checked'" : ""; ?>/>
-</div></li>
+<input type='checkbox' class='checkbox' name='showAvatarThumbnails' value='1'<?php echo !empty($config["showAvatarThumbnails"]) ? " checked='checked'" : ""; ?>/></li>
 
 <li><label><?php echo $language["updateCurrentResultsInterval"]; ?></label>
 <div><input type='text' class='text' name='updateCurrentResultsInterval' value='<?php echo $config["updateCurrentResultsInterval"]; ?>'/>

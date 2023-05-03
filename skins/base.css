@@ -51,7 +51,7 @@ h1#hasForumDescription #forumTitle {font-size:20px}
 #bar strong {font-size:120%}
 #bar form {font-size:90%; margin-top:-1px; margin-bottom:-2px}
 #bar .text {width:8em}
-#bar input.text {height:14px; border-radius:0; -webkit-appearance:none}
+#bar input.text {height:14px; -webkit-appearance:none}
 #bar img {vertical-align:-4px}
 #bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
 #displayAvatars select {height:20px; margin-left:3px}
@@ -246,7 +246,13 @@ blockquote p {margin-bottom:.75em}
 /* Join this forum */
 #join input.text {font-size:140%}
 #join .msg {padding:4px 10px}
-#accountInformation input.text {max-width:20em; width:96%; width:-webkit-fill-available; max-width:20em}
+@media only screen and (max-width:1000px) {
+#name-message, #email-message, #password-message, #confirm-message {clear:left; margin-left:13em}
+#name-message .msg, #email-message .msg, #password-message .msg, #confirm-message .msg {margin:0}
+}
+@media only screen and (max-width:870px) {
+#name-message, #email-message, #password-message, #confirm-message {margin:0}
+}
 
 /* My settings */
 #settings .post {margin:0}
@@ -254,11 +260,13 @@ blockquote p {margin-bottom:.75em}
 #preview .body {overflow:visible}
 form#settingsAvatar {padding-bottom:8px}
 #settingsAvatar label {width:20em}
-#settingsAvatar li:last-child {margin-top:-20px}
+#settingsAvatar li:last-child {margin-top:-28px}
 #settingsPassword label {width:12em}
 #settingsOther label {width:32em}
-#settingsOther input.checkbox, #settingsOther input.radio {margin:3px 5px 5px 0}
 .hidden#settingsOther, .hidden#settingsPassword {margin-bottom:5px; padding-bottom:0}
+@media only screen and (max-width:870px) {
+#settingsAvatar li:last-child {margin-top:0}
+}
 /* Color palette */
 #palette {margin:-10px 0 12px; margin-left:-8px; margin-right:-10px}
 #palette table {position:relative; width:100%} 
@@ -277,43 +285,48 @@ form#settingsAvatar {padding-bottom:8px}
 #admin .menu li.active a {margin-right:-1px; font-weight:bold}
 #admin .inner {min-height:230px; padding:15px 25px 1px 25px; margin-bottom:15px}
 #admin .stats label {font-weight:normal; text-align:left; width:30%}
-#admin .stats div {float:none; font-size:115%; margin-left:35%}
+#admin .stats div {float:none; font-size:115%; margin-left:35%; clear:none}
 #admin .stats li {padding-left:10px}
-#admin .settingsForm input.text, #admin .settingsForm select {font-size:140%}
 #admin .settingsForm hr {display:block; margin:10px -15px}
-#admin .settingsForm.advanced input.text, #admin .settingsForm.advanced select {font-size:100%}
-#admin .settingsForm.advanced div > small {max-width:20rem; display:block; padding:3px 0 0}
 #admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:20em}
-#admin input.checkbox {margin:3px 5px 5px 0}
 #admin .clear {display:none}
+.form.settingsForm input.text {font-size:140%}
+.form.settingsForm.advanced input.text {font-size:100%}
 .form.logoForm img {height:32px; padding:5px}
 .form.iconForm img {width:128px; height:128px}
-.form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-20px}
+.form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:-28px}
+@media only screen and (max-width:870px) {
+.form.logoForm li:last-child, .form.iconForm li:last-child {margin-top:0}
+}
 
 /* Plugins */
 #plugins .controls {float:right}
 #plugins .controls a, #plugins .toggle {font-size:90%; width:4.5em; text-align:center; display:block; float:left; padding:2px 0}
-#plugins .controls a, #plugins small, #plugins strong {margin-left:10px}
-#plugins ul {list-style:none; margin:0; padding:0}
-#plugins li {display:block; padding:5px}
+#plugins .controls a, #plugins li > small, #plugins li > strong {margin-left:10px}
+#plugins li > small {line-height:1.5}
+#plugins > ul {list-style:none; margin:0; padding:0}
+#plugins > ul > li {display:block; padding:5px}
 #plugins li strong {font-weight:normal; font-size:120%}
 #plugins li.enabled strong {font-weight:bold}
 #plugins li form {margin:15px 5px}
 #plugins li .settings {padding:5px 20px; margin-top:5px}
-#plugins li form label {margin-bottom:10px; width:25em; width:50%}
-#plugins li input.checkbox {margin:2px 7px 2px 0}
+#plugins li form label {width:20em; width:40%}
 #plugins li li {border:0; padding:0}
 #addPlugin .warning {margin:0}
 
 /* Skins */
 #skins ul {list-style:none; margin:0; padding:0}
-#skins li {float:left; width:297px}
+#skins li {float:left; width:50%}
 #skins a {display:block; padding:10px}
 #skins strong {font-weight:normal; font-size:120%}
 #skins li.enabled strong {font-weight:bold}
 #skins small {margin-left:10px}
-#skins .preview {display:block; font-size:20px; height:153px; margin-bottom:5px; overflow:hidden; text-align:center; width:275px}
+#skins .preview {display:block; font-size:20px; margin-bottom:5px; overflow:hidden; text-align:center}
 #skins .preview span {display:block; margin-top:65px}
+#skins .preview img {display:block; width:100%}
+@media only screen and (max-width:400px) {
+#skins li {width:100%}
+}
 
 /* Profile */
 .profile .body {overflow:visible; padding:5px 10px}
@@ -353,14 +366,28 @@ fieldset > .warning:last-child {margin:0}
 /* Structured forms */
 .form label {float:left; line-height:1.5; margin:0 1em 1px 0; text-align:right; width:12em}
 .form div label {float:none; margin:0; text-align:left; width:auto}
+.form:not(.stats) div small {width:20rem; display:block; padding:3px 0 0}
 .form label.long {text-align:left; width:100%}
 .form label.radio {cursor:pointer; text-align:left}
 .form input.text, .form select {float:left; margin:0; width:20em}
+.form input.checkbox, .form input.radio {margin:3px 5px 5px 0}
 .form div {float:left; line-height:1.5}
 .form div input.text, .form div select {float:none}
 .form {margin:0; padding:0}
 .form li {display:block; list-style:none; margin-bottom:4px; overflow:hidden}
 .form .msg {float:left; font-size:95%; margin:0 0 0 10px; padding:2px 10px}
+@media only screen and (max-width:870px) {
+.form:not(.stats) label {width:auto!important; text-align:left}
+.form label:empty {display:none}
+.form label.checkbox {margin:0 0 1px 20px}
+.form input.checkbox {display:block; position:absolute}
+.form:not(.stats) div small {width:100%}
+.form select, .form:not(.stats) div, .form input.text {clear:left}
+.form .msg {margin:0}
+}
+@media only screen and (max-width:400px) {
+.form select, .form div, .form input.text {width:100%; width:-webkit-fill-available}
+}
 
 /* Buttons */
 .button, .button input {cursor:pointer; display:-moz-inline-box; display:inline-block; height:20.3px; padding:0; text-align:center; font-weight:normal}
@@ -419,24 +446,6 @@ hr {display:block}
 ul.fl, ul.fr {position:absolute}
 ul.fl {z-index:1}
 ul.fr {z-index:0; right:25px}
-#name-message, #email-message, #password-message, #confirm-message {clear:left; padding-left:146px}
-}
-
-@media only screen and (max-width:870px) {
-.form.settingsForm li {margin-bottom:10px}
-.form.settingsForm li label {text-align:left; width:auto}
-.form.settingsForm li div {clear:left}
-.form.settingsForm li .checkbox {margin-left:20px}
-.form.settingsForm li:last-child {width:20em}
-.form.settingsForm li:last-child label {width:20em!important}
-#admin div.parentBox {position:absolute} 
-#admin .logoForm label, #admin .iconForm label, #admin .settingsForm label {width:auto}
-.form.logoForm li, .form.iconForm li {margin-bottom:10px}
-.form.logoForm li label, .form.iconForm li label {text-align:left}
-.form.logoForm li input, .form.iconForm li input {clear:left; max-width:20em}
-.form.logoForm li:last-child, .form.iconForm li:last-child {width:20em; margin-top:0}
-.form.logoForm li:last-child label, .form.iconForm li:last-child label {width:20em!important}
-.form.logoForm li div, .form.iconForm li div {clear:left}
 }
 
 @media only screen and (max-width:800px) {
@@ -445,23 +454,9 @@ ul.fr {z-index:0; right:25px}
 }
 
 @media only screen and (max-width:735px) {
-#settingsOtherForm label {text-align:left; width:auto}
-#settingsOtherForm select {max-width:20em; width:96%; clear:left}
-#settingsOtherForm li {margin-bottom:5px}
-select#avatarAlignment {margin-bottom:10px}
-#settingsOtherForm .checkbox {margin-left:20px; width:auto}
-#settingsOtherForm input {position:absolute; left:41px}
 .c td.conversation {width:75%}
 th.author, th.lastPost {display:none}
 td.author, td.lastPost {display:none}
-
-/* Change your avatar */
-#lbl-avt {display:none}
-#upl-ava, #upl-url {clear:left; max-width:20em; width:96%}
-#settingsAvatar li:last-child {margin-top:0}
-#settingsAvatar label.radio {width:auto}
-/* #settingsAvatar .button {margin-left:-1px} */
-#appearance .form li {margin-bottom:10px}
 }
 
 @media only screen and (max-width:710px) {
@@ -469,14 +464,6 @@ div#copyright {margin-top:0}
 ul.fl, ul.fr {white-space:nowrap}
 #bar .fr {display:none}
 #ftr .bar {display:block}
-#accountInformation .form div:not(.msg) {padding-left:0}
-#accountInformation .msg {margin-left:0}
-#accountInformation .form label {text-align:left}
-#accountInformation .form input {clear:left}
-}
-
-@media only screen and (max-width:670px) {
-.form input[name="installPlugin"] {width:15em}
 }
 
 @media only screen and (max-width:620px) {
@@ -494,7 +481,6 @@ ul.fl, ul.fr {white-space:nowrap}
 #admin .menu li a {display:block; margin:0}
 #admin .menu li.active a {margin-right:0; border-left:unset!important; border-bottom:unset!important}
 #admin .inner {min-height:unset; padding-top:10px; border-left:0}
-.form input[name="installPlugin"] {width:inherit}
 }
 
 @media only screen and (max-width:570px) {
@@ -541,28 +527,6 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 #joinLink .button {margin-right:-20px}
 }
 
-@media only screen and (max-width:490px) {
-#settingsPassword .form li, #settingsUser .form li {margin-bottom:10px}
-#settingsPasswordForm label, #settingsUserForm label {text-align:left; width:auto}
-#settingsPasswordForm input.text, #settingsUserForm input.text {clear:left; max-width:20em}
-#lbl-pass {display:none}
-fieldset#forgot-pass {padding:0 15px 10px}
-#forgot-password .form label {text-align:right; width:auto}
-#forgot-password input#email {clear:left; max-width:20em; width:96%}
-label#lbl-fgps {width:12em; display:none}
-#forgot-password .button {margin-top:6px; margin-bottom:6px}
-#forgot-pass-reset .form li {margin-bottom:10px}
-#forgot-pass-reset .form label {text-align:right; width:auto}
-#forgot-pass-reset input {clear:left; max-width:20em; width:96%}
-label#lbl-fgcf {width:12em; display:none}
-#forgot-pass-reset .button {margin-top:2px; margin-left:-1px}
-#addPlugin ul.form li:first-child, #addSkin ul.form li:first-child, #addLanguage ul.form li:first-child {margin-bottom:10px}
-#addPlugin ul.form li:first-child label, #addSkin ul.form li:first-child label, #addLanguage ul.form li:first-child label {text-align:left}
-#addPlugin ul.form li:first-child input, #addSkin ul.form li:first-child input, #addLanguage ul.form li:first-child input {clear:left}
-#addPlugin ul.form li:last-child label, #addSkin ul.form li:last-child label, #addLanguage ul.form li:last-child label {display:none}
-#addPlugin .warning, #addSkin .warning, #addLanguage .warning {margin:0}
-}
-
 @media only screen and (max-width:420px) {
 #addMember {width:5em}
 }
@@ -573,11 +537,9 @@ label#lbl-fgcf {width:12em; display:none}
 
 @media only screen and (max-width:395px) {
 #membersOnline .hdr span {display:none}
-#basicSettings .form.settingsForm li:nth-child(-n+3) div {width:100%}
-#admin .settingsForm input.text, #admin .settingsForm select {width:-webkit-fill-available}
 #ftr p#stats {float:none}
 }
-  
+
 @media only screen and (max-width:340px) {
 #discardDraft {clear:left; margin:5px 0 0 0}
 }

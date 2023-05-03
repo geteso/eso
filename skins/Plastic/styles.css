@@ -25,7 +25,7 @@ small a, dt a {color:#55f}
 #bar input.text, #displayAvatars select {box-shadow:inset 0 1px 3px #ccc, 0 1px 0 #ffffff}
 #bar #login .button, #bar #logout .button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d}
 #bar #login .button input, #bar #logout .button input {color:#fff; text-shadow:#046b9e 0 -1px}
-#displayAvatars select {background:#fff; border:1px solid #bbb; border-radius:0}
+#displayAvatars select {color:#000; background:#fff; border:1px solid #bbb; border-radius:0}
 /* Dividers */
 #bar li:not(li:first-child) > .vl {margin-left:4px}
 #bar li:not(li:last-child) > .vr {margin-right:4px}

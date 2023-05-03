@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the eso project, a derivative of esoTalk.
+ * This file is part of the esoBB project, a derivative of esoTalk.
  * It has been modified by several contributors.  (contact@geteso.org)
- * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * Copyright (C) 2023 esoTalk, esoBB.  <https://geteso.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -504,7 +504,7 @@ $messages = array(
 "setNewPassword" => array("class" => "info", "message" => "Alright! Now, what do you want your new password to be?"),
 "skinAdded" => array("class" => "success", "message" => "The skin was successfully added!"),
 "suspended" => array("class" => "warning", "message" => "Ouch! A forum moderator has <strong>suspended</strong> your account. It sucks, but until the suspension is lifted you won't be able to do much around here. Hey, screw them!"),
-"updatesAvailable" => array("class" => "info", "message" => "A new version of eso (<strong>%s</strong>) is available for download. You have version {$versions["eso"]}. <strong><a href='https://geteso.org/download'>Get it now</a></strong>!"),
+"updatesAvailable" => array("class" => "info", "message" => "A new version of esoBB (<strong>%s</strong>) is available for download. You have version {$versions["eso"]}. <strong><a href='https://geteso.org/download'>Get it now</a></strong>!"),
 "verifyEmail" => array("class" => "success", "message" => "Before you can start using your newly-created account, you'll need to verify your email address. Within the next minute or two you should receive an email from us containing a link to activate your account. <strong>Check your spam folder</strong> if you don't receive this email shortly!"),
 "viewMore" => array("class" => "info", "message" => "Your search found more than {$config["results"]} conversations. <a href='%s' onclick='Search.viewMore();return false'>View more</a>"),
 "waitForApproval" => array("class" => "success", "message" => "Before you can start using your newly-created account, it'll need to be manually approved. Within the next couple of hours or so your account should be able to post."),

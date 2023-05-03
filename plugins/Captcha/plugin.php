@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the eso project, a derivative of esoTalk.
+ * This file is part of the esoBB project, a derivative of esoTalk.
  * It has been modified by several contributors.  (contact@geteso.org)
- * Copyright (C) 2022 geteso.org.  <https://geteso.org>
+ * Copyright (C) 2023 esoTalk, esoBB.  <https://geteso.org>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ function settings()
 
 	// Generate settings panel HTML.
 	$settingsHTML = "<ul class='form'>
-	<li><label>{$language["Sample captcha image"]}<br/><small><a href='javascript:document.getElementById(\"captchaImg\").src=document.getElementById(\"captchaImg\").src.split(\"?\")[0]+\"?\"+(new Date()).getTime();void(0)'>{$language["Show another one"]}</a></small></label> <img src='plugins/Captcha/captchaImg.php?" . time() . "' id='captchaImg' alt='Captcha'/></li>
+	<li><label>{$language["Sample captcha image"]}<br/><small><a href='javascript:document.getElementById(\"captchaImg\").src=document.getElementById(\"captchaImg\").src.split(\"?\")[0]+\"?\"+(new Date()).getTime();void(0)'>{$language["Show another one"]}</a></small></label> <div><img src='plugins/Captcha/captchaImg.php?" . time() . "' id='captchaImg' alt='Captcha'/></div></li>
 	<li><label>{$language["Number of characters"]}</label> <input name='Captcha[numberOfCharacters]' type='text' class='text' value='{$config["Captcha"]["numberOfCharacters"]}'/></li>
 	<li><label></label> " . $this->eso->skin->button(array("value" => $language["Save changes"], "name" => "saveSettings")) . "</li>
 	</ul>";

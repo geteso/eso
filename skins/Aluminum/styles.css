@@ -21,6 +21,7 @@ small a, dt a {color:#55f}
 #hdr h1 a:hover {text-decoration:none}
 #hdr h1 a:hover span {text-decoration:underline}
 #hdr h1 img {filter:drop-shadow(#fff 0 1px)}
+#hdr #search {box-shadow:0 1px 0 #ddd; border-bottom-right-radius:5px}
 
 /* Forum description */
 #forumDescription {color:#555}
@@ -28,8 +29,8 @@ small a, dt a {color:#55f}
 /* User bar */
 #bar {background:linear-gradient(#e4e4e4, #a7a7a7); border-bottom:1px solid gray; border-top:1px solid gray; box-shadow:0 0 5px 0 #ababab; text-shadow:#ddd 0 1px}
 #bar strong a {color:#000}
-#bar input.text, #hdr #reset {border-color:#555; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -webkit-box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -moz-box-shadow:0 1px 1px #c6c6c6}
-#displayAvatars select {border-radius:0; border-color:#555; box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -webkit-box-shadow:0 1px 1px rgba(255, 255, 255, 0.5); -moz-box-shadow:0 1px 1px #c6c6c6; background:#fff}
+#bar input.text, #displayAvatars select {border-color:#555; box-shadow:0 1px 0 #ccc, inset 0 1px 3px #aaa}
+#displayAvatars select {color:#000; background:#fff; border-radius:0}
 /* Dividers */
 #bar li:not(li:first-child) > .vl {margin-left:4px}
 #bar li:not(li:last-child) > .vr {margin-right:4px}
@@ -44,7 +45,7 @@ small a, dt a {color:#55f}
 #wrapper {border-top:0; border-bottom:0; border-left:1px solid; border-right:1px solid; border-image:linear-gradient(to bottom, gray, #eee, #fff); border-image-slice:1; background:#fff}
 
 /* Tags & gambits */
-#tagArea {border:1px dashed #bbb; border-image:linear-gradient(to top, #ccc, #aaa); border-image-slice:1}
+#tagArea {border:1px dashed #bbb; border-image:linear-gradient(to top, #ccc, #aaa); border-image-slice:1; text-shadow:#e6eaef 0 1px}
 #tags a {color:#777}
 #gambits a {color:#00f}
 
@@ -56,6 +57,11 @@ small a, dt a {color:#55f}
 #reset {color:#bbb}
 #searchText:focus + .fr #reset {color:#555}
 #reset:hover, #searchText:focus ~ #reset:hover {text-decoration:none; color:#000}
+/* Pretty box shadows */
+#body #searchText {box-shadow:0 1px 0 #eee, inset 0 1px 3px #aaa}
+#body #submit, #body #new {box-shadow:0 1px 0 #eee}
+#body #submit.button:hover, #body #new.button:hover {box-shadow:0 1px 0 #eee, inset 0px 0px 15px 2px rgba(0, 0, 0, .12)}
+#body #submit.button:active, #body #new.button:active {box-shadow:0 1px 0 #eee, inset 0px 0px 15px 2px rgba(0, 0, 0, .5)}
 
 /* Messages */
 #messages .msg {border-bottom:1px solid #888}
@@ -77,7 +83,7 @@ a.star0:active, a.star1:active {color:#68a2ff}
 tr.starred td {background:#d7e3f4; border-color:#5f8dd3; border-top:1px solid #5f8dd3}
 
 /* Conversation labels */
-.label {border-radius:2px; -webkit-border-radius:2px; -moz-border-radius:2px}
+.label {border-radius:2px; -webkit-border-radius:2px; -moz-border-radius:2px; text-shadow:none}
 .locked {background:#999; color:#fff}
 .private {background:#7b00ad; color:#fff}
 #gambits a.privateText {color:#7b00ad}
@@ -106,7 +112,7 @@ tr.starred td {background:#d7e3f4; border-color:#5f8dd3; border-top:1px solid #5
 #searchResults tbody > tr:nth-of-type(even) {background-color:#f4f4f4}
 
 /* Conversation header */
-#cHdr {background:#d6dce5; border:1px solid #bbb; border-image:linear-gradient(to top, #bbb, #aaa); border-image-slice:1}
+#cHdr {background:#d6dce5; border:1px solid #bbb; border-image:linear-gradient(to top, #bbb, #aaa); border-image-slice:1; text-shadow:#e6eaef 0 1px}
 /* Info and title (left part) */
 #cInfo:not(.text) {border-style:none; border-width:1px}
 #cInfo .editable {border-style:dashed; border-width:1px; border-color:#bbb}
@@ -160,9 +166,12 @@ blockquote p:first-child, blockquote p:last-child {margin-bottom:0}
 /* Admin */
 #admin {border-color:#eee; border-image:linear-gradient(180deg, #e0dede, #fff); border-image-slice:1; background:#fff}
 #admin .menu {border-right:1px solid #ccc}
-#admin .menu li.active a {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; color:#000}
+#admin .menu li a {text-decoration:none}
+#admin .menu li.active a, #admin .menu li:not(.active) a:hover {background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; color:#000}
+#admin .menu li:not(.active) a:hover {margin-top:-1px; margin-right:-1px; margin-bottom:-1px; padding-left:14px}
 #admin .inner {border-left:1px solid #ccc}
 #admin .stats li {border-bottom:1px solid #ddd}
+#admin .settingsForm hr {border-style:solid; border-width:1px 0 0; border-color:#ccc}
 .form.logoForm img {border:1px dashed #bbb}
 .form.iconForm img {border:1px solid #ddd}
 
@@ -252,8 +261,8 @@ fieldset.hidden legend a {color:#666}
 #admin {margin-top:0; border-left:0; border-image:none; background:unset}
 #admin .menu {border:1px solid #ccc}
 #admin .menu li a {background-color:#eee; border-top:1px solid #ccc}
+#admin .menu li:not(.active) a:hover {margin:0; padding-left:15px; border-width:1px 0 0}
 #admin .menu li:first-child a, #admin .menu li:first-child a:hover {border:none}
-#admin .inner {border-left:0}
 }
 
 /* Formatting controls */
