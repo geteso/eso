@@ -316,7 +316,7 @@ form#settingsAvatar {padding-bottom:8px}
 
 /* Skins */
 #skins ul {list-style:none; margin:0; padding:0}
-#skins li {float:left; width:50%}
+#skins li {float:left; width:50%; max-width:375px}
 #skins a {display:block; padding:10px}
 #skins strong {font-weight:normal; font-size:120%}
 #skins li.enabled strong {font-weight:bold}
