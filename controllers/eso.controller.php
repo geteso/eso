@@ -115,7 +115,7 @@ function init()
  " . $this->skin->button(array("value" => $language["Log in"], "class" => "buttonSmall")) . "
  </div></form>", 100);
  			if (!empty($config["registrationOpen"])) $this->addToBar("left", "<a href='" . makeLink("join") . "' id='joinLink'><span class='button buttonSmall'><input type='submit' value='{$language["Join us"]}'></span></a>", 200);
- 			if (!empty($config["sendMail"])) $this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
+ 			if (!empty($config["sendEmail"])) $this->addToBar("left", "<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot password"]}'></span></a>", 300);
 		}
 		
 		// If the user IS logged in, we want to display their name and appropriate links.
@@ -323,12 +323,13 @@ function getStatistics()
 	global $config, $language;
 	$result = $this->db->query("SELECT (SELECT COUNT(*) FROM {$config["tablePrefix"]}posts),
 		(SELECT COUNT(*) FROM {$config["tablePrefix"]}conversations),
+		(SELECT COUNT(*) FROM {$config["tablePrefix"]}members),
 		(SELECT COUNT(*) FROM {$config["tablePrefix"]}members WHERE UNIX_TIMESTAMP()-{$config["userOnlineExpire"]}<lastSeen)");
-	list($posts, $conversations, $membersOnline) = $this->db->fetchRow($result);
+	list($posts, $conversations, $membersList, $membersOnline) = $this->db->fetchRow($result);
 	$result = array(
 		"posts" => number_format($posts) . " {$language["posts"]}",
 		"conversations" => number_format($conversations) . " {$language["conversations"]}",
-		"membersOnline" => number_format($membersOnline) . " " . (!empty($config["onlineMembers"]) ? "<a href='" . makeLink("online") . "'>" . ($language[$membersOnline == 1 ? "member online" : "members online"]) . "</a>" : ($language[$membersOnline == 1 ? "member online" : "members online"]))
+		"membersOnline" => (!empty($config["onlineMembers"]) ? number_format($membersOnline) . " " . "<a href='" . makeLink("online") . "'>" . ($language[$membersOnline == 1 ? "member online" : "members online"]) . "</a>" : number_format($membersList) . " " . lcfirst($language[$membersList == 1 ? "Member" : "Member-plural"]))
 	);
 	$this->callHook("getStatistics", array(&$result));
 	

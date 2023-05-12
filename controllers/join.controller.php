@@ -51,7 +51,8 @@ function init()
 		// If the user is requesting that we resend their verification email...
 		if ($_GET["q2"] == "sendVerification") {
 			$memberId = (int)@$_GET["q3"];
-			if (list($email, $name, $password) = $this->eso->db->fetchRow("SELECT email, name, password FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND account='Unvalidated'")) $this->sendVerificationEmail($email, $name, $memberId . $password);
+			$rand = md5(rand());
+			if (list($email, $name) = $this->eso->db->fetchRow("SELECT email, name FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND account='Unvalidated'") and $this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword='$rand' WHERE memberId=$memberId")) $this->sendVerificationEmail($email, $name, $memberId . $rand);
 			$this->eso->message("verifyEmail", false);
 			redirect("");
 		}
@@ -290,10 +291,10 @@ function validateMember($hash)
 	
 	// Split the hash into the member ID and password.
 	$memberId = (int)substr($hash, 0, strlen($hash) - 32);
-	$password = $this->eso->db->escape(substr($hash, -32));
+	$resetPassword = $this->eso->db->escape(substr($hash, -32));
 	
 	// See if there is an unvalidated user with this ID and password hash. If there is, validate them and log them in.
-	if ($name = @$this->eso->db->result($this->eso->db->query("SELECT name FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND password='$password' AND account='Unvalidated'"), 0)) {
+	if ($name = @$this->eso->db->result($this->eso->db->query("SELECT name FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND resetPassword='$resetPassword' AND account='Unvalidated'"), 0) and $password = @$this->eso->db->result($this->eso->db->query("SELECT password FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND resetPassword='$resetPassword' AND account='Unvalidated'"), 0)) {
 		$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET account='Member' WHERE memberId=$memberId");
 		$this->eso->login($name, false, $password);
 		$this->eso->message("accountValidated", false);

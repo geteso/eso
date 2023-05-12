@@ -238,6 +238,7 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 </div>
 <div class='body<?php if($this->editingPost==$post["id"]):?> edit<?php endif;?>'>
 <?php echo $this->editingPost==$post["id"]?$this->getEditArea($post["id"],$this->formatForEditing($post["body"])):$this->displayPost($post["body"]);?>
+<?php $this->callHook("postFooter", array($post)); ?>
 </div>
 </div>
 <?php

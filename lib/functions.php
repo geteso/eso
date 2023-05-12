@@ -393,7 +393,7 @@ function sendEmail($to, $subject, $body)
 	try {
 		$phpmailer = PATH_LIBRARY.'/vendor/class.phpmailer.php';
 		require_once($phpmailer);
-		$mail = new PHPMailer(true);
+		$mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
 		if (isset($eso) and ($return = $eso->callHook("sendEmail", array(&$to, &$subject, &$body), true)) !== null)
 			return $return;

@@ -345,7 +345,7 @@ form#settingsAvatar {padding-bottom:8px}
 /* Footer */
 #ftr {font-size:90%; padding:0 25px 20px; overflow:hidden}
 #ftr ul {margin:0; padding:0; list-style-type:none}
-#ftr ul > li {float:left; margin:0 3px 0 0}
+#ftr ul > li {float:left; margin:0 3px 3px 0}
 #ftr .bar {display:none}
 #ftr p#copyright, #ftr p#stats {margin:0 0 3px 0}
 #ftr p#copyright {display:inline-block}

@@ -39,7 +39,7 @@ function init()
 	if ($this->eso->user) redirect("settings");
 	
 	// If email sending is disabled, kick them out.
-	elseif (empty($config["sendMail"])) {
+	elseif (empty($config["sendEmail"])) {
 		$this->eso->message("sendEmailDisabled");
 		redirect("");
 	}
