@@ -295,7 +295,7 @@ function validateName(&$name)
 	$reservedNames = $config["reservedNames"];
 
 	// Make sure the name isn't a reserved word.
-	if (in_array(strtolower($name), $reservedNames)) return "nameTaken";
+	if (in_array(mb_strtolower($name), $reservedNames)) return "nameTaken";
 
 	// Make sure the name is not too small or large.
 	if (extension_loaded("mbstring")) $length = mb_strlen($name, "UTF-8");
