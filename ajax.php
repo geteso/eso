@@ -31,7 +31,7 @@ require "lib/init.php";
 
 // Set up the action controller.
 if (isset($_GET["controller"])) {
-	$eso->action = strtolower($_GET["controller"]);
+	$eso->action = mb_strtolower($_GET["controller"]);
 	
 	// Does this controller exist?
 	if (!in_array($eso->action, $eso->allowedActions) or !file_exists(dirname(__FILE__) . "/controllers/$eso->action.controller.php")) exit;
