@@ -60,23 +60,23 @@ function init()
 	// Add the default gambits to the collection.
 	// Each gambit is made up of a function and an eval() condition that is used to determine if a search "term" matches the gambit.
 	$this->gambits = array_merge($this->gambits, array(
-		array(array($this, "gambitStarred"), 'return $term == strtolower($language["gambits"]["starred"]);'),
-		array(array($this, "gambitDraft"), 'return $term == strtolower($language["gambits"]["draft"]);'),
-		array(array($this, "gambitTag"), 'return strpos($term, strtolower($language["gambits"]["tag:"])) === 0;'),
-		array(array($this, "gambitPrivate"), 'return $term == strtolower($language["gambits"]["private"]);'),
-		array(array($this, "gambitSticky"), 'return $term == strtolower($language["gambits"]["sticky"]);'),
-		array(array($this, "gambitLocked"), 'return $term == strtolower($language["gambits"]["locked"]);'),
-		array(array($this, "gambitAuthor"), 'return strpos($term, strtolower($language["gambits"]["author:"])) === 0;'),
-		array(array($this, "gambitContributor"), 'return strpos($term, strtolower($language["gambits"]["contributor:"])) === 0;'),
+		array(array($this, "gambitStarred"), 'return $term == mb_strtolower($language["gambits"]["starred"]);'),
+		array(array($this, "gambitDraft"), 'return $term == mb_strtolower($language["gambits"]["draft"]);'),
+		array(array($this, "gambitTag"), 'return strpos($term, mb_strtolower($language["gambits"]["tag:"])) === 0;'),
+		array(array($this, "gambitPrivate"), 'return $term == mb_strtolower($language["gambits"]["private"]);'),
+		array(array($this, "gambitSticky"), 'return $term == mb_strtolower($language["gambits"]["sticky"]);'),
+		array(array($this, "gambitLocked"), 'return $term == mb_strtolower($language["gambits"]["locked"]);'),
+		array(array($this, "gambitAuthor"), 'return strpos($term, mb_strtolower($language["gambits"]["author:"])) === 0;'),
+		array(array($this, "gambitContributor"), 'return strpos($term, mb_strtolower($language["gambits"]["contributor:"])) === 0;'),
 		array(array($this, "gambitActive"), 'return preg_match($language["gambits"]["gambitActive"], $term, $this->matches);'),
 		array(array($this, "gambitHasNPosts"), 'return preg_match($language["gambits"]["gambitHasNPosts"], $term, $this->matches);'),
-		array(array($this, "gambitOrderByPosts"), 'return $term == strtolower($language["gambits"]["order by posts"]);'),
-		array(array($this, "gambitOrderByNewest"), 'return $term == strtolower($language["gambits"]["order by newest"]);'),
-		array(array($this, "gambitUnread"), 'return $term == strtolower($language["gambits"]["unread"]);'),
-		array(array($this, "gambitRandom"), 'return $term == strtolower($language["gambits"]["random"]);'),
-		array(array($this, "gambitReverse"), 'return $term == strtolower($language["gambits"]["reverse"]);'),
-		array(array($this, "gambitMoreResults"), 'return $term == strtolower($language["gambits"]["more results"]);'),
-		array(array($this, "gambitLimit"), 'return strpos($term, strtolower($language["gambits"]["limit:"])) === 0;'),
+		array(array($this, "gambitOrderByPosts"), 'return $term == mb_strtolower($language["gambits"]["order by posts"]);'),
+		array(array($this, "gambitOrderByNewest"), 'return $term == mb_strtolower($language["gambits"]["order by newest"]);'),
+		array(array($this, "gambitUnread"), 'return $term == mb_strtolower($language["gambits"]["unread"]);'),
+		array(array($this, "gambitRandom"), 'return $term == mb_strtolower($language["gambits"]["random"]);'),
+		array(array($this, "gambitReverse"), 'return $term == mb_strtolower($language["gambits"]["reverse"]);'),
+		array(array($this, "gambitMoreResults"), 'return $term == mb_strtolower($language["gambits"]["more results"]);'),
+		array(array($this, "gambitLimit"), 'return strpos($term, mb_strtolower($language["gambits"]["limit:"])) === 0;'),
 		array(array($this, "fulltext"), 'return $term;'),
 	));
 	
@@ -280,7 +280,7 @@ function getConversationIDs($search = "")
 	// Process the search string into individial terms.
 	// Replace all "-" signs with "+!", and then split the string by "+".  Negated terms will then be prefixed with "!".
 	// Only keep the first 5 terms, just to keep the load on the database down!
-	$terms = !empty($search) ? explode("+", strtolower(str_replace("-", "+!", trim($search, " +-")))) : array();
+	$terms = !empty($search) ? explode("+", mb_strtolower(str_replace("-", "+!", trim($search, " +-")))) : array();
 //	$terms = array_slice($terms, 0, 10);
 	$terms = array_slice(array_filter($terms), 0, 5);
 	
@@ -530,7 +530,7 @@ function ajax()
 			
 			// If the "random" gambit is in the search string, then don't go any further (because the results will 
 			// obviously differ!)
-			$terms = $this->searchString ? explode("+", strtolower(str_replace("-", "+!", trim($this->searchString, " +-")))) : array();
+			$terms = $this->searchString ? explode("+", mb_strtolower(str_replace("-", "+!", trim($this->searchString, " +-")))) : array();
 			foreach ($terms as $v) {
 				if (trim($v) == $language["gambits"]["random"]) return array("newActivity" => false);
 			}
