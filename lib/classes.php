@@ -152,13 +152,19 @@ function getView($view)
 function getForumLogo()
 {
 	global $config;
-	return !empty($config["forumLogo"]) ? $config["forumLogo"] : "skins/{$config["skin"]}/logo.svg";
+	if (isset($this->eso->skin->logo) and file_exists("skins/{$config["skin"]}/" . $this->eso->skin->logo)) $logo = $this->eso->skin->logo;
+	elseif (file_exists("skins/{$config["skin"]}/logo.svg")) $logo = "logo.svg";
+	else $logo = "";
+	return !empty($config["forumLogo"]) ? $config["forumLogo"] : "skins/{$config["skin"]}/" . $logo;
 }
 
 function getForumIcon()
 {
 	global $config;
-	return !empty($config["forumIcon"]) ? $config["forumIcon"] : "skins/{$config["skin"]}/icon.png";
+	if (isset($this->eso->skin->icon) and file_exists("skins/{$config["skin"]}/" . $this->eso->skin->icon)) $icon = $this->eso->skin->icon;
+	elseif (file_exists("skins/{$config["skin"]}/icon.png")) $icon = "icon.png";
+	else $icon = "";
+	return !empty($config["forumIcon"]) ? $config["forumIcon"] : "skins/{$config["skin"]}/" . $icon;
 }
 
 }

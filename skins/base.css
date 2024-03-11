@@ -105,7 +105,7 @@ a.star1, a.star0 {cursor:pointer}
 .label {font-size:90%; padding:0 5px; white-space:nowrap}
 
 /* Conversations table */
-.c {margin:0 0 1px; width:100%}
+.c {width:100%}
 .c th {font-weight:normal; font-size:90%; padding:6px 0; text-align:left}
 .c td {line-height:1.1; padding:5px 0}
 .c .labels {margin-right:3px}

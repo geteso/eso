@@ -695,7 +695,6 @@ function installLanguage()
 	}
 			
 	// Everything worked correctly - success!
-	// todo
 	$this->eso->message("languagePackAdded");
 }
 

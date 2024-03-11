@@ -1037,7 +1037,7 @@ displayPosts: function(scrollTo) {
 		// Regardless of post 'groups', output this individual post.
 		html.push("<div", (!singlePost ? " id='p" + post.id + "'" : ""), ">",
 			"<div class='hdr'>");
-		if (side) html.push("<div class='thumb'>", makeMemberLink(post.memberId, "<img src='" + (post.thumb || ("skins/" + eso.skin + "/avatarThumb.svg")) + "' alt=''/>"), "</div>");
+		if (side) html.push("<div class='thumb'>", makeMemberLink(post.memberId, "<img src='" + (post.thumb || ("skins/" +  eso.skin + "/" + eso.avatarThumb)) + "' alt=''/>"), "</div>");
 		html.push("<div class='pInfo'>");
 		html.push("<h3>", makeMemberLink(post.memberId, post.name), "</h3> ",
 			"<span title='", post.date, "'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ");
@@ -1064,7 +1064,7 @@ displayPosts: function(scrollTo) {
 
 		// If the post after this one is by a different member to this one, end the post 'group'.
 		if (k == max - 1 || typeof Conversation.posts[k + 1] == "undefined" || Conversation.posts[k + 1]["name"] != post.name || Conversation.posts[k + 1]["deleteMember"]) {
-			html.push("</div>"); if (side) html.push("<div class='avatar'>", makeMemberLink(post.memberId, "<img src='" + (post.avatar || ("skins/" + eso.skin + "/avatar" + (side == "l" ? "Left" : "Right") + ".svg")) + "' alt=''/>"), "</div>");
+			html.push("</div>"); if (side) html.push("<div class='avatar'>", makeMemberLink(post.memberId, "<img src='" + (post.avatar || ("skins/" + eso.skin + "/" + (side == "l" ? eso.avatarLeft : eso.avatarRight))) + "' alt=''/>"), "</div>");
 			html.push("<div class='clear'></div></div>");
 			
 			// Switch sides now that we're at the end of the group - only if the next post is not deleted!

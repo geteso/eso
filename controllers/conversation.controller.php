@@ -1159,7 +1159,7 @@ function startConversation($conversation)
 	// Impose some flood control measures.
 	$time = time() - $config["timeBetweenPosts"];
 	if (($error = $this->canStartConversation()) !== true
-		or ($error = $this->eso->db->result("SELECT MAX(startTime)>$time OR MAX(time)>$time FROM {$config["tablePrefix"]}conversations, {$config["tablePrefix"]}posts WHERE startMember={$this->eso->user["memberId"]} OR memberId={$this->eso->user["memberId"]}", 0) ? "waitToReply" : false)) {
+		or ($error = $this->eso->db->result("SELECT MAX(startTime)>$time FROM {$config["tablePrefix"]}conversations WHERE startMember={$this->eso->user["memberId"]}", 0) ? "waitToReply" : false)) {
 		$this->eso->message($error);
 		return false;
 	}
@@ -1613,7 +1613,12 @@ function canLock()
 // To reply, user must be: logged in, not suspended, and the conversation can't be locked (unless user is >= moderator)
 function canReply()
 {
+	global $config;
 	if (!$this->eso->user) return "loginRequired";
+	if ($this->eso->user and !$this->eso->db->result("SELECT memberId FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}")) {
+		$this->eso->logout();
+		return "loginRequired";
+	}
 	if ($this->eso->isUnvalidated()) return "noPermission";
 	if ($this->eso->isSuspended()) return "suspended";
 	if ($this->conversation["locked"] and !$this->eso->user["moderator"]) return "locked";

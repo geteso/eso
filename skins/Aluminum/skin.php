@@ -30,6 +30,14 @@ var $version = "2.0";
 var $author = "the esoBB team";
 var $numberOfColors = 27;
 
+// Define name and file type of resources.
+var $logo = "logo.svg";
+var $icon = "icon.png";
+var $favicon = "favicon.ico";
+var $avatarLeft = "avatarLeft.svg";
+var $avatarRight = "avatarRight.svg";
+var $avatarThumb = "avatarThumb.svg";
+
 // Add stylesheets and a favicon to the page header.
 function init()
 {
@@ -38,7 +46,6 @@ function init()
 	$this->eso->addCSS("skins/{$config["skin"]}/styles.css");
 	$this->eso->addCSS("skins/ie6.css", "ie6");
 	$this->eso->addCSS("skins/ie7.css", "ie7");
-	$this->eso->addToHead("<link rel='shortcut icon' type='image/ico' href='skins/{$config["skin"]}/favicon.ico'/>");
 }
 
 // Generate button HTML.

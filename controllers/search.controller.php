@@ -162,7 +162,7 @@ function init()
 		$this->eso->updateLastAction("");
 		
 		// Get the most common tags from the tags table and assign them a text-size class based upon their frequency.
-		$result = $this->eso->db->query("SELECT tag, COUNT(tag) AS count FROM {$config["tablePrefix"]}tags GROUP BY tag ORDER BY count DESC LIMIT {$config["numberOfTagsInTagCloud"]}");
+		$result = $this->eso->db->query("SELECT t.tag, COUNT(t.tag) AS count FROM {$config["tablePrefix"]}tags t LEFT JOIN {$config["tablePrefix"]}conversations c ON (t.conversationId=c.conversationId) WHERE c.private=0 AND c.posts>=1 GROUP BY t.tag ORDER BY count DESC LIMIT {$config["numberOfTagsInTagCloud"]}");
 		$tags = array();
 		if ($rows = $this->eso->db->numRows($result)) {
 			for ($i = 1; list($tag) = $this->eso->db->fetchRow($result); $i++) {

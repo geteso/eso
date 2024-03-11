@@ -43,8 +43,14 @@ if(!defined("IN_ESO"))exit;
 <?php endfor;?>
 </tr></table></div>
 
-<?php // If it's okay to upload avatars, add an avatar selection form.
-if (!empty($config["changeAvatar"])): ?>
+<?php // If avatar uploading is disabled or the user is suspended, show a message.
+if (empty($config["changeAvatar"])) : ?>
+<?php echo $this->eso->htmlMessage("avatarDisabled"); ?>
+<?php elseif($this->eso->isSuspended()) : ?>
+<?php echo $this->eso->htmlMessage("suspended"); ?>
+<?php // Otherwise if avatar uploading is allowed, add an avatar selection form.
+else: ?>
+
 <form action='<?php echo makeLink("settings");?>' id='settingsAvatar' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"];?>'/>
 <ul class='form'>
@@ -82,9 +88,6 @@ if(ini_get("allow_url_fopen")):?>
 </ul>
 </form>
 
-<?php // Otherwise if avatar uploading is disabled, show a message.
-else: ?>
-<?php echo $this->eso->htmlMessage("avatarDisabled"); ?>
 <?php endif; ?>
 
 </div>

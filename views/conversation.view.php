@@ -223,7 +223,8 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 // Regardless of post 'groups', output this individual post. ?>
 <div<?php if(!$singlePost):?> id='p<?php echo $post["id"];?>'<?php endif;?>>
 <div class='hdr'>
-<?php if($side):?><div class='thumb'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='".($post["thumb"]?$post["thumb"]:("skins/{$config["skin"]}/avatarThumb.svg"))."' alt=''/>"),$memberLink);?></div><?php endif;?>
+<?php if($side): ?><div class='thumb'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='" . ($post["thumb"] ? $post["thumb"] : "skins/{$config["skin"]}/" . (isset($this->eso->skin->avatarThumb) ? $this->eso->skin->avatarThumb : "avatarThumb.svg")) . "' alt=''/>"),$memberLink);?></div>
+<?php endif;?>
 <div class='pInfo'>
 <h3><?php echo str_replace(array("%d","%s"),array($post["memberId"],$post["name"]),$memberLink);?></h3>
 <span title='<?php echo $post["date"];?>'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
@@ -246,7 +247,7 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 // If the post after this one is by a different member to this one, end the post 'group'.
 if(!isset($this->conversation["posts"][$k+1]["memberId"]) or $this->conversation["posts"][$k+1]["memberId"]!=$post["memberId"] or !empty($this->conversation["posts"][$k+1]["deleteMember"])):?>
 </div>
-<?php if($side):?><div class='avatar'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='".($post["avatar"]?$post["avatar"]:("skins/{$config["skin"]}/avatar" . ($side == "l" ? "Left" : "Right") . ".svg"))."' alt=''/>"),$memberLink);?></div><?php endif;?>
+<?php if($side):?><div class='avatar'><?php echo str_replace(array("%d","%s"),array($post["memberId"],"<img src='".($post["avatar"]?$post["avatar"]:("skins/{$config["skin"]}/" . ($side == "l" ? (isset($this->eso->skin->avatarLeft) ? $this->eso->skin->avatarLeft : "avatarLeft.svg") : (isset($this->eso->skin->avatarRight) ? $this->eso->skin->avatarRight : "avatarRight.svg"))))."' alt=''/>"),$memberLink);?></div><?php endif;?>
 <div class='clear'></div>
 </div>
 

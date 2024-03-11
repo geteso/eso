@@ -526,8 +526,8 @@ function head()
 		else $head .= "<link rel='stylesheet' href='{$styleSheet["href"]}' type='text/css'" . (!empty($styleSheet["media"]) ? " media='{$styleSheet["media"]}'" : "") . "/>\n";
 	}
 
-	if (isset($this->skin->favicon))
-		$head .= "<link rel='shortcut icon' type='image/ico' href='" . (!empty($config["shortcutIcon"]) ? $config["shortcutIcon"] : $this->skin->favicon) . "'/>";
+	// Custom favicon if any or skin favicon.
+	$head .= "<link rel='shortcut icon' type='image/ico' href='" . (!empty($config["shortcutIcon"]) ? $config["shortcutIcon"] : "skins/{$config["skin"]}/" . (isset($this->skin->favicon) ? $this->skin->favicon : "favicon.ico")) . "'/>";
 
 	// JavaScript: add the scripts collected in the $this->scripts array (via $this->addScript()).
  	ksort($this->scripts);
@@ -541,6 +541,9 @@ function head()
 		"baseURL" => $config["baseURL"],
 		"user" => $this->user ? $this->user["name"] : false,
 		"skin" => $config["skin"],
+		"avatarLeft" => isset($this->skin->avatarLeft) ? $this->skin->avatarLeft : "avatarLeft.svg",
+		"avatarRight" => isset($this->skin->avatarRight) ? $this->skin->avatarRight : "avatarRight.svg",
+		"avatarThumb" => isset($this->skin->avatarThumb) ? $this->skin->avatarThumb : "avatarThumb.svg",
 		"disableAnimation" => !empty($this->eso->user["disableJSEffects"]),
 		"avatarAlignment" => !empty($this->eso->user["avatarAlignment"]) ? $this->eso->user["avatarAlignment"] : $_SESSION["avatarAlignment"],
 		"messageDisplayTime" => $config["messageDisplayTime"],
@@ -632,9 +635,9 @@ function getAvatar($memberId, $avatarFormat, $type = false)
 	if (!$avatarFormat) {
 		global $config;
 		switch ($type) {
-			case "l": return "skins/{$config["skin"]}/avatarLeft.svg";
-			case "r": return "skins/{$config["skin"]}/avatarRight.svg";
-			case "thumb": return "skins/{$config["skin"]}/avatarThumb.svg";
+			case "l": return "skins/{$config["skin"]}/" . isset($this->skin->avatarLeft) ? $this->skin->avatarLeft : "avatarLeft.svg";
+			case "r": return "skins/{$config["skin"]}/" . isset($this->skin->avatarRight) ? $this->skin->avatarRight : "avatarRight.svg";
+			case "thumb": return "skins/{$config["skin"]}/" . isset($this->skin->avatarThumb) ? $this->skin->avatarThumb : "avatarThumb.svg";
 		}
 	}
 }
