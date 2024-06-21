@@ -635,9 +635,9 @@ function getAvatar($memberId, $avatarFormat, $type = false)
 	if (!$avatarFormat) {
 		global $config;
 		switch ($type) {
-			case "l": return "skins/{$config["skin"]}/" . isset($this->skin->avatarLeft) ? $this->skin->avatarLeft : "avatarLeft.svg";
-			case "r": return "skins/{$config["skin"]}/" . isset($this->skin->avatarRight) ? $this->skin->avatarRight : "avatarRight.svg";
-			case "thumb": return "skins/{$config["skin"]}/" . isset($this->skin->avatarThumb) ? $this->skin->avatarThumb : "avatarThumb.svg";
+			case "l": return "skins/{$config["skin"]}/" . (isset($this->skin->avatarLeft) ? $this->skin->avatarLeft : "avatarLeft.svg");
+			case "r": return "skins/{$config["skin"]}/" . (isset($this->skin->avatarRight) ? $this->skin->avatarRight : "avatarRight.svg");
+			case "thumb": return "skins/{$config["skin"]}/" . (isset($this->skin->avatarThumb) ? $this->skin->avatarThumb : "avatarThumb.svg");
 		}
 	}
 }
