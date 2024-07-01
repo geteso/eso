@@ -35,20 +35,9 @@ error_reporting(E_ERROR | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERRO
 // Make sure a default timezone is set... silly PHP 5.
 if (ini_get("date.timezone") == "") date_default_timezone_set("GMT");
 
-// Define directory constants.
-if (!defined("PATH_ROOT")) define("PATH_ROOT", realpath(__DIR__ . "/.."));
-if (!defined("PATH_CONFIG")) define("PATH_CONFIG", PATH_ROOT."/config");
-if (!defined("PATH_CONTROLLERS")) define("PATH_CONTROLLERS", PATH_ROOT."/controllers");
-if (!defined("PATH_LANGUAGES")) define("PATH_LANGUAGES", PATH_ROOT."/languages");
-if (!defined("PATH_LIBRARY")) define("PATH_LIBRARY", PATH_ROOT."/lib");
-if (!defined("PATH_PLUGINS")) define("PATH_PLUGINS", PATH_ROOT."/plugins");
-if (!defined("PATH_SKINS")) define("PATH_SKINS", PATH_ROOT."/skins");
-if (!defined("PATH_UPLOADS")) define("PATH_UPLOADS", PATH_ROOT."/uploads");
-if (!defined("PATH_VIEWS")) define("PATH_VIEWS", PATH_ROOT."/views");
-
 // Include our config files.
-require PATH_ROOT."/config.default.php";
-@include PATH_CONFIG."/config.php";
+require "config.default.php";
+@include "config/config.php";
 // If $config isn't set, the forum hasn't been installed.  Redirect to the installer.
 if (!isset($config)) {
 	if (!defined("AJAX_REQUEST")) header("Location: install/index.php");
@@ -59,7 +48,7 @@ $config = array_merge($defaultConfig, $config);
 
 // Compare the hardcoded version of eso (ESO_VERSION) to the installed one ($versions["eso"]).
 // If they're out-of-date, redirect to the upgrader.
-require PATH_CONFIG."/versions.php";
+require "config/versions.php";
 if ($versions["eso"] != ESO_VERSION) {
 	if (!defined("AJAX_REQUEST")) header("Location: {$config["baseURL"]}upgrade/index.php");
 	exit;
@@ -77,10 +66,10 @@ if (isset($_SERVER["HTTP_HOST"])) {
 }
 
 // Require essential files.
-require PATH_LIBRARY."/functions.php";
-require PATH_LIBRARY."/database.php";
-require PATH_LIBRARY."/classes.php";
-require PATH_LIBRARY."/formatter.php";
+require "functions.php";
+require "database.php";
+require "classes.php";
+require "formatter.php";
 
 // Start a session if one does not already exist.
 if (!session_id()) {
@@ -116,7 +105,7 @@ $_GET = sanitize($_GET);
 $_COOKIE = sanitize($_COOKIE);
 
 // Include and set up the main controller.
-require PATH_CONTROLLERS."/eso.controller.php";
+require "controllers/eso.controller.php";
 $eso = new eso();
 $eso->eso =& $eso;
 
