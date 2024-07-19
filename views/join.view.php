@@ -64,6 +64,8 @@ endforeach;
 
 <p><?php echo $this->eso->skin->button(array("id"=>"joinSubmit","value"=>$language["Join this forum"],"class"=>"big","tabindex"=>1000));?></p>
 
+<p id="joinAgree">By joining this forum, you agree to the <a href="help/tos/" target="_blank">terms of service</a>, and to comply with the <a href="help/rules/" target="_blank">global rules</a>.</p>
+
 <script type='text/javascript'>
 // <![CDATA[
 // Construct a JavaScript array of the fields in the form.

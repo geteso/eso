@@ -1,0 +1,60 @@
+/* Sticky user bar */
+/*@media only screen and (max-width: 570px) {
+	#header {display:contents}
+	#hdr {border-bottom:1px solid #c1c1c1}
+	#bar {top:0; position:sticky; z-index:100; border-top:0}
+}*/
+
+/* Join this forum page */
+#joinAgree {margin-top:-7px}
+
+/* Conversations page */
+#postFormatting {float:left; clear:left; margin:3px 0 -5px 0}
+
+/* About page */
+#about {margin:-15px -25px; border:0; border-left-style:solid; border-left-width:175px; border-color:#eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; background:#fff}
+#about .menu {float:left; width:175px; margin:0; margin-top:5px; margin-left:-175px; padding:10px 0; border-right:1px solid #ccc}
+#about .menu li {list-style-type:none; margin:0; padding:0; display:block; padding-bottom:5px}
+#about .menu li a {display:block; margin-left:25px; padding:10px 15px; font-size:120%; text-decoration:none; border:solid #ccc; border-width:1px 0 1px 1px; color:#000; background:#efefef; box-shadow:inset 1px 1px 1px #fff, -1px 1px 2px #cdcdcd; text-shadow:#fff 0px 1px}
+#about .menu li.title p {display:block; margin:0 15px 0 25px; text-transform:uppercase; font-weight:bold; color:#555; text-shadow:#fff 0 1px}
+#about .menu li.active a, #about .menu li:not(.active) a:hover {margin-right:-1px; background:#fff; border:solid #ccc; border-width:1px 0 1px 1px; color:#000}
+#about .menu li.active a {font-weight:bold}
+#about .inner {min-height:230px; padding:15px 25px 1px 25px; margin-bottom:15px; border-top:0; border-bottom:0; border-left:1px solid; border-right:0; border-image:linear-gradient(to bottom, #ccc, #fff); border-image-slice:1}
+#about .inner h3 {margin:0 0 5px; border-bottom:1px solid #bbb}
+#about .inner p:last-child {margin:0}
+@media only screen and (max-width:620px) {
+	#about {margin-top:0; border-left:0; border-image:none; background:unset}
+	#about .menu {float:none; margin-top:0; margin-left:25px; margin-right:25px; padding:0; width:-webkit-fill-available; border:1px solid #ccc}
+	#about .menu li {display:block; padding:0}
+	#about .menu li a {display:block; margin:0; background-color:#eee; border-top:1px solid #ccc; border-bottom:0; border-left:0; border-right:0; box-shadow:inset 0px 1px 1px #fff}
+	#about .menu li.active a {margin-right:0; border-left:unset!important; border-bottom:unset!important}
+	#about .menu li:not(.active) a:hover {margin:0; padding-left:15px; border-width:1px 0 0}
+	#about .menu li:first-child a, #about .menu li:first-child a:hover {border:none}
+	#about .menu li.title p {margin:3px 15px}
+	#about .inner {min-height:unset; padding-top:10px; border-left:0}
+}
+
+/* Custom footer */
+#ftr-links ul > li {margin:0; padding:0}
+#ftr-links ul > li a {display:block; font-size:100%; padding:2px 5px; height:14px; line-height:1.3; color:#000; background:#efefef; border: 1px solid #ccc; margin:3px 3px -1px 0; box-shadow:inset 0 1px 1px #fff, 1px -1px 1px 0px #ddd; text-shadow:#fff 0 1px}
+#ftr-links ul > li a.active, #ftr-links ul > li a:hover {height: 15px; margin-bottom: -1px; border-bottom-width:0}
+#ftr-links ul > li a.active {font-weight:bold; background:#fff; background:linear-gradient(to bottom, #efefef, #ffffff)}
+#ftr-links ul > li a:hover {text-decoration:none; background:linear-gradient(to bottom, #efefef, #ffffff)}
+/* Special buttons */
+#ftr-links ul > li a#link-esowiki {background:#cef2e0; border-color:#a3bfb1}
+#ftr-links ul > li a#link-esowiki:hover {background:linear-gradient(to bottom, #cef2e0, #ffffff)}
+#ftr-links ul > li a#link-discord {background:#dee0f8; border-color:#a5a9dc}
+#ftr-links ul > li a#link-discord:hover {background:linear-gradient(to bottom, #dee0f8, #ffffff)}
+#ftr-content {clear:left; padding:5px 0 0; border-top:1px solid #ccc; box-shadow:0px -2px 2px -1px #ddd}
+/* Praetorian icon */
+#ftr-links > #secret {float:right; padding-right:1px}
+#ftr-links > #secret a {color:#ccc; font-size:150%; font-family:sans-serif; text-decoration:none}
+@media only screen and (max-width:780px) {
+	#ftr p#stats {float:none}
+}
+@media only screen and (max-width:500px) {
+	#ftr-links ul > li a {height:auto; margin:0 3px 3px 0; box-shadow:inset 0 1px 1px #fff}
+	#ftr-links ul > li a.active, #ftr-links ul > li a:hover {height:auto; margin-bottom:3px; border-bottom-width:1px}
+	#ftr-links > #secret {display:none}
+	#ftr-content {box-shadow:none}
+}

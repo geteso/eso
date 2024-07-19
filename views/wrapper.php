@@ -86,7 +86,7 @@ if(!defined("IN_ESO"))exit;
 <div id='header'>
 <div id='hdr'>
 
-<?php if (($config["showDescription"] == "true") && ($this->action == "search")): ?>
+<?php if ($this->action == "search"): ?>
 <h1 id="hasForumDescription">
 <?php else: ?>
 <h1>
@@ -94,8 +94,8 @@ if(!defined("IN_ESO"))exit;
 
 <a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo();?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
 <span id='forumTitle'><?php echo $config["forumTitle"];?>
-<?php if (($config["showDescription"] == "true") && ($this->action == "search")): ?>
-<small id='forumDescription'><?php echo $config["forumDescription"];?></small>
+<?php if ($this->action == "search"): ?>
+<small id='forumDescription'>Changed the we think.</small>
 <?php endif; ?>
 </span>
 </a></h1>
@@ -124,9 +124,33 @@ if(!defined("IN_ESO"))exit;
 
 <?php $this->callHook("footer"); ?>
 <div id='ftr'>
+<div id='ftr-links'>
+	<ul>
+		<li><a href='/' 
+<?php if ($this->action == "search"):
+	echo "class='active'";
+endif; ?>>Home</a></li>
+		<li><a href='/help/about/' 
+<?php if (@$_GET["q1"] == "help" and (@$_GET["q2"] == "" or @$_GET["q2"] == "about")):
+	echo "class='active'";
+endif; ?>>About the forum</a></li>
+		<li><a href='/help/rules/' 
+<?php if (@$_GET["q1"] == "help" and @$_GET["q2"] == "rules"):
+	echo "class='active'";
+endif; ?>>Global rules</a></li>
+		<li><a href='/help/contact/' 
+<?php if (@$_GET["q1"] == "help" and @$_GET["q2"] == "contact"):
+	echo "class='active'";
+endif; ?>>Contact us</a></li>
+		<li><a href='https://wiki.esoteric.chat/' id='link-esowiki' target='_blank'>Esoteric Wiki</a></li>
+		<li><a href='https://discord.com/invite/kh8h3HUR8k/' id='link-discord' target='_blank'>Discord server</a></li>
+	</ul>
+	<div id='secret'><a href='https://grntbg.com/projects/esobb/' target='_blank' title='Down the rabbit hole?'>π</a></div>
+</div>
 <div id='ftr-content'>
 <p id='copyright'><!-- The following text constitutes a copyright notification. -->
-<?php echo $language["Powered by"];?> <a href='https://geteso.org/'>esoBB</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --> <?php if ($this->user["admin"]) echo ESO_VERSION; ?>
+Copyright © MMXXIV Esoteric Chat. Some rights reserved.</br>
+Pursuant to 47 U.S.C. § 230: All posts on this site are the sole responsibility of their posters.
 <!-- End copyright notification. --></p>
 <?php if ($this->action !== "search"):
 	foreach ($this->getStatistics() as $k=>$v) $stats .= "<span id='statistic-$k'>$v</span> - ";
@@ -139,7 +163,7 @@ endif; ?></ul>
 <ul class='bar'><?php if (count($this->bar["right"])):
 	ksort($this->bar["right"]);foreach ($this->bar["right"] as $v) echo "<li>$v</li>";
 endif; ?></ul>
-</div>
+</p>
 </div>
 
 <?php $this->callHook("pageEnd");?>
