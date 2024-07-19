@@ -109,7 +109,7 @@ function columnLastReply(&$search,$conversation)
 if (is_countable($this->results) && count($this->results)) :
 foreach ($this->results as $conversation): ?>
 
-<tr id='c<?php echo $conversation["id"]; ?>'<?php if ($conversation["starred"]): ?> class='starred'<?php endif; ?>>
+<tr id='c<?php echo $conversation["id"]; ?>' class='c<?php echo $conversation["color"]; if ($conversation["starred"]): ?> starred<?php endif; ?>'>
 <?php
 
 // Loop through the columns defined in the search controller and echo the output of a callback function for the cell contents.

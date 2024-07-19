@@ -287,7 +287,9 @@ function toggleStar(conversationId, star) {
 	});
 	star.className = star.className == "star0" ? "star1" : "star0";
 	star.getElementsByTagName("span")[0].innerHTML = eso.language[star.className == "star1" ? "Starred" : "Unstarred"];
-	if (getById("c" + conversationId)) getById("c" + conversationId).className = star.className == "star1" ? "starred" : "";
+	color = getById("c" + conversationId).classList[0];
+	color = color.startsWith("c") ? color : "";
+	if (getById("c" + conversationId)) getById("c" + conversationId).className = star.className == "star1" ? (color ? color + " starred" : "starred") : color;
 };
 
 // Work out the relative difference between the current time and a given timestamp.
@@ -1738,7 +1740,10 @@ cancelEdit: function(postId) {
 toggleSticky: function() {
 	var label = getElementsByClassName(getById("cLabels"), "sticky")[0];
 	toggle(label);
-	getById("stickyLink").value = eso.language[label.showing ? "Unsticky" : "Sticky"];
+	var buttons = document.querySelectorAll("[id=stickyLink]");
+	for (i = 0; i < buttons.length; ++i) {
+		buttons[i].value = eso.language[label.showing ? "Unsticky" : "Sticky"];
+	}
 	Ajax.request({
 		"url": eso.baseURL + "ajax.php?controller=conversation",
 		"post": "action=toggleSticky&id=" + Conversation.id
@@ -1749,7 +1754,10 @@ toggleSticky: function() {
 toggleLock: function() {
 	label = getElementsByClassName(getById("cLabels"), "locked")[0];
 	toggle(label);
-	getById("lockLink").value = eso.language[label.showing ? "Unlock" : "Lock"];
+	var buttons = document.querySelectorAll("[id=lockLink]");
+	for (i = 0; i < buttons.length; ++i) {
+		buttons[i].value = eso.language[label.showing ? "Unlock" : "Lock"];
+	}
 	Ajax.request({
 		"url": eso.baseURL + "ajax.php?controller=conversation",
 		"post": "action=toggleLock&id=" + Conversation.id
@@ -2149,7 +2157,7 @@ updateCurrentResults: function() {
 				if ((cell = getElementsByClassName(row, "star")[0]) && (star = cell.getElementsByTagName("a")[0])) {
 					star.className = data.starred ? "star1" : "star0";
 					star.getElementsByTagName("span")[0].innerHTML = eso.language[data.starred ? "Starred" : "Unstarred"];
-					row.className = data.starred ? "starred" : "";
+					row.className = "c" + data.color + (data.starred ? " starred" : "");
 				}
 			}
 			

@@ -203,10 +203,8 @@ if(!empty($post["deleteMember"])):?>
 <span title='<?php echo $post["date"];?>'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
 <span><?php printf($deletedBy,$post["deleteMember"]);?></span>
 </div>
-<div class='controls'>
-<?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span> <?php endif;?>
-<?php if($post["canDelete"]):?><span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$deleteForeverLink);?></span><?php endif;?>
-</div>
+<div class='controls'><?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span> <?php endif;?>
+<?php if($post["canDelete"]):?><span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$deleteForeverLink);?></span><?php endif;?></div>
 </div>
 <?php if($this->showingDeletedPost==$post["id"]):?><div class='body'><?php echo $post["body"];?></div><?php endif;?>
 </div>
@@ -295,7 +293,8 @@ else:
 echo $this->eso->skin->button(array("id"=>"saveDraft","name"=>"saveDraft","class"=>"fl","value"=>$language["Save draft"],"tabindex"=>50))," ",
 	$this->eso->skin->button(array("id"=>"discardDraft","name"=>"discardDraft","class"=>"fl","value"=>$language["Discard draft"]))," ",
 	$this->eso->skin->button(array("id"=>"postReply","name"=>"postReply","class"=>"big submit fr","value"=>$language["Submit post"],"tabindex"=>40));
-?></div>
+?>
+<span id='postFormatting'><small><a href="help/formatting/" target="_blank">Learn more</a> about post formatting.</small></span></div>
 <?php $this->callHook("renderReplyArea");?>
 <?php if($this->conversation["id"]):?></div></form><?php endif;?>
 </div>
