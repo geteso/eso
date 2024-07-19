@@ -62,7 +62,7 @@ function init()
 				
 				// Still not logged in?  Ask them again.
 				if (!$this->eso->user) {
-					header('WWW-Authenticate: Basic realm="eso RSS feed"');
+					header('WWW-Authenticate: Basic realm="esoBB RSS feed"');
 				    header('HTTP/1.0 401 Unauthorized');
 					$this->eso->fatalError($messages["cannotViewConversation"]["message"]);
 				}
@@ -130,7 +130,11 @@ function format($post)
 	// Convert relative URLs to absolute URLs.
 	$post = preg_replace("/<a([^>]*) href='(?!http|ftp|mailto)([^']*)'/i", "<a$1 href='{$config["baseURL"]}$2'", $post);
 	$post = preg_replace("/<img([^>]*) src='(?!http|ftp|mailto)([^']*)'/i", "<img$1 src='{$config["baseURL"]}$2'", $post);
-	
+
+	// Remove zero-width joiners because RSS 2.0 doesn't recognize them.
+//	$post = preg_replace("/[\x{200B}-\x{200D}\x{FEFF}]/u", "", $post);
+	$post = htmlentities($post, ENT_XML1);
+
 	return $post;
 }
 

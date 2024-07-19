@@ -41,7 +41,7 @@ function init()
 	parent::init();
 	
 	// Add the emoticon CSS style to the head.
-	$this->eso->addToHead("<style type='text/css'>.emoticon {width:16px; height:16px; background:url({$this->emoticonDir}emoticons.svg); background-repeat:no-repeat}</style>");
+	$this->eso->addToHead("<style type='text/css'>.emoticon {width:16px!important; height:16px; background:url({$this->emoticonDir}emoticons.svg); background-repeat:no-repeat}</style>");
 	
 	// Add a hook to convert emoticons to text in the feed.
 	if ($this->eso->action == "feed")

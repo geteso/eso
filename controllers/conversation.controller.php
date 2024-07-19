@@ -732,6 +732,8 @@ function getPosts($criteria = array(), $display = false)
 	// Loop through the posts and compile them into an array.
 	while ($post = $this->eso->db->fetchAssoc($result)) {
 		
+		$this->callHook("beforePostArray", array(&$post));
+
 		// Make sure the post color is in range.
 		$post["color"] = min($post["color"], $this->eso->skin->numberOfColors);
 		
@@ -1281,11 +1283,11 @@ function addMember($name)
 	if (!$memberId) {
 		switch (strtolower($name)) {
 			// Members
-			case $language["Member-plural"]:
-			case "members":
-				$memberId = "Member";
-				$memberName = $language["Member-plural"];
-				break;
+//			case $language["Member-plural"]:
+//			case "members":
+//				$memberId = "Member";
+//				$memberName = $language["Member-plural"];
+//				break;
 			// Moderators
 			case $language["Moderator-plural"]:
 			case "moderators":

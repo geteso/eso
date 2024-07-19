@@ -56,7 +56,7 @@ h1#hasForumDescription #forumTitle {font-size:20px}
 #bar li a span.button {font-size:90%; margin-top:-1px; margin-bottom:2px; display:flex; display:-webkit-flex; display:-webkit-box; display:-moz-box; display:-ms-flexbox}
 #displayAvatars select {height:20px; margin-left:3px}
 #bar strong#user {margin-right:5px}
-#bar #profile, #bar #profile span {display:none}
+#bar #profile {display:none}
 /* Dividers */
 #bar li > .vl, li > .vr {display:block; position:relative}	
 #bar li:not(li:first-child) > .vl::after, #bar li:not(li:last-child) > .vr::after {content:''; position:absolute; pointer-events:none}
@@ -179,10 +179,10 @@ hr {display:none}
 .p .hdr span, .p .hdr form {display:inline; font-size:90%; margin-left:7px}
 .p .hdr select, .p .hdr input.save {background:none; display:inline; padding-top:1px; margin:-1px 0 -2px 0}
 .p .hdr input.save {padding:0 2px}
-.p .hdr .thumb {float:left; margin:0 10px 0 0}
-.p.l .hdr .thumb {float:left; margin:0 10px 0 -10px; display:none}
-.p.r .hdr .thumb {float:right; margin:0 -10px 0 0; display:none}
-.p .hdr .thumb img {width:30px; height:27px; margin:-5px 0 -10px 0; object-fit:cover; image-rendering:auto}
+.p .hdr .thumb {width:30px; height:29px; float:left; margin:-5px 10px -10px 0}
+.p.l .hdr .thumb {float:left; margin:-5px 10px -10px -10px; display:none}
+.p.r .hdr .thumb {float:right; margin:-5px -10px -10px 0; display:none}
+.p .hdr .thumb img {width:100%; height:100%; object-fit:cover; image-rendering:auto}
 .p .hdr .pInfo {float:left}
 /* .p .hdr .pInfo .thumb {margin:0 8px 0 -10px; display:none}
 .p .hdr .pInfo .thumb img {border-top-color:transparent; border-top-style:solid; border-top-width:3px; box-sizing:border-box} */
@@ -192,9 +192,8 @@ hr {display:none}
 .p .hdr .controls span {font-size:100%}
 .p .hdr a.button {padding:1px 4px}
 .p .body {line-height:1.3; overflow:auto; padding:5px 10px 0}
-.p .body img {vertical-align:bottom; max-width:100%}
-.p .body video {max-width:100%}
-.p .body video, .p .body audio {margin-bottom:-4px}
+.p .body p > img, .p .body p > video {max-width:425px; width:100%}
+.p .body p > img, .p .body p > video, .p .body p > audio {vertical-align:bottom}
 .p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:115px}
 .p.r {border-right-style:solid; border-right-width:115px}
 .p.r div.avatar {float:right; margin-right:-115px}
@@ -345,7 +344,8 @@ form#settingsAvatar {padding-bottom:8px}
 /* Footer */
 #ftr {font-size:90%; padding:0 25px 20px; overflow:hidden}
 #ftr ul {margin:0; padding:0; list-style-type:none}
-#ftr ul > li {float:left; margin:0 3px 3px 0}
+#ftr ul > li {float:left}
+#ftr ul > li a, #ftr ul > li form {margin:0 3px 3px 0; display:inline-block}
 #ftr .bar {display:none}
 #ftr p#copyright, #ftr p#stats {margin:0 0 3px 0}
 #ftr p#copyright {display:inline-block}
@@ -442,7 +442,7 @@ hr {display:block}
 #editedBy, span.star0 {display:none}
 #bar {height:18px}
 #bar #user, #bar #startConversation {display:none}
-#bar #profile {display:inherit}
+#bar #profile {display:initial}
 ul.fl, ul.fr {position:absolute}
 ul.fl {z-index:1}
 ul.fr {z-index:0; right:25px}
@@ -487,7 +487,7 @@ ul.fl, ul.fr {white-space:nowrap}
 #body {padding:15px 10px; padding-top:10px; padding-bottom:0; overflow:hidden}
 #loading {right:10px}
 #hdr, #bar {padding-left:10px; padding-right:10px}
-#tags {display:none}
+#tags .s4, #tags .s5, #tags .s6 {display:none}
 #searchResults table.c {margin-top:0}
 #ftr {padding:0 10px 10px}
 #sconvo .pInfo {display:none}
@@ -507,6 +507,7 @@ form#settingsAvatar {padding-left:10px; padding-right:10px}
 
 /* Formatting controls */
 #sconvo .hdr {min-height:16px}
+.p .controls .formattingButtons {white-space:normal}
 #cPosts .p .hdr .controls:not(:empty) {float:none; clear:left; position:relative; overflow:overlay; margin:5px -10px -7px -10px; padding-top:4px; padding-bottom:4px}
 #cPosts .p .hdr .controls > a:first-child, #cPosts .deleted .hdr .controls span:first-child {margin-left:10px}
 #cPosts .p .hdr .controls .formattingButtons {margin-left:10px; margin-right:10px}

@@ -696,6 +696,7 @@ function url($match, $state)
 // Add a normal link to the output.
 function link($match, $state)
 {
+	global $config;
 	switch ($state) {
 		case LEXER_ENTER:
 			if (substr($match, 0, 5) == "&lt;a") {
@@ -707,7 +708,9 @@ function link($match, $state)
 			else $link = rtrim(substr($match, 1));
 			$protocol = "";
 			if (!preg_match("`^((?:https?|ftp|feed)://|mailto:)`i", $link)) $protocol = "https://";
-			$this->formatter->output .= "<a href='$protocol$link' target='_blank'" . (isset($title) ? " title=$quote$title$quote" : "") . ">";
+			$external = "";
+			if (parse_url($link, PHP_URL_HOST) !== parse_url($config["baseURL"], PHP_URL_HOST)) $external = " target='_blank' class='external'";
+			$this->formatter->output .= "<a href='$protocol$link'" . $external . (isset($title) ? " title=$quote$title$quote" : "") . ">";
 			break;
 		case LEXER_EXIT:
 			$this->formatter->output .= "</a>";

@@ -500,17 +500,19 @@ function ajax()
 			$markedAsRead = !empty($this->eso->user["markedAsRead"]) ? $this->eso->user["markedAsRead"] : "0";
 			$memberId = $this->eso->user ? $this->eso->user["memberId"] : 0;
 			$allowedPredicate = !$this->eso->user ? "c.posts>0 AND c.private=0" : "c.startMember={$this->eso->user["memberId"]} OR (c.posts>0 AND (c.private=0 OR s.allowed OR (SELECT allowed FROM {$config["tablePrefix"]}status WHERE conversationId=c.conversationId AND memberId='{$this->eso->user["account"]}')))";
-			$query = "SELECT c.conversationId, (IF(c.lastPostTime IS NOT NULL,c.lastPostTime,c.startTime)>$markedAsRead AND (s.lastRead IS NULL OR s.lastRead<c.posts)) AS unread, lpm.name AS lastPostMember, c.lastPostMember AS lastPostMemberId, c.lastPostTime AS lastPostTime, c.posts AS posts, s.starred AS starred
+			$query = "SELECT c.conversationId, sm.color AS color, (IF(c.lastPostTime IS NOT NULL,c.lastPostTime,c.startTime)>$markedAsRead AND (s.lastRead IS NULL OR s.lastRead<c.posts)) AS unread, lpm.name AS lastPostMember, c.lastPostMember AS lastPostMemberId, c.lastPostTime AS lastPostTime, c.posts AS posts, s.starred AS starred
 				FROM {$config["tablePrefix"]}conversations c
 				LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId=c.conversationId AND s.memberId=$memberId)
+				LEFT JOIN {$config["tablePrefix"]}members sm ON (c.startMember=sm.memberId)
 				LEFT JOIN {$config["tablePrefix"]}members lpm ON (c.lastPostMember=lpm.memberId)
 				WHERE c.conversationId IN ($conversationIds) AND ($allowedPredicate)";
 			$result = $this->eso->db->query($query);
 			
 			// Loop through these conversations and construct an array of details to return in JSON format.
 			$conversations = array();
-			while (list($id, $unread, $lastPostMember, $lastPostMemberId, $lastPostTime, $postCount, $starred) = $this->eso->db->fetchRow($result)) {
+			while (list($id, $color, $unread, $lastPostMember, $lastPostMemberId, $lastPostTime, $postCount, $starred) = $this->eso->db->fetchRow($result)) {
 				$conversations[$id] = array(
+					"color" => $color,
 					"unread" => !$this->eso->user or $unread,
 					"lastPostMember" => "<a href='" . makeLink("profile", $lastPostMemberId) . "'>$lastPostMember</a>",
 					"lastPostTime" => relativeTime($lastPostTime),
