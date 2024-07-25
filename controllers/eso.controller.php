@@ -177,8 +177,14 @@ function login($name = false, $password = false, $hash = false)
 	// Otherwise attempt to get the member ID and password hash from a cookie.
 	elseif ($hash === false) {
 		$cookie = @$_COOKIE[$config["cookieName"]];
-		$memberId = substr($cookie, 0, strlen($cookie) - 32);
-		$hash = substr($cookie, -32);
+		if ($config["hashingMethod"] == "bcrypt") {
+			$memberId = substr($cookie, 0, strlen($cookie) - 60);
+			$hash = substr($cookie, -60);
+		}
+		else {
+			$memberId = substr($cookie, 0, strlen($cookie) - 32);
+			$hash = substr($cookie, -32);
+		}
 	}
 	
 	// If we successfully have a name or member ID, and a hash, then we attempt to login.
