@@ -153,6 +153,7 @@ Copyright © MMXXIV Esoteric Chat. Some rights reserved.</br>
 Pursuant to 47 U.S.C. § 230: All posts on this site are the sole responsibility of their posters.
 <!-- End copyright notification. --></p>
 <?php if ($this->action !== "search"):
+	$stats = "";
 	foreach ($this->getStatistics() as $k=>$v) $stats .= "<span id='statistic-$k'>$v</span> - ";
 	echo "<p id='stats'>".substr($stats,0,-3)."</p>";
 endif; ?>

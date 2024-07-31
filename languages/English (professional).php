@@ -98,6 +98,7 @@ $language = array(
 "deleted by" => "deleted by %s",
 "Disable" => "Disable",
 "disableJSEffects" => "Disable JavaScript effects and animations",
+"disableLinkAlerts" => "Disable alerts when clicking on <a href class='external' onclick='return false'>external links</a>",
 "Disable emoticons" => "Disable image emoticons",
 "Discard draft" => "Discard draft",
 "Display avatars" => "Display avatars",
@@ -346,6 +347,7 @@ $language = array(
 "confirmDiscard" => "You have not saved your reply as a draft. Do you wish to discard it?",
 "confirmDeleteConversation" => "Are you sure you want to delete this conversation? Once deleted, you will not be able to recover it.",
 "confirmDeletePost" => "Are you sure you want to delete this post? Once deleted, you will not be able to recover it.",
+"confirmExternalLink" => "Are you sure you want to click this link? It leads to an external website or service, which could be potentially harmful.",
 "ajaxRequestPending" => "This page is still processing. If you navigate away from this page you might lose any recent changes you've made. Do you wish to continue?",
 "ajaxDisconnected" => "Unable to communicate with the server. Wait a few seconds and <a href='javascript:Ajax.resumeAfterDisconnection()'>try again</a>, or <a href='' onclick='window.location.reload();return false'>refresh the page</a>."
 );

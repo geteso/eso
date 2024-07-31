@@ -120,7 +120,13 @@ function init()
 				"html" => "<label for='disableJSEffects' class='checkbox'>{$language["disableJSEffects"]}</label> <input id='disableJSEffects' type='checkbox' class='checkbox' name='disableJSEffects' value='1' " .  (!empty($this->eso->user["disableJSEffects"]) ? "checked='checked' " : "") . "/>",
 				"databaseField" => "disableJSEffects",
 				"checkbox" => true
-			)
+			),
+			550 => array(
+				"id" => "disableLinkAlerts",
+				"html" => "<label for='disableLinkAlerts' class='checkbox'>{$language["disableLinkAlerts"]}</label> <input id='disableLinkAlerts' type='checkbox' class='checkbox' name='disableLinkAlerts' value='1' " .  (!empty($this->eso->user["disableLinkAlerts"]) ? "checked='checked' " : "") . "/>",
+				"databaseField" => "disableLinkAlerts",
+				"checkbox" => true
+			)//use 550 to avoid breaking plugins
 		)
 		
 	);
@@ -292,10 +298,10 @@ function changePasswordEmail()
 // Change the user's avatar.
 function changeAvatar()
 {
+	global $config;
 	if (!$this->eso->user or $this->eso->isUnvalidated() or $this->eso->isSuspended()) return false;
 	if (empty($config["changeAvatar"])) return false;
 	if (empty($_POST["avatar"]["type"])) return false;
-	global $config;
 	
 	$allowedTypes = array("image/jpeg", "image/png", "image/gif", "image/pjpeg", "image/x-png");
 	
@@ -513,7 +519,8 @@ function changeColor($color)
 	global $config;
 	
 	// Make sure the color exists within the current skin!
-	$color = max(0, min((int)$color, $this->eso->skin->numberOfColors));
+	if ($this->eso->skin->numberOfColors) $color = max(1, min((int)$color, $this->eso->skin->numberOfColors));
+	else $color = 0;
 
 	// Update the database and session variables with the new color.
 	$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET color=$color WHERE memberId={$this->eso->user["memberId"]}");

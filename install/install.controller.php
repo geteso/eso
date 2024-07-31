@@ -326,7 +326,8 @@ Sitemap: {$config["baseURL"]}sitemap.php");
 		"language" => $_SESSION["install"]["language"],
 		"avatarAlignment" => "alternate",
 		"avatarFormat" => "",
-		"disableJSEffects" => false
+		"disableJSEffects" => false,
+		"disableLinkAlerts" => false
 	);
 }
 

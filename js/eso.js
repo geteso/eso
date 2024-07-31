@@ -1342,6 +1342,12 @@ moveToPercent: function(startFromPercent, scrollTo) {
 	Conversation.moveTo(postNum, scrollTo);
 },
 
+// If the user hasn't disabled external link warnings, confirm before clicking on the link.
+externalLink: function onclick() {
+	if (typeof eso != "undefined" && eso.disableLinkAlerts) return;
+	else return confirm(eso.language["confirmExternalLink"]);
+},
+
 // Add a reply.
 addReply: function() {
 	content = getById("reply-textarea").value;

@@ -679,6 +679,7 @@ function conversationLink($match, $state)
 // Add a link to a URL (that has been auto-linked) to the output.
 function url($match, $state)
 {
+	global $config;
 	$protocol = "";
 	if (!preg_match("`^((?:https?|file|ftp|feed)://)`i", $match)) $protocol = "https://";
 	$after = "";
@@ -689,7 +690,11 @@ function url($match, $state)
 			$after = ")";
 		}
 	}
-	$this->formatter->output .= "<a href='$protocol$match'>$match</a>$after";
+	$external = "";
+	$link = $protocol . $match;
+	// If the URL doesn't match the forum's baseURL, it should be considered an external link.
+	if (parse_url($link, PHP_URL_HOST) !== parse_url($config["baseURL"], PHP_URL_HOST)) $external = " target='_blank' class='external' onclick='return Conversation.externalLink()'";
+	$this->formatter->output .= "<a href='$link'$external>$match</a>$after";
 	return true;
 }
 
@@ -709,7 +714,8 @@ function link($match, $state)
 			$protocol = "";
 			if (!preg_match("`^((?:https?|ftp|feed)://|mailto:)`i", $link)) $protocol = "https://";
 			$external = "";
-			if (parse_url($link, PHP_URL_HOST) !== parse_url($config["baseURL"], PHP_URL_HOST)) $external = " target='_blank' class='external'";
+			// If the URL doesn't match the forum's baseURL, it should be considered an external link.
+			if (preg_match("`^((?:https?|file|ftp|feed)://)`i", $protocol.$link) and parse_url($link, PHP_URL_HOST) !== parse_url($config["baseURL"], PHP_URL_HOST)) $external = " target='_blank' class='external' onclick='return Conversation.externalLink()'";
 			$this->formatter->output .= "<a href='$protocol$link'" . $external . (isset($title) ? " title=$quote$title$quote" : "") . ">";
 			break;
 		case LEXER_EXIT:
@@ -729,8 +735,8 @@ function revert($string)
 	//$string = preg_replace("`<a href='" . str_replace("?", "\?", makeLink("post", "(\d+)")) . "'[^>]*>(.*?)<\/a>`e", "'[post:$1' . ('$2' ? ' $2' : '') . ']'", $string);
 	$string = preg_replace("`<a href='" . str_replace("?", "\?", makeLink("(\d+)")) . "'[^>]*>(.*?)<\/a>`", "[conversation:$1 $2]", $string);
 	$string = preg_replace("/<a href='(?:\w+:\/\/)?(.*?)'>\\1<\/a>/", "$1", $string);
-	$string = preg_replace("/<a(.*?)>(.*?)<\/a>/", "&lt;a$1&gt;$2&lt;/a&gt;", $string);
-		
+	$string = preg_replace("/<a(.*?)(?: target='_blank' class='external' onclick='return Conversation\.externalLink\(\)')>(.*?)<\/a>/", "&lt;a$1&gt;$2&lt;/a&gt;", $string);
+
 	return $string;
 }
 
@@ -799,13 +805,13 @@ function image($src, $alt = "", $title = "")
 {
 	if (!empty($alt)) $altQuote = strpos($alt, "&#39;") === false ? "'" : '"';
 	if (!empty($title)) $titleQuote = strpos($title, "&#39;") === false ? "'" : '"';
-	$this->formatter->output .= "<img src='$src'" . (!empty($alt) ? " alt=$altQuote$alt$altQuote" : "") . (!empty($title) ? " title=$titleQuote$title$titleQuote" : "") . "/>";
+	$this->formatter->output .= "<img src='$src'" . (!empty($alt) ? " alt=$altQuote$alt$altQuote" : "") . (!empty($title) ? " title=$titleQuote$title$titleQuote" : "") . " class='frame'/>";
 }
 
 // Revert image tags to their formatting code.
 function revert($string)
 {
-	$string = preg_replace("/<img(.*?)\/>/", "&lt;img$1&gt;", $string);
+	$string = preg_replace("/<img(.*?)(?: class='frame')\/>/", "&lt;img$1&gt;", $string);
 	return $string;
 }
 
@@ -849,7 +855,7 @@ function video_html($match, $state)
 function video($src, $title = "")
 {
 	if (!empty($title)) $titleQuote = strpos($title, "&#39;") === false ? "'" : '"';
-	$this->formatter->output .= "<video controls " . (!empty($title) ? " title=$titleQuote$title$titleQuote" : "") . "/><source src='$src'/></video/>";
+	$this->formatter->output .= "<video controls " . (!empty($title) ? " title=$titleQuote$title$titleQuote" : "") . " class='frame'/><source src='$src'/></video/>";
 }
 
 // Revert video tags to their formatting code.
@@ -858,7 +864,7 @@ function revert($string)
 	// Clean up the beginning of the video tag.
 	if (preg_match("/<video controls (.*?)\/>/", $string)) $string = str_replace("<source src='", "<video src='", $string);
 	// Remove the controls and title attributes, if any.
-	$string = preg_replace("/<video controls (.*?)\/>/", "", $string);
+	$string = preg_replace("/<video controls (.*?)(?: class='frame')\/>/", "", $string);
 	// Clean up the end of the video tag.
 	$string = str_replace("'/></video/>", "'>", $string);
 	return $string;
