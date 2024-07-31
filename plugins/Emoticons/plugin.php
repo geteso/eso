@@ -80,7 +80,7 @@ function addEmoticonSettings(&$settings)
 		"html" => "<label for='emoticons' class='checkbox'>{$language["Disable emoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
 		"databaseField" => "emoticons",
 		"checkbox" => true
-	));
+	), 600);
 }
 
 // Add the table to the database.

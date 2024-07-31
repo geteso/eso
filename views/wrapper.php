@@ -129,6 +129,7 @@ if(!defined("IN_ESO"))exit;
 <?php echo $language["Powered by"];?> <a href='https://geteso.org/'>esoBB</a><!-- A derivative of esoTalk.  Not directly affiliated with Simon or Toby Zerner. --> <?php if ($this->user["admin"]) echo ESO_VERSION; ?>
 <!-- End copyright notification. --></p>
 <?php if ($this->action !== "search"):
+	$stats = "";
 	foreach ($this->getStatistics() as $k=>$v) $stats .= "<span id='statistic-$k'>$v</span> - ";
 	echo "<p id='stats'>".substr($stats,0,-3)."</p>";
 endif; ?>

@@ -2,6 +2,11 @@
 /* Main tags */
 body {background:linear-gradient(#e4e5ea, #fff 70%); background-repeat:no-repeat}
 
+/* Links */
+a.external::after {content:''; height:10px; width:10px; margin-left:3px; background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5Ljk1MiA5Ljk4NSI+CiAgPHBhdGggZmlsbD0iIzAwZiIgZD0iTTkuNDQ5LjAwOEg1LjU1NHMuNTM3LjU0NS44NTIuODZjNi4wNjIgNi4wNDgtNS4xLTUuMDk1IDIuNjg2IDIuNjgyLjMxNS4zMTQuODYuODcyLjg2Ljg3Mkw5Ljk0MiAwcy0uMjE1LjAwOC0uNDkzLjAwOHoiLz4KICA8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiMwMGYiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHN0cm9rZS13aWR0aD0iMSIgZD0iTTE2LjcxLS42OGgtMy4wN3Y3LjUxNmg3LjQ4M1YzLjg2NW0tNC44Ni4zNDcgNS40Ni01LjQ2IiB0cmFuc2Zvcm09Im1hdHJpeCgxLjA3NDg4IDAgMCAxLjA3Mzg1IC0xNC4xNiAyLjE0NSkiLz4KPC9zdmc+') no-repeat center; background-size:contain; display:inline-block; -webkit-filter:drop-shadow(0 1px 0 #fff); filter:drop-shadow(0 1px 0 #fff)}
+a.external:hover:after {-webkit-filter:saturate(0) drop-shadow(0 1px 0 #fff); filter:saturate(0) drop-shadow(0 1px 0 #fff)}
+a.external:active:after {-webkit-filter:saturate(0) contrast(25%) drop-shadow(0 1px 0 #fff); filter:saturate(0) contrast(25%) drop-shadow(0 1px 0 #fff)}
+
 /* Misc */
 small, dt {color:#888}
 small a, dt a {color:#55f}
@@ -53,10 +58,11 @@ small a, dt a {color:#55f}
 #reset:hover, #searchText:focus ~ #reset:hover {text-decoration:none; color:#000}
 
 /* Messages */
+#messages .msg {box-shadow:0 2px 3px -1px #ababab}
 .msg .close {border:1px solid #000; color:#000; text-decoration:none}
 .msg .close:hover {background:#fff; color:#000; text-decoration:none}
 .msg .close:active {background:#aaa}
-.msg {background:#ddd; text-shadow:#fff 0 1px}
+.msg {background:#ddd; text-shadow:rgba(255,255,255,0.5) 0 1px}
 .info {background:#fad163}
 .success {background:#cf0}
 .warning {background:#c00; color:#fff; text-shadow:none; box-shadow:inset 0 2px 3px rgba(255, 255, 255, 0.5)}
@@ -83,6 +89,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 
 /* Conversations table */
 .c tr {box-shadow:inset 0 1px 1px #ffffff; text-shadow:#ffffff 0 1px}
+.c thead > tr {text-shadow:rgba(255,255,255,0.5) 0 1px}
 .c th {background-color:#ddd}
 .c td {border-bottom:1px solid #ddd}
 .c strong a {color:#000}
@@ -93,6 +100,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 .c .p2 {color:#666}
 .c .p3 {color:#aaa}
 #newResults td {border:0}
+#more .msg {margin-top:-1px}
 #searchResults tbody > tr:nth-of-type(even) {background-color:#f4f4f4}
 
 /* Conversation header */
@@ -119,20 +127,25 @@ a.star0:active, a.star1:active {color:#e4b600}
 .pg .unread {background:#ffc; color:#f71}
 
 /* Conversation post */
-.p {border-style:solid; border-width:0; box-shadow:0 1px 3px #ccc}
+.p {border-style:solid; border-width:0; box-shadow:0 2px 3px -1px #ababab}
 .p .hdr, .p .hdr small, .p .hdr a {color:#000; text-shadow:rgba(255,255,255,0.5) 0 1px}
+.p .hdr a.external::after {filter:saturate(0) drop-shadow(rgba(255,255,255,0.5) 0 1px)}
 .p .hdr select, .p .hdr input.save {border:dashed rgba(0,0,0,0.2); border-width:1px}
 .p .hdr select option {background:#fff}
 .p .hdr .controls a {background:rgba(0,0,0,0.1); box-shadow:rgba(255,255,255,0.5) 0 1px}
 .p .hdr .controls a:hover {background-color:#fff; text-decoration:none}
 .p .hdr .controls a:active {background-color:#888}
 .p .body {text-shadow:#fff 0 1px}
-blockquote, .p .body p > img:not(.emoticon), .p .body  p > video {background:rgba(0,0,0,0.05); border:solid rgba(0,0,0,0.1); border-width:1px; box-shadow:#fff 0 1px}
+.p .body .p {box-shadow:0 1px 0 #ffffff}
+.p .body .label {text-shadow:none}
+blockquote, .p .body .frame {background:rgba(0,0,0,0.05); border:solid rgba(0,0,0,0.1); border-width:1px; box-shadow:#fff 0 1px, inset 0 1px 3px #ccc}
+.p .body .frame {padding:3px}
 .p .body .emoticon {-webkit-filter:drop-shadow(0 1px 0 #fff); filter:drop-shadow(0 1px 0 #fff)}
 .deleted, .deleted .hdr, .deleted .hdr a {color:#888}
 .deleted {background:#eee; border-color:#eee}
 
 /* Reply to a conversation */
+.p .body input.text, .p .body textarea {box-shadow:inset 0 1px 3px #cccccc, 0 1px 0 #ffffff}
 .editButtons .button {border-radius:0}
 .editButtons .big {border-radius:5px; border-top-left-radius:0; border-top-right-radius:0}
 
@@ -199,10 +212,10 @@ fieldset.hidden legend a {color:#666}
 .button input {color:#fff}
 .button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5),inset 0 1px 1px #eeeeee}
 .button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25),inset 0 1px 1px #eeeeee}
-.buttonSmall {box-shadow:inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
+.buttonSmall, .p .body .button {box-shadow:inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
 .buttonSmall, .buttonSmall:active, .buttonSmall:hover {background:linear-gradient(#f7f7f7, #d8d9e1); color:#000; text-shadow:#fff 0 1px; border:1px solid #bbb; border-radius:0}
-.buttonSmall:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5), inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
-.buttonSmall:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25), inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
+.buttonSmall:hover, .p .body .button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5), inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
+.buttonSmall:active, .p .body .button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25), inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
 .buttonSmall input, .buttonSmall:active input, .buttonSmall:hover input {color:#000; text-shadow:#fff 0 1px}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 0 #ffffff}
 .bigDisabled, .bigDisabled:active, .bigDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 0 #ffffff}
@@ -283,5 +296,4 @@ fieldset.hidden legend a {color:#666}
 /* Formatting controls */
 @media only screen and (max-width:570px) {
 #cPosts .p .hdr .controls {background:#ddd}
-.formattingCheckbox {border-top:1px solid rgba(0,0,0,0.2)}
 }

@@ -28,7 +28,7 @@ class eso extends Controller {
 var $db;
 var $user;
 var $action;
-var $allowedActions = array("admin", "conversation", "feed", "forgot-password", "help", "join", "online", "post", "profile", "search", "settings");
+var $allowedActions = array("admin", "conversation", "feed", "forgot-password", "join", "online", "post", "profile", "search", "settings");
 var $controller;
 var $view = "wrapper.php";
 var $language;
@@ -131,7 +131,7 @@ function init()
 
 		// Set up some default JavaScript files and language definitions.
 		$this->addScript("js/eso.js", -1);
-		$this->addLanguageToJS("ajaxRequestPending", "ajaxDisconnected");
+		$this->addLanguageToJS("ajaxRequestPending", "ajaxDisconnected", "confirmExternalLink");
 				
 	}
 	
@@ -551,6 +551,7 @@ function head()
 		"avatarRight" => isset($this->skin->avatarRight) ? $this->skin->avatarRight : "avatarRight.svg",
 		"avatarThumb" => isset($this->skin->avatarThumb) ? $this->skin->avatarThumb : "avatarThumb.svg",
 		"disableAnimation" => !empty($this->eso->user["disableJSEffects"]),
+		"disableLinkAlerts" => !empty($this->eso->user["disableLinkAlerts"]),
 		"avatarAlignment" => !empty($this->eso->user["avatarAlignment"]) ? $this->eso->user["avatarAlignment"] : $_SESSION["avatarAlignment"],
 		"messageDisplayTime" => $config["messageDisplayTime"],
 		"language" => $this->jsLanguage,
@@ -580,10 +581,10 @@ function addToFooter($html, $position = false)
 }
 
 // Add a CSS file to be included on the page.
-function addCSS($styleSheet, $media = false) 
+function addCSS($styleSheet, $media = false, $position = false) 
 {
 	if (in_array(array("href" => $styleSheet, "media" => $media), $this->styleSheets)) return false;
-	addToArray($this->styleSheets, array("href" => $styleSheet, "media" => $media));
+	addToArray($this->styleSheets, array("href" => $styleSheet, "media" => $media), $position);
 }
 
 // Star/unstar a conversation.

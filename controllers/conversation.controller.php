@@ -1285,6 +1285,7 @@ function addMember($name)
 			// Members
 //			case $language["Member-plural"]:
 //			case "members":
+//			case "*":
 //				$memberId = "Member";
 //				$memberName = $language["Member-plural"];
 //				break;
