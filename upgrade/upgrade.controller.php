@@ -42,41 +42,41 @@ function init()
 	// Perform the upgrade, depending on what version the user is currently at.
 	global $config, $versions;
 
-	// 1.0.0 alpha 5 -> 1.0.0 beta 1
+	// esoTalk 1.0.0 alpha 5 -> esoTalk 1.0.0 beta 1
 	if ($versions["eso"] == "1.0.0a5") {
 		$this->upgrade_100b1();
 		$versions["eso"] = "1.0.0b1";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 	
-	// 1.0.0 beta 1 -> 1.0.0 beta 2
+	// esoTalk 1.0.0 beta 1 -> esoTalk 1.0.0 beta 2
 	if ($versions["eso"] == "1.0.0b1") {
 		$this->upgrade_100b2();
 		$versions["eso"] = "1.0.0b2";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 	
-	// 1.0.0 beta 2 -> 1.0.0 beta 3
+	// esoTalk 1.0.0 beta 2 -> esoTalk 1.0.0 beta 3
 	if ($versions["eso"] == "1.0.0b2") {
 		$this->upgrade_100b3();
 		$versions["eso"] = "1.0.0b3";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 
-	// 1.0.0 beta 3 -> 1.0.0 pre 1 (referred to as "beta-1.0")
+	// esoTalk 1.0.0 beta 3 -> esoBB 1.0.0 pre 1 (referred to as "beta-1.0")
 	if ($versions["eso"] == "1.0.0b3") {
 		$versions["eso"] = "beta-1.0";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 
-	// 1.0.0 pre 1 -> 1.0.0 delta 1
+	// esoBB 1.0.0 pre 1 -> esoBB 1.0.0 delta 1
 	if ($versions["eso"] == "beta-1.0") {
 		$this->upgrade_100d1();
 		$versions["eso"] = "1.0.0d1";
 		writeConfigFile("../config/versions.php", '$versions', $versions);
 	}
 
-	// 1.0.0 delta 1 -> 1.0.0 delta 2
+	// esoBB 1.0.0 delta 1 -> esoBB 1.0.0 delta 2
 	if ($versions["eso"] == "1.0.0d1") {
 		$this->upgrade_100d2();
 		$versions["eso"] = "1.0.0d2";
