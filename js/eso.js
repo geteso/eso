@@ -1747,7 +1747,7 @@ toggleSticky: function() {
 	var label = getElementsByClassName(getById("cLabels"), "sticky")[0];
 	toggle(label);
 	var buttons = document.querySelectorAll("[id=stickyLink]");
-	for (i = 0; i < buttons.length; ++i) {
+	for (var i = 0; i < buttons.length; ++i) {
 		buttons[i].value = eso.language[label.showing ? "Unsticky" : "Sticky"];
 	}
 	Ajax.request({
@@ -1761,7 +1761,7 @@ toggleLock: function() {
 	label = getElementsByClassName(getById("cLabels"), "locked")[0];
 	toggle(label);
 	var buttons = document.querySelectorAll("[id=lockLink]");
-	for (i = 0; i < buttons.length; ++i) {
+	for (var i = 0; i < buttons.length; ++i) {
 		buttons[i].value = eso.language[label.showing ? "Unlock" : "Lock"];
 	}
 	Ajax.request({
