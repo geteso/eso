@@ -32,7 +32,7 @@ var $view = "join.view.php";
 function init()
 {
 	global $language, $config;
-	
+
 	// If we're already logged in, go to 'My settings'.
 	if ($this->eso->user) redirect("settings");
 
@@ -46,7 +46,7 @@ function init()
 	$this->title = $language["Join this forum"];
 
 	// Only respond to requests for verification emails if we require e-mail verification.
-	if (($config["registrationRequireApproval"] == "email") && isset($_GET["q2"])) {
+	if (!empty($config["sendEmail"]) && isset($_GET["q2"])) {
 		
 		// If the user is requesting that we resend their verification email...
 		if ($_GET["q2"] == "sendVerification") {
@@ -54,13 +54,20 @@ function init()
 			$rand = md5(rand());
 			if (list($email, $name) = $this->eso->db->fetchRow("SELECT email, name FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND account='Unvalidated'") and $this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword='$rand' WHERE memberId=$memberId")) $this->sendVerificationEmail($email, $name, $memberId . $rand);
 			$this->eso->message("verifyEmail", false);
-			redirect("");
-		}
-		
 		// Otherwise, if there's a verification hash in the URL, attempt to verify the user.
-		else $this->validateMember($_GET["q2"]);
+		} else $this->validateMember($_GET["q2"]);
+		// Make sure to redirect any requests from logged in users back to 'My settings'.
+		if ($this->eso->user) redirect("settings");
+		else redirect("");
 		return;
 
+	// If we're already logged in, go to 'My settings'.
+	} elseif ($this->eso->user) redirect("settings");
+
+	// If registration is disabled, kick them out.
+	elseif (empty($config["registrationOpen"])) {
+		$this->eso->message("registrationClosed");
+		redirect("");
 	}
 	
 	// Define the elements in the join form.
@@ -119,14 +126,14 @@ function init()
 	
 	// If the form has been submitted, validate it and add the member into the database.
 	if (isset($_POST["join"]) and $this->addMember()) {
-		if (!empty($config["sendEmail"]) && $config["registrationRequireApproval"] == "email") {
+		if (!empty($config["sendEmail"]) && !empty($config["registrationEmailApproval"])) {
 			$this->eso->message("verifyEmail", false);
 			redirect("");
-		} elseif ($config["registrationRequireApproval"] == false) {
-			$this->eso->login($_POST["join"]["name"], $_POST["join"]["password"], false);
+		} elseif (!empty($config["registrationManualApproval"])) {
+			$this->eso->message("waitForApproval", false);
 			redirect("");
 		} else {
-			$this->eso->message("waitForApproval", false);
+			$this->eso->login($_POST["join"]["name"], $_POST["join"]["password"], false);
 			redirect("");
 		}
 	}
@@ -260,7 +267,7 @@ function addMember()
 	$this->callHook("afterAddMember", array($memberId));
 	
 	// Email the member with a verification link so that they can verify their account.
-	if (!empty($config["sendEmail"]) && $config["registrationRequireApproval"] == "email") {
+	if (!empty($config["sendEmail"])) {
 		// Update their record in the database with a special password reset hash.
 		$rand = md5(rand());
 		$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET resetPassword='$rand' WHERE memberId=$memberId");
@@ -294,12 +301,11 @@ function validateMember($hash)
 	$resetPassword = $this->eso->db->escape(substr($hash, -32));
 	
 	// See if there is an unvalidated user with this ID and password hash. If there is, validate them and log them in.
-	if ($name = @$this->eso->db->result($this->eso->db->query("SELECT name FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND resetPassword='$resetPassword' AND account='Unvalidated'"), 0) and $password = @$this->eso->db->result($this->eso->db->query("SELECT password FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND resetPassword='$resetPassword' AND account='Unvalidated'"), 0)) {
-		$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET account='Member' WHERE memberId=$memberId");
+	if ($name = @$this->eso->db->result($this->eso->db->query("SELECT name FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND resetPassword='$resetPassword' AND emailVerified!=1"), 0) and $password = @$this->eso->db->result($this->eso->db->query("SELECT password FROM {$config["tablePrefix"]}members WHERE memberId=$memberId AND resetPassword='$resetPassword' AND emailVerified!=1"), 0)) {
+		$this->eso->db->query("UPDATE {$config["tablePrefix"]}members SET " . (empty($config["requireManualApproval"]) ? "account='Member', " : "") . "emailVerified=1 WHERE memberId=$memberId");
 		$this->eso->login($name, false, $password);
-		$this->eso->message("accountValidated", false);
+		if (empty($config["requireManualApproval"]) and $this->eso->db->result($this->eso->db->query("SELECT account FROM {$config["tablePrefix"]}members WHERE memberId=$memberId"), 0) == "Member") $this->eso->message("accountValidated", false);
 	}
-	redirect("");
 }
 
 // Add an element to the page's form.

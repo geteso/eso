@@ -92,8 +92,8 @@ if(!defined("IN_ESO"))exit;
 <h1>
 <?php endif; ?>
 
-<a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo();?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''/> 
-<span id='forumTitle'><?php echo $config["forumTitle"];?>
+<a href='' title='<?php echo $config["forumTitle"];?>'><img src='<?php echo $this->skin->getForumLogo();?>' data-fallback='<?php echo !empty($config["forumLogo"])?$config["forumLogo"]:"skins/{$config["skin"]}/logo.png";?>' alt=''
+/><span id='forumTitle'><?php echo $config["forumTitle"];?>
 <?php if (($config["showDescription"] == "true") && ($this->action == "search")): ?>
 <small id='forumDescription'><?php echo $config["forumDescription"];?></small>
 <?php endif; ?>

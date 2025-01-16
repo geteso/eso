@@ -11,6 +11,7 @@ a.external:active:after {-webkit-filter:saturate(0) contrast(25%) drop-shadow(0 
 small, dt {color:#888}
 small a, dt a {color:#55f}
 #loading {background:#dcff52; border:solid #d4e58f; border-width:0 1px 1px 1px; box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px; -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 0 3px}
+img.avatar, div.avatar img {-webkit-filter:drop-shadow(0 1px 0 rgba(255,255,255,0.5)); filter:drop-shadow(0 1px 0 rgba(255,255,255,0.5))}
 .enabled, #skins a:hover {background:#ffa}
 .disabled {color:#888}
 .disabled:hover {color:#888; text-decoration:none}
@@ -26,12 +27,15 @@ small a, dt a {color:#55f}
 #hdr #search {box-shadow:0 1px 0 #fff; border-bottom-right-radius:5px}
 
 /* User bar */
-#bar {background:linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 2px 3px -1px #ababab}
+#bar {background:linear-gradient(#fff, #d8d9e1); border-bottom:1px solid #ababab; border-top:1px solid #c1c1c1; box-shadow:0 2px 3px -1px #ababab; text-shadow:#fff 0 1px}
 #bar strong a {color:#000}
 #bar input.text, #displayAvatars select {box-shadow:inset 0 1px 3px #ccc, 0 1px 0 #ffffff}
-#bar #login .button, #bar #logout .button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d}
-#bar #login .button input, #bar #logout .button input {color:#fff; text-shadow:#046b9e 0 -1px}
 #displayAvatars select {color:#000; background:#fff; border:1px solid #bbb; border-radius:0}
+/* Login and logout buttons */
+#bar #login .button, #bar #logout .button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; box-shadow:inset 0 1px 0 #eeeeee, 0 1px 0 #ffffff}
+#bar #login .button:hover, #bar #logout .button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5),inset 0 1px 0 #eeeeee}
+#bar #login .button:active, #bar #logout .button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25),inset 0 1px 0 #eeeeee}
+#bar #login .button input, #bar #logout .button input {color:#fff; text-shadow:#046b9e 0 -1px}
 /* Dividers */
 #bar li:not(li:first-child) > .vl {margin-left:4px}
 #bar li:not(li:last-child) > .vr {margin-right:4px}
@@ -58,14 +62,14 @@ small a, dt a {color:#55f}
 #reset:hover, #searchText:focus ~ #reset:hover {text-decoration:none; color:#000}
 
 /* Messages */
-#messages .msg {box-shadow:0 2px 3px -1px #ababab}
+#messages {box-shadow:0 2px 5px 0 rgba(0,0,0,0.5)}
 .msg .close {border:1px solid #000; color:#000; text-decoration:none}
 .msg .close:hover {background:#fff; color:#000; text-decoration:none}
 .msg .close:active {background:#aaa}
-.msg {background:#ddd; text-shadow:rgba(255,255,255,0.5) 0 1px}
+.msg {background:#ddd; text-shadow:rgba(255,255,255,0.5) 0 1px; box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.2)}
 .info {background:#fad163}
 .success {background:#cf0}
-.warning {background:#c00; color:#fff; text-shadow:none; box-shadow:inset 0 2px 3px rgba(255, 255, 255, 0.5)}
+.warning {background:linear-gradient(to bottom, #e36c63, #c00); color:#fff; text-shadow:rgba(0,0,0,0.3) 0 -1px; box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.3)}
 .warning a, .warning a:hover {color:#fff; text-decoration:underline}
 .warning .close {border-color:#fff; color:#fff}
 
@@ -77,23 +81,24 @@ a.star0:active, a.star1:active {color:#e4b600}
 .starred td {background:#ffa}
 
 /* Conversation labels */
-.locked {background:#999; color:#fff}
-.private {background:#7b00ad; color:#fff}
+.label {color:#fff; text-shadow:rgba(0,0,0,0.3) 0 -1px; border-bottom: 1px solid rgba(0,0,0,0.3)}
+.label, .locked {background:#999}
+.private {background:#7b00ad}
+.sticky {background:#f90}
+.draft {background:#0b2}
+/* Gambits */
 #gambits a.privateText {color:#7b00ad}
-.sticky {background:#f90; color:#fff}
 #gambits a.stickyText {color:#f60}
 #gambits a.starredText {color:#efcb00}
 #gambits a.lockedText {color:#888}
-.draft {background:#0b2; color:#fff}
 #gambits a.draftText {color:#0b2}
 
 /* Conversations table */
-.c tr {box-shadow:inset 0 1px 1px #ffffff; text-shadow:#ffffff 0 1px}
+.c tr {box-shadow:inset 0 1px 0 #ffffff; text-shadow:#ffffff 0 1px}
 .c thead > tr {text-shadow:rgba(255,255,255,0.5) 0 1px}
-.c th {background-color:#ddd}
+.c th {background-color:#ddd; box-shadow:inset 0 -1px 0 rgba(0,0,0,0.2)}
 .c td {border-bottom:1px solid #ddd}
 .c strong a {color:#000}
-.c .label {text-shadow:none; box-shadow:#ffffff 0 1px}
 .c .author a, .c .lastPost a {color:#000}
 .c td.avatar img {box-shadow:#ffffff 0 1px}
 .c .p1 {color:#000}
@@ -104,7 +109,7 @@ a.star0:active, a.star1:active {color:#e4b600}
 #searchResults tbody > tr:nth-of-type(even) {background-color:#f4f4f4}
 
 /* Conversation header */
-#cHdr {border:1px solid #ccc; box-shadow:inset 0 1px 3px #ccc}
+#cHdr {text-shadow:0 1px 0 #fff}
 /* Info and title (left part) */
 #cInfo:not(.text) {border-style:none; border-width:1px}
 #cInfo .editable {border-style:dashed; border-width:1px; border-color:#bbb}
@@ -119,15 +124,26 @@ a.star0:active, a.star1:active {color:#e4b600}
 
 /* Pagination */
 .pg {background:#fff}
-.pg li {border:1px solid #bbb}
-.pg li.middle {border-width:1px 0}
-.pg .viewing div {background:#d7eef4; border:1px solid #879ec4; text-shadow:#fff 0 1px}
+.pg li {border:1px solid #bbb; box-shadow:inset 0 1px 3px #ccc; text-shadow:#fff 0 1px}
+.pg li.middle {border-width:1px 0; clip-path:border-box}
+.pg li a {color:#000; border-right:1px solid #ccc; box-sizing:border-box}
+.pg li a:last-child {border-right:0}
+.pg li a.disabled {color:#888}
+.pg li.left a, .pg li.right a {background:#efefef; box-shadow:inset 0 1px 0 #fff, inset 0 -1px 0 #ddd}
+.pg li.left a:hover, .pg li.right a:hover {background:#fff; text-decoration:none}
+.pg li.left a:active, .pg li.right a:active {background:#ddd; box-shadow:none}
+.pg li a.disabled, .pg li a.disabled:hover, .pg li a.disabled:active {background:#efefef; box-shadow:inset 0 1px 0 #fff, inset 0 -1px 0 #ddd}
+.pg .viewing div {background:#d7eef4; box-shadow:inset 0 1px 0 #fff, inset 0 -1px 0 #b6cbd0, 0 1px 3px 1px #ccc; border:1px solid #879ec4}
 .pg .viewing:hover div {background:#e9f3f2}
-.pg .viewing:active div {background:#abcbe3}
+.pg .viewing:active div {background:#abcbe3; box-shadow:none}
 .pg .unread {background:#ffc; color:#f71}
 
 /* Conversation post */
-.p {border-style:solid; border-width:0; box-shadow:0 2px 3px -1px #ababab}
+.p {border-style:solid; border-width:0; box-shadow:inset 0 -1px 0 rgba(0,0,0,0.1)}
+.p.l::after, .p.r::after {content:""; width:115px; height:2px; box-shadow:inset 0 -2px 0 rgba(0,0,0,0.2)}
+.p.l::after {float:left; margin:-2px 0 0 -115px}
+.p.r::after {float:right; margin:-2px -115px 0 0}
+.p .hdr {box-shadow:inset 0 -1px 0 rgba(0,0,0,0.2)}
 .p .hdr, .p .hdr small, .p .hdr a {color:#000; text-shadow:rgba(255,255,255,0.5) 0 1px}
 .p .hdr a.external::after {filter:saturate(0) drop-shadow(rgba(255,255,255,0.5) 0 1px)}
 .p .hdr select, .p .hdr input.save {border:dashed rgba(0,0,0,0.2); border-width:1px}
@@ -136,13 +152,13 @@ a.star0:active, a.star1:active {color:#e4b600}
 .p .hdr .controls a:hover {background-color:#fff; text-decoration:none}
 .p .hdr .controls a:active {background-color:#888}
 .p .body {text-shadow:#fff 0 1px}
-.p .body .p {box-shadow:0 1px 0 #ffffff}
-.p .body .label {text-shadow:none}
-blockquote, .p .body .frame {background:rgba(0,0,0,0.05); border:solid rgba(0,0,0,0.1); border-width:1px; box-shadow:#fff 0 1px, inset 0 1px 3px #ccc}
-.p .body .frame {padding:3px}
+blockquote {background:rgba(0,0,0,0.05); border:solid rgba(0,0,0,0.1); border-width:1px; box-shadow:#fff 0 1px, inset 0 1px 3px #ccc}
 .p .body .emoticon {-webkit-filter:drop-shadow(0 1px 0 #fff); filter:drop-shadow(0 1px 0 #fff)}
+.p div.avatar {padding:5px 0 6px 0}
+/* Deleted posts */
 .deleted, .deleted .hdr, .deleted .hdr a {color:#888}
-.deleted {background:#eee; border-color:#eee}
+.p.deleted {background:#eee; border-color:#eee; box-shadow:none}
+.p.deleted .hdr, .p.deleted .body {box-shadow:inset 0 -1px 0 rgba(0,0,0,0.1)}
 
 /* Reply to a conversation */
 .p .body input.text, .p .body textarea {box-shadow:inset 0 1px 3px #cccccc, 0 1px 0 #ffffff}
@@ -160,6 +176,10 @@ blockquote {color:#555}
 blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
 .p .body h3 {border-bottom:1px solid #bbb}
 .p hr {color:#bbb; border:solid #bbb; border-width:1px 0 0}
+
+/* My settings */
+#palette a {box-shadow:0 1px 0 #fff}
+#palette a.selected {height:41px; margin-top:-1px; box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.2)}
 
 /* Admin */
 #admin {border-color:#eee; border-image:linear-gradient(180deg, #eee, #fff); border-image-slice:1; background:#fff}
@@ -190,7 +210,8 @@ blockquote cite {border-bottom:1px dashed rgba(0,0,0,0.2)}
 #skins a:hover .preview, #skins .enabled .preview {border-color:#aaa}
 
 /* Profile */
-.profile .form li {border-bottom:1px solid rgba(0,0,0,0.1)}
+.profile .form li {border-top:1px solid #fff; border-bottom:1px solid rgba(0,0,0,0.1)}
+.profile .form li:first-child {border-top:0}
 
 /* Footer */
 #ftr-content {border-top:1px dashed #ccc}
@@ -208,77 +229,51 @@ fieldset.hidden legend a {color:#666}
 
 /* Buttons */
 .button, .button input {text-shadow:#046b9e 0 -1px}
-.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 1px #eeeeee}
+.button {background:linear-gradient(#9dcade 25%, #44a2c9 50%, #1e77af 50%, #37dcee 100%); border:1px solid #1a6b9d; border-radius:5px; box-shadow:inset 0 1px 0 #eeeeee}
 .button input {color:#fff}
-.button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5),inset 0 1px 1px #eeeeee}
-.button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25),inset 0 1px 1px #eeeeee}
-.buttonSmall, .p .body .button {box-shadow:inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
+.button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5),inset 0 1px 0 #eeeeee}
+.button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25),inset 0 1px 0 #eeeeee}
+.buttonSmall, .p .body .button {box-shadow:inset 0 1px 0 #ffffff, 0 1px 0 #ffffff}
 .buttonSmall, .buttonSmall:active, .buttonSmall:hover {background:linear-gradient(#f7f7f7, #d8d9e1); color:#000; text-shadow:#fff 0 1px; border:1px solid #bbb; border-radius:0}
-.buttonSmall:hover, .p .body .button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5), inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
-.buttonSmall:active, .p .body .button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25), inset 0 1px 1px #eeeeee, 0 1px 0 #ffffff}
+.buttonSmall:hover, .p .body .button:hover {box-shadow:inset 0 0 0 2px rgba(255, 255, 255, 0.5), inset 0 1px 0 #ffffff, 0 1px 0 #ffffff}
+.buttonSmall:active, .p .body .button:active {box-shadow:inset 0 0 25px 2px rgba(0, 0, 0, 0.25), inset 0 1px 0 #ffffff, 0 1px 0 #ffffff}
 .buttonSmall input, .buttonSmall:active input, .buttonSmall:hover input {color:#000; text-shadow:#fff 0 1px}
 .buttonDisabled, .buttonDisabled:active, .buttonDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 0 #ffffff}
 .bigDisabled, .bigDisabled:active, .bigDisabled:hover {background:linear-gradient(#e9ebe8 25%, #d8dad6 50%, #cbceca 50%, #f8faf7 100%); border:1px solid #b2b4b1; box-shadow:inset 0 1px 0 #ffffff}
 .buttonDisabled input, .buttonDisabled:active input, .buttonDisabled:hover input {color:#999; text-shadow:#fff 0 1px}
 .bigDisabled input, .bigDisabled:active input, .bigDisabled:hover input {color:#999; text-shadow:#fff 0 1px}
+.p .body .buttonDisabled, .p .body .buttonDisabled:active, .p .body .buttonDisabled:hover, .p .body .bigDisabled, .p .body .bigDisabled:active, .p .body .bigDisabled:hover {box-shadow:inset 0 1px 0 #ffffff, 0 1px 0 #ffffff}
 
-/* Profile colors */
-.c tr.c1 td.avatar img, .c1 .hdr, .p .c1 .hdr, #palette .c1 {background:#dfdfdf}
-.c tr.c2 td.avatar img, .c2 .hdr, .p .c2 .hdr, #palette .c2 {background:#d2d2d2}
-.c tr.c3 td.avatar img, .c3 .hdr, .p .c3 .hdr, #palette .c3 {background:#cf9eff}
-.c tr.c4 td.avatar img, .c4 .hdr, .p .c4 .hdr, #palette .c4 {background:#b29cff}
-.c tr.c5 td.avatar img, .c5 .hdr, .p .c5 .hdr, #palette .c5 {background:#a5b1ff}
-.c tr.c6 td.avatar img, .c6 .hdr, .p .c6 .hdr, #palette .c6 {background:#adccff}
-.c tr.c7 td.avatar img, .c7 .hdr, .p .c7 .hdr, #palette .c7 {background:#b4e7ff}
-.c tr.c8 td.avatar img, .c8 .hdr, .p .c8 .hdr, #palette .c8 {background:#93fff1}
-.c tr.c9 td.avatar img, .c9 .hdr, .p .c9 .hdr, #palette .c9 {background:#a4ffd4}
-.c tr.c10 td.avatar img, .c10 .hdr, .p .c10 .hdr, #palette .c10 {background:#93ffae}
-.c tr.c11 td.avatar img, .c11 .hdr, .p .c11 .hdr, #palette .c11 {background:#b5ff97}
-.c tr.c12 td.avatar img, .c12 .hdr, .p .c12 .hdr, #palette .c12 {background:#d4ff95}
-.c tr.c13 td.avatar img, .c13 .hdr, .p .c13 .hdr, #palette .c13 {background:#ebff99}
-.c tr.c14 td.avatar img, .c14 .hdr, .p .c14 .hdr, #palette .c14 {background:#fff391}
-.c tr.c15 td.avatar img, .c15 .hdr, .p .c15 .hdr, #palette .c15 {background:#ffdb75}
-.c tr.c16 td.avatar img, .c16 .hdr, .p .c16 .hdr, #palette .c16 {background:#ffcd92}
-.c tr.c17 td.avatar img, .c17 .hdr, .p .c17 .hdr, #palette .c17 {background:#ffc19b}
-.c tr.c18 td.avatar img, .c18 .hdr, .p .c18 .hdr, #palette .c18 {background:#ffa3af}
-.c tr.c19 td.avatar img, .c19 .hdr, .p .c19 .hdr, #palette .c19 {background:#ffafdc}
-.c tr.c20 td.avatar img, .c20 .hdr, .p .c20 .hdr, #palette .c20 {background:#eba5ff}
-.c tr.c21 td.avatar img, .c21 .hdr, .p .c21 .hdr, #palette .c21 {background:#c0c0db}
-.c tr.c22 td.avatar img, .c22 .hdr, .p .c22 .hdr, #palette .c22 {background:#abcbcd}
-.c tr.c23 td.avatar img, .c23 .hdr, .p .c23 .hdr, #palette .c23 {background:#b8d9c2}
-.c tr.c24 td.avatar img, .c24 .hdr, .p .c24 .hdr, #palette .c24 {background:#c8d9b8}
-.c tr.c25 td.avatar img, .c25 .hdr, .p .c25 .hdr, #palette .c25 {background:#e5e2ba}
-.c tr.c26 td.avatar img, .c26 .hdr, .p .c26 .hdr, #palette .c26 {background:#e7d0bb}
-.c tr.c27 td.avatar img, .c27 .hdr, .p .c27 .hdr, #palette .c27 {background:#cdc5bd}
-
-/* Post colors */
-.p.c1 {border-color:#dfdfdf; background:#eeeeee}
-.p.c2 {border-color:#d2d2d2; background:#eeeeee}
-.p.c3 {border-color:#cf9eff; background:#f7eeff}
-.p.c4 {border-color:#b29cff; background:#f1edff}
-.p.c5 {border-color:#a5b1ff; background:#eff1ff}
-.p.c6 {border-color:#adccff; background:#f0f6ff}
-.p.c7 {border-color:#b4e7ff; background:#f1faff}
-.p.c8 {border-color:#93fff1; background:#ecfffc}
-.p.c9 {border-color:#a4ffd4; background:#effff8}
-.p.c10 {border-color:#93ffae; background:#ecfff1}
-.p.c11 {border-color:#b5ff97; background:#f3ffec}
-.p.c12 {border-color:#d4ff95; background:#f8ffec}
-.p.c13 {border-color:#ebff99; background:#fbffed}
-.p.c14 {border-color:#fff391; background:#fffdeb}
-.p.c15 {border-color:#ffdb75; background:#fff9e7}
-.p.c16 {border-color:#ffcd92; background:#fff6ec}
-.p.c17 {border-color:#ffc19b; background:#fff4ed}
-.p.c18 {border-color:#ffa3af; background:#ffeef1}
-.p.c19 {border-color:#ffafdc; background:#fff0f8}
-.p.c20 {border-color:#eba5ff; background:#fcefff}
-.p.c21 {border-color:#c0c0db; background:#f4f4f8}
-.p.c22 {border-color:#abcbcd; background:#f0f5f6}
-.p.c23 {border-color:#b8d9c2; background:#f2f8f4}
-.p.c24 {border-color:#c8d9b8; background:#f6f8f3}
-.p.c25 {border-color:#e5e2ba; background:#fafaf2}
-.p.c26 {border-color:#e7d0bb; background:#fbf7f3}
-.p.c27 {border-color:#cdc5bd; background:#f6f5f3}
+/* Profile and post colors */
+.c1 {--profile-color:#dfdfdf; --post-color:#eeeeee}
+.c2 {--profile-color:#d2d2d2; --post-color:#eeeeee}
+.c3 {--profile-color:#cf9eff; --post-color:#f7eeff}
+.c4 {--profile-color:#b29cff; --post-color:#f1edff}
+.c5 {--profile-color:#a5b1ff; --post-color:#eff1ff}
+.c6 {--profile-color:#adccff; --post-color:#f0f6ff}
+.c7 {--profile-color:#b4e7ff; --post-color:#f1faff}
+.c8 {--profile-color:#93fff1; --post-color:#ecfffc}
+.c9 {--profile-color:#a4ffd4; --post-color:#effff8}
+.c10 {--profile-color:#93ffae; --post-color:#ecfff1}
+.c11 {--profile-color:#b5ff97; --post-color:#f3ffec}
+.c12 {--profile-color:#d4ff95; --post-color:#f8ffec}
+.c13 {--profile-color:#ebff99; --post-color:#fbffed}
+.c14 {--profile-color:#fff391; --post-color:#fffdeb}
+.c15 {--profile-color:#ffdb75; --post-color:#fff9e7}
+.c16 {--profile-color:#ffcd92; --post-color:#fff6ec}
+.c17 {--profile-color:#ffc19b; --post-color:#fff4ed}
+.c18 {--profile-color:#ffa3af; --post-color:#ffeef1}
+.c19 {--profile-color:#ffafdc; --post-color:#fff0f8}
+.c20 {--profile-color:#eba5ff; --post-color:#fcefff}
+.c21 {--profile-color:#c0c0db; --post-color:#f4f4f8}
+.c22 {--profile-color:#abcbcd; --post-color:#f0f5f6}
+.c23 {--profile-color:#b8d9c2; --post-color:#f2f8f4}
+.c24 {--profile-color:#c8d9b8; --post-color:#f6f8f3}
+.c25 {--profile-color:#e5e2ba; --post-color:#fafaf2}
+.c26 {--profile-color:#e7d0bb; --post-color:#fbf7f3}
+.c27 {--profile-color:#cdc5bd; --post-color:#f6f5f3}
+.c tr td.avatar img, .hdr, .p .hdr, #palette a {background:var(--profile-color)}
+.p {background:var(--post-color); border-color:var(--profile-color)}
 
 /* Mobile properties */
 @media only screen and (max-width:1000px) {
@@ -295,5 +290,6 @@ fieldset.hidden legend a {color:#666}
 
 /* Formatting controls */
 @media only screen and (max-width:570px) {
+.p.l::after, .p.r::after {display:none}
 #cPosts .p .hdr .controls {background:#ddd}
 }

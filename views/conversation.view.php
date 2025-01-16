@@ -200,7 +200,7 @@ if(!empty($post["deleteMember"])):?>
 <hr/><div class='p deleted' id='p<?php echo $post["id"];?>'><div class='hdr'>
 <div class='pInfo'>
 <h3><?php echo $post["name"];?></h3>
-<span title='<?php echo $post["date"];?>'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
+<span title='<?php echo $post["date"];?>' class='pTime'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
 <span><?php printf($deletedBy,$post["deleteMember"]);?></span>
 </div>
 <div class='controls'><?php if($post["canEdit"]):?><span><?php echo str_replace("%s",$post["id"],$this->showingDeletedPost==$post["id"]?$hideDeletedLink:$showDeletedLink);?></span> <span><?php echo str_replace(array("%s","%t"),array($post["id"],$_SESSION["token"]),$restoreLink);?></span> <?php endif;?>
@@ -225,7 +225,7 @@ if(!isset($this->conversation["posts"][$k-1]["memberId"]) or $this->conversation
 <?php endif;?>
 <div class='pInfo'>
 <h3><?php echo str_replace(array("%d","%s"),array($post["memberId"],$post["name"]),$memberLink);?></h3>
-<span title='<?php echo $post["date"];?>'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
+<span title='<?php echo $post["date"];?>' class='pTime'><a href='<?php echo str_replace("%s",$post["id"],$permalink);?>'><?php echo relativeTime($post["time"]);?></a></span>
 <?php if($post["editTime"]):?><span id='editedBy'><?php printf($editedBy,$post["editMember"],relativeTime($post["editTime"]));?></span>
 <?php endif;if(!empty($post["accounts"])):?><form action='<?php echo curLink();?>' method='post'><div style='display:inline'><select onchange='Conversation.changeMemberGroup(<?php echo $post["memberId"];?>,this.value)' name='group'>
 	<?php foreach($post["accounts"] as $group):?><option value='<?php echo $group;?>'<?php if($group==$post["account"])echo " selected='selected'";?>><?php echo $language[$group];?></option><?php endforeach;?></select></div> <noscript><div style='display:inline'><input name='saveGroup' type='submit' value='Save' class='save'/><input type='hidden' name='member' value='<?php echo $post["memberId"];?>'/></div></noscript></form>
@@ -293,8 +293,7 @@ else:
 echo $this->eso->skin->button(array("id"=>"saveDraft","name"=>"saveDraft","class"=>"fl","value"=>$language["Save draft"],"tabindex"=>50))," ",
 	$this->eso->skin->button(array("id"=>"discardDraft","name"=>"discardDraft","class"=>"fl","value"=>$language["Discard draft"]))," ",
 	$this->eso->skin->button(array("id"=>"postReply","name"=>"postReply","class"=>"big submit fr","value"=>$language["Submit post"],"tabindex"=>40));
-?>
-<span id='postFormatting'><small><a href="help/formatting/" target="_blank">Learn more</a> about post formatting.</small></span></div>
+?></div>
 <?php $this->callHook("renderReplyArea");?>
 <?php if($this->conversation["id"]):?></div></form><?php endif;?>
 </div>

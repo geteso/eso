@@ -841,13 +841,13 @@ function addReply($content, $newConversation = false)
 			$this->eso->db->query("UPDATE {$config["tablePrefix"]}status SET draft=NULL WHERE conversationId={$this->conversation["id"]} AND memberId={$this->eso->user["memberId"]}");
 	
 		// Email people who have starred this conversation and want an email!
-		// Conditions for the query: the member isn't themselves, they have ticked 'email me' in My settings, they've
-		// starred the conversation, they have no unread posts in the conversation (apart from this one), and they're
-		// not online at the moment.
+		// Conditions for the query: the member isn't themselves, they have verified their email address, they have
+		// ticked 'email me' in My settings, they've starred the conversation, they have no unread posts in the
+		// conversation (apart from this one), and they're not online at the moment.
 		$query = "SELECT name, email, language
 			FROM {$config["tablePrefix"]}members m
 			LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId={$this->conversation["id"]} AND s.memberId=m.memberId)
-			WHERE m.memberId!={$this->eso->user["memberId"]} AND m.emailOnStar=1 AND s.starred=1 AND s.lastRead>={$this->conversation["postCount"]} AND (m.lastSeen IS NULL OR " . (time() - $config["userOnlineExpire"]) . ">m.lastSeen)";
+			WHERE m.memberId!={$this->eso->user["memberId"]} AND m.emailVerified=1 AND m.emailOnStar=1 AND s.starred=1 AND s.lastRead>={$this->conversation["postCount"]} AND (m.lastSeen IS NULL OR " . (time() - $config["userOnlineExpire"]) . ">m.lastSeen)";
 		$result = $this->eso->db->query($query);
 		global $versions;
 		while (list($name, $email, $language) = $this->eso->db->fetchRow($result)) {
@@ -1038,12 +1038,13 @@ function deletePost($postId)
 		$this->eso->message("noPermission");
 		return false;
 	}
+
 	// Is the user suspended?
 	if ($this->eso->isSuspended()) {
 		$this->eso->message("suspended");
 		return false;
 	}
-	
+
 	// Delete the post (don't actually delete it, just mark it as deleted.)
 	global $config;
 	$postId = (int)$postId;
@@ -1072,6 +1073,7 @@ function restorePost($postId)
 		$this->eso->message("noPermission");
 		return false;
 	}	
+
 	// Is the user suspended?
 	if ($this->eso->isSuspended()) {
 		$this->eso->message("suspended");
@@ -1113,6 +1115,8 @@ function deletePostForever($postId)
 		$this->eso->message($error);
 		return false;
 	}
+	// Make sure the post has already been soft-deleted (we don't want to be accidentally deleting posts forever).
+	if (!$this->eso->db->result("SELECT deleteMember FROM {$config["tablePrefix"]}posts WHERE conversationId={$this->conversation["id"]} AND postId=$postId")) return false;
 
 	// Is the post being deleted also the last post of this conversaton?
 	$lastPost = $this->eso->db->result("SELECT postId FROM {$config["tablePrefix"]}posts
@@ -1397,12 +1401,13 @@ function emailPrivateAdd($memberIds, $emailAll = false)
 	if (!count($memberIds)) $memberIds[] = 0;
 	
 	// Work out which members need to be emailed. Conditions: the member isn't themselves, the member name/account is in
-	// our array, they've checked the 'email me' box in My settings, and the member musn't have a record in the status
-	// table for this conversation if we're emailing ALL members in the conversation.
+	// our array, they have verified their email address, they've checked the 'email me' box in My settings, and the
+	// member musn't have a record in the status table for this conversation if we're emailing ALL members in the
+	// conversation.
 	$query = "SELECT DISTINCT name, email, language
 		FROM {$config["tablePrefix"]}members m
 		LEFT JOIN {$config["tablePrefix"]}status s ON (s.conversationId={$this->conversation["id"]} AND m.memberId=s.memberId)
-		WHERE m.memberId!={$this->eso->user["memberId"]} AND (m.memberId IN (" . implode(",", $memberIds) . ") OR m.account IN ('" . implode("','", $accounts) . "')) AND m.emailOnPrivateAdd=1 " . (!$emailAll ? "AND s.memberId IS NULL" : "");
+		WHERE m.memberId!={$this->eso->user["memberId"]} AND (m.memberId IN (" . implode(",", $memberIds) . ") OR m.account IN ('" . implode("','", $accounts) . "')) AND m.emailVerified=1 AND m.emailOnPrivateAdd=1 " . (!$emailAll ? "AND s.memberId IS NULL" : "");
 	$result = $this->eso->db->query($query);
 	if (!$this->eso->db->numRows($result)) return false;
 	
@@ -1586,18 +1591,21 @@ function updateLastAction()
 // To edit tags, user must be: conversation starter or >=moderator
 function canEditTags()
 {
+	if ( $this->eso->isSuspended()) return false;
 	return $this->eso->user and ((!$this->conversation["locked"] and $this->conversation["startMember"] == $this->eso->user["memberId"]) or $this->eso->user["moderator"]);
 }
 
 // To edit members allowed, user must be: conversation starter
 function canEditMembersAllowed()
 {
+	if ($this->eso->isSuspended()) return false;
 	return $this->eso->user and $this->eso->user["memberId"] == $this->conversation["startMember"];
 }
 
 // To edit the title, user must be: conversation starter or >=moderator
 function canEditTitle()
 {
+	if ($this->eso->isSuspended()) return false;
 	return $this->eso->user and ((!$this->conversation["locked"] and $this->conversation["startMember"] == $this->eso->user["memberId"]) or $this->eso->user["moderator"]);
 }
 
@@ -1622,7 +1630,6 @@ function canReply()
 		$this->eso->logout();
 		return "loginRequired";
 	}
-	if ($this->eso->isUnvalidated()) return "noPermission";
 	if ($this->eso->isSuspended()) return "suspended";
 	if ($this->conversation["locked"] and !$this->eso->user["moderator"]) return "locked";
 	return true;
@@ -1661,7 +1668,6 @@ function canDeletePost($postId, $memberId = false, $account = false, $deleteMemb
 function canStartConversation()
 {
 	if (!$this->eso->user) return "loginRequired";
-	if ($this->eso->isUnvalidated()) return "noPermission";
 	if ($this->eso->isSuspended()) return "suspended";
 	return true;
 }

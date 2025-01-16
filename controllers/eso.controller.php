@@ -121,7 +121,7 @@ function init()
 		// If the user IS logged in, we want to display their name and appropriate links.
 		else {
 						$this->addToBar("left", "<strong id='user'><a href='" . makeLink("profile") . "'>{$this->user["name"]}</a>:</strong>", 100);
-						$this->addToBar("left", "<a href='" . makeLink("") . "'><span class='button buttonSmall'><input type='submit' value='{$language["Home"]}'></span></a>", 200);
+						$this->addToBar("left", "<a href='{$config["baseURL"]}'><span class='button buttonSmall'><input type='submit' value='{$language["Home"]}'></span></a>", 200);
 						$this->addToBar("left", "<a href='" . makeLink("profile") . "' id='profile'><span class='button buttonSmall'><input type='submit' value='{$language["My profile"]}'></span></a>", 300);
 						$this->addToBar("left", "<a href='" . makeLink("settings") . "'><span class='button buttonSmall'><input type='submit' value='{$language["My settings"]}'></span></a>", 400);
 						$this->addToBar("left", "<a href='" . makeLink("conversation", "new") . "' id='startConversation'><span class='button buttonSmall'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 500);
@@ -129,10 +129,13 @@ function init()
 						if ($this->user["moderator"]) $this->addToBar("left", "<a href='" . makeLink("admin") . "'><span class='button buttonSmall'><input type='submit' value='{$language["Dashboard"]}'></span></a>", 700);
 		}
 
+		// Add "Forgot password" link to the footer,
+		if (!$this->eso->user) $this->eso->addToFooter("<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot your password"]}'></span></a>", 100);
+
 		// Set up some default JavaScript files and language definitions.
 		$this->addScript("js/eso.js", -1);
 		$this->addLanguageToJS("ajaxRequestPending", "ajaxDisconnected", "confirmExternalLink");
-				
+		
 	}
 	
 	$this->callHook("init");
@@ -255,16 +258,17 @@ function login($name = false, $password = false, $hash = false)
 				$this->message("passwordUpgraded", false);
 			}
 
-			// If their account is unvalidated and we're using email verification, show a message with a link to resend a verification email.
-			if ($data["account"] == "Unvalidated" and $config["registrationRequireApproval"] == "email") {
-				$this->message("accountNotYetVerified", false, makeLink("join", "sendVerification", $data["memberId"]));
-				return false;
-			}
-			// If we're manually approving accounts, show a message that says to wait for approval.
-			// Even if this forum doesn't require verification, accounts that were made before that change will need approval.
-			elseif ($data["account"] == "Unvalidated") {
-				$this->message("waitForApproval", false);
-				return false;
+			if ($data["account"] == "Unvalidated") {
+				// If sendEmail is enabled and we're requiring email verification to login, show a message with a link to resend a verification email.
+				if (!empty($config["sendEmail"]) and $config["registrationEmailApproval"] == "strict" and !$data["emailVerified"]) {
+					$this->message("accountNotYetVerified", false, makeLink("join", "sendVerification", $data["memberId"]));
+					return false;
+				// If we're manually approving accounts, show a message that says to wait for approval.
+				// Even if this forum doesn't require verification, accounts that were made before that change will need approval.
+				} elseif ($config["registrationManualApproval"] == "strict") {
+					$this->message("waitForApproval", false);
+					return false;
+				}
 			}
 			
 			// Assign the user data to a SESSION variable, and as a property of the eso class.
@@ -547,6 +551,7 @@ function head()
 		"baseURL" => $config["baseURL"],
 		"user" => $this->user ? $this->user["name"] : false,
 		"skin" => $config["skin"],
+		"colors" => $this->skin->numberOfColors,
 		"avatarLeft" => isset($this->skin->avatarLeft) ? $this->skin->avatarLeft : "avatarLeft.svg",
 		"avatarRight" => isset($this->skin->avatarRight) ? $this->skin->avatarRight : "avatarRight.svg",
 		"avatarThumb" => isset($this->skin->avatarThumb) ? $this->skin->avatarThumb : "avatarThumb.svg",

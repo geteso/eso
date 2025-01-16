@@ -93,6 +93,7 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	language varchar(31) default '',
 	avatarAlignment enum('alternate','right','left','none') NOT NULL default 'alternate',
 	avatarFormat enum('jpg','png','gif') default NULL,
+	emailVerified tinyint(1) NOT NULL default '0',
 	emailOnPrivateAdd tinyint(1) NOT NULL default '1',
 	emailOnStar tinyint(1) NOT NULL default '1',
 	disableJSEffects tinyint(1) NOT NULL default '0',
@@ -101,7 +102,6 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}members (
 	lastSeen int unsigned default NULL,
 	lastAction varchar(191) default NULL,
 	resetPassword char(32) default NULL,
-	cookieIP char(32) default NULL,
 	PRIMARY KEY  (memberId),
 	UNIQUE KEY members_name (name),
 	UNIQUE KEY members_email (email),
@@ -117,18 +117,26 @@ $queries[] = "CREATE TABLE {$config["tablePrefix"]}tags (
 	PRIMARY KEY  (conversationId, tag)
 ) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
-// Create the searches table.
-$queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}searches";
-$queries[] = "CREATE TABLE {$config["tablePrefix"]}searches (
+// Create the actions table.
+$queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}actions";
+$queries[] = "CREATE TABLE {$config["tablePrefix"]}actions (
 	ip char(32) NOT NULL,
-	searchTime int unsigned NOT NULL
+	memberId int unsigned default NULL,
+	action varchar(63) NOT NULL,
+	time int unsigned NOT NULL
 ) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
-// Create the logins table.
-$queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}logins";
-$queries[] = "CREATE TABLE {$config["tablePrefix"]}logins (
-	ip char(32) NOT NULL,
-	loginTime int unsigned NOT NULL
+// Create the cookies table.
+$queries[] = "DROP TABLE IF EXISTS {$config["tablePrefix"]}cookies";
+$queries[] = "CREATE TABLE {$config["tablePrefix"]}cookies (
+	cookie char(32) NOT NULL,
+	cookieIP char(32) default NULL,
+	userAgent varchar(191) default NULL,
+	memberId int unsigned NOT NULL,
+	action varchar(63) NOT NULL default 'login',
+	firstTime int unsigned default NULL,
+	lastTime int unsigned default NULL,
+	PRIMARY KEY  (cookie, memberId)
 ) ENGINE={$config["storageEngine"]} DEFAULT CHARSET={$config["characterEncoding"]}";
 
 // Create the account for the administrator.

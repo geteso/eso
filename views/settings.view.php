@@ -26,6 +26,9 @@ if(!defined("IN_ESO"))exit;
 ?>
 <div id='settings'>
 
+<?php // If the user hasn't verified their email address, show a message.
+if ($this->emailVerified !== 1) echo $this->eso->htmlMessage("accountNotYetVerified1", makeLink("join", "sendVerification", $this->eso->user["memberId"])); ?>
+
 <fieldset id='appearance'>
 <legend><?php echo $language["Appearance settings"];?></legend>
 
@@ -166,7 +169,7 @@ endforeach;
 </form>
 
 <?php // If it's okay to change names, output the change my username form.
-if (!empty($config["changeUsername"])): ?>
+if (!empty($config["changeUsername"]) and !$this->eso->isSuspended()): ?>
 <form action='<?php echo makeLink("settings");?>' method='post'>
 <input type='hidden' name='token' value='<?php echo $_SESSION["token"];?>'/>
 <fieldset id='settingsUser'>

@@ -70,7 +70,7 @@ $defaultConfig = array(
 // Email settings.
 // WARNING: Email sending is disabled by default and should be configured first!
 // Read the guide on setting up email:
-"sendEmail" => false,
+"sendEmail" => false, // Whether outgoing emails may be sent. Required for any email-based features.
 // The following isn't necessary unless you're planning to use SMTP email.
 "smtpAuth" => false, // false | "ssl" | "tls"
 "smtpHost" => "",
@@ -91,7 +91,9 @@ $defaultConfig = array(
 "minPasswordLength" => 6,
 "nonAsciiCharacters" => true, // Whether or not usernames may contain non-printable characters (includes things like umlauts).
 "registrationOpen" => true, // Whether or not new accounts can be made on your forum.
-"registrationRequireApproval" => "manual", // false | "email" = require email approval | "manual" = approval by mod/admin
+"requireEmailApproval" => true, // Requires sendMail to be true. Whether or not new accounts will be required to have a verified email address before logging in.
+"requireManualApproval" => false, // Whether or not new accounts must be approved by an administrator before logging in.  (They will remain unvalidated.)
+// If manual and email validation are both enabled, the user will have to verify their email address AND be manually validated before being able to log in.
 "registrationsPerMinute" => "5", // Amount of registration attempts a user is limited to per minute.
 "reservedNames" => array("guest", "member", "members", "moderator", "moderators", "administrator", "administrators", "admin", "suspended", "eso", "name", "password", "everyone", "myself"), // Reserved user names which cannot be used.
 
@@ -125,6 +127,7 @@ $defaultConfig = array(
 
 // Online settings.
 "onlineMembers" => true, // Whether or not to show a list of online members.  true | false | "login" = users only
+"onlineShowSuspended" => false, // Whether or not to include suspended accounts in the list.
 "userOnlineExpire" => 4500, // Amount of time by which a user's last seen time is before the user goes offline. (300 seconds = 5 minutes.)
 
 // Default user preferences.
@@ -132,6 +135,8 @@ $defaultConfig = array(
 "showAvatarThumbnails" => true, // Whether or not to show avatar thumbnails next to each conversation.
 "emailPrivateAdd" => true, // Email when added to a private conversation?
 "emailStarReply" => true, // Email when someone posts in a private conversation that's starred?
+"rememberMe" => true, // Whether or not the user's login information will be cached (stored as a cookie).
+"showOnline" => true, // Whether or not to display when the user is online.
 
 // Avatar dimensions in pixels.
 "avatarMaxWidth" => 200,

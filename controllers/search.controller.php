@@ -121,7 +121,7 @@ function init()
 	
 	// Define the columns of the search results table.
 	if ($this->eso->user) $this->resultsTable[] = array("class" => "star", "content" => "columnStar");
-	if (!empty($config["showAvatarThumbnails"]) and (($this->eso->user["avatarAlignment"]!="none") or (!$this->eso->user and $_SESSION["avatarAlignment"]!="none"))) $this->resultsTable[] = array("class" => "avatar", "content" => "columnAvatar");
+	if (!empty($config["showAvatarThumbnails"]) and (isset($this->eso->user) and $this->eso->user["avatarAlignment"] != "none") or ($_SESSION["avatarAlignment"] != "none")) $this->resultsTable[] = array("class" => "avatar", "content" => "columnAvatar");
 	$this->resultsTable[] = array("title" => $language["Conversation"], "class" => "conversation", "content" => "columnConversation");
 	$this->resultsTable[] = array("title" => $language["Posts"], "class" => "posts", "content" => "columnPosts");
 	$this->resultsTable[] = array("title" => $language["Started by"], "class" => "author", "content" => "columnAuthor");
@@ -171,7 +171,7 @@ function init()
 			}
 		}
 		
-		// Add meta tags to the header, the "Mark all conversations as read" link to the footer, and a "Start a conversation" link for mobile support.
+		// Add meta tags to the header, the "Mark all conversations as read" link to the footer, and a "Start a conversation" link.
 		if (!empty($config["metaKeywords"])) {
 			$this->eso->addToHead("<meta name='keywords' content='" . implode(",", $config["metaKeywords"]) . "'/>");
 		} else {
@@ -187,7 +187,6 @@ function init()
 			$this->eso->addToHead("<meta property='og:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
 			$this->eso->addToHead("<meta name='twitter:description' content='" . sprintf($language["forumDescription"], $config["forumTitle"], implode(", ", $tags), $lastTag) . "'/>");
 		}
-		if (!$this->eso->user) $this->eso->addToFooter("<a href='" . makeLink("forgot-password") . "' id='forgotPassword'><span class='button buttonSmall'><input type='submit' value='{$language["Forgot your password"]}'></span></a>", 100);
 		if ($this->eso->user) $this->eso->addToFooter("<a href='" . makeLink("?markAsRead") . "' id='markAsRead'><span class='button buttonSmall'><input type='submit' value='{$language["Mark all conversations as read"]}'></span></a>", 200);
 		if ($this->eso->user) $this->eso->addToFooter("<a href='" . makeLink("conversation/new") . "' id='startConversation'><span class='button buttonSmall'><input type='submit' value='{$language["Start a conversation"]}'></span></a>", 300);
 		

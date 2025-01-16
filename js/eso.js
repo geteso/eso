@@ -790,6 +790,11 @@ initPagination: function() {
 		pg.unread.onclick = function() {Conversation.moveTo(Conversation.lastRead);};
 		pg.viewingPosts.onmousedown = Conversation.mouseDown;
 		pg.viewingPosts.onmouseup = Conversation.mouseUp;
+
+		// Add touch handlers for mobile support.
+		pg.viewingPosts.addEventListener("touchstart", Conversation.touchStart, false);
+		pg.viewingPosts.addEventListener("touchmove", Conversation.touchMove, false);
+		pg.viewingPosts.addEventListener("touchend", Conversation.touchEnd, false);
 		
 		// When the mouse is over viewingPosts or unread, prevent the jumpTo click from being activated.
 		Conversation.disableJumpTo = false;
@@ -857,6 +862,12 @@ reloadPosts: function(startFrom, scrollTo, dontDisplay) {
 	
 	// Make sure startFrom is a number within range.
 	startFrom = Math.max(0, Math.min(Conversation.postCount, parseInt(startFrom)));
+
+	// Prevent generating negative limits.
+	if (startFrom >= Conversation.postCount) {
+		startFrom = Math.max(0, Conversation.postCount - eso.postsPerPage);
+		end = Conversation.postCount;
+	}
 	
 	// Update the window hash.
 	Conversation.startFrom = window.location.hash = startFrom;
@@ -881,7 +892,7 @@ reloadPosts: function(startFrom, scrollTo, dontDisplay) {
 			"success": function() {
 				// Update our post cache with this new data.
 				if (posts = this.result) for (var i in posts) Conversation.posts[i] = posts[i];
-				
+
 				// Only update the post display if the first/last post numbers of these ajax results are consistent with 
 				// where we should be viewing. (Prevents blank display when a user clicks 'Next' or 'Previous' multiple 
 				// times in a row.)
@@ -914,6 +925,15 @@ setReloadTimeout: function(seconds) {
 	Conversation.timeout = setTimeout(function() {Conversation.checkForNewPosts();}, seconds * 1000);
 },
 
+// Update the timestamps in posts.
+updatePostTimes: function() {
+	Conversation.posts.forEach(post => {
+		// Find the post's timestamp
+		const timestamp = document.querySelector(`#p${post.id} .pTime a`);
+		if (timestamp) timestamp.textContent = relativeTime(post.time); // Update the relative time
+	});
+},
+
 // Change and save a guest's avatar alignment.
 changeAvatarAlignment: function(alignment) {
 	eso.avatarAlignment = alignment;
@@ -936,6 +956,9 @@ checkForNewPosts: function() {
 			
 			// Update the eso 'clock'.
 			eso.time = this.result.time;
+
+			// Update the timestamps in posts.
+			Conversation.updatePostTimes();
 			
 			// If there are no updated or new posts, set a longer timeout to check again.
 			if (!this.result.newPosts) {
@@ -953,7 +976,7 @@ checkForNewPosts: function() {
 			// If there are no new posts, set a longer timeout to check again. Otherwise, reset the timeout length.
 			if (!newPosts) Conversation.setReloadTimeout(Conversation.autoReloadInterval *= eso.autoReloadIntervalMultiplier);
 			else Conversation.setReloadTimeout(Conversation.autoReloadInterval = eso.autoReloadIntervalStart);
-			
+
 			// Store the current position of the bottom pagination bar within the browser's window so it won't move
 			// when changing the post area HTML.
 			Conversation.scrollStart = getOffsetTop(Conversation.paginations[1].bar) - getScrollTop();
@@ -1011,7 +1034,7 @@ displayPosts: function(scrollTo) {
 			html.push("<hr/><div class='p deleted' id='p", post.id, "'><div class='hdr'>",
 				"<div class='pInfo'>",
 				"<h3>" + post.name + "</h3> ",
-				"<span title='", post.date, "'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ",
+				"<span title='", post.date, "' class='pTime'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ",
 				"<span>", makeDeletedBy(post.deleteMember), "</span> ",
 				"</div>",
 				"<div class='controls'>");
@@ -1042,7 +1065,7 @@ displayPosts: function(scrollTo) {
 		if (side) html.push("<div class='thumb'>", makeMemberLink(post.memberId, "<img src='" + (post.thumb || ("skins/" +  eso.skin + "/" + eso.avatarThumb)) + "' alt=''/>"), "</div>");
 		html.push("<div class='pInfo'>");
 		html.push("<h3>", makeMemberLink(post.memberId, post.name), "</h3> ",
-			"<span title='", post.date, "'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ");
+			"<span title='", post.date, "' class='pTime'><a href='", makePermalink(post.id), "'>", relativeTime(post.time), "</a></span> ");
 		if (post.editTime) html.push("<span id='editedBy'>", makeEditedBy(post.editMember, relativeTime(post.editTime)), "</span> ");
 		// Output the member's account.
 		if (post.accounts.length > 0) {
@@ -1205,6 +1228,49 @@ mouseMove: function(e) {
 			Conversation.paginations[i].viewingPosts.title = Conversation.paginations[i].viewingPosts.firstChild.innerHTML.replace(/<.+?>/g, "");
 		}
 	}
+},
+
+// Start dragging the pagination bar using touch.
+touchStart: function(e) {
+	if (e.touches.length === 1) {
+		document.body.style.cursor = "col-resize";
+		Conversation.draggingHandle = this;
+		Conversation.mouseStart = e.touches[0].clientX;
+		Conversation.marginLeft = parseFloat(Conversation.paginations[0].viewingPosts.style.marginLeft);
+		Conversation.scrollStart = getOffsetTop(Conversation.paginations[1].bar) - getScrollTop();
+		if (Conversation.paginationAnimation) Conversation.paginationAnimation.stop();
+	}
+},
+
+// Drag the pagination bar handle using touch.
+touchMove: function(e) {
+	if (Conversation.draggingHandle && e.touches.length === 1) {
+		var offsetPixels = e.touches[0].clientX - Conversation.mouseStart;
+		var offsetPercent = (offsetPixels / Conversation.paginations[0].middle.offsetWidth) * 100;
+		Conversation.moveHandle(parseFloat(Conversation.marginLeft) + offsetPercent);
+
+		// Update the numbers in '1-20 of 38 posts'.
+		var startFrom = Math.round(parseFloat(Conversation.paginations[0].viewingPosts.style.marginLeft)
+			* (Conversation.postCount - eso.postsPerPage) / Math.max(100 - Conversation.handleWidth, 1));
+		for (var i in Conversation.paginations) {
+			Conversation.paginations[i].from.innerHTML = Math.max(parseInt(startFrom) + 1, 1);
+			Conversation.paginations[i].to.innerHTML = Math.min(Math.max(startFrom, 0) + eso.postsPerPage, Conversation.postCount);
+			Conversation.paginations[i].viewingPosts.title = Conversation.paginations[i].viewingPosts.firstChild.innerHTML.replace(/<.+?>/g, "");
+		}
+
+        e.preventDefault(); // Prevent scrolling the page while dragging.
+	}
+},
+
+// Stop dragging the pagination bar using touch.
+touchEnd: function(e) {
+	if (!e) e = window.event;
+	document.body.style.cursor = "auto";
+	if (Conversation.draggingHandle) {
+		Conversation.moveToPercent(parseFloat(Conversation.paginations[0].viewingPosts.style.marginLeft), Conversation.draggingHandle == Conversation.paginations[1].viewingPosts ? "pagination" : null);
+	}
+	Conversation.draggingHandle = false;
+	Conversation.mouseStart = null;
 },
 
 // Animate the pagination bar moving and resizing.
@@ -1632,17 +1698,18 @@ deletePostForever: function(postId) {
 		"post": "action=deletePostForever&postId=" + postId,
 		"success": function() {
 			if (this.messages) return;
-			
-			// Find the post we just deleted and change its deleteMember to the current user, then redisplay the posts.
-			for (var i in Conversation.posts) {
-				if (Conversation.posts[i].id == postId) {
-					var oldHeight = getById("p" + postId).offsetHeight;
-					getById("p" + postId).style.height = "0px";
-//					Conversation.displayPosts();
-					Conversation.animateDeletePost(getById("p" + postId), oldHeight);
-					break;
-				}
-			}
+
+			// Remove the post from the DOM.
+			var postElement = getById("p" + postId);
+			if (postElement) postElement.parentNode.removeChild(postElement);
+
+			// Remove the post from the Conversation.posts array.
+			Conversation.posts = Conversation.posts.filter(post => post?.id !== postId);
+
+			// Update the post count and re-render.
+			Conversation.postCount = Conversation.posts.length;
+//			Conversation.displayPosts();
+			Conversation.reloadPosts(Conversation.startFrom, null, false);
 		}
 	});
 },
@@ -1717,6 +1784,8 @@ saveEditPost: function(postId, content) {
 					break;
 				}
 			}
+			// Update the timestamps.
+			Conversation.updatePostTimes();
 		},
 		"post": "action=editPost&postId=" + postId + "&content=" + encodeURIComponent(content)
 	});
@@ -2299,6 +2368,10 @@ var Settings = {
 // Change the user's color.
 changeColor: function(color) {
 	
+	// Make sure the color exists.
+	if (!eso.colors) color = 0;
+	else if (color < 1 || color > eso.colors) return false;
+
 	// If the user's color is already set to this, we don't need to do anything!
 	if ((new RegExp("c" + color + "$")).test(getById("preview").className)) return;
 	

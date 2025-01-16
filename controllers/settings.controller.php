@@ -27,6 +27,9 @@ class settings extends Controller {
 	
 var $view = "settings.view.php";
 var $messages = array();
+var $emailVerified = 1;
+var $languages;
+var $form;
 
 // Initialize: perform any necessary saving actions, and define the form contents.
 function init()
@@ -36,7 +39,10 @@ function init()
 	
 	// Set the title.
 	global $config, $language;
-	$this->title = $language["My settings"];	
+	$this->title = $language["My settings"];
+	
+	// Has the user verified their email address?
+	if (!empty($config["sendEmail"])) $this->emailVerified = $this->eso->db->result("SELECT emailVerified FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
 	
 	// Change the user's color.
 	if (!empty($_GET["changeColor"]) and (int)$_GET["changeColor"]
@@ -54,7 +60,6 @@ function init()
 		$this->eso->message("changesSaved");
 		redirect("settings");
 	}
-
 	// Change the user's name.
 	if (!empty($config["changeUsername"]) and isset($_POST["settingsUsername"]["submit"])
 		and $this->eso->validateToken(@$_POST["token"])
@@ -105,13 +110,13 @@ function init()
 			),
 			300 => array(
 				"id" => "emailOnPrivateAdd",
-				"html" => "<label for='emailOnPrivateAdd' class='checkbox'>{$language["emailOnPrivateAdd"]} <span class='label private'>{$language["labels"]["private"]}</span></label> <input id='emailOnPrivateAdd' type='checkbox' class='checkbox' name='emailOnPrivateAdd' value='1' " . ($this->eso->user["emailOnPrivateAdd"] ? "checked='checked' " : "") . "/>",
+				"html" => "<label for='emailOnPrivateAdd' class='checkbox'>{$language["emailOnPrivateAdd"]} <span class='label private'>{$language["labels"]["private"]}</span></label> <input id='emailOnPrivateAdd' type='checkbox' class='checkbox' name='emailOnPrivateAdd' value='1' " . ($this->eso->user["emailOnPrivateAdd"] ? "checked='checked' " : "") . ($this->emailVerified == 1 ? "" : "disabled") . "/>",
 				"databaseField" => "emailOnPrivateAdd",
 				"checkbox" => true
 			),
 			400 => array(
 				"id" => "emailOnStar",
-				"html" => "<label for='emailOnStar' class='checkbox'>{$language["emailOnStar"]} <span class='star1 starInline'>*</span></label> <input id='emailOnStar' type='checkbox' class='checkbox' name='emailOnStar' value='1' " .  ($this->eso->user["emailOnStar"] ? "checked='checked' " : "") . "/>",
+				"html" => "<label for='emailOnStar' class='checkbox'>{$language["emailOnStar"]} <span class='star1 starInline'>*</span></label> <input id='emailOnStar' type='checkbox' class='checkbox' name='emailOnStar' value='1' " .  ($this->eso->user["emailOnStar"] ? "checked='checked' " : "") . ($this->emailVerified == 1 ? "" : "disabled") . "/>",
 				"databaseField" => "emailOnStar",
 				"checkbox" => true
 			),
@@ -199,6 +204,7 @@ function saveSettings()
 function changeUsername()
 {
 	global $config;
+	if ($this->eso->isSuspended()) return false;
 	$updateData = array();
 	$salt = $this->eso->db->result("SELECT salt FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
 	$password = $this->eso->db->result("SELECT password FROM {$config["tablePrefix"]}members WHERE memberId={$this->eso->user["memberId"]}", 0);
@@ -272,6 +278,9 @@ function changePasswordEmail()
 	
 	// Are we setting a new email?
 	if (!empty($_POST["settingsPasswordEmail"]["email"])) {
+
+		// Make sure the user isn't suspended (to avoid abuse of email requests).
+		if ($this->eso->isSuspended()) return false;
 		
 		// Validate the email address. If it's ok, add the updating part to the query.
 		if ($error = validateEmail($_POST["settingsPasswordEmail"]["email"])) $this->messages["email"] = $error;
@@ -299,7 +308,7 @@ function changePasswordEmail()
 function changeAvatar()
 {
 	global $config;
-	if (!$this->eso->user or $this->eso->isUnvalidated() or $this->eso->isSuspended()) return false;
+	if ($this->eso->isSuspended()) return false;
 	if (empty($config["changeAvatar"])) return false;
 	if (empty($_POST["avatar"]["type"])) return false;
 	

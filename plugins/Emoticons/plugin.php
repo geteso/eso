@@ -41,7 +41,7 @@ function init()
 	parent::init();
 	
 	// Add the emoticon CSS style to the head.
-	$this->eso->addToHead("<style type='text/css'>.emoticon {width:16px!important; height:16px; background:url({$this->emoticonDir}emoticons.svg); background-repeat:no-repeat}</style>");
+	$this->eso->addToHead("<style type='text/css'>.emoticon {width:16px!important; height:16px; background:url({$this->emoticonDir}emoticons.svg); background-repeat:no-repeat} li .emoticon {margin-bottom:-4px}</style>");
 	
 	// Add a hook to convert emoticons to text in the feed.
 	if ($this->eso->action == "feed")
@@ -77,7 +77,7 @@ function addEmoticonSettings(&$settings)
 
 	$settings->addToForm("settingsOther", array(
 		"id" => "emoticons",
-		"html" => "<label for='emoticons' class='checkbox'>{$language["Disable emoticons"]}</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
+		"html" => "<label for='emoticons' class='checkbox'>{$language["Disable emoticons"]} " . (empty($this->eso->user["emoticons"]) ? "<img src='js/x.gif' style='background-position:0 0' alt=':)' class='emoticon'/>" : ":)") . "</label> <input id='emoticons' type='checkbox' class='checkbox' name='emoticons' value='1' " .  (!empty($this->eso->user["emoticons"]) ? "checked='checked' " : "") . "/>",
 		"databaseField" => "emoticons",
 		"checkbox" => true
 	), 600);

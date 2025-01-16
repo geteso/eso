@@ -443,6 +443,7 @@ $language["gambits"] += array(
 // Messages.
 $messages = array(
 "accountNotYetVerified" => array("class" => "info", "message" => "You need to verify your account before you can log in with it! If you didn't receive the verification email, <a href='%s'>click here to get it sent again</a>."),
+"accountNotYetVerified1" => array("class" => "info", "message" => "Heads up, you still need to verify your email address. If you didn't receive the verification email, <a href='%s'>click here to get it sent again</a>."),
 "accountValidated" => array("class" => "success", "message" => "Cool! Your account has been validated and you can now start participating in conversations. Why not <a href='" . makeLink("new") . "'>start one</a> yourself?"),
 "avatarError" => array("class" => "warning", "message" => "There was a problem uploading your avatar. Make sure you're using a valid image type (like .jpg, .png, or .gif) and the file isn't really really huge."),
 "avatarDisabled" => array("class" => "warning", "message" => "Avatar settings have been disabled on this forum, but you can always ask the forum administrator to turn it back on."),
@@ -505,6 +506,7 @@ $messages = array(
 "setNewPassword" => array("class" => "info", "message" => "Alright! Now, what do you want your new password to be?"),
 "skinAdded" => array("class" => "success", "message" => "The skin was successfully added!"),
 "suspended" => array("class" => "warning", "message" => "Ouch! A forum moderator has <strong>suspended</strong> your account. It sucks, but until the suspension is lifted you won't be able to do much around here. Hey, screw them!"),
+"unvalidated" => array("class" => "warning", "message" => "Your account still needs to be validated before you can do anything on this forum. Go check out your <a href='" . makeLink("settings") . "'>settings</a> for instructions on how to validate your account."),
 "updatesAvailable" => array("class" => "info", "message" => "A new version of esoBB (<strong>%s</strong>) is available for download. You have version {$versions["eso"]}. <strong><a href='https://geteso.org/download'>Get it now</a></strong>!"),
 "verifyEmail" => array("class" => "success", "message" => "Before you can start using your newly-created account, you'll need to verify your email address. Within the next minute or two you should receive an email from us containing a link to activate your account. <strong>Check your spam folder</strong> if you don't receive this email shortly!"),
 "viewMore" => array("class" => "info", "message" => "Your search found more than {$config["results"]} conversations. <a href='%s' onclick='Search.viewMore();return false'>View more</a>"),

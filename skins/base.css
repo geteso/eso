@@ -31,7 +31,7 @@ h3 {font-size:120%; font-weight:bold}
 #hdr h1 img {height:36px; padding-right:15px}
 #hdr h1 img, #forumTitle {vertical-align:middle}
 #hdr p#stats {float:right; font-size:90%; line-height:1.5em; margin-top:1em; text-align:right}
-.small #hdr h1 {float:left; font-size:150%; line-height:1.7; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
+.small #hdr h1 {float:left; font-size:150%; overflow:hidden; padding:7px 0; margin-right:5%; white-space:nowrap}
 .small #hdr h1 img {height:32px; max-width:100px}
 .small #forumTitle {display:inline-block; max-width:500px}
 #hdr #search {margin-bottom:0; margin-top:10px; overflow:hidden}
@@ -91,7 +91,7 @@ a.s5 {font-size:90%}
 
 /* Messages */
 #messages .msg {margin:0}
-.msg .close {float:right; padding:0 5px; margin:-2px -4px 0 0}
+.msg .close {float:right; padding:0 5px; margin:-2px -4px 0 5px}
 .msg {line-height:1.4; margin:0 0 1em 0; padding:5px 10px}
 .msg code {background:none}
 
@@ -108,7 +108,7 @@ a.star1, a.star0 {cursor:pointer}
 .c {width:100%}
 .c th {font-weight:normal; font-size:90%; padding:6px 0; text-align:left}
 .c td {line-height:1.1; padding:5px 0}
-.c .labels {margin-right:3px}
+.c .labels {margin-right:3px; vertical-align:text-top}
 .c strong {font-size:120%; font-weight:bold}
 .c .read {font-weight:normal}
 .c strong a {margin:0}
@@ -135,14 +135,14 @@ small.tags:empty {margin:0}
 /* #searchResults tbody tr:hover #unreadPost a, #searchResults tbody tr:hover #lastPost a {display:inherit} */
 
 /* Conversation header */
-#cHdr {margin:0 0 10px; overflow:hidden; padding:10px}
+#cHdr {margin:0 0 10px; overflow:hidden; padding:5px 0 0}
 /* Info and title (left part) */
 #cInfo {float:left; overflow:hidden; width:60%}
 #cInfo .star1, #cInfo .star0 {float:left; width:32px; margin:0 5px 0 0; padding:5px 0 0 0}
 #cInfo h2 {font-size:100%; margin:0; overflow:hidden}
 #cInfo #cTitle {font-size:180%; font-weight:normal; width:75%; margin:0; word-wrap:break-word; text-overflow:ellipsis}
 #cInfo #cTitle:not(.text) {padding-left:0}
-#cTitle {display:inline-block; padding:3px 2px}
+#cTitle {display:inline-block; padding:5px 2px 3px 2px; line-height:1}
 #cInfo .editable {box-shadow:none}
 #cInfo .text {width:75%}
 #cInfo .editable {background:none; padding:3px}
@@ -153,27 +153,26 @@ small.tags:empty {margin:0}
 #cTags a {line-height:1.5; padding:0 5px 0 5px; width:fit-content; text-align:center}
 #cTags a:empty {display:none}
 /* Members allowed (right part) */
-#allowed {float:right; text-align:right; width:40%}
+#allowed {float:right; text-align:right; width:40%; margin:0; padding:5px 0 0}
 #allowed dd {margin:0}
 #allowedList {display:block; font-size:90%; margin:5px 0}
 #addMember {width:9em; height:14px; margin:0 -5px 5px 0}
 
 /* Pagination */
-.pg {clear:both; font-size:95%; line-height:1.8em; margin:0 0 10px; overflow:hidden; padding:0 10em; text-align:center}
-.pg li {display:block; float:left; list-style-type:none}
-.pg li.left {margin-left:-10em; margin-right:-1px; width:10em}
-.pg li.right {margin-left:-1px; margin-right:-10em; width:10em}
-.pg li.middle {cursor:pointer; margin:0 -1px; width:100%}
-.pg .viewing {bottom:-1px; cursor:E-resize; cursor:col-resize; margin-top:-2px; position:relative; white-space:nowrap}
+.pg {font-size:95%; line-height:20px; margin:0 0 10px; display:flex; flex-direction:row; overflow:hidden; padding:0; text-align:center; -webkit-user-select:none; -ms-user-select:none; user-select:none}
+.pg li {list-style-type:none; box-sizing:border-box}
+.pg li.middle {cursor:pointer; margin:0 -1px; width:100%; flex:1; min-width:0}
+.pg li a {padding:0 10px}
+.pg li a.disabled, .pg li a.disabled:hover, .pg li a.disabled:active {cursor:default; cursor:not-allowed}
+.pg .viewing {cursor:E-resize; cursor:col-resize; margin-top:-1px; position:relative; white-space:nowrap}
 .pg .viewing div {overflow:hidden; padding:0 2px; line-height:20px}
-.pg .unread {display:block; margin-top:-20px; overflow:hidden; white-space:nowrap}
-.pg li.left a, .pg li.right a {cursor:pointer; display:block; float:left; overflow:hidden; text-align:center; width:6em; white-space:nowrap}
-.pg li.left a.first, .pg li.right a.last {width:4em}
+.pg .unread {display:block; height:20px; margin-top:-21px; overflow:hidden; white-space:nowrap}
+.pg li.left a, .pg li.right a {cursor:pointer; display:block; float:left; overflow:hidden; text-align:center; white-space:nowrap}
 
 /* Conversation post */
 hr {display:none}
 .p {margin-bottom:10px}
-.p .hdr {margin-bottom:5px; white-space:nowrap; overflow:hidden; overflow-x:scroll; overflow-y:hidden; -ms-overflow-style:none; scrollbar-width:none; padding:5px 10px}
+.p .hdr {white-space:nowrap; overflow:hidden; overflow-x:scroll; overflow-y:hidden; -ms-overflow-style:none; scrollbar-width:none; padding:5px 10px}
 .p .hdr::-webkit-scrollbar {display:none}
 .p .hdr h3, .p .hdr h4 {border:0; display:inline; font-size:120%; font-weight:bold; margin:0}
 .p .hdr span, .p .hdr form {display:inline; font-size:90%; margin-left:7px}
@@ -191,7 +190,7 @@ hr {display:none}
 .p .hdr .controls a {font-size:90%; line-height:1.5; margin:0 0 3px 0; padding:0 5px; text-align:center; display:inline-block}
 .p .hdr .controls span {font-size:100%}
 .p .hdr a.button {padding:1px 4px}
-.p .body {line-height:1.3; overflow:auto; padding:5px 10px 0}
+.p .body {line-height:1.3; overflow:auto; padding:10px 10px 0}
 .p div.avatar {overflow:hidden; padding:5px 0; position:relative; text-align:center; width:115px}
 .p.r {border-right-style:solid; border-right-width:115px}
 .p.r div.avatar {float:right; margin-right:-115px}
@@ -203,12 +202,13 @@ hr {display:none}
 #cPosts p {word-wrap:break-word; text-align:justify}
 #cPosts p:empty {display:none}
 .deleted .hdr {margin:0}
+.p.deleted .hdr {box-shadow:none}
 .deleted .controls span, .deleted .controls span:nth-child(n+2) > a {margin-left:0}
 
 /* Reply to a conversation */
-.p .edit {padding:5px 10px 10px 10px}
-.r .edit {padding:5px 10px 10px 0; padding-left:10px}
-.l .edit {padding:5px 0 10px 10px; padding-right:10px}
+.p .edit {padding:10px 10px 10px 10px}
+.r .edit {padding:10px 10px 10px 0; padding-left:10px}
+.l .edit {padding:10px 0 10px 10px; padding-right:10px}
 .p .body textarea {height:25em; width:fill-available; width:-webkit-fill-available; width:-moz-available}
 .p .editButtons {text-align:right}
 #reply-preview p {text-align:justify}
@@ -238,7 +238,7 @@ blockquote {margin:0 0 1em; padding:8px 10px 0 10px; max-height:145px; overflow-
 blockquote cite {display:block; font-style:normal; font-weight:bold; padding-bottom:2px}
 blockquote p {margin-bottom:.75em}
 .p .body h3 {margin:0 0 5px}
-.p .body p > img, .p .body p > video, .p .body p > audio, .p .body .frame {vertical-align:bottom; max-width:425px; width:100; box-sizing:border-box}
+.p .body p > img, .p .body p > video, .p .body p > audio, .p .body .frame {vertical-align:bottom; max-width:425px; width:100%; box-sizing:border-box}
 .p .body p > .frame {margin-top:.5em}
 .p .body p > .frame:first-child {margin-top:0}
 .p hr {display:block; height:1px}
@@ -257,8 +257,7 @@ blockquote p {margin-bottom:.75em}
 /* My settings */
 #settings .post {margin:0}
 #settings .submit {margin-bottom:5px}
-#preview .body {overflow:visible}
-form#settingsAvatar {padding-bottom:10px}
+#preview .body {overflow:visible; padding:10px 10px}
 #settingsAvatar label {width:20em}
 #settingsAvatar li:last-child {margin-top:-28px}
 #settingsOther label {width:32em}
@@ -310,7 +309,7 @@ form#settingsAvatar {padding-bottom:10px}
 #plugins li form {margin:15px 5px}
 #plugins li .settings {padding:5px 20px; margin-top:5px}
 #plugins li form label {width:20em; width:40%}
-#plugins li li {border:0; padding:0}
+#plugins li li {border:0}
 #addPlugin .warning {margin:0}
 
 /* Skins */
@@ -328,7 +327,7 @@ form#settingsAvatar {padding-bottom:10px}
 }
 
 /* Profile */
-.profile .body {overflow:visible; padding:5px 10px}
+.profile .body {padding:10px 10px}
 .profile .form label {font-weight:normal; text-align:left; width:30%}
 .profile .form div {float:none; font-size:115%; margin-left:35%}
 .profile .form li {padding-left:10px}
@@ -374,7 +373,8 @@ fieldset > .warning:last-child {margin:0}
 .form div {float:left; line-height:1.5}
 .form div input.text, .form div select {float:none}
 .form {margin:0; padding:0}
-.form li {display:block; list-style:none; margin-bottom:4px; overflow:hidden}
+.form li {display:block; list-style:none; padding-top:4px; overflow:hidden}
+.form li:first-child {padding-top:0}
 .form .msg {float:left; font-size:95%; margin:0 0 0 10px; padding:2px 10px}
 @media only screen and (max-width:870px) {
 .form:not(.stats) label {width:auto!important; text-align:left}
@@ -383,6 +383,7 @@ fieldset > .warning:last-child {margin:0}
 .form input.checkbox {display:block; position:absolute}
 .form:not(.stats) div small {width:100%}
 .form select, .form:not(.stats) div, .form input.text {clear:left}
+.form li {padding-top:7px}
 .form .msg {margin:0}
 }
 @media only screen and (max-width:400px) {
@@ -432,7 +433,8 @@ td.author, td.lastPost {max-width:95px; overflow:hidden; text-overflow:ellipsis;
 #hdr, #bar, .pg .left, .pg .right, #reply, .avatar, .p .controls {display:none}
 .pg {padding:0}
 hr {display:block}
-.p.r, .p.l {border:0}
+.p.l, p.r {border:0}
+.p.l::after, .p.r::after {display:none}
 }
 
 /* Mobile properties */
@@ -497,10 +499,6 @@ ul.fl, ul.fr {white-space:nowrap}
 .p.l div.avatar, .p.r div.avatar {display:none}
 .p.l .hdr .thumb, .p.r .hdr .thumb {display:initial}
 #allowed {margin-block-start:0; margin-bottom:0}
-#preview {margin-bottom:0}
-#appearance .p .body {padding:5px 0 0}
-form#settingsAvatar {padding-left:10px; padding-right:10px}
-#palette {margin-left:2px; margin-right:0}
 #settingsOtherForm input {left:26px}
 .profile .form li, #report {padding-left:0}
 
